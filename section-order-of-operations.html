@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*       on 2021-08-28T19:50:51Z       *-->
+<!--*   A recent stable commit (2020-08-09):   *-->
+<!--* 98f21740783f166a773df4dc83cab5293ab63a4a *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<html lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>ORCCA Order of Operations</title>
+<meta name="Keywords" content="Authored in PreTeXt">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+<script>window.MathJax = {
+  tex: {
+    inlineMath: [['\\(','\\)']],
+    tags: "none",
+    useLabelIds: true,
+    tagSide: "right",
+    tagIndent: ".8em",
+    packages: {'[+]': ['base', 'extpfeil', 'ams', 'amscd', 'newcommand', 'knowl', 'sfrac']}
+  },
+  options: {
+    ignoreHtmlClass: "tex2jax_ignore",
+    processHtmlClass: "has_am",
+  },
+  chtml: {
+    scale: 0.88,
+    mtextInheritFont: true
+  },
+  loader: {
+    load: ['input/asciimath', '[tex]/extpfeil', '[tex]/amscd', '[tex]/newcommand', '[pretext]/mathjaxknowl3.js'],
+    paths: {pretext: "https://pretextbook.org/js/lib"},
+  },
+/* support for the sfrac command in MathJax (Beveled fraction) */
+  startup: {
+    ready() {
+      //
+      // Creating a simple "sfrac" package on-the-fly
+      //
+      const Configuration = MathJax._.input.tex.Configuration.Configuration;
+      const CommandMap = MathJax._.input.tex.SymbolMap.CommandMap;
+      
+      new CommandMap('sfrac', {
+        sfrac: 'SFrac'
+        }, {
+        SFrac(parser, name) {
+        const num = parser.ParseArg(name);
+        const den = parser.ParseArg(name);
+        const frac = parser.create('node', 'mfrac', [num, den], {bevelled: true});
+        parser.Push(frac);
+        }
+      });
+      //
+      // Create the package for the overridden macros
+      //
+      Configuration.create('sfrac', {
+        handler: {macro: ['sfrac']}
+      });
+      
+    MathJax.startup.defaultReady();
+    }
+  },
+};
+</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext_add_on.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script xmlns:svg="http://www.w3.org/2000/svg">sagecellEvalName='Evaluate (Sage)';
+</script><link xmlns:svg="http://www.w3.org/2000/svg" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://fonts.googleapis.com/css?family=Inconsolata:400,700&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/pretext.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/pretext_add_on.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/banner_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/toc_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/knowls_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/style_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/colors_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/setcolors.css" rel="stylesheet" type="text/css">
+<!-- 2019-10-12: Temporary - CSS file for experiments with styling --><link xmlns:svg="http://www.w3.org/2000/svg" href="developer.css" rel="stylesheet" type="text/css">
+</head>
+<body id="PCC-ORCCA" class="mathbook-book has-toc has-sidebar-left">
+<a class="assistive" href="#content">Skip to main content</a><div xmlns:svg="http://www.w3.org/2000/svg" id="latex-macros" class="hidden-content" style="display:none">\(\require{cancel}\newcommand{\abs}[1]{\left\lvert#1\right\rvert}
+\newcommand{\point}[2]{\left(#1,#2\right)}
+\newcommand{\highlight}[1]{\definecolor{sapphire}{RGB}{59,90,125} {\color{sapphire}{{#1}}}}
+\newcommand{\firsthighlight}[1]{\definecolor{sapphire}{RGB}{59,90,125} {\color{sapphire}{{#1}}}}
+\newcommand{\secondhighlight}[1]{\definecolor{emerald}{RGB}{20,97,75} {\color{emerald}{{#1}}}}
+\newcommand{\unhighlight}[1]{{\color{black}{{#1}}}}
+\newcommand{\lowlight}[1]{{\color{lightgray}{#1}}}
+\newcommand{\attention}[1]{\mathord{\overset{\downarrow}{#1}}}
+\newcommand{\nextoperation}[1]{\mathord{\boxed{#1}}}
+\newcommand{\substitute}[1]{{\color{blue}{{#1}}}}
+\newcommand{\pinover}[2]{\overset{\overset{\mathrm{\ #2\ }}{|}}{\strut #1 \strut}}
+\newcommand{\addright}[1]{{\color{blue}{{{}+#1}}}}
+\newcommand{\addleft}[1]{{\color{blue}{{#1+{}}}}}
+\newcommand{\subtractright}[1]{{\color{blue}{{{}-#1}}}}
+\newcommand{\multiplyright}[2][\cdot]{{\color{blue}{{{}#1#2}}}}
+\newcommand{\multiplyleft}[2][\cdot]{{\color{blue}{{#2#1{}}}}}
+\newcommand{\divideunder}[2]{\frac{#1}{{\color{blue}{{#2}}}}}
+\newcommand{\divideright}[1]{{\color{blue}{{{}\div#1}}}}
+\newcommand{\negate}[1]{{\color{blue}{{-}}}\left(#1\right)}
+\newcommand{\cancelhighlight}[1]{\definecolor{sapphire}{RGB}{59,90,125}{\color{sapphire}{{\cancel{#1}}}}}
+\newcommand{\secondcancelhighlight}[1]{\definecolor{emerald}{RGB}{20,97,75}{\color{emerald}{{\bcancel{#1}}}}}
+\newcommand{\thirdcancelhighlight}[1]{\definecolor{amethyst}{RGB}{112,72,91}{\color{amethyst}{{\xcancel{#1}}}}}
+\newcommand{\confirm}[1]{\stackrel{\checkmark}{#1}}
+\newcommand{\reject}[1]{\stackrel{\text{no}}{#1}}
+\newcommand{\wonder}[1]{\stackrel{\text{?}}{#1}}
+\newcommand{\apple}{\text{🍎}}
+\newcommand{\banana}{\text{🍌}}
+\newcommand{\pear}{\text{🍐}}
+\newcommand{\cat}{\text{🐱}}
+\newcommand{\dog}{\text{🐶}}
+\newcommand{\lt}{&lt;}
+\newcommand{\gt}{&gt;}
+\newcommand{\amp}{&amp;}
+\)</div>
+<header id="masthead" class="smallbuttons"><div class="banner"><div class="container">
+<a id="logo-link" href="http://www.pcc.edu/ORCCA" target="_blank"><img src="images/ORCCAbrandlogo.png" alt="Logo image"></a><div class="title-container">
+<h1 class="heading"><a href="orcca.html"><span class="title">RVCC Elementary Algebra</span></a></h1>
+<p class="byline">Department of Mathematics and Computer Science</p>
+</div>
+</div></div>
+<nav xmlns:svg="http://www.w3.org/2000/svg" id="primary-navbar" class="navbar"><div class="container">
+<div class="navbar-top-buttons">
+<button class="sidebar-left-toggle-button button active" aria-label="Show or hide table of contents sidebar">Contents</button><div class="tree-nav toolbar toolbar-divisor-3">
+<a class="index-button toolbar-item button" href="index-1.html" title="Index">Index</a><span class="threebuttons"><a id="previousbutton" class="previous-button toolbar-item button" href="section-percentages.html" title="Previous">Prev</a><a id="upbutton" class="up-button button toolbar-item" href="appendix-basic-math-review.html" title="Up">Up</a><a id="nextbutton" class="next-button button toolbar-item" href="section-set-notation-and-types-of-numbers.html" title="Next">Next</a></span>
+</div>
+</div>
+<div class="navbar-bottom-buttons toolbar toolbar-divisor-4">
+<button class="sidebar-left-toggle-button button toolbar-item active">Contents</button><a class="previous-button toolbar-item button" href="section-percentages.html" title="Previous">Prev</a><a class="up-button button toolbar-item" href="appendix-basic-math-review.html" title="Up">Up</a><a class="next-button button toolbar-item" href="section-set-notation-and-types-of-numbers.html" title="Next">Next</a>
+</div>
+</div></nav></header><div class="page">
+<div xmlns:svg="http://www.w3.org/2000/svg" id="sidebar-left" class="sidebar" role="navigation"><div class="sidebar-content">
+<nav id="toc"><ul>
+<li class="link frontmatter">
+<a href="frontmatter.html" data-scroll="JVg"><span class="title">Front Matter</span></a><ul><li><a href="colophon-1.html" data-scroll="colophon-1">Colophon</a></li></ul>
+</li>
+<li class="link part"><a href="part-all-of-the-chapters.html" data-scroll="part-all-of-the-chapters"><span class="codenumber">I</span> <span class="title"></span></a></li>
+<li class="link">
+<a href="chapter-introduction-to-algebra.html" data-scroll="dNX"><span class="codenumber">1</span> <span class="title">Introduction to Algebra</span></a><ul>
+<li><a href="section-real-numbers-and-the-number-line.html" data-scroll="ipv">Real Numbers and the Number Line</a></li>
+<li><a href="section-properties-of-real-numbers.html" data-scroll="tNy">Properties of Real Numbers</a></li>
+<li><a href="section-simplifying-and-writing-algebraic-expressions.html" data-scroll="xRO">Simplifying and Writing Algebraic Expressions</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="chapter-linear-equations-and-inequalities-modified.html" data-scroll="sWV"><span class="codenumber">2</span> <span class="title">Linear Equations and Inequalities</span></a><ul>
+<li><a href="section-introduction-to-equations.html" data-scroll="fwy">Introduction to Equations</a></li>
+<li><a href="section-linear-equations.html" data-scroll="xVO">Linear Equations</a></li>
+<li><a href="section-introduction-to-problem-solving.html" data-scroll="Wul">Introduction to Problem Solving</a></li>
+<li><a href="section-formulas.html" data-scroll="Nnq">Formulas</a></li>
+<li><a href="section-linear-inequalities.html" data-scroll="Nuc">Linear Inequalities</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="chapter-graphing-equations.html" data-scroll="gID"><span class="codenumber">3</span> <span class="title">Graphing Lines</span></a><ul>
+<li><a href="section-introduction-to-graphing.html" data-scroll="YTJ">Introduction to Graphing</a></li>
+<li><a href="section-equations-in-two-variables.html" data-scroll="QXY">Equations in Two Variables</a></li>
+<li><a href="section-intercepts-horizontal-and-vertical-lines.html" data-scroll="ByF">Intercepts: Horizontal and Vertical Lines</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="chapter-systems-of-linear-equations-in-two-variables.html" data-scroll="xGO"><span class="codenumber">4</span> <span class="title">Systems of Linear Equations</span></a><ul>
+<li><a href="section-solving-systems-of-linear-equations-graphically-and-numerically.html" data-scroll="njo">Solving Systems of Linear Equations Graphically and Numerically</a></li>
+<li><a href="section-solving-systems-of-linear-equations-by-substitution.html" data-scroll="zdh">Solving Systems of Linear Equations by Substitution</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="chapter-polynomials-and-exponents-modified.html" data-scroll="onc"><span class="codenumber">5</span> <span class="title">Exponents and Polynomials</span></a><ul>
+<li><a href="section-rules-for-exponents.html" data-scroll="KHJ">Rules for Exponents</a></li>
+<li><a href="section-adding-and-subtracting-polynomials.html" data-scroll="VvN">Addition and Subtraction of Polynomials</a></li>
+<li><a href="section-multiplication-of-polynomials.html" data-scroll="IcY">Multiplication of Polynomials</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="chapter-radical-expressions-and-equations.html" data-scroll="chapter-radical-expressions-and-equations"><span class="codenumber">6</span> <span class="title">Radical Expressions and Equations</span></a><ul>
+<li><a href="section-introduction-to-factoring.html" data-scroll="duD">Introduction to Factoring</a></li>
+<li><a href="section-factoring-trinomials.html" data-scroll="Mrf">Factoring Trinomials</a></li>
+<li><a href="section-solving-equations-by-factoring.html" data-scroll="DXi">Solving Equations by Factoring 1 (Quadratics)</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="chapter-rational-expressions.html" data-scroll="RzF"><span class="codenumber">7</span> <span class="title">Rational Expressions</span></a><ul>
+<li><a href="section-introduction-to-rational-expressions.html" data-scroll="Moo">Introduction to Rational Expressions</a></li>
+<li><a href="section-multiplication-and-division-of-rational-expressions.html" data-scroll="Vps">Multiplication and Division of Rational Expressions</a></li>
+<li><a href="section-addition-and-subtraction-with-like-denominators.html" data-scroll="KBw">Addition and Subtraction of Rational Expressions with Like Denominators</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="chapter-radical-expressions-and-functions.html" data-scroll="chapter-radical-expressions-and-functions"><span class="codenumber">8</span> <span class="title">Quantities in the Physical World</span></a><ul><li><a href="section-radical-expressions-and-functions.html" data-scroll="GAK">Radical Expressions and Functions</a></li></ul>
+</li>
+<li class="link backmatter"><a href="backmatter.html" data-scroll="jDj"><span class="title">Appendices</span></a></li>
+<li class="link">
+<a href="appendix-basic-math-review.html" data-scroll="appendix-basic-math-review"><span class="codenumber">A</span> <span class="title">Basic Math Review</span></a><ul>
+<li><a href="section-arithmetic-with-negative-numbers.html" data-scroll="qBB">Arithmetic with Negative Numbers</a></li>
+<li><a href="section-fractions-and-fraction-arithmetic.html" data-scroll="VAa">Fractions and Fraction Arithmetic</a></li>
+<li><a href="section-absolute-value-and-square-root.html" data-scroll="GAK">Absolute Value and Square Root</a></li>
+<li><a href="section-percentages.html" data-scroll="Chi">Percentages</a></li>
+<li><a href="section-order-of-operations.html" data-scroll="aog" class="active">Order of Operations</a></li>
+<li><a href="section-set-notation-and-types-of-numbers.html" data-scroll="Fdo">Set Notation and Types of Numbers</a></li>
+</ul>
+</li>
+<li class="link"><a href="appendix-unit-conversions.html" data-scroll="appendix-unit-conversions"><span class="codenumber">B</span> <span class="title">Unit Conversions</span></a></li>
+<li class="link"><a href="index-1.html" data-scroll="index-1"><span class="title">Index</span></a></li>
+</ul></nav><div class="extras"><nav><a class="mathbook-link" href="https://pretextbook.org">Authored in PreTeXt</a><a href="https://www.mathjax.org"><img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" alt="Powered by MathJax"></a></nav></div>
+</div></div>
+<main class="main"><div id="content" class="pretext-content"><section xmlns:svg="http://www.w3.org/2000/svg" class="section" id="aog"><h2 class="heading hide-type">
+<span class="type">Section</span> <span class="codenumber">A.5</span> <span class="title">Order of Operations</span>
+</h2>
+<section class="introduction" id="OYd"><p id="gUD">Mathematical symbols are a means of communication, and it's important that when you write something, everyone else knows exactly what you intended. For example, if we say in English, “two times three squared,” do we mean that:</p>
+<ul class="disc">
+<li id="yJM"><p id="XWq">\(2\) is multiplied by \(3\text{,}\) and then the result is squared?</p></li>
+<li id="eQV"><p id="Edz">or that \(2\) is multiplied by the result of squaring \(3\text{?}\)</p></li>
+</ul>
+<p id="NbM">English is allowed to have ambiguities like this. But mathematical language needs to be precise and mean the same thing to everyone reading it. For this reason, a standard <dfn class="terminology">order of operations</dfn> has been adopted, which we review here.</p>
+<figure class="figure figure-like" id="tiV"><div class="video-box" style="width: 100%;padding-top: 56.25%; margin-left: 0%; margin-right: 0%;"><iframe id="video-4" class="video" allowfullscreen="" src="https://www.youtube-nocookie.com/embed?listType=playlist&amp;list=PLmuZCPhWPt-cE9eEq9ZW5Hj64c3iPwOU5&amp;modestbranding=1&amp;rel=0"></iframe></div>
+<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">A.5.1<span class="period">.</span></span><span class="space"> </span>Alternative Video Lesson</figcaption></figure></section><section class="subsection" id="Gvp"><h3 class="heading hide-type">
+<span class="type">Subsection</span> <span class="codenumber">A.5.1</span> <span class="title">Grouping Symbols</span>
+</h3>
+<p id="sdC">Consider the math expression \(2\cdot3^2\text{.}\) There are two mathematical operations here: a multiplication and an exponentiation. The result of this expression will change depending on which operation you decide to execute first: the multiplication or the exponentiation. If you multiply \(2\cdot3\text{,}\) and then square the result, you have \(36\text{.}\) If you square \(3\text{,}\) and then multiply \(2\) by the result, you have \(18\text{.}\) If we want all people everywhere to interpret \(2\cdot3^2\) in the same way, then only <em class="emphasis">one</em> of these can be correct.</p>
+<p id="YkL">The first tools that we have to tell readers what operations to execute first are grouping symbols, like parentheses and brackets. If you <em class="emphasis">intend</em> to execute the multiplication first, then writing</p>
+<div class="displaymath">
+\begin{equation*}
+(2\cdot3)^2
+\end{equation*}
+</div>
+<p class="continuation">clearly tells your reader to do that. And if you <em class="emphasis">intend</em> to execute the power first, then writing</p>
+<div class="displaymath">
+\begin{equation*}
+2\cdot\left(3^2\right)
+\end{equation*}
+</div>
+<p class="continuation">clearly tells your reader to do that.</p>
+<p id="ErU">To visualize the difference between \(2\cdot \left(3^2\right)\) or \((2\cdot 3)^2\text{,}\) consider these garden plots:</p>
+<div class="sidebyside"><div class="sbsrow" style="margin-left:5%;margin-right:5%;">
+<div class="sbspanel bottom" style="width:44.4444444444444%;"><figure class="figure figure-like" id="UGl"><img src="images/image-131.svg" role="img" class="contained" alt="two squares, side by side; each square is labeled as 3 yd wide and 3 yd high, and labeled as having area 9 yd^2"><div class="image-archive">
+<a href="images/image-131.eps">eps</a><a href="images/image-131.pdf">pdf</a><a href="images/image-131.png">png</a><a href="images/image-131.svg">svg</a><a href="images/image-131.tex">tex</a>
+</div>
+<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">A.5.2<span class="period">.</span></span><span class="space"> </span><span class="quantity">3 yd</span> is squared, then doubled: \(2\cdot\left(3^2\right)\)</figcaption></figure></div>
+<div class="sbspanel bottom" style="width:44.4444444444444%;"><figure class="figure figure-like" id="ANu"><img src="images/image-132.svg" role="img" class="contained" alt="a square whose width is labeled as 2*3 yd = 6 yd wide and whose height is also 6 yd; the square's area is labeled as being area 36 yd^2"><div class="image-archive">
+<a href="images/image-132.eps">eps</a><a href="images/image-132.pdf">pdf</a><a href="images/image-132.png">png</a><a href="images/image-132.svg">svg</a><a href="images/image-132.tex">tex</a>
+</div>
+<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">A.5.3<span class="period">.</span></span><span class="space"> </span><span class="quantity">3 yd</span> is doubled, then squared: \((2\cdot3)^2\)</figcaption></figure></div>
+</div></div>
+<p id="kzd">If we calculate \(3^2\text{,}\) we have the area of one of the small square garden plots on the left. If we then double that, we have \(2\cdot\left(3^2\right)\text{,}\) the area of the left garden plot.</p>
+<p id="QGm">But if we calculate \((2\cdot3)^2\text{,}\) then first we are doubling \(3\text{.}\) So we are calculating the area of a square garden plot whose sides are twice as long. We end up with the area of the garden plot on the right.</p>
+<p id="wNv">The point is that these amounts are different.</p>
+<article class="exercise exercise-like" id="PPb"><a data-knowl="" class="id-ref exercise-knowl original" data-refid="hk-PPb"><h6 class="heading">
+<span class="type">Checkpoint</span><span class="space"> </span><span class="codenumber">A.5.4</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-PPb"><article class="exercise exercise-like"><p id="p-1876">The WeBWorK problem with ID “webwork-366” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article></div></section><section class="subsection" id="mCy"><h3 class="heading hide-type">
+<span class="type">Subsection</span> <span class="codenumber">A.5.2</span> <span class="title">Beyond Grouping Symbols</span>
+</h3>
+<p id="cUE">If all math expressions used grouping symbols for each and every arithmetic operation, we wouldn't need to say anything more here. In fact, some computer systems work that way, <em class="emphasis">requiring</em> the use of grouping symbols all the time. But it is much more common to permit math expressions with no grouping symbols at all, like \(5+3\cdot2\text{.}\) Should the addition \(5+3\) be executed first, or should the multiplication \(3\cdot2\text{?}\) We need what's known formally as the <dfn class="terminology">order of operations</dfn> to tell us what to do.</p>
+<p id="JbN">The <dfn class="terminology">order of operations</dfn> is nothing more than an agreement that we all have made to prioritize the arithmetic operations in a certain order.</p>
+<figure class="list table-like" id="IkC"><figcaption><span class="type">List</span><span class="space"> </span><span class="codenumber">A.5.5<span class="period">.</span></span><span class="space"> </span>Order of Operations</figcaption><div class="named-list-content"><dl class="description-list">
+<dt id="GYf">(P)arentheses and other grouping symbols</dt>
+<dd><p id="kkI">Grouping symbols should always direct you to the highest priority arithmetic first.</p></dd>
+<dt id="nfo">(E)xponentiation</dt>
+<dd><p id="QrR">After grouping symbols, exponentiation has the highest priority. Execute any exponentiation before other arithmetic operations.</p></dd>
+<dt id="Tmx">(M)ultiplication, (D)ivision, and Negation</dt>
+<dd><p id="wza">After all exponentiation has been executed, start executing multiplications, divisions, and negations. These things all have equal priority. If there are more than one of them in your expression, the highest priority is the one that is leftmost (which comes first as you read it).</p></dd>
+<dt id="ztG">(A)ddition and (S)ubtraction</dt>
+<dd><p id="cGj">After all other arithmetic has been executed, these are all that is left. Addition and subtraction have equal priority. If there are more than one of them in your expression, the highest priority is the one that is leftmost (which comes first as you read it).</p></dd>
+</dl></div></figure><p id="piW">A common acronym to help you remember this order of operations is <abbr class="acronym">PEMDAS</abbr>. There are a handful of mnemonic devices for remembering this ordering (such as Please Excuse My Dear Aunt Sally, People Eat More Donuts After School, etc.).</p>
+<p id="Vqf">We'll start with a few examples that only invoke a few operations each.</p>
+<article class="example example-like" id="vWk"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-vWk"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">A.5.6</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-vWk"><article class="example example-like"><p id="jPj">Use the order of operations to simplify the following expressions.</p>
+<ol class="lower-alpha">
+<li id="Xmw">
+<p id="INs">\(10+2\cdot 3\text{.}\) With this expression, we have the operations of addition and multiplication. The order of operations says the multiplication has higher priority, so execute that first:</p>
+<div class="displaymath">
+\begin{align*}
+10+2\cdot 3\amp =10+\nextoperation{2\cdot 3}\\
+\amp=10+\highlight{6}\\
+\amp=\highlight{16}
+\end{align*}
+</div>
+</li>
+<li id="DtF">
+<p id="oUB">\(4+10\div 2 - 1\text{.}\) With this expression, we have addition, division, and subtraction. According to the order of operations, the first thing we need to do is divide. After that, we'll apply the addition and subtraction, working left to right:</p>
+<div class="displaymath">
+\begin{align*}
+4+10\div2-1\amp=4+\nextoperation{10\div2}-1\\
+\amp=\nextoperation{4+\highlight{5}}-1\\
+\amp=\highlight{9}-1\\
+\amp=\highlight{8}
+\end{align*}
+</div>
+</li>
+<li id="jAO">
+<p id="VbK">\(7-10+4\text{.}\) This example <em class="emphasis">only</em> has subtraction and addition. While the acronym PEMDAS may mislead you to do addition before subtraction, remember that these operations have the same priority, and so we work left to right when executing them:</p>
+<div class="displaymath">
+\begin{align*}
+7-10+4\amp=\nextoperation{7-10}+4\\
+\amp=\highlight{-3}+4\\
+\amp=1
+\end{align*}
+</div>
+</li>
+<li id="PHX">
+<p id="BiT">\(20\div 4\cdot 7\text{.}\) This expression has only division and multiplication. Again, remember that although PEMDAS shows “MD,” the operations of multiplication and division have the same priority, so we'll apply them left to right:</p>
+<div class="displaymath">
+\begin{align*}
+20\div 4\cdot 5\amp=\nextoperation{20\div 4} \cdot 5\\
+\amp=\highlight{5}\cdot5\\
+\amp=\highlight{25}
+\end{align*}
+</div>
+</li>
+<li id="vPg">
+<p id="hqc">\((6+7)^2\text{.}\) With this expression, we have addition inside a set of parentheses, and an exponent of \(2\) outside of that. We must compute the operation inside the parentheses first, and after that we'll apply the exponent:</p>
+<div class="displaymath">
+\begin{align*}
+(6+7)^2\amp= (\nextoperation{6+7})^2\\
+\amp= \highlight{13}^2\\
+\amp= \highlight{169}
+\end{align*}
+</div>
+</li>
+<li id="bWp">
+<p id="Nxl">\(4(2)^3\text{.}\) This expression has multiplication and an exponent. There are parentheses too, but no operation inside them. Parentheses used in this manner make it clear that the \(4\) and \(2\) are separate numbers, not to be confused with \(42\text{.}\) In other words, \(4(2)^3\) and \(42^3\) mean very different things. Exponentiation has the higher priority, so we'll apply the exponent first, and then we'll multiply:</p>
+<div class="displaymath">
+\begin{align*}
+4(2)^3 \amp= 4\nextoperation{(2)^3}\\
+\amp= 4(\highlight{8})\\
+\amp= \highlight{32}
+\end{align*}
+</div>
+</li>
+</ol></article></div>
+<article class="remark remark-like" id="cdt"><h6 class="heading">
+<span class="type">Remark</span><span class="space"> </span><span class="codenumber">A.5.7</span><span class="period">.</span>
+</h6>
+<p id="IrT">There are many different ways that we write multiplication. We can use the symbols \(\cdot\text{,}\) \(\times\text{,}\) and \(*\) to denote multiplication. We can also use parentheses to denote multiplication, as we've seen in <a class="xref" data-knowl="./knowl/example-order-of-operations.html" title="Example A.5.6">Example A.5.6</a>, <a class="xref" data-knowl="./knowl/item-parenthetical-multiplication.html" title="Item f">Item f</a>. Once we start working with variables, there is even another way. No matter how multiplication is written, it does not change the priority that multiplication has in the order of operations.</p></article><article class="exercise exercise-like" id="orL"><a data-knowl="" class="id-ref exercise-knowl original" data-refid="hk-orL"><h6 class="heading">
+<span class="type">Checkpoint</span><span class="space"> </span><span class="codenumber">A.5.8</span><span class="period">.</span><span class="space"> </span><span class="title">Practice with order of operations.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-orL"><article class="exercise exercise-like"><p id="p-1893">The WeBWorK problem with ID “webwork-367” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article></div></section><section class="subsection" id="SJH"><h3 class="heading hide-type">
+<span class="type">Subsection</span> <span class="codenumber">A.5.3</span> <span class="title">Absolute Value Bars, Radicals, and Fraction Bars are Grouping Symbols</span>
+</h3>
+<p id="Bxo">When we first discussed grouping symbols, we only mentioned parentheses and brackets. Each of the following operations has an <em class="emphasis">implied</em> grouping symbol aside from parentheses and brackets.</p>
+<dl id="hEx" class="description-list">
+<dt id="fAP">Absolute Value Bars</dt>
+<dd><p id="tEu">The absolute value bars, as in \(\abs{2-5}\text{,}\) group the expression inside it just like a set of parentheses would.</p></dd>
+<dt id="LHY">Radicals</dt>
+<dd><p id="ZLD">The same is true of the radical symbol—everything inside the radical is grouped, as with \(\sqrt{12-3}\text{.}\)</p></dd>
+<dt id="rPh">Fraction Bars</dt>
+<dd><p id="FSM">With a horizontal division bar, the numerator is treated as one group and the denominator as another, as with \(\frac{2+3}{5-2}\text{.}\)</p></dd>
+</dl>
+<p id="NLG">We don't <em class="emphasis">need</em> parentheses for these three things since the absolute value bars, radical, and horizontal division bar each denote this grouping on their own. As far as priority in the order of operations goes, it's important to remember that these work just like our most familiar grouping symbols, parentheses.</p>
+<p id="tSP">With absolute value bars and radicals, these grouping symbols also <em class="emphasis">do</em> something to what's inside (but only <em class="emphasis">after</em> the operations inside have been executed). For example, \(\abs{-2}=2\text{,}\) and \(\sqrt{9}=3\text{.}\)</p>
+<article class="example example-like" id="UyU"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-UyU"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">A.5.9</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-UyU"><article class="example example-like"><p id="PWs">Use the order of operations to simplify the following expressions.</p>
+<ol class="lower-alpha">
+<li id="Idy">
+<p id="lZV">\(4-3\abs{5-7}\text{.}\) For this expression, we'll treat the absolute value bars just like we treat parentheses. This implies we'll simplify what's inside the bars first, and then compute the absolute value. After that, we'll multiply and then finally subtract:</p>
+<div class="displaymath">
+\begin{align*}
+4-3\abs{5-7} \amp= 4-3\abs{\nextoperation{5-7}}\\
+\amp= 4-3\nextoperation{\abs{\highlight{-2}}}\\
+\amp= 4-\nextoperation{3(\highlight{2})}\\
+\amp= 4-\highlight{6}\\
+\amp= \highlight{-2}
+\end{align*}
+</div>
+<p class="continuation">We may not do \(4-3=1\) first, because \(3\) is connected to the absolute value bars by multiplication (although implicitly), which has a higher order than subtraction.</p>
+</li>
+<li id="okH">
+<p id="She">\(8-\sqrt{5^2-8\cdot 2}\text{.}\) This expression has an expression inside the radical of \(5^2-8\cdot 2\text{.}\) We'll treat this radical like we would a set of parentheses, and simplify that internal expression first. We'll then apply the square root, and then our last step will be to subtract that expression from \(8\text{:}\)</p>
+<div class="displaymath">
+\begin{align*}
+8-\sqrt{5^2-8\cdot 2} \amp= 8-\sqrt{\nextoperation{5^2}-8\cdot 2}\\
+\amp= 8-\sqrt{\highlight{25}-\nextoperation{8\cdot 2}}\\
+\amp= 8-\sqrt{\nextoperation{25-\highlight{16}}}\\
+\amp= 8-\nextoperation{\sqrt{\highlight{9}}}\\
+\amp= 8-\highlight{3}\\
+\amp= \highlight{5}
+\end{align*}
+</div>
+</li>
+<li id="UrQ">
+<p id="yon">\(\dfrac{2^4+3\cdot 6}{5-18\div 2}\text{.}\) For this expression, the first thing we want to do is to recognize that the main fraction bar serves as a separator that groups the numerator and groups the denominator. Another way this expression could be written is \((2^4+3\cdot6)\div(15-18\div 2)\text{.}\) This implies we'll simplify the numerator and denominator separately according to the order of operations (since there are implicit parentheses around each of these). As a final step we'll simplify the resulting fraction (which is division).</p>
+<div class="displaymath">
+\begin{align*}
+\frac{2^4+3\cdot 6}{5-18\div 2} \amp= \frac{\nextoperation{2^4}+3\cdot 6}{5-\nextoperation{18\div 2}}\\
+\amp=\frac{\highlight{16}+\nextoperation{3\cdot 6}}{\nextoperation{5-\highlight{9}}}\\
+\amp=\frac{\nextoperation{16+\highlight{18}}}{\highlight{-4}}\\
+\amp=\frac{\highlight{34}}{-4}\\
+\amp=-\frac{17}{2}
+\end{align*}
+</div>
+</li>
+</ol></article></div>
+<article class="exercise exercise-like" id="AGd"><a data-knowl="" class="id-ref exercise-knowl original" data-refid="hk-AGd"><h6 class="heading">
+<span class="type">Checkpoint</span><span class="space"> </span><span class="codenumber">A.5.10</span><span class="period">.</span><span class="space"> </span><span class="title">More Practice with Order of Operations.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-AGd"><article class="exercise exercise-like"><p id="p-1905">The WeBWorK problem with ID “webwork-368” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article></div></section><section class="subsection" id="yQQ"><h3 class="heading hide-type">
+<span class="type">Subsection</span> <span class="codenumber">A.5.4</span> <span class="title">Negation and Distinguishing \((-a)^m\) from \(-a^m\)</span>
+</h3>
+<p id="ZZY">We noted in the <a class="xref" data-knowl="./knowl/list-order-of-operations.html" title="List A.5.5: Order of Operations">order of operations</a> that using the negative sign to negate a number has the same priority as multiplication and division. To understand why this is, observe that \(-1\cdot 23=-23\text{,}\) just for one example. So negating \(23\) gives the same result as multiplying \(23\) by \(-1\text{.}\) For this reason, negation has the same priority in the order of operations as multiplication. This can be a source of misunderstandings.</p>
+<p id="Ghh">How would you write a math expression that takes the number \(-4\) and squares it?</p>
+<div class="displaymath">
+\begin{equation*}
+-4^2\mathord{?}\qquad(-4)^2\mathord{?}\qquad\text{it doesn't matter?}
+\end{equation*}
+</div>
+<p id="moq">It <em class="emphasis">does</em> matter. The second option, \((-4)^2\) is squaring the number \(-4\text{.}\) The parentheses emphasize this.</p>
+<p id="Svz">But the expression \(-4^2\) is different. There are two actions in this expression: a negation and and exponentiation. According to the order of operations, the exponentiation has higher priority than the negation, so the exponent of \(2\) in \(-4^2\) applies to the \(4\) <em class="emphasis">before</em> the negative sign (multiplication by \(-1\)) is taken into account.</p>
+<div class="displaymath">
+\begin{align*}
+-4^2\amp=-\nextoperation{4^2}\\
+\amp=-16
+\end{align*}
+</div>
+<p class="continuation">and this is not the same as \((-4)^2\text{,}\) which is <em class="emphasis">positive</em> \(16\text{.}\)</p>
+<article class="warning remark-like" id="EyY"><h6 class="heading">
+<span class="type">Warning</span><span class="space"> </span><span class="codenumber">A.5.11</span><span class="period">.</span><span class="space"> </span><span class="title">Negative Numbers Raised to Powers.</span>
+</h6>
+<p id="DIa">You may find yourself needing to raise a negative number to a power, and using a calculator to do the work for you. If you do not understand the issue described here, then you may get incorrect results.</p>
+<ul class="disc">
+<li id="KYe"><p id="evw">For example, entering <code class="code-inline tex2jax_ignore">-4^2</code> into a calculator will result in \(-16\text{,}\) the negative of \(4^2\text{.}\)</p></li>
+<li id="rfn"><p id="KCF">But entering <code class="code-inline tex2jax_ignore">(-4)^2</code> into a calculator will result in \(16\text{,}\) the square of \(-4\text{.}\)</p></li>
+</ul>
+<p class="continuation">Go ahead and try entering these into your own calculator.</p></article><article class="exercise exercise-like" id="MUv"><a data-knowl="" class="id-ref exercise-knowl original" data-refid="hk-MUv"><h6 class="heading">
+<span class="type">Checkpoint</span><span class="space"> </span><span class="codenumber">A.5.12</span><span class="period">.</span><span class="space"> </span><span class="title">Negating and Raising to Powers.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-MUv"><article class="exercise exercise-like"><p id="p-1913">The WeBWorK problem with ID “webwork-369” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article></div>
+<article class="remark remark-like" id="gNm"><h6 class="heading">
+<span class="type">Remark</span><span class="space"> </span><span class="codenumber">A.5.13</span><span class="period">.</span>
+</h6>
+<p id="ozc">You might observe in the previous example that there is no difference between \(-4^3\) and \((-4)^3\text{.}\) It's true that the results are the same, \(-64\text{,}\) but the two expressions still do say different things. With \(-4^3\text{,}\) you raise to a power first, then negate. With \((-4)^3\text{,}\) you negate first, then raise to a power.</p></article><p id="yCI">As was discussed in <a href="section-arithmetic-with-negative-numbers.html#vlu" class="internal" title="Subsection A.1.5: Powers">Subsection A.1.5</a>, if the base of a power is negative, then whether or not the result is positive or negative depends on if the exponent is even or odd. It depends on whether or not the factors can all be paired up to “cancel” negative signs, or if there will be a lone factor left by itself.</p></section><section class="subsection" id="eXZ"><h3 class="heading hide-type">
+<span class="type">Subsection</span> <span class="codenumber">A.5.5</span> <span class="title">More Examples</span>
+</h3>
+<p id="eJR">Here are some example exercises that involve applying the order of operations to more complicated expressions. Try these exercises and read the steps given in each solution.</p>
+<article class="example example-like" id="tbE"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-tbE"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">A.5.14</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-tbE"><article class="example example-like"><p id="wdB">Simplify \(10-4(5-7)^3\text{.}\)</p>
+<div class="solutions">
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-vfm" id="vfm"><span class="type">Explanation</span></a><div class="hidden-content tex2jax_ignore" id="hk-vfm"><div class="solution solution-like">
+<p id="SQY">For the expression \(10-4(5-7)^3\text{,}\) we have simplify what's inside parentheses first, then we'll apply the exponent, then multiply, and finally subtract:</p>
+<div class="displaymath">
+\begin{align*}
+10-4(5-7)^3\amp=10-4(\nextoperation{5-7})^3\\
+\amp=10-4\nextoperation{(\highlight{-2})^3}\\
+\amp=10-\nextoperation{4(\highlight{-8})}\\
+\amp=10-\highlight{(-32)}\\
+\amp=10+32\\
+\amp=\highlight{42}
+\end{align*}
+</div>
+</div></div>
+</div></article></div>
+<article class="exercise exercise-like" id="FpW"><a data-knowl="" class="id-ref exercise-knowl original" data-refid="hk-FpW"><h6 class="heading">
+<span class="type">Checkpoint</span><span class="space"> </span><span class="codenumber">A.5.15</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-FpW"><article class="exercise exercise-like"><p id="p-1919">The WeBWorK problem with ID “webwork-370” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article></div>
+<article class="example example-like" id="ZiN"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-ZiN"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">A.5.16</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-ZiN"><article class="example example-like"><p id="ckK">Simplify \(6-(-8)^2\div 4+1\text{.}\)</p>
+<div class="solutions">
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-bmv" id="bmv"><span class="type">Explanation</span></a><div class="hidden-content tex2jax_ignore" id="hk-bmv"><div class="solution solution-like">
+<p id="ffq">To simplify \(6-(-8)^2\div 4+1\text{,}\) we'll first apply the exponent of \(2\) to \(-8\text{,}\) making sure to recall that \((-8)^2=64\text{.}\) After this, we'll apply division. As a final step, we'll be have subtraction and addition, which we'll apply working left-to-right:</p>
+<div class="displaymath">
+\begin{align*}
+6-(-8)^2\div 4+1 \amp= 6-\nextoperation{(-8)^2}\div 4+1\\
+\amp=6-\nextoperation{(\highlight{64})\div 4}+1\\
+\amp=\nextoperation{6-\highlight{16}}+1\\
+\amp=\highlight{-10}+1\\
+\amp=\highlight{-9}
+\end{align*}
+</div>
+</div></div>
+</div></article></div>
+<article class="exercise exercise-like" id="lxf"><a data-knowl="" class="id-ref exercise-knowl original" data-refid="hk-lxf"><h6 class="heading">
+<span class="type">Checkpoint</span><span class="space"> </span><span class="codenumber">A.5.17</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-lxf"><article class="exercise exercise-like"><p id="p-1922">The WeBWorK problem with ID “webwork-371” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article></div>
+<article class="exercise exercise-like" id="REo"><a data-knowl="" class="id-ref exercise-knowl original" data-refid="hk-REo"><h6 class="heading">
+<span class="type">Checkpoint</span><span class="space"> </span><span class="codenumber">A.5.18</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-REo"><article class="exercise exercise-like"><p id="p-1923">The WeBWorK problem with ID “webwork-372” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article></div></section><section class="exercises" id="Lfi"><h3 class="heading hide-type">
+<span class="type">Exercises</span> <span class="codenumber">A.5.6</span> <span class="title">Exercises</span>
+</h3>
+<div class="exercisegroup" id="rmr">
+<h6 class="heading"><span class="title">Review and Warmup</span></h6>
+<div class="exercisegroup-exercises cols3">
+<article class="exercise exercise-like" id="xLx"><h6 class="heading"><span class="codenumber">1<span class="period">.</span></span></h6>
+<p id="p-1924">The WeBWorK problem with ID “webwork-373” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="dSG"><h6 class="heading"><span class="codenumber">2<span class="period">.</span></span></h6>
+<p id="p-1925">The WeBWorK problem with ID “webwork-374” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="JZP"><h6 class="heading"><span class="codenumber">3<span class="period">.</span></span></h6>
+<p id="p-1926">The WeBWorK problem with ID “webwork-375” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="qgY"><h6 class="heading"><span class="codenumber">4<span class="period">.</span></span></h6>
+<p id="p-1927">The WeBWorK problem with ID “webwork-376” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="Woh"><h6 class="heading"><span class="codenumber">5<span class="period">.</span></span></h6>
+<p id="p-1928">The WeBWorK problem with ID “webwork-negative-bases-and-powers” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="Cvq"><h6 class="heading"><span class="codenumber">6<span class="period">.</span></span></h6>
+<p id="p-1929">The WeBWorK problem with ID “webwork-378” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article>
+</div>
+</div>
+<div class="exercisegroup" id="XtA">
+<h6 class="heading"><span class="title">Order of Operations Skills</span></h6>
+<div class="exercisegroup-exercises cols3">
+<article class="exercise exercise-like" id="iCz"><h6 class="heading"><span class="codenumber">7<span class="period">.</span></span></h6>
+<p id="p-1930">The WeBWorK problem with ID “webwork-379” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="OJI"><h6 class="heading"><span class="codenumber">8<span class="period">.</span></span></h6>
+<p id="p-1931">The WeBWorK problem with ID “webwork-380” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="uQR"><h6 class="heading"><span class="codenumber">9<span class="period">.</span></span></h6>
+<p id="p-1932">The WeBWorK problem with ID “webwork-381” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="aYa"><h6 class="heading"><span class="codenumber">10<span class="period">.</span></span></h6>
+<p id="p-1933">The WeBWorK problem with ID “webwork-382” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="Hfj"><h6 class="heading"><span class="codenumber">11<span class="period">.</span></span></h6>
+<p id="p-1934">The WeBWorK problem with ID “webwork-383” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="nms"><h6 class="heading"><span class="codenumber">12<span class="period">.</span></span></h6>
+<p id="p-1935">The WeBWorK problem with ID “webwork-384” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="TtB"><h6 class="heading"><span class="codenumber">13<span class="period">.</span></span></h6>
+<p id="p-1936">The WeBWorK problem with ID “webwork-385” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="zAK"><h6 class="heading"><span class="codenumber">14<span class="period">.</span></span></h6>
+<p id="p-1937">The WeBWorK problem with ID “webwork-386” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="fHT"><h6 class="heading"><span class="codenumber">15<span class="period">.</span></span></h6>
+<p id="p-1938">The WeBWorK problem with ID “webwork-387” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="LPc"><h6 class="heading"><span class="codenumber">16<span class="period">.</span></span></h6>
+<p id="p-1939">The WeBWorK problem with ID “webwork-388” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="rWl"><h6 class="heading"><span class="codenumber">17<span class="period">.</span></span></h6>
+<p id="p-1940">The WeBWorK problem with ID “webwork-389” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="Ydu"><h6 class="heading"><span class="codenumber">18<span class="period">.</span></span></h6>
+<p id="p-1941">The WeBWorK problem with ID “webwork-390” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="EkD"><h6 class="heading"><span class="codenumber">19<span class="period">.</span></span></h6>
+<p id="p-1942">The WeBWorK problem with ID “webwork-391” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="krM"><h6 class="heading"><span class="codenumber">20<span class="period">.</span></span></h6>
+<p id="p-1943">The WeBWorK problem with ID “webwork-392” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="QyV"><h6 class="heading"><span class="codenumber">21<span class="period">.</span></span></h6>
+<p id="p-1944">The WeBWorK problem with ID “webwork-393” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="wGe"><h6 class="heading"><span class="codenumber">22<span class="period">.</span></span></h6>
+<p id="p-1945">The WeBWorK problem with ID “webwork-394” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="cNn"><h6 class="heading"><span class="codenumber">23<span class="period">.</span></span></h6>
+<p id="p-1946">The WeBWorK problem with ID “webwork-395” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="IUw"><h6 class="heading"><span class="codenumber">24<span class="period">.</span></span></h6>
+<p id="p-1947">The WeBWorK problem with ID “webwork-396” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="pbF"><h6 class="heading"><span class="codenumber">25<span class="period">.</span></span></h6>
+<p id="p-1948">The WeBWorK problem with ID “webwork-397” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="ViO"><h6 class="heading"><span class="codenumber">26<span class="period">.</span></span></h6>
+<p id="p-1949">The WeBWorK problem with ID “webwork-398” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="BpX"><h6 class="heading"><span class="codenumber">27<span class="period">.</span></span></h6>
+<p id="p-1950">The WeBWorK problem with ID “webwork-399” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="hxg"><h6 class="heading"><span class="codenumber">28<span class="period">.</span></span></h6>
+<p id="p-1951">The WeBWorK problem with ID “webwork-400” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="NEp"><h6 class="heading"><span class="codenumber">29<span class="period">.</span></span></h6>
+<p id="p-1952">The WeBWorK problem with ID “webwork-401” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="tLy"><h6 class="heading"><span class="codenumber">30<span class="period">.</span></span></h6>
+<p id="p-1953">The WeBWorK problem with ID “webwork-402” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="ZSH"><h6 class="heading"><span class="codenumber">31<span class="period">.</span></span></h6>
+<p id="p-1954">The WeBWorK problem with ID “webwork-403” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="FZQ"><h6 class="heading"><span class="codenumber">32<span class="period">.</span></span></h6>
+<p id="p-1955">The WeBWorK problem with ID “webwork-404” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="mgZ"><h6 class="heading"><span class="codenumber">33<span class="period">.</span></span></h6>
+<p id="p-1956">The WeBWorK problem with ID “webwork-405” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="Soi"><h6 class="heading"><span class="codenumber">34<span class="period">.</span></span></h6>
+<p id="p-1957">The WeBWorK problem with ID “webwork-406” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="yvr"><h6 class="heading"><span class="codenumber">35<span class="period">.</span></span></h6>
+<p id="p-1958">The WeBWorK problem with ID “webwork-407” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="eCA"><h6 class="heading"><span class="codenumber">36<span class="period">.</span></span></h6>
+<p id="p-1959">The WeBWorK problem with ID “webwork-408” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="KJJ"><h6 class="heading"><span class="codenumber">37<span class="period">.</span></span></h6>
+<p id="p-1960">The WeBWorK problem with ID “webwork-409” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="qQS"><h6 class="heading"><span class="codenumber">38<span class="period">.</span></span></h6>
+<p id="p-1961">The WeBWorK problem with ID “webwork-410” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="WYb"><h6 class="heading"><span class="codenumber">39<span class="period">.</span></span></h6>
+<p id="p-1962">The WeBWorK problem with ID “webwork-411” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="Dfk"><h6 class="heading"><span class="codenumber">40<span class="period">.</span></span></h6>
+<p id="p-1963">The WeBWorK problem with ID “webwork-412” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="jmt"><h6 class="heading"><span class="codenumber">41<span class="period">.</span></span></h6>
+<p id="p-1964">The WeBWorK problem with ID “webwork-413” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="PtC"><h6 class="heading"><span class="codenumber">42<span class="period">.</span></span></h6>
+<p id="p-1965">The WeBWorK problem with ID “webwork-414” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="vAL"><h6 class="heading"><span class="codenumber">43<span class="period">.</span></span></h6>
+<p id="p-1966">The WeBWorK problem with ID “webwork-415” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="bHU"><h6 class="heading"><span class="codenumber">44<span class="period">.</span></span></h6>
+<p id="p-1967">The WeBWorK problem with ID “webwork-416” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="HPd"><h6 class="heading"><span class="codenumber">45<span class="period">.</span></span></h6>
+<p id="p-1968">The WeBWorK problem with ID “webwork-417” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="nWm"><h6 class="heading"><span class="codenumber">46<span class="period">.</span></span></h6>
+<p id="p-1969">The WeBWorK problem with ID “webwork-418” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="Udv"><h6 class="heading"><span class="codenumber">47<span class="period">.</span></span></h6>
+<p id="p-1970">The WeBWorK problem with ID “webwork-419” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="AkE"><h6 class="heading"><span class="codenumber">48<span class="period">.</span></span></h6>
+<p id="p-1971">The WeBWorK problem with ID “webwork-420” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="grN"><h6 class="heading"><span class="codenumber">49<span class="period">.</span></span></h6>
+<p id="p-1972">The WeBWorK problem with ID “webwork-421” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="MyW"><h6 class="heading"><span class="codenumber">50<span class="period">.</span></span></h6>
+<p id="p-1973">The WeBWorK problem with ID “webwork-422” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="sGf"><h6 class="heading"><span class="codenumber">51<span class="period">.</span></span></h6>
+<p id="p-1974">The WeBWorK problem with ID “webwork-423” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="YNo"><h6 class="heading"><span class="codenumber">52<span class="period">.</span></span></h6>
+<p id="p-1975">The WeBWorK problem with ID “webwork-424” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="EUx"><h6 class="heading"><span class="codenumber">53<span class="period">.</span></span></h6>
+<p id="p-1976">The WeBWorK problem with ID “webwork-425” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="lbG"><h6 class="heading"><span class="codenumber">54<span class="period">.</span></span></h6>
+<p id="p-1977">The WeBWorK problem with ID “webwork-426” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="RiP"><h6 class="heading"><span class="codenumber">55<span class="period">.</span></span></h6>
+<p id="p-1978">The WeBWorK problem with ID “webwork-427” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="xpY"><h6 class="heading"><span class="codenumber">56<span class="period">.</span></span></h6>
+<p id="p-1979">The WeBWorK problem with ID “webwork-428” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="dxh"><h6 class="heading"><span class="codenumber">57<span class="period">.</span></span></h6>
+<p id="p-1980">The WeBWorK problem with ID “webwork-429” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="JEq"><h6 class="heading"><span class="codenumber">58<span class="period">.</span></span></h6>
+<p id="p-1981">The WeBWorK problem with ID “webwork-430” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="pLz"><h6 class="heading"><span class="codenumber">59<span class="period">.</span></span></h6>
+<p id="p-1982">The WeBWorK problem with ID “webwork-431” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="VSI"><h6 class="heading"><span class="codenumber">60<span class="period">.</span></span></h6>
+<p id="p-1983">The WeBWorK problem with ID “webwork-432” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="BZR"><h6 class="heading"><span class="codenumber">61<span class="period">.</span></span></h6>
+<p id="p-1984">The WeBWorK problem with ID “webwork-433” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="iha"><h6 class="heading"><span class="codenumber">62<span class="period">.</span></span></h6>
+<p id="p-1985">The WeBWorK problem with ID “webwork-434” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="Ooj"><h6 class="heading"><span class="codenumber">63<span class="period">.</span></span></h6>
+<p id="p-1986">The WeBWorK problem with ID “webwork-435” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="uvs"><h6 class="heading"><span class="codenumber">64<span class="period">.</span></span></h6>
+<p id="p-1987">The WeBWorK problem with ID “webwork-436” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="aCB"><h6 class="heading"><span class="codenumber">65<span class="period">.</span></span></h6>
+<p id="p-1988">The WeBWorK problem with ID “webwork-437” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="GJK"><h6 class="heading"><span class="codenumber">66<span class="period">.</span></span></h6>
+<p id="p-1989">The WeBWorK problem with ID “webwork-438” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="mQT"><h6 class="heading"><span class="codenumber">67<span class="period">.</span></span></h6>
+<p id="p-1990">The WeBWorK problem with ID “webwork-439” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="SYc"><h6 class="heading"><span class="codenumber">68<span class="period">.</span></span></h6>
+<p id="p-1991">The WeBWorK problem with ID “webwork-440” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="zfl"><h6 class="heading"><span class="codenumber">69<span class="period">.</span></span></h6>
+<p id="p-1992">The WeBWorK problem with ID “webwork-441” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="fmu"><h6 class="heading"><span class="codenumber">70<span class="period">.</span></span></h6>
+<p id="p-1993">The WeBWorK problem with ID “webwork-442” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="LtD"><h6 class="heading"><span class="codenumber">71<span class="period">.</span></span></h6>
+<p id="p-1994">The WeBWorK problem with ID “webwork-443” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="rAM"><h6 class="heading"><span class="codenumber">72<span class="period">.</span></span></h6>
+<p id="p-1995">The WeBWorK problem with ID “webwork-444” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="XHV"><h6 class="heading"><span class="codenumber">73<span class="period">.</span></span></h6>
+<p id="p-1996">The WeBWorK problem with ID “webwork-445” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="DPe"><h6 class="heading"><span class="codenumber">74<span class="period">.</span></span></h6>
+<p id="p-1997">The WeBWorK problem with ID “webwork-446” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="jWn"><h6 class="heading"><span class="codenumber">75<span class="period">.</span></span></h6>
+<p id="p-1998">The WeBWorK problem with ID “webwork-447” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="Qdw"><h6 class="heading"><span class="codenumber">76<span class="period">.</span></span></h6>
+<p id="p-1999">The WeBWorK problem with ID “webwork-448” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="wkF"><h6 class="heading"><span class="codenumber">77<span class="period">.</span></span></h6>
+<p id="p-2000">The WeBWorK problem with ID “webwork-449” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="crO"><h6 class="heading"><span class="codenumber">78<span class="period">.</span></span></h6>
+<p id="p-2001">The WeBWorK problem with ID “webwork-450” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="IyX"><h6 class="heading"><span class="codenumber">79<span class="period">.</span></span></h6>
+<p id="p-2002">The WeBWorK problem with ID “webwork-451” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="oGg"><h6 class="heading"><span class="codenumber">80<span class="period">.</span></span></h6>
+<p id="p-2003">The WeBWorK problem with ID “webwork-452” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="UNp"><h6 class="heading"><span class="codenumber">81<span class="period">.</span></span></h6>
+<p id="p-2004">The WeBWorK problem with ID “webwork-453” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="AUy"><h6 class="heading"><span class="codenumber">82<span class="period">.</span></span></h6>
+<p id="p-2005">The WeBWorK problem with ID “webwork-454” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="hbH"><h6 class="heading"><span class="codenumber">83<span class="period">.</span></span></h6>
+<p id="p-2006">The WeBWorK problem with ID “webwork-455” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="NiQ"><h6 class="heading"><span class="codenumber">84<span class="period">.</span></span></h6>
+<p id="p-2007">The WeBWorK problem with ID “webwork-456” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="tpZ"><h6 class="heading"><span class="codenumber">85<span class="period">.</span></span></h6>
+<p id="p-2008">The WeBWorK problem with ID “webwork-457” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="Zxi"><h6 class="heading"><span class="codenumber">86<span class="period">.</span></span></h6>
+<p id="p-2009">The WeBWorK problem with ID “webwork-458” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="FEr"><h6 class="heading"><span class="codenumber">87<span class="period">.</span></span></h6>
+<p id="p-2010">The WeBWorK problem with ID “webwork-459” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="lLA"><h6 class="heading"><span class="codenumber">88<span class="period">.</span></span></h6>
+<p id="p-2011">The WeBWorK problem with ID “webwork-460” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="RSJ"><h6 class="heading"><span class="codenumber">89<span class="period">.</span></span></h6>
+<p id="p-2012">The WeBWorK problem with ID “webwork-461” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="xZS"><h6 class="heading"><span class="codenumber">90<span class="period">.</span></span></h6>
+<p id="p-2013">The WeBWorK problem with ID “webwork-462” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="ehb"><h6 class="heading"><span class="codenumber">91<span class="period">.</span></span></h6>
+<p id="p-2014">The WeBWorK problem with ID “webwork-463” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="Kok"><h6 class="heading"><span class="codenumber">92<span class="period">.</span></span></h6>
+<p id="p-2015">The WeBWorK problem with ID “webwork-464” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="qvt"><h6 class="heading"><span class="codenumber">93<span class="period">.</span></span></h6>
+<p id="p-2016">The WeBWorK problem with ID “webwork-465” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="WCC"><h6 class="heading"><span class="codenumber">94<span class="period">.</span></span></h6>
+<p id="p-2017">The WeBWorK problem with ID “webwork-466” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article>
+</div>
+</div>
+<div class="exercisegroup" id="DAJ">
+<h6 class="heading"><span class="title">Challenge</span></h6>
+<div class="exercisegroup-exercises"><article class="exercise exercise-like" id="CJL"><h6 class="heading"><span class="codenumber">95<span class="period">.</span></span></h6>
+<p id="p-2018">The WeBWorK problem with ID “webwork-467” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article></div>
+</div></section></section></div></main>
+</div>
+</body>
+</html>

@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*       on 2021-08-28T19:50:27Z       *-->
+<!--*   A recent stable commit (2020-08-09):   *-->
+<!--* 98f21740783f166a773df4dc83cab5293ab63a4a *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<html lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>ORCCA Properties of Real Numbers</title>
+<meta name="Keywords" content="Authored in PreTeXt">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+<script>window.MathJax = {
+  tex: {
+    inlineMath: [['\\(','\\)']],
+    tags: "none",
+    useLabelIds: true,
+    tagSide: "right",
+    tagIndent: ".8em",
+    packages: {'[+]': ['base', 'extpfeil', 'ams', 'amscd', 'newcommand', 'knowl', 'sfrac']}
+  },
+  options: {
+    ignoreHtmlClass: "tex2jax_ignore",
+    processHtmlClass: "has_am",
+  },
+  chtml: {
+    scale: 0.88,
+    mtextInheritFont: true
+  },
+  loader: {
+    load: ['input/asciimath', '[tex]/extpfeil', '[tex]/amscd', '[tex]/newcommand', '[pretext]/mathjaxknowl3.js'],
+    paths: {pretext: "https://pretextbook.org/js/lib"},
+  },
+/* support for the sfrac command in MathJax (Beveled fraction) */
+  startup: {
+    ready() {
+      //
+      // Creating a simple "sfrac" package on-the-fly
+      //
+      const Configuration = MathJax._.input.tex.Configuration.Configuration;
+      const CommandMap = MathJax._.input.tex.SymbolMap.CommandMap;
+      
+      new CommandMap('sfrac', {
+        sfrac: 'SFrac'
+        }, {
+        SFrac(parser, name) {
+        const num = parser.ParseArg(name);
+        const den = parser.ParseArg(name);
+        const frac = parser.create('node', 'mfrac', [num, den], {bevelled: true});
+        parser.Push(frac);
+        }
+      });
+      //
+      // Create the package for the overridden macros
+      //
+      Configuration.create('sfrac', {
+        handler: {macro: ['sfrac']}
+      });
+      
+    MathJax.startup.defaultReady();
+    }
+  },
+};
+</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext_add_on.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script xmlns:svg="http://www.w3.org/2000/svg">sagecellEvalName='Evaluate (Sage)';
+</script><link xmlns:svg="http://www.w3.org/2000/svg" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://fonts.googleapis.com/css?family=Inconsolata:400,700&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/pretext.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/pretext_add_on.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/banner_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/toc_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/knowls_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/style_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/colors_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/setcolors.css" rel="stylesheet" type="text/css">
+<!-- 2019-10-12: Temporary - CSS file for experiments with styling --><link xmlns:svg="http://www.w3.org/2000/svg" href="developer.css" rel="stylesheet" type="text/css">
+</head>
+<body id="PCC-ORCCA" class="mathbook-book has-toc has-sidebar-left">
+<a class="assistive" href="#content">Skip to main content</a><div xmlns:svg="http://www.w3.org/2000/svg" id="latex-macros" class="hidden-content" style="display:none">\(\require{cancel}\newcommand{\abs}[1]{\left\lvert#1\right\rvert}
+\newcommand{\point}[2]{\left(#1,#2\right)}
+\newcommand{\highlight}[1]{\definecolor{sapphire}{RGB}{59,90,125} {\color{sapphire}{{#1}}}}
+\newcommand{\firsthighlight}[1]{\definecolor{sapphire}{RGB}{59,90,125} {\color{sapphire}{{#1}}}}
+\newcommand{\secondhighlight}[1]{\definecolor{emerald}{RGB}{20,97,75} {\color{emerald}{{#1}}}}
+\newcommand{\unhighlight}[1]{{\color{black}{{#1}}}}
+\newcommand{\lowlight}[1]{{\color{lightgray}{#1}}}
+\newcommand{\attention}[1]{\mathord{\overset{\downarrow}{#1}}}
+\newcommand{\nextoperation}[1]{\mathord{\boxed{#1}}}
+\newcommand{\substitute}[1]{{\color{blue}{{#1}}}}
+\newcommand{\pinover}[2]{\overset{\overset{\mathrm{\ #2\ }}{|}}{\strut #1 \strut}}
+\newcommand{\addright}[1]{{\color{blue}{{{}+#1}}}}
+\newcommand{\addleft}[1]{{\color{blue}{{#1+{}}}}}
+\newcommand{\subtractright}[1]{{\color{blue}{{{}-#1}}}}
+\newcommand{\multiplyright}[2][\cdot]{{\color{blue}{{{}#1#2}}}}
+\newcommand{\multiplyleft}[2][\cdot]{{\color{blue}{{#2#1{}}}}}
+\newcommand{\divideunder}[2]{\frac{#1}{{\color{blue}{{#2}}}}}
+\newcommand{\divideright}[1]{{\color{blue}{{{}\div#1}}}}
+\newcommand{\negate}[1]{{\color{blue}{{-}}}\left(#1\right)}
+\newcommand{\cancelhighlight}[1]{\definecolor{sapphire}{RGB}{59,90,125}{\color{sapphire}{{\cancel{#1}}}}}
+\newcommand{\secondcancelhighlight}[1]{\definecolor{emerald}{RGB}{20,97,75}{\color{emerald}{{\bcancel{#1}}}}}
+\newcommand{\thirdcancelhighlight}[1]{\definecolor{amethyst}{RGB}{112,72,91}{\color{amethyst}{{\xcancel{#1}}}}}
+\newcommand{\confirm}[1]{\stackrel{\checkmark}{#1}}
+\newcommand{\reject}[1]{\stackrel{\text{no}}{#1}}
+\newcommand{\wonder}[1]{\stackrel{\text{?}}{#1}}
+\newcommand{\apple}{\text{🍎}}
+\newcommand{\banana}{\text{🍌}}
+\newcommand{\pear}{\text{🍐}}
+\newcommand{\cat}{\text{🐱}}
+\newcommand{\dog}{\text{🐶}}
+\newcommand{\lt}{&lt;}
+\newcommand{\gt}{&gt;}
+\newcommand{\amp}{&amp;}
+\)</div>
+<header id="masthead" class="smallbuttons"><div class="banner"><div class="container">
+<a id="logo-link" href="http://www.pcc.edu/ORCCA" target="_blank"><img src="images/ORCCAbrandlogo.png" alt="Logo image"></a><div class="title-container">
+<h1 class="heading"><a href="orcca.html"><span class="title">RVCC Elementary Algebra</span></a></h1>
+<p class="byline">Department of Mathematics and Computer Science</p>
+</div>
+</div></div>
+<nav xmlns:svg="http://www.w3.org/2000/svg" id="primary-navbar" class="navbar"><div class="container">
+<div class="navbar-top-buttons">
+<button class="sidebar-left-toggle-button button active" aria-label="Show or hide table of contents sidebar">Contents</button><div class="tree-nav toolbar toolbar-divisor-3">
+<a class="index-button toolbar-item button" href="index-1.html" title="Index">Index</a><span class="threebuttons"><a id="previousbutton" class="previous-button toolbar-item button" href="section-real-numbers-and-the-number-line.html" title="Previous">Prev</a><a id="upbutton" class="up-button button toolbar-item" href="chapter-introduction-to-algebra.html" title="Up">Up</a><a id="nextbutton" class="next-button button toolbar-item" href="section-simplifying-and-writing-algebraic-expressions.html" title="Next">Next</a></span>
+</div>
+</div>
+<div class="navbar-bottom-buttons toolbar toolbar-divisor-4">
+<button class="sidebar-left-toggle-button button toolbar-item active">Contents</button><a class="previous-button toolbar-item button" href="section-real-numbers-and-the-number-line.html" title="Previous">Prev</a><a class="up-button button toolbar-item" href="chapter-introduction-to-algebra.html" title="Up">Up</a><a class="next-button button toolbar-item" href="section-simplifying-and-writing-algebraic-expressions.html" title="Next">Next</a>
+</div>
+</div></nav></header><div class="page">
+<div xmlns:svg="http://www.w3.org/2000/svg" id="sidebar-left" class="sidebar" role="navigation"><div class="sidebar-content">
+<nav id="toc"><ul>
+<li class="link frontmatter">
+<a href="frontmatter.html" data-scroll="JVg"><span class="title">Front Matter</span></a><ul><li><a href="colophon-1.html" data-scroll="colophon-1">Colophon</a></li></ul>
+</li>
+<li class="link part"><a href="part-all-of-the-chapters.html" data-scroll="part-all-of-the-chapters"><span class="codenumber">I</span> <span class="title"></span></a></li>
+<li class="link">
+<a href="chapter-introduction-to-algebra.html" data-scroll="dNX"><span class="codenumber">1</span> <span class="title">Introduction to Algebra</span></a><ul>
+<li><a href="section-real-numbers-and-the-number-line.html" data-scroll="ipv">Real Numbers and the Number Line</a></li>
+<li><a href="section-properties-of-real-numbers.html" data-scroll="tNy" class="active">Properties of Real Numbers</a></li>
+<li><a href="section-simplifying-and-writing-algebraic-expressions.html" data-scroll="xRO">Simplifying and Writing Algebraic Expressions</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="chapter-linear-equations-and-inequalities-modified.html" data-scroll="sWV"><span class="codenumber">2</span> <span class="title">Linear Equations and Inequalities</span></a><ul>
+<li><a href="section-introduction-to-equations.html" data-scroll="fwy">Introduction to Equations</a></li>
+<li><a href="section-linear-equations.html" data-scroll="xVO">Linear Equations</a></li>
+<li><a href="section-introduction-to-problem-solving.html" data-scroll="Wul">Introduction to Problem Solving</a></li>
+<li><a href="section-formulas.html" data-scroll="Nnq">Formulas</a></li>
+<li><a href="section-linear-inequalities.html" data-scroll="Nuc">Linear Inequalities</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="chapter-graphing-equations.html" data-scroll="gID"><span class="codenumber">3</span> <span class="title">Graphing Lines</span></a><ul>
+<li><a href="section-introduction-to-graphing.html" data-scroll="YTJ">Introduction to Graphing</a></li>
+<li><a href="section-equations-in-two-variables.html" data-scroll="QXY">Equations in Two Variables</a></li>
+<li><a href="section-intercepts-horizontal-and-vertical-lines.html" data-scroll="ByF">Intercepts: Horizontal and Vertical Lines</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="chapter-systems-of-linear-equations-in-two-variables.html" data-scroll="xGO"><span class="codenumber">4</span> <span class="title">Systems of Linear Equations</span></a><ul>
+<li><a href="section-solving-systems-of-linear-equations-graphically-and-numerically.html" data-scroll="njo">Solving Systems of Linear Equations Graphically and Numerically</a></li>
+<li><a href="section-solving-systems-of-linear-equations-by-substitution.html" data-scroll="zdh">Solving Systems of Linear Equations by Substitution</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="chapter-polynomials-and-exponents-modified.html" data-scroll="onc"><span class="codenumber">5</span> <span class="title">Exponents and Polynomials</span></a><ul>
+<li><a href="section-rules-for-exponents.html" data-scroll="KHJ">Rules for Exponents</a></li>
+<li><a href="section-adding-and-subtracting-polynomials.html" data-scroll="VvN">Addition and Subtraction of Polynomials</a></li>
+<li><a href="section-multiplication-of-polynomials.html" data-scroll="IcY">Multiplication of Polynomials</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="chapter-radical-expressions-and-equations.html" data-scroll="chapter-radical-expressions-and-equations"><span class="codenumber">6</span> <span class="title">Radical Expressions and Equations</span></a><ul>
+<li><a href="section-introduction-to-factoring.html" data-scroll="duD">Introduction to Factoring</a></li>
+<li><a href="section-factoring-trinomials.html" data-scroll="Mrf">Factoring Trinomials</a></li>
+<li><a href="section-solving-equations-by-factoring.html" data-scroll="DXi">Solving Equations by Factoring 1 (Quadratics)</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="chapter-rational-expressions.html" data-scroll="RzF"><span class="codenumber">7</span> <span class="title">Rational Expressions</span></a><ul>
+<li><a href="section-introduction-to-rational-expressions.html" data-scroll="Moo">Introduction to Rational Expressions</a></li>
+<li><a href="section-multiplication-and-division-of-rational-expressions.html" data-scroll="Vps">Multiplication and Division of Rational Expressions</a></li>
+<li><a href="section-addition-and-subtraction-with-like-denominators.html" data-scroll="KBw">Addition and Subtraction of Rational Expressions with Like Denominators</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="chapter-radical-expressions-and-functions.html" data-scroll="chapter-radical-expressions-and-functions"><span class="codenumber">8</span> <span class="title">Quantities in the Physical World</span></a><ul><li><a href="section-radical-expressions-and-functions.html" data-scroll="GAK">Radical Expressions and Functions</a></li></ul>
+</li>
+<li class="link backmatter"><a href="backmatter.html" data-scroll="jDj"><span class="title">Appendices</span></a></li>
+<li class="link">
+<a href="appendix-basic-math-review.html" data-scroll="appendix-basic-math-review"><span class="codenumber">A</span> <span class="title">Basic Math Review</span></a><ul>
+<li><a href="section-arithmetic-with-negative-numbers.html" data-scroll="qBB">Arithmetic with Negative Numbers</a></li>
+<li><a href="section-fractions-and-fraction-arithmetic.html" data-scroll="VAa">Fractions and Fraction Arithmetic</a></li>
+<li><a href="section-absolute-value-and-square-root.html" data-scroll="GAK">Absolute Value and Square Root</a></li>
+<li><a href="section-percentages.html" data-scroll="Chi">Percentages</a></li>
+<li><a href="section-order-of-operations.html" data-scroll="aog">Order of Operations</a></li>
+<li><a href="section-set-notation-and-types-of-numbers.html" data-scroll="Fdo">Set Notation and Types of Numbers</a></li>
+</ul>
+</li>
+<li class="link"><a href="appendix-unit-conversions.html" data-scroll="appendix-unit-conversions"><span class="codenumber">B</span> <span class="title">Unit Conversions</span></a></li>
+<li class="link"><a href="index-1.html" data-scroll="index-1"><span class="title">Index</span></a></li>
+</ul></nav><div class="extras"><nav><a class="mathbook-link" href="https://pretextbook.org">Authored in PreTeXt</a><a href="https://www.mathjax.org"><img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" alt="Powered by MathJax"></a></nav></div>
+</div></div>
+<main class="main"><div id="content" class="pretext-content"><section xmlns:svg="http://www.w3.org/2000/svg" class="section" id="tNy"><h2 class="heading hide-type">
+<span class="type">Section</span> <span class="codenumber">1.2</span> <span class="title">Properties of Real Numbers</span>
+</h2>
+<section class="introduction" id="VdK"><p id="XYD">We know that if we have two apples and add three more, then our result is the same as if we'd had three apples and added two more. In this section, we'll examine this and other basic properties we know about numbers, and extend them to variable expressions.</p></section><section class="subsection" id="ZUH"><h3 class="heading hide-type">
+<span class="type">Subsection</span> <span class="codenumber">1.2.1</span> <span class="title">Identities and Inverses</span>
+</h3>
+<p id="HKm">We start with some definitions. The number \(0\) is called the <dfn class="terminology">additive identity</dfn>.  It gets this name because adding \(0\) to a number does not change the “identity” of that number. If the sum of two numbers is the additive identity, \(0\text{,}\) these two numbers are called <dfn class="terminology">additive inverses</dfn>.  For example, \(2\) is the additive inverse of \(-2\text{,}\) and the additive inverse of \(-2\) is \(2\text{.}\)</p>
+<p id="nRv">Similarly, the number \(1\) is called the <dfn class="terminology">multiplicative identity</dfn>.  It gets this name because multiplying a number by \(1\) does not change the “identity” of that number. If the product of two numbers is the multiplicative identity, \(1\text{,}\) these two numbers are called <dfn class="terminology">multiplicative inverses</dfn>.  For example, \(2\) is the multiplicative inverse of \(\frac{1}{2}\text{,}\) and the multiplicative inverse of \(-\frac{2}{3}\) is \(-\frac{3}{2}\text{.}\) The multiplicative inverse of a number is also called the <dfn class="terminology">reciprocal</dfn> of that number. </p></section><section class="subsection" id="GbQ"><h3 class="heading hide-type">
+<span class="type">Subsection</span> <span class="codenumber">1.2.2</span> <span class="title">Introduction to Algebraic Properties</span>
+</h3>
+<section class="paragraphs" id="Ufv"><h5 class="heading"><span class="title">Commutative Property.</span></h5>
+<p id="TYE">When we compute the area of a rectangle, we generally multiply the length by the width. Does the result change if we multiply the width by the length?</p>
+<figure class="figure figure-like" id="EPG"><div class="image-box" style="width: 70%; margin-left: 15%; margin-right: 15%;">
+<img src="images/image-4.svg" role="img" class="contained" alt="two rectangles; the left rectangle is 3 cm wide by 2 cm high; its area is marked by Area=3*2=6; the right rectangle is 2 cm wide by 3 cm high; its area is marked by Area=2*3=6"><div class="image-archive">
+<a href="images/image-4.eps">eps</a><a href="images/image-4.pdf">pdf</a><a href="images/image-4.png">png</a><a href="images/image-4.svg">svg</a><a href="images/image-4.tex">tex</a>
+</div>
+</div>
+<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">1.2.1<span class="period">.</span></span><span class="space"> </span>Horizontal and Vertical Rectangles</figcaption></figure><p id="AfN">We can see \(3\cdot2=2\cdot3\text{.}\) If we denote the length of a rectangle with \(\ell\) and the width with \(w\text{,}\) this implies \(\ell w=w\ell\text{.}\) The fact that we can reverse the order is known as the <dfn class="terminology">commutative property of multiplication</dfn>. There is a similar property for addition, as with \(1+2=2+1\text{,}\) called the <dfn class="terminology">commutative property of addition</dfn>. However, there is no commutative property of subtraction or division, because for example \(2-1\ne1-2\) and \(\frac{4}{2}\ne\frac{2}{4}\text{.}\)</p></section><section class="paragraphs" id="AmE"><h5 class="heading"><span class="title">Associative Property.</span></h5>
+<p id="gmW">Let's extend the rectangle to a rectangular prism with width \(w=4\,\text{cm}\text{,}\) depth \(d=3\,\text{cm}\text{,}\) and height \(h=2\,\text{cm}\text{.}\) To compute the volume of this solid, we multiply the width, depth and height, which we write as \(wdh\text{.}\)</p>
+<p id="Muf">In the following figure, on the left side, we multiply the width and depth first, and then multiply the height. On the right side, we multiply the width and height first, and then multiply the depth. Let's compare the products.</p>
+<div class="sidebyside"><div class="sbsrow" style="margin-left:7.5%;margin-right:7.5%;">
+<div class="sbspanel top" style="width:41.1764705882353%;"><figure class="figure figure-like" id="LKl"><img src="images/image-5.svg" role="img" class="contained" alt="a rectangular prism; its length is 4 cm, width is 3 cm, and height is 2 cm; one face representing the length and width is highlighted"><div class="image-archive">
+<a href="images/image-5.eps">eps</a><a href="images/image-5.pdf">pdf</a><a href="images/image-5.png">png</a><a href="images/image-5.svg">svg</a><a href="images/image-5.tex">tex</a>
+</div>
+<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">1.2.2<span class="period">.</span></span><span class="space"> </span>\((4\cdot3)\cdot2=24\)</figcaption></figure></div>
+<div class="sbspanel top" style="width:41.1764705882353%;"><figure class="figure figure-like" id="rRu"><img src="images/image-6.svg" role="img" class="contained" alt="a rectangular prism; its length is 4 cm, width is 3 cm, and height is 2 cm; one face representing the width and height is highlighted"><div class="image-archive">
+<a href="images/image-6.eps">eps</a><a href="images/image-6.pdf">pdf</a><a href="images/image-6.png">png</a><a href="images/image-6.svg">svg</a><a href="images/image-6.tex">tex</a>
+</div>
+<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">1.2.3<span class="period">.</span></span><span class="space"> </span>\(4\cdot(3\cdot2)=24\)</figcaption></figure></div>
+</div></div>
+<p id="sBo">We can see \((wd)h=w(dh)\text{.}\) We haven't changed the order that the three variables are written left to right, but we have moved parentheses to change what operation is highest priority in the order of operations. This is known as the <dfn class="terminology">associative property of multiplication</dfn>. Theres is a similar property for addition, as with \((1+2)+3=1+(2+3)\text{,}\) called the <dfn class="terminology">associative property of addition</dfn>. However, there is no associative property of subtraction or division, because for example \((3-2)-1\ne3-(2-1)\) and \((2\div2)\div2\neq2\div(2\div2)\text{.}\)</p></section><section class="paragraphs" id="gtN"><h5 class="heading"><span class="title">Distributive Property.</span></h5>
+<p id="YIx">The final property we'll explore is called the <dfn class="terminology">distributive property</dfn>, which involves both multiplication and addition. To conceptualize this property, let's consider what happens if we buy 3 boxes that each contain one apple and one pear. This will have the same total cost as if we'd bought 3 apples and 3 pears. We write this algebraically:</p>
+<div class="displaymath">
+\begin{equation*}
+3(a+p)=3a+3p\text{.}
+\end{equation*}
+</div>
+<p class="continuation">Visually, we can see that it's just a means of re-grouping: \((\apple + \pear) + (\apple + \pear) + (\apple + \pear) = (\apple + \apple + \apple) + (\pear + \pear + \pear)\text{.}\)</p></section></section><section class="subsection" id="miZ"><h3 class="heading hide-type">
+<span class="type">Subsection</span> <span class="codenumber">1.2.3</span> <span class="title">Summary of Algebraic Properties</span>
+</h3>
+<figure class="list table-like" id="RkP"><figcaption><span class="type">List</span><span class="space"> </span><span class="codenumber">1.2.4<span class="period">.</span></span><span class="space"> </span>Algebraic Properties</figcaption><div class="named-list-content">
+<div class="introduction" id="xrY"><p id="fDc">Let \(a\text{,}\) \(b\text{,}\) and \(c\) represent real numbers, variables, or algebraic expressions. Then the following properties hold:</p></div>
+<dl class="description-list">
+<dt id="dkZ">Commutative Property of Multiplication</dt>
+<dd><p id="hUS">\(\displaystyle a\cdot b=b\cdot a\)</p></dd>
+<dt id="Jsi">Associative Property of Multiplication</dt>
+<dd><p id="Ocb">\(\displaystyle a\cdot(b\cdot c)=(a\cdot b)\cdot c\)</p></dd>
+<dt id="pzr">Commutative Property of Addition</dt>
+<dd><p id="ujk">\(\displaystyle a+b=b+a\)</p></dd>
+<dt id="VGA">Associative Property of Addition</dt>
+<dd><p id="aqt">\(\displaystyle a+(b+c)=(a+b)+c\)</p></dd>
+<dt id="BNJ">Distributive Property</dt>
+<dd><p id="GxC">\(\displaystyle a(b+c)=ab+ac\)</p></dd>
+</dl>
+</div></figure><p id="kWP">Let's practice these properties in the following exercises.</p>
+<article class="exercise exercise-like" id="dzh"><a data-knowl="" class="id-ref exercise-knowl original" data-refid="hk-dzh"><h6 class="heading">
+<span class="type">Checkpoint</span><span class="space"> </span><span class="codenumber">1.2.5</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-dzh"><article class="exercise exercise-like"><p id="p-91">The WeBWorK problem with ID “webwork-8” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article></div></section><section class="subsection" id="Sqi"><h3 class="heading hide-type">
+<span class="type">Subsection</span> <span class="codenumber">1.2.4</span> <span class="title">Applying the Commutative, Associative, and Distributive Properties</span>
+</h3>
+<section class="paragraphs" id="MAW"><h5 class="heading"><span class="title">Like Terms.</span></h5>
+<p id="RdY">One of the main ways that we will use the commutative, associative, and distributive properties is to simplify expressions. In order to do this, we need to recognize <dfn class="terminology">like terms</dfn>, as discussed in <code class="code-inline tex2jax_ignore">[cross-reference to target(s) "section-combining-like-terms" missing or not unique]</code>. We combine like terms when we take an expression like \(2a+3a\) and write the result as \(5a\text{.}\) The formal process actually involves using the distributive property:</p>
+<div class="displaymath">
+\begin{align*}
+2a+3a \amp=(2+3)a\\
+\amp=5a
+\end{align*}
+</div>
+<p class="continuation">In practice, however, it's more helpful to think of this as having \(2\) of an object and then an additional \(3\) of that same object. In total, we then have \(5\) of that object.</p></section><article class="example example-like" id="JGq"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-JGq"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">1.2.6</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-JGq"><article class="example example-like"><p id="Cqz">Where possible, simplify the following expressions by combining like terms.</p>
+<ol class="lower-alpha cols4">
+<li id="LYt"><p id="AIq">\(\displaystyle 6c+12c-5c\)</p></li>
+<li id="sfC"><p id="gPz">\(\displaystyle -5q^2-3q^2\)</p></li>
+<li id="YmL"><p id="MWI">\(\displaystyle x-5y+4x\)</p></li>
+<li id="EtU"><p id="tdR">\(\displaystyle 2x-3y+4z\)</p></li>
+</ol>
+<div class="solutions">
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-BkT" id="BkT"><span class="type">Explanation</span></a><div class="hidden-content tex2jax_ignore" id="hk-BkT"><div class="solution solution-like"><ol id="bYC" class="lower-alpha">
+<li id="kBd">
+<p id="Zla">All three terms are like terms, so they may combined. We combine them two at a time:</p>
+<div class="displaymath">
+\begin{align*}
+6c+12c-5c \amp=18c-5c\\
+\amp=13c
+\end{align*}
+</div>
+</li>
+<li id="QIm">
+<p id="Fsj">The two terms \(-5q^2\) and \(-3q^2\) are like terms, so we may combine them:</p>
+<div class="displaymath">
+\begin{align*}
+-5q^2-3q^2 \amp=-8q^2
+\end{align*}
+</div>
+</li>
+<li id="wPv">
+<p id="lzs">The two terms \(x\) and \(4x\) are like terms, while the other term is different. Using the associative and commutative properties of addition in the first step allows us to place the two like terms next to each other, and then combine them:</p>
+<div class="displaymath">
+\begin{align*}
+x-5y+4x \amp=x+4x+(-5y)\\
+\amp=1x+4x+(-5y)\\
+\amp=5x-5y
+\end{align*}
+</div>
+<p id="RGB">Note the expression \(x\) is the same as \(1x\text{.}\) Usually we don't write the “\(1\)” as it is implied. However, it's helpful when combining like terms to remember that \(x=1x\text{.}\) (Similarly, \(-x\) is equal to \(-1x\text{,}\) which can be helpful when combining \(-x\) with like terms.)</p>
+</li>
+<li id="cWE"><p id="xNK">The expression \(2x-3y+4z\) cannot be simplified as there are no like terms.</p></li>
+</ol></div></div>
+</div></article></div>
+<section class="paragraphs" id="sIf"><h5 class="heading"><span class="title">Adding Expressions.</span></h5>
+<p id="xlh">When we add an expression like \(4x-5\) to an expression like \(3x-7\text{,}\) we write them as follows:</p>
+<div class="displaymath">
+\begin{equation*}
+(4x-5)+(3x-7)
+\end{equation*}
+</div>
+<p class="continuation">In order to remove the given sets of parentheses and apply the commutative property of addition, we will rewrite the subtraction operation as “adding the opposite”:</p>
+<div class="displaymath">
+\begin{equation*}
+4x+(-5)+3x+(-7)
+\end{equation*}
+</div>
+<p class="continuation">At this point we can apply the commutative property of addition and then combine like terms. Here's how the entire problem will look:</p>
+<div class="displaymath">
+\begin{align*}
+(4x-5)+(3x-7)\amp=4x+(-5)+3x+(-7)\\
+\amp=4x+3x+(-5)+(-7)\\
+\amp=7x+(-12)\\
+\amp=7x-12
+\end{align*}
+</div></section><article class="remark remark-like" id="ija"><h6 class="heading">
+<span class="type">Remark</span><span class="space"> </span><span class="codenumber">1.2.7</span><span class="period">.</span>
+</h6>
+<p id="nhB">Once we become more comfortable simplifying such expressions, we will simply write this kind of simplification in one step:</p>
+<div class="displaymath">
+\begin{equation*}
+(4x-5)+(3x-7)=7x-12
+\end{equation*}
+</div></article><article class="example example-like" id="pNz"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-pNz"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">1.2.8</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-pNz"><article class="example example-like"><p id="ixI">Use the associative, commutative, and distributive properties to simplify the following expressions as much as possible.</p>
+<ol class="lower-alpha cols2">
+<li id="JdN"><p id="dUT">\(\displaystyle (2x+3)+(4x+5)\)</p></li>
+<li id="pkW"><p id="Kcc">\(\displaystyle (-5x+3)+(4x-7)\)</p></li>
+</ol>
+<div class="solutions">
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-hsc" id="hsc"><span class="type">Explanation</span></a><div class="hidden-content tex2jax_ignore" id="hk-hsc"><div class="solution solution-like"><ol id="IfL" class="lower-alpha">
+<li id="Vsf">
+<p id="qjl">We will remove parentheses, and then combine like terms:</p>
+<div class="displaymath">
+\begin{align*}
+(2x+3)+(4x+5) \amp=2x+3+4x+5\\
+\amp=2x+4x+3+5\\
+\amp=6x+8
+\end{align*}
+</div>
+</li>
+<li id="Bzo">
+<p id="Wqu">We will remove parentheses, and then combine like terms:</p>
+<div class="displaymath">
+\begin{align*}
+(-5x+3)+(4x-7)\amp=-5x+3+4x+(-7)\\
+\amp=-x+(-4)\\
+\amp=-x-4
+\end{align*}
+</div>
+</li>
+</ol></div></div>
+</div></article></div>
+<section class="paragraphs" id="YPo"><h5 class="heading"><span class="title">Applying the Distributive Property with Negative Coefficients.</span></h5>
+<p id="dsq">Applying the distributive property in an expression such as \(2(3x+4)\) is fairly straightforward, in that this becomes \(2(3x)+2(4)\) which we then simplify to \(6x+8\text{.}\) Applying the distributive property is a little trickier when subtraction or a negative constant is involved, for example, with the expression \(2(3x-4)\text{.}\) Recalling that subtraction is defined as “adding the opposite,” we can change the subtraction of positive \(4\) to the addition of negative \(4\text{:}\)</p>
+<div class="displaymath">
+\begin{equation*}
+2\big(3x+(-4)\big)
+\end{equation*}
+</div>
+<p class="continuation">Now when we distribute, we obtain:</p>
+<div class="displaymath">
+\begin{equation*}
+2(3x)+2(-4)
+\end{equation*}
+</div>
+<p class="continuation">As a final step, we see that this simplifies to:</p>
+<div class="displaymath">
+\begin{equation*}
+6x-8
+\end{equation*}
+</div></section><article class="remark remark-like" id="Oqj"><h6 class="heading">
+<span class="type">Remark</span><span class="space"> </span><span class="codenumber">1.2.9</span><span class="period">.</span>
+</h6>
+<p id="ToK">We can also extend the distributive property to use subtraction, and state that \(a(b-c)=ab-ac\text{.}\) With this property, we would simplify \(2(3x-4)\) more efficiently:</p>
+<div class="displaymath">
+\begin{align*}
+2(3x-4) \amp=2(3x)-2(4)\\
+\amp=6x-8
+\end{align*}
+</div></article><article class="example example-like" id="VUI"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-VUI"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">1.2.10</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-VUI"><article class="example example-like"><p id="OER">Apply the distributive property to each expression and simplify it as much as possible.</p>
+<ol class="lower-alpha cols2">
+<li id="hGx"><p id="CxD">\(\displaystyle -3(5x+7)\)</p></li>
+<li id="NNG"><p id="iEM">\(\displaystyle 2(-4x-1)\)</p></li>
+</ol>
+<div class="solutions">
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-Nzl" id="Nzl"><span class="type">Explanation</span></a><div class="hidden-content tex2jax_ignore" id="hk-Nzl"><div class="solution solution-like"><ol id="omU" class="lower-alpha cols2">
+<li id="tUP">
+<p id="OLV">We will distribute \(-3\) to the \(5x\) and \(7\text{:}\)</p>
+<div class="displaymath">
+\begin{align*}
+-3(5x+7)\amp=-3(5x)+(-3)(7)\\
+\amp=-15x-21
+\end{align*}
+</div>
+</li>
+<li id="abY">
+<p id="uTe">We will distribute \(2\) to the \(-4x\) and \(-1\text{:}\)</p>
+<div class="displaymath">
+\begin{align*}
+2(-4x-1)\amp=2(-4x)-2(1)\\
+\amp=-8x-2
+\end{align*}
+</div>
+</li>
+</ol></div></div>
+</div></article></div>
+<article class="exercise exercise-like" id="aEB"><a data-knowl="" class="id-ref exercise-knowl original" data-refid="hk-aEB"><h6 class="heading">
+<span class="type">Checkpoint</span><span class="space"> </span><span class="codenumber">1.2.11</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-aEB"><article class="exercise exercise-like"><p id="p-120">The WeBWorK problem with ID “webwork-9” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article></div>
+<section class="paragraphs" id="EWx"><h5 class="heading"><span class="title">Subtracting Expressions.</span></h5>
+<p id="Jzz">To subtract one expression from another expression, such as \((5x+9)-(3x+2)\text{,}\) we will again rely on the fact that subtraction is defined as “adding the opposite.” To add the <em class="emphasis">opposite</em> of an expression, we will technically distribute a constant factor of \(-1\) and simplify from there:</p>
+<div class="displaymath">
+\begin{align*}
+(5x+9)-(3x+2)\amp=(5x+9)+(-1)(3x+2)\\
+\amp=5x+9+(-1)(3x)+(-1)(2)\\
+\amp=5x+9+(-3x)+(-2)\\
+\amp=2x+7
+\end{align*}
+</div></section><article class="remark remark-like" id="uxs"><h6 class="heading">
+<span class="type">Remark</span><span class="space"> </span><span class="codenumber">1.2.12</span><span class="period">.</span>
+</h6>
+<p id="zvT">The above example demonstrates <em class="emphasis">how</em> we apply the distributive property in order to subtract two expressions. But in practice, it can be pretty cumbersome. A shorter (and often clearer) approach is to instead subtract every term in the expression we are subtracting, which is shown like this:</p>
+<div class="displaymath">
+\begin{align*}
+(5x+9)-(3x+2)\amp=5x+9-3x-2\\
+\amp=2x+7
+\end{align*}
+</div>
+<p class="continuation">You may even find it helpful to view the above as “distributing the subtraction” and changing the signs on each term within the group that is being subtracted.</p></article><article class="example example-like" id="CbR"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-CbR"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">1.2.13</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-CbR"><article class="example example-like"><p id="uMa">Use the associative, commutative, and distributive properties to simplify the following expressions as much as possible.</p>
+<ol class="lower-alpha cols2">
+<li id="Gjh"><p id="ban">\(\displaystyle (-6x+4)-(3x-7)\)</p></li>
+<li id="mqq"><p id="Hhw">\(\displaystyle (-2x-5)-(-4x-6)\)</p></li>
+</ol>
+<div class="solutions">
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-tGu" id="tGu"><span class="type">Explanation</span></a><div class="hidden-content tex2jax_ignore" id="hk-tGu"><div class="solution solution-like"><ol id="Uud" class="lower-alpha">
+<li id="Sxz">
+<p id="noF">We will remove parentheses using the distributive property, and then combine like terms:</p>
+<div class="displaymath">
+\begin{align*}
+(-6x+4)-(3x-7) \amp=-6x+4-3x-(-7)\\
+\amp=-6x+4-3x+7\\
+\amp=-9x+11
+\end{align*}
+</div>
+</li>
+<li id="yEI">
+<p id="TvO">We will remove parentheses using the distributive property, and then combine like terms:</p>
+<div class="displaymath">
+\begin{align*}
+(-2x-5)-(-4x-6)\amp=-2x-5-(-4x)-(-6)\\
+\amp=-2x-5+4x+6\\
+\amp=2x+1
+\end{align*}
+</div>
+</li>
+</ol></div></div>
+</div></article></div></section><section class="subsection" id="yxr"><h3 class="heading hide-type">
+<span class="type">Subsection</span> <span class="codenumber">1.2.5</span> <span class="title">The Role of the Order of Operations in Applying the Commutative, Associative, and Distributive Properties</span>
+</h3>
+<p id="pGI">When simplifying an expression such as \(3+4(5x+7)\text{,}\) we need to respect the order of operations. Since the terms inside the parentheses are not like terms, there is nothing to simplify there. The next highest priority operation is multiplying the \(4\) by \((5x+7)\text{.}\) This must be done <em class="emphasis">before</em> anything happens with the adding of that \(3\text{.}\) We cannot say \(3+4(5x+7)=\highlight{7}(5x+7)\text{,}\) because that would mean we treated the addition as having higher priority than the multiplication.</p>
+<p id="VNR">So to simplify \(3+4(5x+7)\text{,}\) we will first examine the multiplication of \(4\) with \((5x+7)\text{,}\) and here we may apply the distributive property. After that, we will use the commutative and associative properties:</p>
+<div class="displaymath">
+\begin{align*}
+3+4(5x+7)\amp=3+4(5x)+4(7)\\
+\amp=3+20x+28\\
+\amp=20x+3+28\\
+\amp=20x+31
+\end{align*}
+</div>
+<article class="example example-like" id="GLK"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-GLK"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">1.2.14</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-GLK"><article class="example example-like"><p id="aTj">Simplify the following expressions using the commutative, associative, and distributive properties.</p>
+<ol class="lower-alpha cols3">
+<li id="eLR"><p id="zCX">\(\displaystyle 4-(3x-9)\)</p></li>
+<li id="KTa"><p id="fKg">\(\displaystyle 5x+9(-2x+3)\)</p></li>
+<li id="raj"><p id="LRp">\(\displaystyle 5(x-9)+4(x+4)\)</p></li>
+</ol>
+<div class="solutions">
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-ZND" id="ZND"><span class="type">Explanation</span></a><div class="hidden-content tex2jax_ignore" id="hk-ZND"><div class="solution solution-like"><ol id="ABm" class="lower-alpha">
+<li id="Xhs">
+<p id="rYy">We will remove parentheses using the distributive property, and then combine like terms:</p>
+<div class="displaymath">
+\begin{align*}
+4-(3x-9) \amp=4-3x-(-9)\\
+\amp=4-3x+9\\
+\amp=-3x+13
+\end{align*}
+</div>
+</li>
+<li id="DoB">
+<p id="YfH">We will remove parentheses using the distributive property, and then combine like terms:</p>
+<div class="displaymath">
+\begin{align*}
+5x+9(-2x+3)\amp=5x+9(-2x)+9(3)\\
+\amp=5x-18x+27\\
+\amp=-13x+27
+\end{align*}
+</div>
+</li>
+<li id="jvK">
+<p id="EmQ">We will remove parentheses using the distributive property, and then combine like terms:</p>
+<div class="displaymath">
+\begin{align*}
+5(x-9)+4(x+4)\amp=5x-45+4x+16\\
+\amp=9x-29
+\end{align*}
+</div>
+</li>
+</ol></div></div>
+</div></article></div>
+<article class="exercise exercise-like" id="mST"><a data-knowl="" class="id-ref exercise-knowl original" data-refid="hk-mST"><h6 class="heading">
+<span class="type">Checkpoint</span><span class="space"> </span><span class="codenumber">1.2.15</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-mST"><article class="exercise exercise-like"><p id="p-139">The WeBWorK problem with ID “webwork-10” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article></div></section><section class="reading-questions" id="reading-questions-1"><h3 class="heading hide-type">
+<span class="type">Reading Questions</span> <span class="codenumber">1.2.6</span> <span class="title">Reading Questions</span>
+</h3>
+<article class="exercise exercise-like" id="exercise-11"><h6 class="heading"><span class="codenumber">1<span class="period">.</span></span></h6>
+<p id="p-140">Why is the number \(1\) known as the “multiplicative identity”?</p></article><article class="exercise exercise-like" id="exercise-12"><h6 class="heading"><span class="codenumber">2<span class="period">.</span></span></h6>
+<p id="p-141">Consider the expression \(138+25+5\text{.}\) By the order of operations, you would add this as \((138+25)+5\text{.}\) (Meaning you would start by adding \(138+25\text{.}\))</p>
+<p id="p-142">Which property of algebra allows you to view that as \(138+(25+5)\text{?}\) (Meaning you could start with an easy \(25+5\text{,}\) and follow with an easy \(138+30\text{.}\))</p></article><article class="exercise exercise-like" id="exercise-13"><h6 class="heading"><span class="codenumber">3<span class="period">.</span></span></h6>
+<p id="p-143">Describe a certin thing that you should watch out for when it comes to using the distributive law. (It is something that has to do with negative numbers and/or subtraction.)</p></article></section></section></div></main>
+</div>
+</body>
+</html>

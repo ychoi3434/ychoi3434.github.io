@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*       on 2021-08-28T19:50:35Z       *-->
+<!--*   A recent stable commit (2020-08-09):   *-->
+<!--* 98f21740783f166a773df4dc83cab5293ab63a4a *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<html lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>ORCCA Solving Systems of Linear Equations by Substitution</title>
+<meta name="Keywords" content="Authored in PreTeXt">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+<script>window.MathJax = {
+  tex: {
+    inlineMath: [['\\(','\\)']],
+    tags: "none",
+    useLabelIds: true,
+    tagSide: "right",
+    tagIndent: ".8em",
+    packages: {'[+]': ['base', 'extpfeil', 'ams', 'amscd', 'newcommand', 'knowl', 'sfrac']}
+  },
+  options: {
+    ignoreHtmlClass: "tex2jax_ignore",
+    processHtmlClass: "has_am",
+  },
+  chtml: {
+    scale: 0.88,
+    mtextInheritFont: true
+  },
+  loader: {
+    load: ['input/asciimath', '[tex]/extpfeil', '[tex]/amscd', '[tex]/newcommand', '[pretext]/mathjaxknowl3.js'],
+    paths: {pretext: "https://pretextbook.org/js/lib"},
+  },
+/* support for the sfrac command in MathJax (Beveled fraction) */
+  startup: {
+    ready() {
+      //
+      // Creating a simple "sfrac" package on-the-fly
+      //
+      const Configuration = MathJax._.input.tex.Configuration.Configuration;
+      const CommandMap = MathJax._.input.tex.SymbolMap.CommandMap;
+      
+      new CommandMap('sfrac', {
+        sfrac: 'SFrac'
+        }, {
+        SFrac(parser, name) {
+        const num = parser.ParseArg(name);
+        const den = parser.ParseArg(name);
+        const frac = parser.create('node', 'mfrac', [num, den], {bevelled: true});
+        parser.Push(frac);
+        }
+      });
+      //
+      // Create the package for the overridden macros
+      //
+      Configuration.create('sfrac', {
+        handler: {macro: ['sfrac']}
+      });
+      
+    MathJax.startup.defaultReady();
+    }
+  },
+};
+</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext_add_on.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script xmlns:svg="http://www.w3.org/2000/svg">sagecellEvalName='Evaluate (Sage)';
+</script><link xmlns:svg="http://www.w3.org/2000/svg" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://fonts.googleapis.com/css?family=Inconsolata:400,700&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/pretext.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/pretext_add_on.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/banner_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/toc_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/knowls_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/style_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/colors_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/setcolors.css" rel="stylesheet" type="text/css">
+<!-- 2019-10-12: Temporary - CSS file for experiments with styling --><link xmlns:svg="http://www.w3.org/2000/svg" href="developer.css" rel="stylesheet" type="text/css">
+</head>
+<body id="PCC-ORCCA" class="mathbook-book has-toc has-sidebar-left">
+<a class="assistive" href="#content">Skip to main content</a><div xmlns:svg="http://www.w3.org/2000/svg" id="latex-macros" class="hidden-content" style="display:none">\(\require{cancel}\newcommand{\abs}[1]{\left\lvert#1\right\rvert}
+\newcommand{\point}[2]{\left(#1,#2\right)}
+\newcommand{\highlight}[1]{\definecolor{sapphire}{RGB}{59,90,125} {\color{sapphire}{{#1}}}}
+\newcommand{\firsthighlight}[1]{\definecolor{sapphire}{RGB}{59,90,125} {\color{sapphire}{{#1}}}}
+\newcommand{\secondhighlight}[1]{\definecolor{emerald}{RGB}{20,97,75} {\color{emerald}{{#1}}}}
+\newcommand{\unhighlight}[1]{{\color{black}{{#1}}}}
+\newcommand{\lowlight}[1]{{\color{lightgray}{#1}}}
+\newcommand{\attention}[1]{\mathord{\overset{\downarrow}{#1}}}
+\newcommand{\nextoperation}[1]{\mathord{\boxed{#1}}}
+\newcommand{\substitute}[1]{{\color{blue}{{#1}}}}
+\newcommand{\pinover}[2]{\overset{\overset{\mathrm{\ #2\ }}{|}}{\strut #1 \strut}}
+\newcommand{\addright}[1]{{\color{blue}{{{}+#1}}}}
+\newcommand{\addleft}[1]{{\color{blue}{{#1+{}}}}}
+\newcommand{\subtractright}[1]{{\color{blue}{{{}-#1}}}}
+\newcommand{\multiplyright}[2][\cdot]{{\color{blue}{{{}#1#2}}}}
+\newcommand{\multiplyleft}[2][\cdot]{{\color{blue}{{#2#1{}}}}}
+\newcommand{\divideunder}[2]{\frac{#1}{{\color{blue}{{#2}}}}}
+\newcommand{\divideright}[1]{{\color{blue}{{{}\div#1}}}}
+\newcommand{\negate}[1]{{\color{blue}{{-}}}\left(#1\right)}
+\newcommand{\cancelhighlight}[1]{\definecolor{sapphire}{RGB}{59,90,125}{\color{sapphire}{{\cancel{#1}}}}}
+\newcommand{\secondcancelhighlight}[1]{\definecolor{emerald}{RGB}{20,97,75}{\color{emerald}{{\bcancel{#1}}}}}
+\newcommand{\thirdcancelhighlight}[1]{\definecolor{amethyst}{RGB}{112,72,91}{\color{amethyst}{{\xcancel{#1}}}}}
+\newcommand{\confirm}[1]{\stackrel{\checkmark}{#1}}
+\newcommand{\reject}[1]{\stackrel{\text{no}}{#1}}
+\newcommand{\wonder}[1]{\stackrel{\text{?}}{#1}}
+\newcommand{\apple}{\text{🍎}}
+\newcommand{\banana}{\text{🍌}}
+\newcommand{\pear}{\text{🍐}}
+\newcommand{\cat}{\text{🐱}}
+\newcommand{\dog}{\text{🐶}}
+\newcommand{\lt}{&lt;}
+\newcommand{\gt}{&gt;}
+\newcommand{\amp}{&amp;}
+\)</div>
+<header id="masthead" class="smallbuttons"><div class="banner"><div class="container">
+<a id="logo-link" href="http://www.pcc.edu/ORCCA" target="_blank"><img src="images/ORCCAbrandlogo.png" alt="Logo image"></a><div class="title-container">
+<h1 class="heading"><a href="orcca.html"><span class="title">RVCC Elementary Algebra</span></a></h1>
+<p class="byline">Department of Mathematics and Computer Science</p>
+</div>
+</div></div>
+<nav xmlns:svg="http://www.w3.org/2000/svg" id="primary-navbar" class="navbar"><div class="container">
+<div class="navbar-top-buttons">
+<button class="sidebar-left-toggle-button button active" aria-label="Show or hide table of contents sidebar">Contents</button><div class="tree-nav toolbar toolbar-divisor-3">
+<a class="index-button toolbar-item button" href="index-1.html" title="Index">Index</a><span class="threebuttons"><a id="previousbutton" class="previous-button toolbar-item button" href="section-solving-systems-of-linear-equations-graphically-and-numerically.html" title="Previous">Prev</a><a id="upbutton" class="up-button button toolbar-item" href="chapter-systems-of-linear-equations-in-two-variables.html" title="Up">Up</a><a id="nextbutton" class="next-button button toolbar-item" href="chapter-polynomials-and-exponents-modified.html" title="Next">Next</a></span>
+</div>
+</div>
+<div class="navbar-bottom-buttons toolbar toolbar-divisor-4">
+<button class="sidebar-left-toggle-button button toolbar-item active">Contents</button><a class="previous-button toolbar-item button" href="section-solving-systems-of-linear-equations-graphically-and-numerically.html" title="Previous">Prev</a><a class="up-button button toolbar-item" href="chapter-systems-of-linear-equations-in-two-variables.html" title="Up">Up</a><a class="next-button button toolbar-item" href="chapter-polynomials-and-exponents-modified.html" title="Next">Next</a>
+</div>
+</div></nav></header><div class="page">
+<div xmlns:svg="http://www.w3.org/2000/svg" id="sidebar-left" class="sidebar" role="navigation"><div class="sidebar-content">
+<nav id="toc"><ul>
+<li class="link frontmatter">
+<a href="frontmatter.html" data-scroll="JVg"><span class="title">Front Matter</span></a><ul><li><a href="colophon-1.html" data-scroll="colophon-1">Colophon</a></li></ul>
+</li>
+<li class="link part"><a href="part-all-of-the-chapters.html" data-scroll="part-all-of-the-chapters"><span class="codenumber">I</span> <span class="title"></span></a></li>
+<li class="link">
+<a href="chapter-introduction-to-algebra.html" data-scroll="dNX"><span class="codenumber">1</span> <span class="title">Introduction to Algebra</span></a><ul>
+<li><a href="section-real-numbers-and-the-number-line.html" data-scroll="ipv">Real Numbers and the Number Line</a></li>
+<li><a href="section-properties-of-real-numbers.html" data-scroll="tNy">Properties of Real Numbers</a></li>
+<li><a href="section-simplifying-and-writing-algebraic-expressions.html" data-scroll="xRO">Simplifying and Writing Algebraic Expressions</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="chapter-linear-equations-and-inequalities-modified.html" data-scroll="sWV"><span class="codenumber">2</span> <span class="title">Linear Equations and Inequalities</span></a><ul>
+<li><a href="section-introduction-to-equations.html" data-scroll="fwy">Introduction to Equations</a></li>
+<li><a href="section-linear-equations.html" data-scroll="xVO">Linear Equations</a></li>
+<li><a href="section-introduction-to-problem-solving.html" data-scroll="Wul">Introduction to Problem Solving</a></li>
+<li><a href="section-formulas.html" data-scroll="Nnq">Formulas</a></li>
+<li><a href="section-linear-inequalities.html" data-scroll="Nuc">Linear Inequalities</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="chapter-graphing-equations.html" data-scroll="gID"><span class="codenumber">3</span> <span class="title">Graphing Lines</span></a><ul>
+<li><a href="section-introduction-to-graphing.html" data-scroll="YTJ">Introduction to Graphing</a></li>
+<li><a href="section-equations-in-two-variables.html" data-scroll="QXY">Equations in Two Variables</a></li>
+<li><a href="section-intercepts-horizontal-and-vertical-lines.html" data-scroll="ByF">Intercepts: Horizontal and Vertical Lines</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="chapter-systems-of-linear-equations-in-two-variables.html" data-scroll="xGO"><span class="codenumber">4</span> <span class="title">Systems of Linear Equations</span></a><ul>
+<li><a href="section-solving-systems-of-linear-equations-graphically-and-numerically.html" data-scroll="njo">Solving Systems of Linear Equations Graphically and Numerically</a></li>
+<li><a href="section-solving-systems-of-linear-equations-by-substitution.html" data-scroll="zdh" class="active">Solving Systems of Linear Equations by Substitution</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="chapter-polynomials-and-exponents-modified.html" data-scroll="onc"><span class="codenumber">5</span> <span class="title">Exponents and Polynomials</span></a><ul>
+<li><a href="section-rules-for-exponents.html" data-scroll="KHJ">Rules for Exponents</a></li>
+<li><a href="section-adding-and-subtracting-polynomials.html" data-scroll="VvN">Addition and Subtraction of Polynomials</a></li>
+<li><a href="section-multiplication-of-polynomials.html" data-scroll="IcY">Multiplication of Polynomials</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="chapter-radical-expressions-and-equations.html" data-scroll="chapter-radical-expressions-and-equations"><span class="codenumber">6</span> <span class="title">Radical Expressions and Equations</span></a><ul>
+<li><a href="section-introduction-to-factoring.html" data-scroll="duD">Introduction to Factoring</a></li>
+<li><a href="section-factoring-trinomials.html" data-scroll="Mrf">Factoring Trinomials</a></li>
+<li><a href="section-solving-equations-by-factoring.html" data-scroll="DXi">Solving Equations by Factoring 1 (Quadratics)</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="chapter-rational-expressions.html" data-scroll="RzF"><span class="codenumber">7</span> <span class="title">Rational Expressions</span></a><ul>
+<li><a href="section-introduction-to-rational-expressions.html" data-scroll="Moo">Introduction to Rational Expressions</a></li>
+<li><a href="section-multiplication-and-division-of-rational-expressions.html" data-scroll="Vps">Multiplication and Division of Rational Expressions</a></li>
+<li><a href="section-addition-and-subtraction-with-like-denominators.html" data-scroll="KBw">Addition and Subtraction of Rational Expressions with Like Denominators</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="chapter-radical-expressions-and-functions.html" data-scroll="chapter-radical-expressions-and-functions"><span class="codenumber">8</span> <span class="title">Quantities in the Physical World</span></a><ul><li><a href="section-radical-expressions-and-functions.html" data-scroll="GAK">Radical Expressions and Functions</a></li></ul>
+</li>
+<li class="link backmatter"><a href="backmatter.html" data-scroll="jDj"><span class="title">Appendices</span></a></li>
+<li class="link">
+<a href="appendix-basic-math-review.html" data-scroll="appendix-basic-math-review"><span class="codenumber">A</span> <span class="title">Basic Math Review</span></a><ul>
+<li><a href="section-arithmetic-with-negative-numbers.html" data-scroll="qBB">Arithmetic with Negative Numbers</a></li>
+<li><a href="section-fractions-and-fraction-arithmetic.html" data-scroll="VAa">Fractions and Fraction Arithmetic</a></li>
+<li><a href="section-absolute-value-and-square-root.html" data-scroll="GAK">Absolute Value and Square Root</a></li>
+<li><a href="section-percentages.html" data-scroll="Chi">Percentages</a></li>
+<li><a href="section-order-of-operations.html" data-scroll="aog">Order of Operations</a></li>
+<li><a href="section-set-notation-and-types-of-numbers.html" data-scroll="Fdo">Set Notation and Types of Numbers</a></li>
+</ul>
+</li>
+<li class="link"><a href="appendix-unit-conversions.html" data-scroll="appendix-unit-conversions"><span class="codenumber">B</span> <span class="title">Unit Conversions</span></a></li>
+<li class="link"><a href="index-1.html" data-scroll="index-1"><span class="title">Index</span></a></li>
+</ul></nav><div class="extras"><nav><a class="mathbook-link" href="https://pretextbook.org">Authored in PreTeXt</a><a href="https://www.mathjax.org"><img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" alt="Powered by MathJax"></a></nav></div>
+</div></div>
+<main class="main"><div id="content" class="pretext-content"><section xmlns:svg="http://www.w3.org/2000/svg" class="section" id="zdh"><h2 class="heading hide-type">
+<span class="type">Section</span> <span class="codenumber">4.2</span> <span class="title">Solving Systems of Linear Equations by Substitution</span>
+</h2>
+<section class="introduction" id="tCq"><p id="tQL">In <code class="code-inline tex2jax_ignore">[cross-reference to target(s) "section-solving-systems-of-linear-equations-by-graphing" missing or not unique]</code>, we focused on solving systems of equations by graphing. In addition to being time consuming, graphing can be an awkward method to determine the exact solution when the solution has large numbers, fractions, or decimals. There are two symbolic methods for solving systems of linear equations, and in this section we will use one of them: substitution.</p></section><section class="subsection" id="fkq"><h3 class="heading hide-type">
+<span class="type">Subsection</span> <span class="codenumber">4.2.1</span> <span class="title">Solving Systems of Equations Using Substitution</span>
+</h3>
+<article class="example example-like" id="cpK"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-cpK"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">4.2.1</span><span class="period">.</span><span class="space"> </span><span class="title">The Interview.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-cpK"><article class="example example-like"><p id="OOV">In 2014, the New York Times<a data-knowl="" class="id-ref fn-knowl original" data-refid="hk-fn-3" id="fn-3"><sup> 1 </sup></a> posted the following about the movie, “The Interview”:</p>
+<div class="hidden-content tex2jax_ignore" id="hk-fn-3"><div class="fn"><a class="external" href="https://nyti.ms/2pupebT" target="_blank">(nyti.ms/2pupebT)</a></div></div>
+<blockquote class="blockquote" id="ZJz">
+<p id="CAD">“The Interview” generated roughly \(\$15\) million in online sales and rentals during its first four days of availability, Sony Pictures said on Sunday.</p>
+<p id="iHM">Sony did not say how much of that total represented \(\$6\) digital rentals versus \(\$15\) sales. The studio said there were about two million transactions overall.</p>
+</blockquote>
+<p id="uWe">A few days later, Joey Devilla cleverly pointed out in his blog<a data-knowl="" class="id-ref fn-knowl original" data-refid="hk-fn-4" id="fn-4"><sup> 2 </sup></a>, that there is enough information given to find the amount of sales versus rentals. Using algebra, we can write a system of equations and solve it to find the two quantities.<a data-knowl="" class="id-ref fn-knowl original" data-refid="hk-fn-5" id="fn-5"><sup> 3 </sup></a></p>
+<div class="hidden-content tex2jax_ignore" id="hk-fn-4"><div class="fn"><a class="external" href="http://www.joeydevilla.com/2014/12/31/the-new-york-times-unintentionally-provided-the-answer-to-their-question-is-algebra-necessary/" target="_blank">http://www.joeydevilla.com/2014/12/31/</a></div></div>
+<div class="hidden-content tex2jax_ignore" id="hk-fn-5"><div class="fn">Although since the given information uses approximate values, the solutions we will find will only be approximations too.</div></div>
+<p id="bdn">First, we will define variables. We need two variables, because there are two unknown quantities: how many sales there were and how many rentals there were. Let \(r\) be the number of rental transactions and let \(s\) be the number of sales transactions.</p>
+<p id="Hkw">If you are unsure how to write an equation from the background information, use the units to help you. The units of each term in an equation must match because we can only add like quantities. Both \(r\) and \(s\) are in transactions. The article says that the total number of transactions is \(2\) million. So our first equation will add the total number of rental and sales transactions and set that equal to \(2\) million. Our equation is:</p>
+<div class="displaymath">
+\begin{equation*}
+(r\,\text{transactions})+(s\,\text{transactions})=2{,}000{,}000\,\text{transactions}
+\end{equation*}
+</div>
+<p class="continuation">Without the units:</p>
+<div class="displaymath">
+\begin{equation*}
+r+s=2{,}000{,}000
+\end{equation*}
+</div>
+<p id="nrF">The price of each rental was \(\$6\text{.}\) That means the problem has given us a <em class="emphasis">rate</em> of \(6\,\frac{\text{dollars}}{\text{transaction}}\) to work with. The rate unit suggests this should be multiplied by something measured in transactions. It makes sense to multiply by \(r\text{,}\) and then the number of dollars generated from rentals was \(6r\text{.}\) Similarly, the price of each sale was \(\$15\text{,}\) so the revenue from sales was \(15s\text{.}\) The total revenue was \(\$15\) million, which we can represent with this equation:</p>
+<div class="displaymath">
+\begin{equation*}
+\left(6\,\tfrac{\text{dollars}}{\text{transaction}}\right)(r\,\text{transactions})+\left(15\,\tfrac{\text{dollars}}{\text{transaction}}\right)(s\,\text{transactions})=\$15{,}000{,}000
+\end{equation*}
+</div>
+<p class="continuation">Without the units:</p>
+<div class="displaymath">
+\begin{equation*}
+6r+15s=15{,}000{,}000
+\end{equation*}
+</div>
+<p id="TyO">Here is our system of equations:</p>
+<div class="displaymath">
+\begin{equation*}
+\left\{
+\begin{alignedat}{4}
+r\amp+{}\amp s\amp={}\amp2{,}000{,}000 \\
+6r\amp+{}\amp 15s\amp={}\amp15{,}000{,}000
+\end{alignedat}
+\right.
+\end{equation*}
+</div>
+<p class="continuation">To solve the system, we will use the <dfn class="terminology">substitution</dfn> method. The idea is to use <em class="emphasis">one</em> equation to find an expression that is equal to \(r\) but, cleverly, does not use the variable “\(r\text{.}\)” Then, substitute this for \(r\) into the <em class="emphasis">other</em> equation. This leaves you with <em class="emphasis">one</em> equation that only has <em class="emphasis">one</em> variable.</p>
+<p id="zFX">The first equation from the system is an easy one to solve for \(r\text{:}\)</p>
+<div class="displaymath">
+\begin{align*}
+r+s \amp=2{,}000{,}000\\
+r \amp=2{,}000{,}000-s
+\end{align*}
+</div>
+<p id="fNg">This tells us that the expression \(2{,}000{,}000-s\) is equal to \(r\text{,}\) so we can <em class="emphasis">substitute</em> it for \(r\) in the second equation:</p>
+<div class="displaymath">
+\begin{align*}
+6r+15s \amp=15{,}000{,}000\\
+6(\substitute{2{,}000{,}000-s})+15s \amp=15{,}000{,}000\\
+\end{align*}
+<p class="intertext">Now we have an equation with only one variable, \(s\text{,}\) which we will solve for:</p>
+\begin{align*}
+6(2{,}000{,}000-s)+15s \amp=15{,}000{,}000\\
+12{,}000{,}000-6s+15s \amp=15{,}000{,}000\\
+12{,}000{,}000+9s \amp= 15{,}000{,}000\\
+9s \amp= 3{,}000{,}000\\
+\divideunder{9s}{9} \amp= \divideunder{3{,}000{,}000}{9}\\
+s \amp= 333{,}333.\overline{3}
+\end{align*}
+</div>
+<p id="LUp">At this point, we know that \(s=333{,}333.\overline{3}\text{.}\) This tells us that out of the \(2\) million transactions, roughly \(333{,}333\) were from online sales. Recall that we solved the first equation for \(r\text{,}\) and found \(r=2{,}000{,}000-s\text{.}\)</p>
+<div class="displaymath">
+\begin{align*}
+r \amp=2{,}000{,}000-s\\
+r \amp=2{,}000{,}000-\substitute{333{,}333.\overline{3}}\\
+r \amp=1{,}666{,}666.\overline{6}
+\end{align*}
+</div>
+<p id="sby">To check our answer, we will see if \(s=333{,}333.\overline{3}\) and \(r=1{,}666{,}666.\overline{6}\) make the original equations true:</p>
+<div class="displaymath">
+\begin{align*}
+r+s \amp=2{,}000{,}000\amp 6r+15s \amp=15{,}000{,}000\\
+\substitute{1{,}666{,}666.\overline{6}}+\substitute{333{,}333.\overline{3}} \amp\wonder{=}2{,}000{,}000\amp 6\left(\substitute{1{,}666{,}666.\overline{6}}\right)+15\left(\substitute{333{,}333.\overline{3}}\right) \amp\wonder{=}15{,}000{,}000\\
+2{,}000{,}000\amp\confirm{=}2{,}000{,}000\amp 10{,}000{,}000+5{,}000{,}000 \amp\confirm{=}15{,}000{,}000
+\end{align*}
+</div>
+<p id="YiH">In summary, there were roughly \(333{,}333\) copies sold and roughly \(1{,}666{,}667\) copies rented.</p></article></div>
+<article class="remark remark-like" id="ASu"><h6 class="heading">
+<span class="type">Remark</span><span class="space"> </span><span class="codenumber">4.2.2</span><span class="period">.</span>
+</h6>
+<p id="Bvk">In <a class="xref" data-knowl="./knowl/example-systems-of-equations-substitution-intro.html" title="Example 4.2.1: The Interview">Example 4.2.1</a>, we <em class="emphasis">chose</em> to solve the equation \(r+s=2{,}000{,}000\) for \(r\text{.}\) We could just as easily have instead solved for \(s\) and substituted that result into the second equation instead. The summary conclusion would have been the same.</p></article><article class="remark remark-like" id="gZD"><h6 class="heading">
+<span class="type">Remark</span><span class="space"> </span><span class="codenumber">4.2.3</span><span class="period">.</span>
+</h6>
+<p id="hCt">In <a class="xref" data-knowl="./knowl/example-systems-of-equations-substitution-intro.html" title="Example 4.2.1: The Interview">Example 4.2.1</a>, we rounded the solution values because only whole numbers make sense in the context of the problem. It was OK to round, because the original information we had to work with were rounded. In fact, it would be OK to round even more to \(s=330{,}000\) and \(r=1{,}700{,}000\text{,}\) as long as we communicate clearly that we rounded and our values are rough.</p>
+<p id="NJC">In other exercises where there is no context and nothing suggests the given numbers are approximations, it is not OK to round and all answers should be communicated with their exact values.</p></article><article class="example example-like" id="IwT"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-IwT"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">4.2.4</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-IwT"><article class="example example-like"><p id="EpQ">Solve the system of equations using substitution:</p>
+<div class="displaymath">
+\begin{align*}
+\left\{
+\begin{alignedat}{4}
+x\amp+{}\amp 2y \amp={}\amp 8 \\
+3x\amp-{}\amp 2y \amp={}\amp 8 \\
+\end{alignedat}
+\right.
+\end{align*}
+</div>
+<div class="solutions">
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-FQI" id="FQI"><span class="type">Explanation</span></a><div class="hidden-content tex2jax_ignore" id="hk-FQI"><div class="solution solution-like">
+<p id="giF">To use substitution, we need to solve for <em class="emphasis">one</em> of the variables in <em class="emphasis">one</em> of our equations. Looking at both equations, it will be easiest to solve for \(x\) in the first equation:</p>
+<div class="displaymath">
+\begin{align*}
+x+2y\amp=8\\
+x\amp= 8-2y
+\end{align*}
+</div>
+<p id="MpO">Next, we replace \(x\) in the second equation with \(8-2y\text{,}\) giving us a linear equation in only one variable, \(y\text{,}\) that we may solve:</p>
+<div class="displaymath">
+\begin{align*}
+3x-2y\amp=8\\
+3(\substitute{8-2y})-2y\amp=8\\
+24-6y-2y\amp=8\\
+24-8y\amp=8\\
+-8y\amp=-16\\
+y\amp=2
+\end{align*}
+</div>
+<p id="swX">Now that we have the value for \(y\text{,}\) we need to find the value for \(x\text{.}\) We have already solved the first equation for \(x\text{,}\) so that is the easiest equation to use.</p>
+<div class="displaymath">
+\begin{align*}
+x\amp= 8-2y\\
+x\amp= 8-2(\substitute{2})\\
+x\amp= 8-4\\
+x\amp=4
+\end{align*}
+</div>
+<p id="YEg">To check this solution, we replace \(x\) with \(4\) and \(y\) with \(2\) in each equation:</p>
+<div class="displaymath">
+\begin{align*}
+x+2y\amp=8\amp3x-2y\amp=8\\
+\substitute{4}+2\substitute{(2)}\amp\wonder{=}8\amp3\substitute{(4)}-2\substitute{(2)}\amp\wonder{=}8\\
+4+4\amp\confirm{=}8\amp12-4\amp\confirm{=}8
+\end{align*}
+</div>
+<p id="ELp">We conclude then that this system of equations is true when \(x=4\) and \(y=2\text{.}\) Our solution is the point \((4,2)\) and we write the solution set as \(\{(4,2)\}\text{.}\)</p>
+</div></div>
+</div></article></div>
+<article class="exercise exercise-like" id="lJw"><a data-knowl="" class="id-ref exercise-knowl original" data-refid="hk-lJw"><h6 class="heading">
+<span class="type">Checkpoint</span><span class="space"> </span><span class="codenumber">4.2.5</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-lJw"><article class="exercise exercise-like"><p id="p-759">The WeBWorK problem with ID “webwork-46” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article></div>
+<article class="example example-like" id="oEc"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-oEc"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">4.2.6</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-oEc"><article class="example example-like"><p id="kwZ">Solve this system of equations using substitution:</p>
+<div class="displaymath">
+\begin{align*}
+\left\{
+\begin{alignedat}{4}
+3x\amp-{}\amp 7y \amp={}\amp 5 \\
+-5x\amp+{}\amp 2y \amp={}\amp 11 \\
+\end{alignedat}
+\right.
+\end{align*}
+</div>
+<div class="solutions">
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-lXR" id="lXR"><span class="type">Explanation</span></a><div class="hidden-content tex2jax_ignore" id="hk-lXR"><div class="solution solution-like">
+<p id="kSy">We need to solve for <em class="emphasis">one</em> of the variables in <em class="emphasis">one</em> of our equations. Looking at both equations, it will be easiest to solve for \(y\) in the second equation. The coefficient of \(y\) in that equation is smallest.</p>
+<div class="displaymath">
+\begin{align*}
+-5x+2y\amp=11\\
+2y\amp=11+5x\\
+\divideunder{2y}{2}\amp=\divideunder{11+5x}{2}\\
+y\amp=\frac{11}{2}+\frac{5}{2}x
+\end{align*}
+</div>
+<p class="continuation">Note that in this example, there are fractions once we solve for \(y\text{.}\) We should take care with the steps that follow that the fraction arithmetic is correct.</p>
+<p id="QZH">Replace \(y\) in the first equation with \(\frac{11}{2}+\frac{5}{2}x\text{,}\) giving us a linear equation in only one variable, \(x\text{,}\) that we may solve:</p>
+<div class="displaymath">
+\begin{align*}
+3x-7y\amp=5\\
+3x-7\left(\frac{11}{2}+\frac{5}{2}x\right)\amp=5\\
+3x-7\cdot\frac{11}{2}-7\cdot\frac{5}{2}x\amp=5\\
+3x-\frac{77}{2}-\frac{35}{2}x\amp=5\\
+\frac{6}{2}x-\frac{77}{2}-\frac{35}{2}x\amp=5\\
+-\frac{29}{2}x-\frac{77}{2}\amp=5\\
+-\frac{29}{2}x\amp=\frac{10}{2}\addright{\frac{77}{2}}\\
+-\frac{29}{2}x\amp=\frac{87}{2}\\
+\multiplyleft{-\frac{2}{29}}\left(-\frac{29}{2}x\right)\amp=\multiplyleft{-\frac{2}{29}}\left(\frac{87}{2}\right)\\
+x\amp=-3
+\end{align*}
+</div>
+<p id="xgQ">Now that we have the value for \(x\text{,}\) we need to find the value for \(y\text{.}\) We have already solved the second equation for \(y\text{,}\) so that is the easiest equation to use.</p>
+<div class="displaymath">
+\begin{align*}
+y\amp=\frac{11}{2}+\frac{5}{2}x\\
+y\amp=\frac{11}{2}+\frac{5}{2}(\substitute{-3})\\
+y\amp=\frac{11}{2}-\frac{15}{2}\\
+y\amp=-\frac{4}{2}\\
+y\amp=-2
+\end{align*}
+</div>
+<p id="dnZ">To check this solution, we replace \(x\) with \(-3\) and \(y\) with \(-2\) in each equation:</p>
+<div class="displaymath">
+\begin{align*}
+3x-7y \amp=5  \amp  -5x+2y \amp= 11\\
+3(-3)-7(-2) \amp\wonder{=}5  \amp  -5(-3)+2(-2) \amp\wonder{=} 11\\
+-9+14\amp\confirm{=}5\amp 15-4\amp\confirm{=}11
+\end{align*}
+</div>
+<p id="Jvi">We conclude then that this system of equations is true when \(x=-3\) and \(y=-2\text{.}\) Our solution is the point \((-3,-2)\) and we write the solution set as \(\{(-3,-2)\}\text{.}\)</p>
+</div></div>
+</div></article></div>
+<article class="example example-like" id="ULl"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-ULl"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">4.2.7</span><span class="period">.</span><span class="space"> </span><span class="title">Clearing Fraction Denominators Before Solving.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-ULl"><article class="example example-like"><p id="QEi">Solve the system of equations using the substitution method:</p>
+<div class="displaymath">
+\begin{align*}
+\left\{
+\begin{aligned}
+\frac{x}{3} - \frac{1}{2}y \amp= \frac{5}{6} \\
+\frac{1}{4}x \amp = \frac{y}{2} + 1 \\
+\end{aligned}
+\right.
+\end{align*}
+</div>
+<div class="solutions">
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-Sfa" id="Sfa"><span class="type">Explanation</span></a><div class="hidden-content tex2jax_ignore" id="hk-Sfa"><div class="solution solution-like">
+<p id="pCr">When a system of equations has fraction coefficients, it can be helpful to take steps that replace the fractions with whole numbers. With each equation, we may multiply each side by the least common multiple of all the denominators.</p>
+<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;">
+<div class="sbspanel top" style="width:47%;">
+<p id="VJA">In the first equation, the least common multiple of the denominators is \(6\text{,}\) so:</p>
+<div class="displaymath">
+\begin{align*}
+\frac{x}{3}-\frac{1}{2}y\amp=\frac{5}{6}\\
+\multiplyleft{6}\left(\frac{x}{3}-\frac{1}{2}y\right)\amp=\multiplyleft{6}\frac{5}{6}\\
+6\cdot\frac{x}{3}-6\cdot\frac{1}{2}y\amp=\multiplyleft{6}\frac{5}{6}\\
+2x-3y\amp=5
+\end{align*}
+</div>
+</div>
+<div class="sbspanel top" style="width:47%;">
+<p id="BQJ">In the second equation, the least common multiple of the denominators is \(4\text{,}\) so:</p>
+<div class="displaymath">
+\begin{align*}
+\frac{1}{4}x\amp=\frac{y}{2}+1\\
+\multiplyleft{4}\frac{1}{4}x\amp=\multiplyleft{4}\frac{y}{2}+\multiplyleft{4}1\\
+\multiplyleft{4}\frac{1}{4}x\amp=\multiplyleft{4}\frac{y}{2}+\multiplyleft{4}1\\
+x\amp=2y+4
+\end{align*}
+</div>
+</div>
+</div></div>
+<p id="hXS">Now we have this system that is equivalent to the original system of equations, but there are no fraction coefficients:</p>
+<div class="displaymath">
+\begin{align*}
+\left\{
+\begin{aligned}
+2x-3y\amp=5 \\
+x\amp=2y+4 \\
+\end{aligned}
+\right.
+\end{align*}
+</div>
+<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;">
+<div class="sbspanel top" style="width:47%;">
+<p id="Ofb">The second equation is already solved for \(x\text{,}\) so we will substitute \(x\) in the first equation with \(2y+4\text{,}\) and we have:</p>
+<div class="displaymath">
+\begin{align*}
+2x-3y\amp=5\\
+2(\substitute{2y+4})-3y\amp=5\\
+4y+8-3y\amp=5\\
+y+8\amp=5\\
+y\amp=-3
+\end{align*}
+</div>
+</div>
+<div class="sbspanel top" style="width:47%;">
+<p id="umk">And we have solved for \(y\text{.}\) To find \(x\text{,}\) we know \(x=2y+4\text{,}\) so we have:</p>
+<div class="displaymath">
+\begin{align*}
+x\amp=2y+4\\
+x\amp=2(\substitute{-3})+4\\
+x\amp=-6+4\\
+x\amp=-2
+\end{align*}
+</div>
+</div>
+</div></div>
+<p id="att">The solution is \((-2,-3)\text{.}\) Checking this solution is left as an exercise.</p>
+</div></div>
+</div></article></div>
+<article class="exercise exercise-like" id="RQF"><a data-knowl="" class="id-ref exercise-knowl original" data-refid="hk-RQF"><h6 class="heading">
+<span class="type">Checkpoint</span><span class="space"> </span><span class="codenumber">4.2.8</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-RQF"><article class="exercise exercise-like"><p id="p-775">The WeBWorK problem with ID “webwork-47” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article></div>
+<p id="p-776">For summary reference, here is the general procedure.</p>
+<article class="algorithm theorem-like" id="algorithm-solving-systems-of-equations-by-substitution"><h6 class="heading">
+<span class="type">Process</span><span class="space"> </span><span class="codenumber">4.2.9</span><span class="period">.</span><span class="space"> </span><span class="title">Solving Systems of Equations by Substitution.</span>
+</h6>
+<p id="p-777">To solve a system of equations by substitution,</p>
+<ol class="decimal">
+<li id="li-108"><p id="p-778">Solve one of the equations for one of the variables.</p></li>
+<li id="li-109"><p id="p-779">Substitute that expression into the <em class="emphasis">other</em> equation. There should now only be one variable in that equation.</p></li>
+<li id="li-110"><p id="p-780">Solve that equation for the one remaining variable.</p></li>
+<li id="li-111"><p id="p-781">Substitute that value into an earlier equation and solve for the other variable.</p></li>
+<li id="li-112"><p id="p-782">Verify your solution in the original equations.</p></li>
+</ol></article></section><section class="subsection" id="Lrz"><h3 class="heading hide-type">
+<span class="type">Subsection</span> <span class="codenumber">4.2.2</span> <span class="title">Applications of Systems of Equations</span>
+</h3>
+<article class="example example-like" id="xXO"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-xXO"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">4.2.10</span><span class="period">.</span><span class="space"> </span><span class="title">Two Different Interest Rates.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-xXO"><article class="example example-like"><p id="wLr">Notah made some large purchases with his two credit cards one month and took on a total of \(\$8{,}400\) in debt from the two cards. He didn't make any payments the first month, so the two credit card debts each started to accrue interest. That month, his Visa card charged \(2\%\) interest and his Mastercard charged \(2.5\%\) interest. Because of this, Notah's total debt grew by \(\$178\text{.}\) How much money did Notah charge to each card?</p>
+<div class="solutions">
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-ymj" id="ymj"><span class="type">Explanation</span></a><div class="hidden-content tex2jax_ignore" id="hk-ymj"><div class="solution solution-like">
+<p id="GAC">To start, we will define two variables based on our two unknowns. Let \(v\) be the amount charged to the Visa card (in dollars) and let \(m\) be the amount charged to the Mastercard (in dollars).</p>
+<p id="mHL">To determine our equations, notice that we are given two different totals. We will use these to form our two equations. The total amount charged is \(\$8{,}400\) so we have:</p>
+<div class="displaymath">
+\begin{equation*}
+(v\,\text{dollars})+(m\,\text{dollars})=\$8400
+\end{equation*}
+</div>
+<p class="continuation">Or without units:</p>
+<div class="displaymath">
+\begin{equation*}
+v+m=8400
+\end{equation*}
+</div>
+<p class="continuation">The other total we were given is the total amount of interest, \(\$178\text{,}\) which is also in dollars. The Visa had \(v\) dollars charged to it and accrues \(2\%\) interest. So \(0.02v\) is the dollar amount of interest that comes from using this card. Similarly, \(0.025m\) is the dollar amount of interest from using the Mastercard. Together:</p>
+<div class="displaymath">
+\begin{equation*}
+0.02(v\,\text{dollars})+0.025(m\,\text{dollars})=\$178
+\end{equation*}
+</div>
+<p class="continuation">Or without units:</p>
+<div class="displaymath">
+\begin{equation*}
+0.02v+0.025m=178
+\end{equation*}
+</div>
+<p class="continuation">As a system, we write:</p>
+<div class="displaymath">
+\begin{equation*}
+\left\{
+\begin{alignedat}{3}
+v\amp+{}\amp m\amp={}8400 \\
+0.02v\amp+{}\amp 0.025m\amp{}=178 \\
+\end{alignedat}
+\right.
+\end{equation*}
+</div>
+<p id="SOU">To solve this system by substitution, notice that it will be easier to solve for one of the variables in the first equation. We'll solve that equation for \(v\text{:}\)</p>
+<div class="displaymath">
+\begin{align*}
+v+m\amp=8400\\
+v\amp=8400-m
+\end{align*}
+</div>
+<p class="continuation">Now we will substitute \(8400-m\) for \(v\) in the second equation:</p>
+<div class="displaymath">
+\begin{align*}
+0.02v+0.025m\amp=178\\
+0.02(\substitute{8400-m})+0.025m\amp=178\\
+168-0.02m+0.025m\amp=178\\
+168+0.005m\amp=178\\
+0.005m\amp=10\\
+\divideunder{0.005m}{0.005}\amp=\divideunder{10}{0.005}\\
+m\amp=2000
+\end{align*}
+</div>
+<p class="continuation">Lastly, we can determine the value of \(v\) by using the earlier equation where we isolated \(v\text{:}\)</p>
+<div class="displaymath">
+\begin{align*}
+v\amp=8400-m\\
+v\amp=8400-\substitute{2000}\\
+v\amp=6400
+\end{align*}
+</div>
+<p id="yWd">In summary, Notah charged \(\$6400\) to the Visa and \(\$2000\) to the Mastercard. We should check that these numbers work as solutions to our original system <em class="emphasis">and</em> that they make sense in context. (For instance, if one of these numbers were negative, or was something small like \(\$0.50\text{,}\) they wouldn't make sense as credit card debt.)</p>
+</div></div>
+</div></article></div>
+<p id="UiI">The next two examples are called <dfn class="terminology">mixture problems</dfn>, because they involve mixing two quantities together to form a combination and we want to find out how much of each quantity to mix.</p>
+<article class="example example-like" id="eeX"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-eeX"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">4.2.11</span><span class="period">.</span><span class="space"> </span><span class="title">Mixing Solutions with Two Different Concentrations.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-eeX"><article class="example example-like"><p id="cSA">LaVonda is a meticulous bartender and she needs to serve \(600\) milliliters of Rob Roy, an alcoholic cocktail that is \(34\%\) alcohol by volume. The main ingredients are scotch that is \(42\%\) alcohol and vermouth that is \(18\%\) alcohol. How many milliliters of each ingredient should she mix together to make the concentration she needs?</p>
+<div class="solutions">
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-ets" id="ets"><span class="type">Explanation</span></a><div class="hidden-content tex2jax_ignore" id="hk-ets"><div class="solution solution-like">
+<p id="fdm">The two unknowns are the quantities of each ingredient. Let \(s\) be the amount of scotch (in <span class="quantity">mL</span>) and let \(v\) be the amount of vermouth (in <span class="quantity">mL</span>).</p>
+<p id="Lkv">One quantity given to us in the problem is <span class="quantity">600 mL</span>. Since this is the total volume of the mixed drink, we must have:</p>
+<div class="displaymath">
+\begin{equation*}
+(s\,\text{mL})+(v\,\text{mL})=600\,\text{mL}
+\end{equation*}
+</div>
+<p class="continuation">Or without units:</p>
+<div class="displaymath">
+\begin{equation*}
+s+v=600
+\end{equation*}
+</div>
+<p id="rrE">To build the second equation, we have to think about the alcohol concentrations for the scotch, vermouth, and Rob Roy. It can be tricky to think about percentages like these correctly. One strategy is to focus on the <em class="emphasis">amount</em> (in <span class="quantity">mL</span>) of <em class="emphasis">alcohol</em> being mixed. If we have \(s\) milliliters of scotch that is \(42\%\) alcohol, then \(0.42s\) is the actual <em class="emphasis">amount</em> (in <span class="quantity">mL</span>) of alcohol in that scotch. Similarly, \(0.18v\) is the amount of alcohol in the vermouth. And the final cocktail is <span class="quantity">600 mL</span> of liquid that is \(34\%\) alcohol, so it has \(0.34(600)=204\) milliliters of alcohol. All this means:</p>
+<div class="displaymath">
+\begin{equation*}
+0.42(s\,\text{mL})+0.18(v\,\text{mL})=204\,\text{mL}
+\end{equation*}
+</div>
+<p class="continuation">Or without units:</p>
+<div class="displaymath">
+\begin{equation*}
+0.42s+0.18v=204
+\end{equation*}
+</div>
+<p id="XyN">So our system is:</p>
+<div class="displaymath">
+\begin{equation*}
+\left\{
+\begin{alignedat}{3}
+s\amp+{}\amp v\amp=600 \\
+0.42s\amp+{}\amp0.18v\amp=204
+\end{alignedat}
+\right.
+\end{equation*}
+</div>
+<p id="DFW">To solve this system, we'll solve for \(s\) in the first equation:</p>
+<div class="displaymath">
+\begin{align*}
+s+v\amp=600\\
+s\amp=600-v
+\end{align*}
+</div>
+<p class="continuation">And then substitute \(s\) in the second equation with \(600-v\text{:}\)</p>
+<div class="displaymath">
+\begin{align*}
+0.42s+0.18v\amp=204\\
+0.42(\substitute{600-v})+0.18v\amp=204\\
+252-0.42v+0.18v\amp=204\\
+252-0.24v\amp=204\\
+-0.24v\amp=-48\\
+\divideunder{-0.24v}{-0.24}\amp=\divideunder{-48}{-0.24}\\
+v\amp=200
+\end{align*}
+</div>
+<p class="continuation">As a last step, we will determine \(s\) using the equation where we had isolated \(s\text{:}\)</p>
+<div class="displaymath">
+\begin{align*}
+s\amp=600-v\\
+s\amp=600-\substitute{200}\\
+s\amp=400
+\end{align*}
+</div>
+<p id="jNf">In summary, LaVonda needs to combine <span class="quantity">400 mL</span> of scotch with <span class="quantity">200 mL</span> of vermouth to create <span class="quantity">600 mL</span> of Rob Roy that is \(34\%\) alcohol by volume.</p>
+</div></div>
+</div></article></div>
+<p id="ApR">As a check for <a class="xref" data-knowl="./knowl/example-solving-systems-of-equations-chemistry-solution-application.html" title="Example 4.2.11: Mixing Solutions with Two Different Concentrations">Example 4.2.11</a>, we will use <dfn class="terminology">estimation</dfn> to see that our solution is reasonable. Since LaVonda is making a \(34\%\) solution, she would need to use more of the \(42\%\) concentration than the \(18\%\) concentration, because \(34\%\) is closer to \(42\%\) than to \(18\%\text{.}\) This agrees with our answer because we found that she needed <span class="quantity">400 mL</span> of the \(42\%\) solution and <span class="quantity">200 mL</span> of the \(18\%\) solution. This is an added check that we have found reasonable answers.</p>
+<article class="example example-like" id="Kmg"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-Kmg"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">4.2.12</span><span class="period">.</span><span class="space"> </span><span class="title">Mixing a Coffee Blend.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-Kmg"><article class="example example-like"><p id="IZJ">Desi owns a coffee shop and they want to mix two different types of coffee beans to make a blend that sells for \(\$12.50\) per pound. They have some coffee beans from Columbia that sell for \(\$9.00\) per pound and some coffee beans from Honduras that sell for \(\$14.00\) per pound. How many pounds of each should they mix to make \(30\) pounds of the blend?</p>
+<div class="solutions">
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-KAB" id="KAB"><span class="type">Explanation</span></a><div class="hidden-content tex2jax_ignore" id="hk-KAB"><div class="solution solution-like">
+<p id="PUo">Before we begin, it may be helpful to try to estimate the solution. Let's compare the three prices. Since \(\$12.50\) is between the prices of \(\$9.00\) and \(\$14.00\text{,}\) this mixture is possible. Now we need to estimate the amount of each type needed. The price of the blend (\(\$12.50\) per pound) is closer to the higher priced beans (\(\$14.00\) per pound) than the lower priced beans (\(\$9.00\) per pound). So we will need to use more of that type. Keeping in mind that we need a total of \(30\) pounds, we roughly estimate \(20\) pounds of the \(\$14.00\) Honduran beans and \(10\) pounds of the \(\$9.00\) Columbian beans. How good is our estimate? Next we will solve this exercise exactly.</p>
+<p id="wbx">To set up our system of equations we define variables, letting \(C\) be the amount of Columbian coffee beans (in pounds) and \(H\) be the amount of Honduran coffee beans (in pounds).</p>
+<p id="ciG">The equations in our system will come from the total amount of beans and the total cost. The equation for the total amount of beans can be written as:</p>
+<div class="displaymath">
+\begin{equation*}
+(C\,\text{lb})+(H\,\text{lb})=30\,\text{lb}
+\end{equation*}
+</div>
+<p class="continuation">Or without units:</p>
+<div class="displaymath">
+\begin{equation*}
+C+H=30
+\end{equation*}
+</div>
+<p id="IpP">To build the second equation, we have to think about the cost of all these beans. If we have \(C\) pounds of Columbian beans that cost \(\$9.00\) per pound, then \(9C\) is the cost of those beans in dollars. Similarly, \(14H\) is the cost of the Honduran beans. And the total cost is for \(30\) pounds of beans priced at \(\$12.50\) per pound, totaling \(12.5(30)=37.5\) dollars. All this means:</p>
+<div class="displaymath">
+\begin{equation*}
+\left(9\,\tfrac{\text{dollars}}{\text{lb}}\right)(C\,\text{lb})+\left(14\,\tfrac{\text{dollars}}{\text{lb}}\right)(H\,\text{lb})=\left(12.50\,\tfrac{\text{dollars}}{\text{lb}}\right)(30\,\text{lb})
+\end{equation*}
+</div>
+<p class="continuation">Or without units and carrying out the multiplication on the right:</p>
+<div class="displaymath">
+\begin{equation*}
+9C+14H=37.5
+\end{equation*}
+</div>
+<p id="owY">Now our system is:</p>
+<div class="displaymath">
+\begin{equation*}
+\left\{
+\begin{alignedat}{3}
+C\amp+{}\amp H\amp=30 \\
+9C\amp+{}\amp 14H\amp=37.50
+\end{alignedat}
+\right.
+\end{equation*}
+</div>
+<p id="UEh">To solve the system, we'll solve the first equation for \(C\text{:}\)</p>
+<div class="displaymath">
+\begin{align*}
+C+H\amp=30\\
+C\amp=30-H
+\end{align*}
+</div>
+<p class="continuation">Next, we'll substitute \(C\) in the second equation with \(30-H\text{:}\)</p>
+<div class="displaymath">
+\begin{align*}
+9C+14H\amp=375\\
+9(\substitute{30-H})+14H\amp=375\\
+270-9H+14H\amp=375\\
+270+5H\amp=375\\
+5H\amp=105\\
+H\amp=21
+\end{align*}
+</div>
+<p class="continuation">Since \(H=21\text{,}\) we can conclude that \(C=9\text{.}\)</p>
+<p id="ALq">In summary, Desi needs to mix \(21\) pounds of the Honduran coffee beans with \(9\) pounds of the Columbian coffee beans to create this blend. Our estimate at the beginning was pretty close, so we feel this answer is reasonable.</p>
+</div></div>
+</div></article></div></section><section class="subsection" id="ryI"><h3 class="heading hide-type">
+<span class="type">Subsection</span> <span class="codenumber">4.2.3</span> <span class="title">Solving Special Systems of Equations with Substitution</span>
+</h3>
+<p id="gxa">Remember the two special cases we encountered when solving by graphing in <a href="section-solving-systems-of-linear-equations-graphically-and-numerically.html#zxG" class="internal" title="Subsection 4.1.2: Special Systems of Equations">Subsection 4.1.2</a>? If the two lines represented by a system of equations have the same slope, then they might be separate lines that never meet, meaning the system has no solutions. Or they might coincide as the same line, in which case there are infinitely many solutions represented by all the points on that line. Let's see what happens when we use the substitution method on each of the special cases.</p>
+<article class="example example-like" id="qtp"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-qtp"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">4.2.13</span><span class="period">.</span><span class="space"> </span><span class="title">A System with No Solution.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-qtp"><article class="example example-like"><p id="pgS">Solve the system of equations using the substitution method:</p>
+<div class="displaymath">
+\begin{align*}
+\left\{
+\begin{aligned}
+y \amp= 2x-1 \\
+4x - 2y \amp= 3 \\
+\end{aligned}
+\right.
+\end{align*}
+</div>
+<div class="solutions">
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-qHK" id="qHK"><span class="type">Explanation</span></a><div class="hidden-content tex2jax_ignore" id="hk-qHK"><div class="solution solution-like">
+<p id="gSz">Since the first equation is already solved for \(y\text{,}\) we will substitute \(2x-1\) for \(y\) in the second equation, and we have:</p>
+<div class="displaymath">
+\begin{align*}
+4x-2y\amp=3\\
+4x-2\substitute{(2x-1)}\amp=3\\
+4x-4x+2\amp=3\\
+2\amp=3
+\end{align*}
+</div>
+<p id="MZI">Even though we were only intending to substitute away \(y\text{,}\) we ended up with an equation where there are no variables at all. This will happen whenever the lines have the same slope. This tells us the system represents either parallel or coinciding lines. Since \(2=3\) is false no matter what values \(x\) and \(y\) might be, there can be no solution to the system. So the lines are parallel and <em class="emphasis">distinct</em>. We write the solution set using the empty set symbol: the solution set is \(\emptyset\text{.}\)</p>
+<p id="tgR">To verify this, re-write the second equation, \(4x-2y=3\text{,}\) in slope-intercept form:</p>
+<div class="displaymath">
+\begin{align*}
+4x-2y\amp=3\\
+-2y\amp=-4x+3\\
+\divideunder{-2y}{-2}\amp=\divideunder{-4x+3}{-2}\\
+y\amp=\frac{-4x}{-2}+\frac{3}{-2}\\
+y\amp=2x-\frac{3}{2}
+\end{align*}
+</div>
+<p class="continuation">So the system is equivalent to:</p>
+<div class="displaymath">
+\begin{align*}
+\left\{
+\begin{aligned}
+y \amp = 2x-1 \\
+y \amp = 2x-\frac{3}{2} \\
+\end{aligned}
+\right.
+\end{align*}
+</div>
+<p class="continuation">Now it is easier to see that the two lines have the same slope but different \(y\)-intercepts. They are parallel and distinct lines, so the system has no solution.</p>
+</div></div>
+</div></article></div>
+<article class="example example-like" id="WAy"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-WAy"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">4.2.14</span><span class="period">.</span><span class="space"> </span><span class="title">A System with Infinitely Many Solutions.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-WAy"><article class="example example-like"><p id="Vob">Solve the system of equations using the substitution method:</p>
+<div class="displaymath">
+\begin{align*}
+\left\{
+\begin{aligned}
+y \amp=2x-1 \\
+4x-2y \amp=2 \\
+\end{aligned}
+\right.
+\end{align*}
+</div>
+<div class="solutions">
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-WOT" id="WOT"><span class="type">Explanation</span></a><div class="hidden-content tex2jax_ignore" id="hk-WOT"><div class="solution solution-like">
+<p id="Zoa">Since \(y=2x-1\text{,}\) we will substitute \(2x-1\) for \(y\) in the second equation and we have:</p>
+<div class="displaymath">
+\begin{align*}
+4x-2y\amp=2\\
+4x-2\substitute{(2x-1)}\amp=2\\
+4x-4x+2\amp=2\\
+2\amp=2
+\end{align*}
+</div>
+<p id="Fvj">Even though we were only intending to substitute away \(y\text{,}\) we ended up with an equation where there are no variables at all. This will happen whenever the lines have the same slope. This tells us the system represents either parallel or coinciding lines. Since \(2=2\) is true no matter what values \(x\) and \(y\) might be, the system equations are true no matter what \(x\) is, as long as \(y=2x-1\text{.}\) So the lines <em class="emphasis">coincide</em>. We write the solution set as \(\{(x,y)\mid y=2x-1\}\text{.}\)</p>
+<p id="lCs">To verify this, re-write the second equation, \(4x-2y=2\text{,}\) in slope-intercept form:</p>
+<div class="displaymath">
+\begin{align*}
+4x-2y\amp=2\\
+-2y\amp=-4x+2\\
+\frac{-2y}{-2}\amp=\frac{-4x}{-2}+\frac{2}{-2}\\
+y\amp=2x-1
+\end{align*}
+</div>
+<p class="continuation">The system looks like:</p>
+<div class="displaymath">
+\begin{align*}
+\left\{
+\begin{alignedat}{4}
+y \amp {}={} \amp 2x-1 \\
+y \amp {}={} \amp 2x-1 \\
+\end{alignedat}
+\right.
+\end{align*}
+</div>
+<p class="continuation">Now it is easier to see that the two equations represent the same line. Every point on the line is a solution to the system, so the system has infinitely many solutions. The solution set is \(\{(x,y) \mid y=2x-1\}\text{.}\)</p>
+</div></div>
+</div></article></div></section><section class="reading-questions" id="reading-questions-14"><h3 class="heading hide-type">
+<span class="type">Reading Questions</span> <span class="codenumber">4.2.4</span> <span class="title">Reading Questions</span>
+</h3>
+<article class="exercise exercise-like" id="exercise-87"><h6 class="heading"><span class="codenumber">1<span class="period">.</span></span></h6>
+<p id="p-814">Give an example of a system of two equations in \(x\) and \(y\) where it would be nicer to solve the system using substitution than by graphing the two lines that the equations define. Explain why substitution would be nicer than graphing for your example system.</p></article><article class="exercise exercise-like" id="exercise-88"><h6 class="heading"><span class="codenumber">2<span class="period">.</span></span></h6>
+<p id="p-815">What might be a good first step if you have a system of two linear equations in two variables where there are fractions appearing in the equations?</p></article><article class="exercise exercise-like" id="exercise-89"><h6 class="heading"><span class="codenumber">3<span class="period">.</span></span></h6>
+<p id="p-816">In an application problem, thinking about the <span class="fillin" role="img" aria-label="10-character blank" style="width: 4.545454545454546em;"></span> can help you understand how to set up equations.</p></article></section></section></div></main>
+</div>
+</body>
+</html>

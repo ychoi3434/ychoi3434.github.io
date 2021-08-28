@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*       on 2021-08-28T19:50:37Z       *-->
+<!--*   A recent stable commit (2020-08-09):   *-->
+<!--* 98f21740783f166a773df4dc83cab5293ab63a4a *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<html lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>ORCCA Multiplication of Polynomials</title>
+<meta name="Keywords" content="Authored in PreTeXt">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+<script>window.MathJax = {
+  tex: {
+    inlineMath: [['\\(','\\)']],
+    tags: "none",
+    useLabelIds: true,
+    tagSide: "right",
+    tagIndent: ".8em",
+    packages: {'[+]': ['base', 'extpfeil', 'ams', 'amscd', 'newcommand', 'knowl', 'sfrac']}
+  },
+  options: {
+    ignoreHtmlClass: "tex2jax_ignore",
+    processHtmlClass: "has_am",
+  },
+  chtml: {
+    scale: 0.88,
+    mtextInheritFont: true
+  },
+  loader: {
+    load: ['input/asciimath', '[tex]/extpfeil', '[tex]/amscd', '[tex]/newcommand', '[pretext]/mathjaxknowl3.js'],
+    paths: {pretext: "https://pretextbook.org/js/lib"},
+  },
+/* support for the sfrac command in MathJax (Beveled fraction) */
+  startup: {
+    ready() {
+      //
+      // Creating a simple "sfrac" package on-the-fly
+      //
+      const Configuration = MathJax._.input.tex.Configuration.Configuration;
+      const CommandMap = MathJax._.input.tex.SymbolMap.CommandMap;
+      
+      new CommandMap('sfrac', {
+        sfrac: 'SFrac'
+        }, {
+        SFrac(parser, name) {
+        const num = parser.ParseArg(name);
+        const den = parser.ParseArg(name);
+        const frac = parser.create('node', 'mfrac', [num, den], {bevelled: true});
+        parser.Push(frac);
+        }
+      });
+      //
+      // Create the package for the overridden macros
+      //
+      Configuration.create('sfrac', {
+        handler: {macro: ['sfrac']}
+      });
+      
+    MathJax.startup.defaultReady();
+    }
+  },
+};
+</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext_add_on.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script xmlns:svg="http://www.w3.org/2000/svg">sagecellEvalName='Evaluate (Sage)';
+</script><link xmlns:svg="http://www.w3.org/2000/svg" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://fonts.googleapis.com/css?family=Inconsolata:400,700&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/pretext.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/pretext_add_on.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/banner_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/toc_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/knowls_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/style_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/colors_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/setcolors.css" rel="stylesheet" type="text/css">
+<!-- 2019-10-12: Temporary - CSS file for experiments with styling --><link xmlns:svg="http://www.w3.org/2000/svg" href="developer.css" rel="stylesheet" type="text/css">
+</head>
+<body id="PCC-ORCCA" class="mathbook-book has-toc has-sidebar-left">
+<a class="assistive" href="#content">Skip to main content</a><div xmlns:svg="http://www.w3.org/2000/svg" id="latex-macros" class="hidden-content" style="display:none">\(\require{cancel}\newcommand{\abs}[1]{\left\lvert#1\right\rvert}
+\newcommand{\point}[2]{\left(#1,#2\right)}
+\newcommand{\highlight}[1]{\definecolor{sapphire}{RGB}{59,90,125} {\color{sapphire}{{#1}}}}
+\newcommand{\firsthighlight}[1]{\definecolor{sapphire}{RGB}{59,90,125} {\color{sapphire}{{#1}}}}
+\newcommand{\secondhighlight}[1]{\definecolor{emerald}{RGB}{20,97,75} {\color{emerald}{{#1}}}}
+\newcommand{\unhighlight}[1]{{\color{black}{{#1}}}}
+\newcommand{\lowlight}[1]{{\color{lightgray}{#1}}}
+\newcommand{\attention}[1]{\mathord{\overset{\downarrow}{#1}}}
+\newcommand{\nextoperation}[1]{\mathord{\boxed{#1}}}
+\newcommand{\substitute}[1]{{\color{blue}{{#1}}}}
+\newcommand{\pinover}[2]{\overset{\overset{\mathrm{\ #2\ }}{|}}{\strut #1 \strut}}
+\newcommand{\addright}[1]{{\color{blue}{{{}+#1}}}}
+\newcommand{\addleft}[1]{{\color{blue}{{#1+{}}}}}
+\newcommand{\subtractright}[1]{{\color{blue}{{{}-#1}}}}
+\newcommand{\multiplyright}[2][\cdot]{{\color{blue}{{{}#1#2}}}}
+\newcommand{\multiplyleft}[2][\cdot]{{\color{blue}{{#2#1{}}}}}
+\newcommand{\divideunder}[2]{\frac{#1}{{\color{blue}{{#2}}}}}
+\newcommand{\divideright}[1]{{\color{blue}{{{}\div#1}}}}
+\newcommand{\negate}[1]{{\color{blue}{{-}}}\left(#1\right)}
+\newcommand{\cancelhighlight}[1]{\definecolor{sapphire}{RGB}{59,90,125}{\color{sapphire}{{\cancel{#1}}}}}
+\newcommand{\secondcancelhighlight}[1]{\definecolor{emerald}{RGB}{20,97,75}{\color{emerald}{{\bcancel{#1}}}}}
+\newcommand{\thirdcancelhighlight}[1]{\definecolor{amethyst}{RGB}{112,72,91}{\color{amethyst}{{\xcancel{#1}}}}}
+\newcommand{\confirm}[1]{\stackrel{\checkmark}{#1}}
+\newcommand{\reject}[1]{\stackrel{\text{no}}{#1}}
+\newcommand{\wonder}[1]{\stackrel{\text{?}}{#1}}
+\newcommand{\apple}{\text{🍎}}
+\newcommand{\banana}{\text{🍌}}
+\newcommand{\pear}{\text{🍐}}
+\newcommand{\cat}{\text{🐱}}
+\newcommand{\dog}{\text{🐶}}
+\newcommand{\lt}{&lt;}
+\newcommand{\gt}{&gt;}
+\newcommand{\amp}{&amp;}
+\)</div>
+<header id="masthead" class="smallbuttons"><div class="banner"><div class="container">
+<a id="logo-link" href="http://www.pcc.edu/ORCCA" target="_blank"><img src="images/ORCCAbrandlogo.png" alt="Logo image"></a><div class="title-container">
+<h1 class="heading"><a href="orcca.html"><span class="title">RVCC Elementary Algebra</span></a></h1>
+<p class="byline">Department of Mathematics and Computer Science</p>
+</div>
+</div></div>
+<nav xmlns:svg="http://www.w3.org/2000/svg" id="primary-navbar" class="navbar"><div class="container">
+<div class="navbar-top-buttons">
+<button class="sidebar-left-toggle-button button active" aria-label="Show or hide table of contents sidebar">Contents</button><div class="tree-nav toolbar toolbar-divisor-3">
+<a class="index-button toolbar-item button" href="index-1.html" title="Index">Index</a><span class="threebuttons"><a id="previousbutton" class="previous-button toolbar-item button" href="section-adding-and-subtracting-polynomials.html" title="Previous">Prev</a><a id="upbutton" class="up-button button toolbar-item" href="chapter-polynomials-and-exponents-modified.html" title="Up">Up</a><a id="nextbutton" class="next-button button toolbar-item" href="chapter-radical-expressions-and-equations.html" title="Next">Next</a></span>
+</div>
+</div>
+<div class="navbar-bottom-buttons toolbar toolbar-divisor-4">
+<button class="sidebar-left-toggle-button button toolbar-item active">Contents</button><a class="previous-button toolbar-item button" href="section-adding-and-subtracting-polynomials.html" title="Previous">Prev</a><a class="up-button button toolbar-item" href="chapter-polynomials-and-exponents-modified.html" title="Up">Up</a><a class="next-button button toolbar-item" href="chapter-radical-expressions-and-equations.html" title="Next">Next</a>
+</div>
+</div></nav></header><div class="page">
+<div xmlns:svg="http://www.w3.org/2000/svg" id="sidebar-left" class="sidebar" role="navigation"><div class="sidebar-content">
+<nav id="toc"><ul>
+<li class="link frontmatter">
+<a href="frontmatter.html" data-scroll="JVg"><span class="title">Front Matter</span></a><ul><li><a href="colophon-1.html" data-scroll="colophon-1">Colophon</a></li></ul>
+</li>
+<li class="link part"><a href="part-all-of-the-chapters.html" data-scroll="part-all-of-the-chapters"><span class="codenumber">I</span> <span class="title"></span></a></li>
+<li class="link">
+<a href="chapter-introduction-to-algebra.html" data-scroll="dNX"><span class="codenumber">1</span> <span class="title">Introduction to Algebra</span></a><ul>
+<li><a href="section-real-numbers-and-the-number-line.html" data-scroll="ipv">Real Numbers and the Number Line</a></li>
+<li><a href="section-properties-of-real-numbers.html" data-scroll="tNy">Properties of Real Numbers</a></li>
+<li><a href="section-simplifying-and-writing-algebraic-expressions.html" data-scroll="xRO">Simplifying and Writing Algebraic Expressions</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="chapter-linear-equations-and-inequalities-modified.html" data-scroll="sWV"><span class="codenumber">2</span> <span class="title">Linear Equations and Inequalities</span></a><ul>
+<li><a href="section-introduction-to-equations.html" data-scroll="fwy">Introduction to Equations</a></li>
+<li><a href="section-linear-equations.html" data-scroll="xVO">Linear Equations</a></li>
+<li><a href="section-introduction-to-problem-solving.html" data-scroll="Wul">Introduction to Problem Solving</a></li>
+<li><a href="section-formulas.html" data-scroll="Nnq">Formulas</a></li>
+<li><a href="section-linear-inequalities.html" data-scroll="Nuc">Linear Inequalities</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="chapter-graphing-equations.html" data-scroll="gID"><span class="codenumber">3</span> <span class="title">Graphing Lines</span></a><ul>
+<li><a href="section-introduction-to-graphing.html" data-scroll="YTJ">Introduction to Graphing</a></li>
+<li><a href="section-equations-in-two-variables.html" data-scroll="QXY">Equations in Two Variables</a></li>
+<li><a href="section-intercepts-horizontal-and-vertical-lines.html" data-scroll="ByF">Intercepts: Horizontal and Vertical Lines</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="chapter-systems-of-linear-equations-in-two-variables.html" data-scroll="xGO"><span class="codenumber">4</span> <span class="title">Systems of Linear Equations</span></a><ul>
+<li><a href="section-solving-systems-of-linear-equations-graphically-and-numerically.html" data-scroll="njo">Solving Systems of Linear Equations Graphically and Numerically</a></li>
+<li><a href="section-solving-systems-of-linear-equations-by-substitution.html" data-scroll="zdh">Solving Systems of Linear Equations by Substitution</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="chapter-polynomials-and-exponents-modified.html" data-scroll="onc"><span class="codenumber">5</span> <span class="title">Exponents and Polynomials</span></a><ul>
+<li><a href="section-rules-for-exponents.html" data-scroll="KHJ">Rules for Exponents</a></li>
+<li><a href="section-adding-and-subtracting-polynomials.html" data-scroll="VvN">Addition and Subtraction of Polynomials</a></li>
+<li><a href="section-multiplication-of-polynomials.html" data-scroll="IcY" class="active">Multiplication of Polynomials</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="chapter-radical-expressions-and-equations.html" data-scroll="chapter-radical-expressions-and-equations"><span class="codenumber">6</span> <span class="title">Radical Expressions and Equations</span></a><ul>
+<li><a href="section-introduction-to-factoring.html" data-scroll="duD">Introduction to Factoring</a></li>
+<li><a href="section-factoring-trinomials.html" data-scroll="Mrf">Factoring Trinomials</a></li>
+<li><a href="section-solving-equations-by-factoring.html" data-scroll="DXi">Solving Equations by Factoring 1 (Quadratics)</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="chapter-rational-expressions.html" data-scroll="RzF"><span class="codenumber">7</span> <span class="title">Rational Expressions</span></a><ul>
+<li><a href="section-introduction-to-rational-expressions.html" data-scroll="Moo">Introduction to Rational Expressions</a></li>
+<li><a href="section-multiplication-and-division-of-rational-expressions.html" data-scroll="Vps">Multiplication and Division of Rational Expressions</a></li>
+<li><a href="section-addition-and-subtraction-with-like-denominators.html" data-scroll="KBw">Addition and Subtraction of Rational Expressions with Like Denominators</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="chapter-radical-expressions-and-functions.html" data-scroll="chapter-radical-expressions-and-functions"><span class="codenumber">8</span> <span class="title">Quantities in the Physical World</span></a><ul><li><a href="section-radical-expressions-and-functions.html" data-scroll="GAK">Radical Expressions and Functions</a></li></ul>
+</li>
+<li class="link backmatter"><a href="backmatter.html" data-scroll="jDj"><span class="title">Appendices</span></a></li>
+<li class="link">
+<a href="appendix-basic-math-review.html" data-scroll="appendix-basic-math-review"><span class="codenumber">A</span> <span class="title">Basic Math Review</span></a><ul>
+<li><a href="section-arithmetic-with-negative-numbers.html" data-scroll="qBB">Arithmetic with Negative Numbers</a></li>
+<li><a href="section-fractions-and-fraction-arithmetic.html" data-scroll="VAa">Fractions and Fraction Arithmetic</a></li>
+<li><a href="section-absolute-value-and-square-root.html" data-scroll="GAK">Absolute Value and Square Root</a></li>
+<li><a href="section-percentages.html" data-scroll="Chi">Percentages</a></li>
+<li><a href="section-order-of-operations.html" data-scroll="aog">Order of Operations</a></li>
+<li><a href="section-set-notation-and-types-of-numbers.html" data-scroll="Fdo">Set Notation and Types of Numbers</a></li>
+</ul>
+</li>
+<li class="link"><a href="appendix-unit-conversions.html" data-scroll="appendix-unit-conversions"><span class="codenumber">B</span> <span class="title">Unit Conversions</span></a></li>
+<li class="link"><a href="index-1.html" data-scroll="index-1"><span class="title">Index</span></a></li>
+</ul></nav><div class="extras"><nav><a class="mathbook-link" href="https://pretextbook.org">Authored in PreTeXt</a><a href="https://www.mathjax.org"><img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" alt="Powered by MathJax"></a></nav></div>
+</div></div>
+<main class="main"><div id="content" class="pretext-content"><section xmlns:svg="http://www.w3.org/2000/svg" class="section" id="IcY"><h2 class="heading hide-type">
+<span class="type">Section</span> <span class="codenumber">5.3</span> <span class="title">Multiplication of Polynomials</span>
+</h2>
+<section class="introduction" id="wMV"><p id="uJA">Previously in <code class="code-inline tex2jax_ignore">[cross-reference to target(s) "section-introduction-to-exponent-rules" missing or not unique]</code>, we learned to multiply two monomials together (such as \(4xy\cdot3x^2\)). And in <a href="section-adding-and-subtracting-polynomials.html" class="internal" title="Section 5.2: Addition and Subtraction of Polynomials">Section 5.2</a>, we learned how to add and subtract polynomials even when there is more than one term (such as \((4x^2-3x)+(5x^2+x-2)\)). In this section, we will learn how to multiply polynomials with more than one term.</p>
+<article class="example example-like" id="QFM"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-QFM"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">5.3.1</span><span class="period">.</span><span class="space"> </span><span class="title">Revenue.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-QFM"><article class="example example-like"><p id="AyM">Avery owns a local organic jam company that currently sells about \(1500\) jars a month at a price of \(\$13\) per jar. Avery has found that for each time they would raise the price of a jar by \(25\) cents, they will sell \(50\) fewer jars of jam per month.</p>
+<p id="gFV">In general, this company's revenue can be calculated by multiplying the cost per jar by the total number of jars of jam sold. If we let \(x\) represent the number of times the price was raised by \(25\) cents, then the price will be \(13+0.25x\text{.}\)</p>
+<p id="sUn">Conversely, the number of jars the company will sell will be the \(1500\) they currently sell each month, minus \(50\) times \(x\text{.}\) This gives us the expression \(1500-50x\) to represent how many jars the company will sell after raising the price \(x\) times.</p>
+<p id="Zbw">Combining these expressions, we can write a formula for the revenue model:</p>
+<div class="displaymath">
+\begin{align*}
+\text{revenue} \amp= \left(\text{price per item}\right)\times\left(\text{number of items sold}\right)\\
+R \amp= \left(13+0.25x\right)\left(1500-50x\right)
+\end{align*}
+</div>
+<p id="FiF">To simplify the expression \(\left(13+0.25x\right)\left(1500-50x\right)\text{,}\) we'll need to multiply \(13+0.25x\) by \(1500-50x\text{.}\) In this section, we learn how to do that.</p></article></div></section><section class="subsection" id="okh"><h3 class="heading hide-type">
+<span class="type">Subsection</span> <span class="codenumber">5.3.1</span> <span class="title">Review of the Distributive Property</span>
+</h3>
+<p id="WQK">Polynomial multiplication relies on the <a class="xref" data-knowl="./knowl/item-distributive-property.html" title="Item: Distributive Property">distributive property</a>, and may also rely on the <a class="xref" data-knowl="./knowl/list-rules-of-exponents.html" title="List 5.1.8: Summary of the Rules of Exponents for Multiplication">rules of exponents</a>. When we multiply a monomial with a binomial, we apply this property by distributing the monomial to each term in the binomial. For example,</p>
+<div class="displaymath">
+\begin{align*}
+\highlight{-4x}(3x^2+5) \amp= \multiplyleft{(-4x)}\left(3x^2\right)+\multiplyleft{(-4x)}(5)\\
+\amp=-12x^3-20x
+\end{align*}
+</div>
+<article class="remark remark-like" id="iuV"><h6 class="heading">
+<span class="type">Remark</span><span class="space"> </span><span class="codenumber">5.3.2</span><span class="period">.</span>
+</h6>
+<p id="OCr">We can use the distributive property when multiplying on either the left or the right. This means that \(a(b+c)=ab+ac\text{,}\) but also \((b+c)a=ba+ca\text{.}\)</p></article><article class="example example-like" id="example-121"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-example-121"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">5.3.3</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-example-121"><article class="example example-like"><p id="p-928">A rectangle's length is \(4\) meters longer than its width. Assume its width is \(w\) meters. Use a simplified polynomial to model the rectangle's area in terms of \(w\) as the only variable.</p>
+<div class="solutions">
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-86" id="solution-86"><span class="type">Explanation</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-86"><div class="solution solution-like">
+<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;">
+<div class="sbspanel top" style="width:37%;"><p id="p-929">Since the rectangle's length is \(4\) meters longer than its width, we can model its length by \(w+4\) meters.</p></div>
+<div class="sbspanel top" style="width:22%;">
+<img src="images/image-89.svg" role="img" class="contained" alt=""><div class="image-archive">
+<a href="images/image-89.eps">eps</a><a href="images/image-89.pdf">pdf</a><a href="images/image-89.png">png</a><a href="images/image-89.svg">svg</a><a href="images/image-89.tex">tex</a>
+</div>
+</div>
+<div class="sbspanel top" style="width:37%;">
+<p id="p-930">The rectangle's area would be:</p>
+<div class="displaymath">
+\begin{align*}
+A\amp=\ell w\\
+\amp=(w+4)w\\
+\amp=w^2+4w
+\end{align*}
+</div>
+<p class="continuation">The rectangle's area can be modeled by \(w^2+4w\) square meters.</p>
+</div>
+</div></div>
+<p id="p-931">In the second line of work above, we should recognize that \((w+4)w\) is equivalent to \(w(w+4)\text{.}\) Whether the \(w\) is written before or after the binomial, we are still able to use distribution to simplify the product.</p>
+</div></div>
+</div></article></div>
+<article class="exercise exercise-like" id="exercise-102"><a data-knowl="" class="id-ref exercise-knowl original" data-refid="hk-exercise-102"><h6 class="heading">
+<span class="type">Checkpoint</span><span class="space"> </span><span class="codenumber">5.3.4</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-exercise-102"><article class="exercise exercise-like"><p id="p-932">The WeBWorK problem with ID “webwork-55” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article></div>
+<p id="p-933">The distributive property can be understood visually with a <dfn class="terminology">generic rectangle</dfn>. </p>
+<figure class="figure figure-like" id="bAD"><div class="image-box" style="width: 40%; margin-left: 30%; margin-right: 30%;">
+<img src="images/image-90.svg" role="img" class="contained" alt="a rectangle with two regions; the region on the left indicates 2x*3x=6x^2; the region on the right indicates that 2x*4=8x; together they add up to 6x^2+8x"><div class="image-archive">
+<a href="images/image-90.eps">eps</a><a href="images/image-90.pdf">pdf</a><a href="images/image-90.png">png</a><a href="images/image-90.svg">svg</a><a href="images/image-90.tex">tex</a>
+</div>
+</div>
+<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">5.3.5<span class="period">.</span></span><span class="space"> </span>A Generic Rectangle Modeling \(2x(3x+4)\)</figcaption></figure><p id="Pml">The big rectangle consists of two smaller rectangles. The big rectangle's area is \(2x(3x+4)\text{,}\) and the sum of those two smaller rectangles is \(2x\cdot3x+2x\cdot4\text{.}\) Since the sum of the areas of those two smaller rectangles is the same as the bigger rectangle's area, we have:</p>
+<div class="displaymath">
+\begin{align*}
+2x(3x+4) \amp= 2x\cdot3x+2x\cdot4\\
+\amp= 6x^2+8x
+\end{align*}
+</div>
+<p class="continuation">Generic rectangles can be used to visualize multiplying polynomials.</p></section><section class="subsection" id="Urq"><h3 class="heading hide-type">
+<span class="type">Subsection</span> <span class="codenumber">5.3.2</span> <span class="title">Multiplying Binomials</span>
+</h3>
+<section class="paragraphs" id="pZu"><h5 class="heading"><span class="title">Multiplying Binomials Using Distribution.</span></h5>
+<p id="HHM">Whether we're multiplying a monomial with a polynomial or two larger polynomials together, the first step is still based on the <a class="xref" data-knowl="./knowl/item-distributive-property.html" title="Item: Distributive Property">distributive property</a>. We'll start with multiplying two binomials and then move on to larger polynomials.</p>
+<p id="nOV">We know we can distribute the \(3\) in \((x+2)3\) to obtain \((x+2)\multiplyright{3}=x\multiplyright{3}+2\multiplyright{3}\text{.}\) We can actually distribute <em class="emphasis">anything</em> across \((x+2)\) if it is multiplied. For example:</p>
+<div class="displaymath">
+\begin{equation*}
+(x+2)\cat=x\cdot \cat + 2\cdot \cat
+\end{equation*}
+</div>
+<p id="TWe">With this in mind, we can multiply \((x+2)(x+3)\) by distributing the \((x+3)\) across \((x+2)\text{:}\)</p>
+<div class="displaymath">
+\begin{equation*}
+(x+2)\highlight{(x+3)} = x\highlight{(x+3)} + 2\highlight{(x+3)}
+\end{equation*}
+</div>
+<p class="continuation">To finish multiplying, we'll continue by distributing again, but this time across \((x+3)\text{:}\)</p>
+<div class="displaymath">
+\begin{align*}
+(x+2)\highlight{(x+3)} \amp= x\highlight{(x+3)} + 2\highlight{(x+3)}\\
+\amp= x \cdot \highlight{x} + x \cdot \highlight{3} + 2 \cdot \highlight{x} +  2 \cdot \highlight{3}\\
+\amp=x^2+3x+2x+6\\
+\amp=x^2+5x+6
+\end{align*}
+</div>
+<p id="Adn">To multiply a binomial by another binomial, we simply had to repeat the step of distribution and simplify the resulting terms. In fact, multiplying any two polynomials will rely upon these same steps.</p></section><section class="paragraphs" id="WgD"><h5 class="heading"><span class="title">Multiplying Binomials Using <abbr class="acronym">FOIL</abbr>.</span></h5>
+<p id="gkw">While multiplying two binomials requires two applications of the distributive property, people often remember this distribution process using the acronym <abbr class="acronym">FOIL</abbr>.  <abbr class="acronym">FOIL</abbr> refers to the pairs of terms from each binomial that end up distributed to each other.</p>
+<p id="MrF">If we take another look at the example we just completed, \((x+2)(x+3)\text{,}\) we can highlight how the <abbr class="acronym">FOIL</abbr> process works. <abbr class="acronym">FOIL</abbr> is the acronym for “First, Outer, Inner, Last”.</p>
+<div class="displaymath">
+\begin{align*}
+(x+2)(x+3)\amp= (\overbrace{{x} \stackrel{}{\cdot} {x}}^{\text{F}}) + (\overbrace{{3} \stackrel{}{\cdot} {x}}^{\text{O}}) + (\overbrace{{2} \stackrel{}{\cdot} {x}}^{\text{I}}) + (\overbrace{{2} \stackrel{}{\cdot} {3}}^{\text{L}})\\
+\amp=x^2+3x+2x+6\\
+\amp=x^2+5x+6
+\end{align*}
+</div>
+<dl class="description-list">
+<dt id="cdg">F: \(x^2\)</dt>
+<dd><p id="AFQ">The \(x^2\) term was the result of the product of <em class="emphasis">first</em> terms from each binomial.</p></dd>
+<dt id="Ikp">O: \(3x\)</dt>
+<dd><p id="gMZ">The \(3x\) was the result of the product of the <em class="emphasis">outer</em> terms from each binomial. This was from the \(x\) in the front of the first binomial and the \(3\) in the back of the second binomial.</p></dd>
+<dt id="ory">I: \(2x\)</dt>
+<dd><p id="MUi">The \(2x\) was the result of the product of the <em class="emphasis">inner</em> terms from each binomial. This was from the \(2\) in the back of the first binomial and the \(x\) in the front of the second binomial.</p></dd>
+<dt id="UyH">L: \(6\)</dt>
+<dd><p id="tbr">The constant term \(6\) was the result of the product of the <em class="emphasis">last</em> terms of each binomial.</p></dd>
+</dl>
+<figure class="figure figure-like" id="Rby"><div class="image-box" style="width: 30%; margin-left: 35%; margin-right: 35%;">
+<img src="images/image-91.svg" role="img" class="contained" alt="a diagram that shows how to multiply using FOIL; x*x + x*3 + 2*x + 6"><div class="image-archive">
+<a href="images/image-91.eps">eps</a><a href="images/image-91.pdf">pdf</a><a href="images/image-91.png">png</a><a href="images/image-91.svg">svg</a><a href="images/image-91.tex">tex</a>
+</div>
+</div>
+<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">5.3.6<span class="period">.</span></span><span class="space"> </span>Using <abbr class="acronym">FOIL</abbr> Method to multiply \((x+2)(x+3)\)</figcaption></figure></section><section class="paragraphs" id="CnM"><h5 class="heading"><span class="title">Multiplying Binomials Using Generic Rectangles.</span></h5>
+<p id="syO">We can also approach this same example using the generic rectangle method. To use generic rectangles, we treat \(x+2\) as the base of a rectangle, and \(x+3\) as the height. Their product, \((x+2)(x+3)\text{,}\) represents the rectangle's area. The next diagram shows how to set up generic rectangles to multiply \((x+2)(x+3)\text{.}\)</p>
+<figure class="figure figure-like" id="xiH"><div class="image-box" style="width: 40%; margin-left: 30%; margin-right: 30%;">
+<img src="images/image-92.svg" role="img" class="contained" alt="a two by two rectangle with the terms x and 2 above the columns and the terms x and 3 on the left side of the rows"><div class="image-archive">
+<a href="images/image-92.eps">eps</a><a href="images/image-92.pdf">pdf</a><a href="images/image-92.png">png</a><a href="images/image-92.svg">svg</a><a href="images/image-92.tex">tex</a>
+</div>
+</div>
+<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">5.3.7<span class="period">.</span></span><span class="space"> </span>Setting up Generic Rectangles to Multiply \((x+2)(x+3)\)</figcaption></figure><p id="YFX">The big rectangle consists of four smaller rectangles. We will find each small rectangle's area in the next diagram by the formula \(\text{area}=\text{base}\cdot\text{height}\text{.}\)</p>
+<figure class="figure figure-like" id="dpQ"><div class="image-box" style="width: 40%; margin-left: 30%; margin-right: 30%;">
+<img src="images/image-93.svg" role="img" class="contained" alt="the previous generic rectangles with the areas computed; x*x=x^2, x*2=2x, 3*x=3x and 3*2=6"><div class="image-archive">
+<a href="images/image-93.eps">eps</a><a href="images/image-93.pdf">pdf</a><a href="images/image-93.png">png</a><a href="images/image-93.svg">svg</a><a href="images/image-93.tex">tex</a>
+</div>
+</div>
+<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">5.3.8<span class="period">.</span></span><span class="space"> </span>Using Generic Rectangles to Multiply \((x+2)(x+3)\)</figcaption></figure><p id="ENg">To finish finding this product, we need to add the areas of the four smaller rectangles:</p>
+<div class="displaymath">
+\begin{align*}
+(x+2)(x+3)\amp=x^2+3x+2x+6\\
+\amp=x^2+5x+6
+\end{align*}
+</div></section><p id="kUp">Notice that the areas of the four smaller rectangles are exactly the same as the four terms we obtained using distribution, which are also the same four terms that came from the <abbr class="acronym">FOIL</abbr> method. Both the <abbr class="acronym">FOIL</abbr> method and generic rectangles approach are different ways to represent the distribution that is occurring.</p>
+<article class="example example-like" id="GXF"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-GXF"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">5.3.9</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-GXF"><article class="example example-like"><p id="lpO">Multiply \((2x-3y)(4x-5y)\) using distribution.</p>
+<div class="solutions">
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-cUe" id="cUe"><span class="type">Explanation</span></a><div class="hidden-content tex2jax_ignore" id="hk-cUe"><div class="solution solution-like">
+<p id="YrC">To use the distributive property to multiply those two binomials, we'll first distribute the second binomial across \((2x-3y)\text{.}\) Then we'll distribute again, and simplify the terms that result.</p>
+<div class="displaymath">
+\begin{align*}
+(2x-3y)\highlight{(4x-5y)}\amp=2x\highlight{(4x-5y)}-3y\highlight{(4x-5y)}\\
+\amp=8x^2-10xy-12xy+15y^2\\
+\amp=8x^2-22xy+15y^2
+\end{align*}
+</div>
+</div></div>
+</div></article></div>
+<article class="example example-like" id="neO"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-neO"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">5.3.10</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-neO"><article class="example example-like"><p id="RwX">Multiply \((2x-3y)(4x-5y)\) using <abbr class="acronym">FOIL</abbr>.</p>
+<div class="solutions">
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-Jbn" id="Jbn"><span class="type">Explanation</span></a><div class="hidden-content tex2jax_ignore" id="hk-Jbn"><div class="solution solution-like">
+<p id="EyL">First, Outer, Inner, Last: Either with arrows on paper or mentally in our heads, we'll pair up the four pairs of monomials and multiply those pairs together.</p>
+<div class="displaymath">
+\begin{align*}
+(2x-3y)(4x-5y)\amp=
+(\overbrace{{\stackrel{}{2x}}\cdot{4x}}^{\large\text{F}})+
+(\overbrace{{\stackrel{}{2x}}\cdot{(-5y)}}^{\large\text{O}})+
+(\overbrace{{\stackrel{}{-3y}}\cdot{4x}}^{\large\text{I}})+
+(\overbrace{{\stackrel{}{-3y}}\cdot{(-5y}}^{\large\text{L}})\\
+\amp=8x^2-10xy-12xy+15y^2\\
+\amp=8x^2-22xy+15y^2
+\end{align*}
+</div>
+</div></div>
+</div></article></div>
+<article class="example example-like" id="TlX"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-TlX"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">5.3.11</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-TlX"><article class="example example-like"><p id="xEg">Multiply \((2x-3y)(4x-5y)\) using generic rectangles.</p>
+<div class="solutions">
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-piw" id="piw"><span class="type">Explanation</span></a><div class="hidden-content tex2jax_ignore" id="hk-piw"><div class="solution solution-like">
+<p id="kFU">We begin by drawing four rectangles and marking their bases and heights with terms in the given binomials:</p>
+<figure class="figure figure-like" id="dbv"><div class="image-box" style="width: 40%; margin-left: 30%; margin-right: 30%;">
+<img src="images/image-94.svg" role="img" class="contained" alt="a two by two rectangle with the terms 2x and -3y above the columns and the terms 4x and -5y on the left of the rows"><div class="image-archive">
+<a href="images/image-94.eps">eps</a><a href="images/image-94.pdf">pdf</a><a href="images/image-94.png">png</a><a href="images/image-94.svg">svg</a><a href="images/image-94.tex">tex</a>
+</div>
+</div>
+<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">5.3.12<span class="period">.</span></span><span class="space"> </span>Setting up Generic Rectangles to Multiply \((2x-3y)(4x-5y)\)</figcaption></figure><p id="QNd">Next, we calculate each rectangle's area by multiplying its base with its height:</p>
+<figure class="figure figure-like" id="JiE"><div class="image-box" style="width: 40%; margin-left: 30%; margin-right: 30%;">
+<img src="images/image-95.svg" role="img" class="contained" alt="the previous generic rectangles with the areas multiplied; 2x*4x=8x^2, 2x*-5y=-10xy, -3y*4x=-12xy and -3y*-5y=15y^2"><div class="image-archive">
+<a href="images/image-95.eps">eps</a><a href="images/image-95.pdf">pdf</a><a href="images/image-95.png">png</a><a href="images/image-95.svg">svg</a><a href="images/image-95.tex">tex</a>
+</div>
+</div>
+<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">5.3.13<span class="period">.</span></span><span class="space"> </span>Using Generic Rectangles to Multiply \((2x-3y)(4x-5y)\)</figcaption></figure><p id="wUm">Finally, we add up all rectangles' area to find the product:</p>
+<div class="displaymath">
+\begin{align*}
+(2x-3y)(4x-5y)\amp=8x^2-10xy-12xy+15y^2\\
+\amp=8x^2-22xy+15y^2
+\end{align*}
+</div>
+</div></div>
+</div></article></div>
+<article class="example example-like" id="ztg"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-ztg"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">5.3.14</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-ztg"><article class="example example-like"><p id="dLp">Multiply and simplify the formula for Avery's organic jam revenue, \(R\) (in dollars), from <a class="xref" data-knowl="./knowl/example-revenue.html" title="Example 5.3.1: Revenue">Example 5.3.1</a> where \(R= (13+0.25x)(1500-50x)\) and \(x\) represents the number of times they raised the price by 25 cents.</p>
+<div class="solutions">
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-VpF" id="VpF"><span class="type">Explanation</span></a><div class="hidden-content tex2jax_ignore" id="hk-VpF"><div class="solution solution-like">
+<p id="ppN">To multiply this, we'll use <abbr class="acronym">FOIL</abbr>:</p>
+<div class="displaymath">
+\begin{align*}
+R \amp= \left(13+0.25x\right)\left(1500-50x\right)\\
+\amp= \left(13\cdot1500\right) - \left(13 \cdot 50x  \right) + \left( 0.25x \cdot 1500 \right) - \left( 0.25x \cdot 50x \right)\\
+\amp= 19500  - 650x + 375x - 12.5x^2\\
+\amp= -12.5x^2 - 275x + 19500
+\end{align*}
+</div>
+</div></div>
+</div></article></div>
+<article class="example example-like" id="fAp"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-fAp"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">5.3.15</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-fAp"><article class="example example-like"><p id="JSy">Tyrone is an artist and he sells each of his paintings for \(\$200\text{.}\) Currently, he can sell \(100\) paintings per year. So his annual revenue from selling paintings is \(\$200\cdot100=\$20000\text{.}\) He plans to raise the price. However, for each $20 price increase per painting, his customers will buy \(5\) fewer paintings annually.</p>
+<p id="pZH">Assume Tyrone would raise the price of his paintings \(x\) times, each time by $20. Use an expanded polynomial to represent his new revenue per year.</p>
+<div class="solutions">
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-BwO" id="BwO"><span class="type">Explanation</span></a><div class="hidden-content tex2jax_ignore" id="hk-BwO"><div class="solution solution-like">
+<p id="VwW">Currently, each painting costs $200. After raising the price \(x\) times, each time by $20, each painting's new price would be \(200+20x\) dollars.</p>
+<p id="BEf">Currently, Tyrone sells \(100\) paintings per year. After raising the price \(x\) times, each time selling \(5\) fewer paintings, he would sell \(100-5x\) paintings per year.</p>
+<p id="hLo">His annual revenue can be calculated by multiplying each painting's price by the number of paintings he would sell:</p>
+<div class="displaymath">
+\begin{align*}
+\text{annual revenue}\amp=(\text{price})(\text{number of sales})\\
+\amp=(200+20x)(100-5x)\\
+\amp=200(100)+200(-5x)+20x(100)+20x(-5x)\\
+\amp=20000-1000x+2000x-100x^2\\
+\amp=-100x^2+1000x+20000
+\end{align*}
+</div>
+<p class="continuation">After raising the price \(x\) times, each time by $20, Tyrone's annual income from paintings would be \(-100x^2+1000x+20000\) dollars.</p>
+</div></div>
+</div></article></div></section><section class="subsection" id="gFI"><h3 class="heading hide-type">
+<span class="type">Subsection</span> <span class="codenumber">5.3.3</span> <span class="title">Multiplying Polynomials Larger Than Binomials</span>
+</h3>
+<p id="pEi">The foundation for multiplying any pair of polynomials is distribution and monomial multiplication. Whether we are working with binomials, trinomials, or larger polynomials, the process is fundamentally the same.</p>
+<article class="example example-like" id="XVQ"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-XVQ"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">5.3.16</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-XVQ"><article class="example example-like"><p id="WgQ">Multiply \(\left( x+5 \right)\left( x^2-4x+6 \right)\text{.}\)</p>
+<p id="CnZ">We can approach this product using either distribution generic rectangles. We cannot directly use the <abbr class="acronym">FOIL</abbr> method, although it can be helpful to draw arrows to the six pairs of products that will occur.</p>
+<figure class="figure figure-like" id="figure-107"><div class="image-box" style="width: 100%; margin-left: 0%; margin-right: 0%;">
+<img src="images/image-96.svg" role="img" class="contained" alt=""><div class="image-archive">
+<a href="images/image-96.eps">eps</a><a href="images/image-96.pdf">pdf</a><a href="images/image-96.png">png</a><a href="images/image-96.svg">svg</a><a href="images/image-96.tex">tex</a>
+</div>
+</div>
+<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">5.3.17<span class="period">.</span></span><span class="space"> </span>Multiply Each Term by Each Term</figcaption></figure><p id="ivi">Using the distributive property, we begin by distributing across \(\left( x^2-4x+6 \right)\text{,}\) perform a second step of distribution, and then combine like terms.</p>
+<div class="displaymath">
+\begin{align*}
+\left(x+5\right)\highlight{\left( x^2-4x+6 \right)}\amp= x\highlight{\left( x^2-4x+6 \right)}+5\highlight{\left( x^2-4x+6 \right)}\\
+\amp= x\cdot \highlight{x^2} - x\cdot \highlight{4x} +x\cdot \highlight{6}+5\cdot \highlight{x^2} - 5\cdot \highlight{4x} +5\cdot \highlight{6}\\
+\amp= x^3 -4x^2 +6x +5x^2 -20x +30\\
+\amp= x^3+x^2-14x+30
+\end{align*}
+</div></article></div>
+<p id="VLr">With the foundation of monomial multiplication and understanding how distribution applies in this context, we are able to find the product of any two polynomials.</p>
+<article class="exercise exercise-like" id="EcZ"><a data-knowl="" class="id-ref exercise-knowl original" data-refid="hk-EcZ"><h6 class="heading">
+<span class="type">Checkpoint</span><span class="space"> </span><span class="codenumber">5.3.18</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-EcZ"><article class="exercise exercise-like"><p id="p-969">The WeBWorK problem with ID “webwork-56” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article></div></section><section class="reading-questions" id="reading-questions-17"><h3 class="heading hide-type">
+<span class="type">Reading Questions</span> <span class="codenumber">5.3.4</span> <span class="title">Reading Questions</span>
+</h3>
+<article class="exercise exercise-like" id="exercise-104"><h6 class="heading"><span class="codenumber">1<span class="period">.</span></span></h6>
+<p id="p-970">Describe three ways you can go about multiplying \((x+3)(2x+5)\text{.}\)</p></article><article class="exercise exercise-like" id="exercise-105"><h6 class="heading"><span class="codenumber">2<span class="period">.</span></span></h6>
+<p id="p-971">If you multiplied out \((a+b+c)(d+e+f+g)\text{,}\) how many terms would there be? (Try to answer without actually writing them all down.)</p></article></section></section></div></main>
+</div>
+</body>
+</html>

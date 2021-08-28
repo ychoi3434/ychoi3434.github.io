@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*       on 2021-08-28T19:50:43Z       *-->
+<!--*   A recent stable commit (2020-08-09):   *-->
+<!--* 98f21740783f166a773df4dc83cab5293ab63a4a *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<html lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>ORCCA Radical Expressions and Functions</title>
+<meta name="Keywords" content="Authored in PreTeXt">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+<script>window.MathJax = {
+  tex: {
+    inlineMath: [['\\(','\\)']],
+    tags: "none",
+    useLabelIds: true,
+    tagSide: "right",
+    tagIndent: ".8em",
+    packages: {'[+]': ['base', 'extpfeil', 'ams', 'amscd', 'newcommand', 'knowl', 'sfrac']}
+  },
+  options: {
+    ignoreHtmlClass: "tex2jax_ignore",
+    processHtmlClass: "has_am",
+  },
+  chtml: {
+    scale: 0.88,
+    mtextInheritFont: true
+  },
+  loader: {
+    load: ['input/asciimath', '[tex]/extpfeil', '[tex]/amscd', '[tex]/newcommand', '[pretext]/mathjaxknowl3.js'],
+    paths: {pretext: "https://pretextbook.org/js/lib"},
+  },
+/* support for the sfrac command in MathJax (Beveled fraction) */
+  startup: {
+    ready() {
+      //
+      // Creating a simple "sfrac" package on-the-fly
+      //
+      const Configuration = MathJax._.input.tex.Configuration.Configuration;
+      const CommandMap = MathJax._.input.tex.SymbolMap.CommandMap;
+      
+      new CommandMap('sfrac', {
+        sfrac: 'SFrac'
+        }, {
+        SFrac(parser, name) {
+        const num = parser.ParseArg(name);
+        const den = parser.ParseArg(name);
+        const frac = parser.create('node', 'mfrac', [num, den], {bevelled: true});
+        parser.Push(frac);
+        }
+      });
+      //
+      // Create the package for the overridden macros
+      //
+      Configuration.create('sfrac', {
+        handler: {macro: ['sfrac']}
+      });
+      
+    MathJax.startup.defaultReady();
+    }
+  },
+};
+</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext_add_on.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script xmlns:svg="http://www.w3.org/2000/svg">sagecellEvalName='Evaluate (Sage)';
+</script><link xmlns:svg="http://www.w3.org/2000/svg" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://fonts.googleapis.com/css?family=Inconsolata:400,700&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/pretext.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/pretext_add_on.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/banner_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/toc_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/knowls_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/style_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/colors_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/setcolors.css" rel="stylesheet" type="text/css">
+<!-- 2019-10-12: Temporary - CSS file for experiments with styling --><link xmlns:svg="http://www.w3.org/2000/svg" href="developer.css" rel="stylesheet" type="text/css">
+</head>
+<body id="PCC-ORCCA" class="mathbook-book has-toc has-sidebar-left">
+<a class="assistive" href="#content">Skip to main content</a><div xmlns:svg="http://www.w3.org/2000/svg" id="latex-macros" class="hidden-content" style="display:none">\(\require{cancel}\newcommand{\abs}[1]{\left\lvert#1\right\rvert}
+\newcommand{\point}[2]{\left(#1,#2\right)}
+\newcommand{\highlight}[1]{\definecolor{sapphire}{RGB}{59,90,125} {\color{sapphire}{{#1}}}}
+\newcommand{\firsthighlight}[1]{\definecolor{sapphire}{RGB}{59,90,125} {\color{sapphire}{{#1}}}}
+\newcommand{\secondhighlight}[1]{\definecolor{emerald}{RGB}{20,97,75} {\color{emerald}{{#1}}}}
+\newcommand{\unhighlight}[1]{{\color{black}{{#1}}}}
+\newcommand{\lowlight}[1]{{\color{lightgray}{#1}}}
+\newcommand{\attention}[1]{\mathord{\overset{\downarrow}{#1}}}
+\newcommand{\nextoperation}[1]{\mathord{\boxed{#1}}}
+\newcommand{\substitute}[1]{{\color{blue}{{#1}}}}
+\newcommand{\pinover}[2]{\overset{\overset{\mathrm{\ #2\ }}{|}}{\strut #1 \strut}}
+\newcommand{\addright}[1]{{\color{blue}{{{}+#1}}}}
+\newcommand{\addleft}[1]{{\color{blue}{{#1+{}}}}}
+\newcommand{\subtractright}[1]{{\color{blue}{{{}-#1}}}}
+\newcommand{\multiplyright}[2][\cdot]{{\color{blue}{{{}#1#2}}}}
+\newcommand{\multiplyleft}[2][\cdot]{{\color{blue}{{#2#1{}}}}}
+\newcommand{\divideunder}[2]{\frac{#1}{{\color{blue}{{#2}}}}}
+\newcommand{\divideright}[1]{{\color{blue}{{{}\div#1}}}}
+\newcommand{\negate}[1]{{\color{blue}{{-}}}\left(#1\right)}
+\newcommand{\cancelhighlight}[1]{\definecolor{sapphire}{RGB}{59,90,125}{\color{sapphire}{{\cancel{#1}}}}}
+\newcommand{\secondcancelhighlight}[1]{\definecolor{emerald}{RGB}{20,97,75}{\color{emerald}{{\bcancel{#1}}}}}
+\newcommand{\thirdcancelhighlight}[1]{\definecolor{amethyst}{RGB}{112,72,91}{\color{amethyst}{{\xcancel{#1}}}}}
+\newcommand{\confirm}[1]{\stackrel{\checkmark}{#1}}
+\newcommand{\reject}[1]{\stackrel{\text{no}}{#1}}
+\newcommand{\wonder}[1]{\stackrel{\text{?}}{#1}}
+\newcommand{\apple}{\text{🍎}}
+\newcommand{\banana}{\text{🍌}}
+\newcommand{\pear}{\text{🍐}}
+\newcommand{\cat}{\text{🐱}}
+\newcommand{\dog}{\text{🐶}}
+\newcommand{\lt}{&lt;}
+\newcommand{\gt}{&gt;}
+\newcommand{\amp}{&amp;}
+\)</div>
+<header id="masthead" class="smallbuttons"><div class="banner"><div class="container">
+<a id="logo-link" href="http://www.pcc.edu/ORCCA" target="_blank"><img src="images/ORCCAbrandlogo.png" alt="Logo image"></a><div class="title-container">
+<h1 class="heading"><a href="orcca.html"><span class="title">RVCC Elementary Algebra</span></a></h1>
+<p class="byline">Department of Mathematics and Computer Science</p>
+</div>
+</div></div>
+<nav xmlns:svg="http://www.w3.org/2000/svg" id="primary-navbar" class="navbar"><div class="container">
+<div class="navbar-top-buttons">
+<button class="sidebar-left-toggle-button button active" aria-label="Show or hide table of contents sidebar">Contents</button><div class="tree-nav toolbar toolbar-divisor-3">
+<a class="index-button toolbar-item button" href="index-1.html" title="Index">Index</a><span class="threebuttons"><a id="previousbutton" class="previous-button toolbar-item button" href="chapter-radical-expressions-and-functions.html" title="Previous">Prev</a><a id="upbutton" class="up-button button toolbar-item" href="chapter-radical-expressions-and-functions.html" title="Up">Up</a><a id="nextbutton" class="next-button button toolbar-item" href="backmatter.html" title="Next">Next</a></span>
+</div>
+</div>
+<div class="navbar-bottom-buttons toolbar toolbar-divisor-4">
+<button class="sidebar-left-toggle-button button toolbar-item active">Contents</button><a class="previous-button toolbar-item button" href="chapter-radical-expressions-and-functions.html" title="Previous">Prev</a><a class="up-button button toolbar-item" href="chapter-radical-expressions-and-functions.html" title="Up">Up</a><a class="next-button button toolbar-item" href="backmatter.html" title="Next">Next</a>
+</div>
+</div></nav></header><div class="page">
+<div xmlns:svg="http://www.w3.org/2000/svg" id="sidebar-left" class="sidebar" role="navigation"><div class="sidebar-content">
+<nav id="toc"><ul>
+<li class="link frontmatter">
+<a href="frontmatter.html" data-scroll="JVg"><span class="title">Front Matter</span></a><ul><li><a href="colophon-1.html" data-scroll="colophon-1">Colophon</a></li></ul>
+</li>
+<li class="link part"><a href="part-all-of-the-chapters.html" data-scroll="part-all-of-the-chapters"><span class="codenumber">I</span> <span class="title"></span></a></li>
+<li class="link">
+<a href="chapter-introduction-to-algebra.html" data-scroll="dNX"><span class="codenumber">1</span> <span class="title">Introduction to Algebra</span></a><ul>
+<li><a href="section-real-numbers-and-the-number-line.html" data-scroll="ipv">Real Numbers and the Number Line</a></li>
+<li><a href="section-properties-of-real-numbers.html" data-scroll="tNy">Properties of Real Numbers</a></li>
+<li><a href="section-simplifying-and-writing-algebraic-expressions.html" data-scroll="xRO">Simplifying and Writing Algebraic Expressions</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="chapter-linear-equations-and-inequalities-modified.html" data-scroll="sWV"><span class="codenumber">2</span> <span class="title">Linear Equations and Inequalities</span></a><ul>
+<li><a href="section-introduction-to-equations.html" data-scroll="fwy">Introduction to Equations</a></li>
+<li><a href="section-linear-equations.html" data-scroll="xVO">Linear Equations</a></li>
+<li><a href="section-introduction-to-problem-solving.html" data-scroll="Wul">Introduction to Problem Solving</a></li>
+<li><a href="section-formulas.html" data-scroll="Nnq">Formulas</a></li>
+<li><a href="section-linear-inequalities.html" data-scroll="Nuc">Linear Inequalities</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="chapter-graphing-equations.html" data-scroll="gID"><span class="codenumber">3</span> <span class="title">Graphing Lines</span></a><ul>
+<li><a href="section-introduction-to-graphing.html" data-scroll="YTJ">Introduction to Graphing</a></li>
+<li><a href="section-equations-in-two-variables.html" data-scroll="QXY">Equations in Two Variables</a></li>
+<li><a href="section-intercepts-horizontal-and-vertical-lines.html" data-scroll="ByF">Intercepts: Horizontal and Vertical Lines</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="chapter-systems-of-linear-equations-in-two-variables.html" data-scroll="xGO"><span class="codenumber">4</span> <span class="title">Systems of Linear Equations</span></a><ul>
+<li><a href="section-solving-systems-of-linear-equations-graphically-and-numerically.html" data-scroll="njo">Solving Systems of Linear Equations Graphically and Numerically</a></li>
+<li><a href="section-solving-systems-of-linear-equations-by-substitution.html" data-scroll="zdh">Solving Systems of Linear Equations by Substitution</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="chapter-polynomials-and-exponents-modified.html" data-scroll="onc"><span class="codenumber">5</span> <span class="title">Exponents and Polynomials</span></a><ul>
+<li><a href="section-rules-for-exponents.html" data-scroll="KHJ">Rules for Exponents</a></li>
+<li><a href="section-adding-and-subtracting-polynomials.html" data-scroll="VvN">Addition and Subtraction of Polynomials</a></li>
+<li><a href="section-multiplication-of-polynomials.html" data-scroll="IcY">Multiplication of Polynomials</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="chapter-radical-expressions-and-equations.html" data-scroll="chapter-radical-expressions-and-equations"><span class="codenumber">6</span> <span class="title">Radical Expressions and Equations</span></a><ul>
+<li><a href="section-introduction-to-factoring.html" data-scroll="duD">Introduction to Factoring</a></li>
+<li><a href="section-factoring-trinomials.html" data-scroll="Mrf">Factoring Trinomials</a></li>
+<li><a href="section-solving-equations-by-factoring.html" data-scroll="DXi">Solving Equations by Factoring 1 (Quadratics)</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="chapter-rational-expressions.html" data-scroll="RzF"><span class="codenumber">7</span> <span class="title">Rational Expressions</span></a><ul>
+<li><a href="section-introduction-to-rational-expressions.html" data-scroll="Moo">Introduction to Rational Expressions</a></li>
+<li><a href="section-multiplication-and-division-of-rational-expressions.html" data-scroll="Vps">Multiplication and Division of Rational Expressions</a></li>
+<li><a href="section-addition-and-subtraction-with-like-denominators.html" data-scroll="KBw">Addition and Subtraction of Rational Expressions with Like Denominators</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="chapter-radical-expressions-and-functions.html" data-scroll="chapter-radical-expressions-and-functions"><span class="codenumber">8</span> <span class="title">Quantities in the Physical World</span></a><ul><li><a href="section-radical-expressions-and-functions.html" data-scroll="GAK" class="active">Radical Expressions and Functions</a></li></ul>
+</li>
+<li class="link backmatter"><a href="backmatter.html" data-scroll="jDj"><span class="title">Appendices</span></a></li>
+<li class="link">
+<a href="appendix-basic-math-review.html" data-scroll="appendix-basic-math-review"><span class="codenumber">A</span> <span class="title">Basic Math Review</span></a><ul>
+<li><a href="section-arithmetic-with-negative-numbers.html" data-scroll="qBB">Arithmetic with Negative Numbers</a></li>
+<li><a href="section-fractions-and-fraction-arithmetic.html" data-scroll="VAa">Fractions and Fraction Arithmetic</a></li>
+<li><a href="section-absolute-value-and-square-root.html" data-scroll="GAK">Absolute Value and Square Root</a></li>
+<li><a href="section-percentages.html" data-scroll="Chi">Percentages</a></li>
+<li><a href="section-order-of-operations.html" data-scroll="aog">Order of Operations</a></li>
+<li><a href="section-set-notation-and-types-of-numbers.html" data-scroll="Fdo">Set Notation and Types of Numbers</a></li>
+</ul>
+</li>
+<li class="link"><a href="appendix-unit-conversions.html" data-scroll="appendix-unit-conversions"><span class="codenumber">B</span> <span class="title">Unit Conversions</span></a></li>
+<li class="link"><a href="index-1.html" data-scroll="index-1"><span class="title">Index</span></a></li>
+</ul></nav><div class="extras"><nav><a class="mathbook-link" href="https://pretextbook.org">Authored in PreTeXt</a><a href="https://www.mathjax.org"><img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" alt="Powered by MathJax"></a></nav></div>
+</div></div>
+<main class="main"><div id="content" class="pretext-content"><section xmlns:svg="http://www.w3.org/2000/svg" class="section" id="GAK"><h2 class="heading hide-type">
+<span class="type">Section</span> <span class="codenumber">8.1</span> <span class="title">Radical Expressions and Functions</span>
+</h2>
+<section class="introduction" id="hXs"><p id="pQm">In this section, we learn what expressions like \(\sqrt{25}\) and \(\sqrt[3]{27}\) mean, and some of the properties they have that allow for simplification.</p></section><section class="subsection" id="subsection-68"><h3 class="heading hide-type">
+<span class="type">Subsection</span> <span class="codenumber">8.1.1</span> <span class="title">Square Roots</span>
+</h3>
+<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;">
+<div class="sbspanel top" style="width:47%;">
+<p id="p-1321">Consider the non-negative number \(25\text{.}\) You can ask the question “what number multiplies by itself to make \(25\text{?}\)” We use the symbol \(\sqrt{25}\) to represent the answer to this question, whether or not you know the “answer”.</p>
+<p id="p-1322">A geometric visualization of the same idea is to imagine a square with \(25\) units of area inside it. What would a side length have to be? We use \(\sqrt{25}\) to represent that side length.</p>
+</div>
+<div class="sbspanel top" style="width:47%;">
+<img src="images/image-108.svg" role="img" class="contained" alt=""><div class="image-archive">
+<a href="images/image-108.eps">eps</a><a href="images/image-108.pdf">pdf</a><a href="images/image-108.png">png</a><a href="images/image-108.svg">svg</a><a href="images/image-108.tex">tex</a>
+</div>
+</div>
+</div></div>
+<article class="definition definition-like" id="VJa"><h6 class="heading">
+<span class="type">Definition</span><span class="space"> </span><span class="codenumber">8.1.1</span><span class="period">.</span><span class="space"> </span><span class="title">Square Root.</span>
+</h6>
+<p id="DjX">Given a non-negative number \(x\text{,}\) if \(r\cdot r=x\) for some positive number \(r\text{,}\) then \(r\) is called the <dfn class="terminology">square root</dfn>  of \(x\text{,}\) and we can write \(\sqrt{x}\) instead of \(r\text{.}\) The \(\sqrt{\phantom{x}}\) symbol is called the <dfn class="terminology">radical</dfn>  or the <dfn class="terminology">root</dfn>.  We call expressions with the \(\sqrt{\phantom{x}}\) symbol <dfn class="terminology">radical expressions</dfn>. The number inside the radical is called the <dfn class="terminology">radicand</dfn>. </p></article><p id="p-1324">For example, if you are confronted with the expression \(\sqrt{16}\text{,}\) you should think about the equation \(r\cdot r=16\) (or if you prefer, \(r^2=16\)) and ask yourself if you know a positive value for \(r\) that solves that equation. Of course, \(4\) is a non-negative solution. So we an say \(\sqrt{16}=4\text{.}\)</p>
+<p id="p-1325">To demonstrate more of the vocabulary, both \(\sqrt{2}\) and \(3\sqrt{2}\) are radical expressions. In both expressions, the number \(2\) is the radicand.</p>
+<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;">
+<div class="sbspanel top" style="width:69%;"><p id="dBU">The word “radical” means something like “on the fringes” when used in politics, sports, and other places. It actually has that same meaning in math, when you consider a square with area \(A\) as in <a class="xref" data-knowl="./knowl/figure-radical.html" title="Figure 8.1.2">Figure 8.1.2</a>.</p></div>
+<div class="sbspanel top" style="width:25%;"><figure class="figure figure-like" id="JJd"><img src="images/image-109.svg" role="img" class="contained" alt="A drawing of a square labeled with area A; the side lengths are labeled the square root of A"><div class="image-archive">
+<a href="images/image-109.eps">eps</a><a href="images/image-109.pdf">pdf</a><a href="images/image-109.png">png</a><a href="images/image-109.svg">svg</a><a href="images/image-109.tex">tex</a>
+</div>
+<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">8.1.2<span class="period">.</span></span><span class="space"> </span>“Radical” means “off to the side.”</figcaption></figure></div>
+</div></div>
+<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;">
+<div class="sbspanel bottom" style="width:47%;">
+<p id="p-1327">The one-digit multiplication times table has special numbers along the diagonal. They are known as <dfn class="terminology">perfect squares</dfn>.  And for working with square roots, it will be helpful if you can memorize these first few perfect square numbers. For example, the times table tells us that \(7\cdot7=49\text{.}\) Just knowing that fact from memory lets us know that \(\sqrt{49}=7\text{.}\) It's advisable to memorize the following:</p>
+<table class="tabular" id="hvx">
+<tr>
+<td class="c m b0 r0 l0 t0 lines">\(\sqrt{0}=0\)</td>
+<td class="c m b0 r0 l0 t0 lines">\(\sqrt{1}=1\)</td>
+<td class="c m b0 r0 l0 t0 lines">\(\sqrt{4}=2\)</td>
+</tr>
+<tr>
+<td class="c m b0 r0 l0 t0 lines">\(\sqrt{9}=3\)</td>
+<td class="c m b0 r0 l0 t0 lines">\(\sqrt{16}=4\)</td>
+<td class="c m b0 r0 l0 t0 lines">\(\sqrt{25}=5\)</td>
+</tr>
+<tr>
+<td class="c m b0 r0 l0 t0 lines">\(\sqrt{36}=6\)</td>
+<td class="c m b0 r0 l0 t0 lines">\(\sqrt{49}=7\)</td>
+<td class="c m b0 r0 l0 t0 lines">\(\sqrt{64}=8\)</td>
+</tr>
+<tr>
+<td class="c m b0 r0 l0 t0 lines">\(\sqrt{81}=9\)</td>
+<td class="c m b0 r0 l0 t0 lines">\(\sqrt{100}=10\)</td>
+<td class="c m b0 r0 l0 t0 lines">\(\sqrt{121}=11\)</td>
+</tr>
+<tr>
+<td class="c m b0 r0 l0 t0 lines">\(\sqrt{144}=12\)</td>
+<td class="c m b0 r0 l0 t0 lines">\(\sqrt{225}=15\)</td>
+<td class="c m b0 r0 l0 t0 lines">\(\sqrt{256}=16\)</td>
+</tr>
+</table>
+</div>
+<div class="sbspanel bottom" style="width:47%;"><figure class="figure figure-like" id="NCG"><table class="tabular" id="tJP">
+<tr>
+<td class="c m b2 r2 l3 t3 lines">\(\times\)</td>
+<td class="c m b2 r1 l0 t3 lines">\(1\)</td>
+<td class="c m b2 r1 l0 t3 lines">\(2\)</td>
+<td class="c m b2 r1 l0 t3 lines">\(3\)</td>
+<td class="c m b2 r1 l0 t3 lines">\(4\)</td>
+<td class="c m b2 r1 l0 t3 lines">\(5\)</td>
+<td class="c m b2 r1 l0 t3 lines">\(6\)</td>
+<td class="c m b2 r1 l0 t3 lines">\(7\)</td>
+<td class="c m b2 r1 l0 t3 lines">\(8\)</td>
+<td class="c m b2 r3 l0 t3 lines">\(9\)</td>
+</tr>
+<tr>
+<td class="c m b1 r2 l3 t0 lines">\(1\)</td>
+<td class="c m b1 r1 l0 t0 lines">\(1\)</td>
+<td class="c m b1 r1 l0 t0 lines">\(\lowlight{2}\)</td>
+<td class="c m b1 r1 l0 t0 lines">\(\lowlight{3}\)</td>
+<td class="c m b1 r1 l0 t0 lines">\(\lowlight{4}\)</td>
+<td class="c m b1 r1 l0 t0 lines">\(\lowlight{5}\)</td>
+<td class="c m b1 r1 l0 t0 lines">\(\lowlight{6}\)</td>
+<td class="c m b1 r1 l0 t0 lines">\(\lowlight{7}\)</td>
+<td class="c m b1 r1 l0 t0 lines">\(\lowlight{8}\)</td>
+<td class="c m b1 r3 l0 t0 lines">\(\lowlight{9}\)</td>
+</tr>
+<tr>
+<td class="c m b1 r2 l3 t0 lines">\(2\)</td>
+<td class="c m b1 r1 l0 t0 lines">\(\lowlight{2}\)</td>
+<td class="c m b1 r1 l0 t0 lines">\(4\)</td>
+<td class="c m b1 r1 l0 t0 lines">\(\lowlight{6}\)</td>
+<td class="c m b1 r1 l0 t0 lines">\(\lowlight{8}\)</td>
+<td class="c m b1 r1 l0 t0 lines">\(\lowlight{10}\)</td>
+<td class="c m b1 r1 l0 t0 lines">\(\lowlight{12}\)</td>
+<td class="c m b1 r1 l0 t0 lines">\(\lowlight{14}\)</td>
+<td class="c m b1 r1 l0 t0 lines">\(\lowlight{16}\)</td>
+<td class="c m b1 r3 l0 t0 lines">\(\lowlight{18}\)</td>
+</tr>
+<tr>
+<td class="c m b1 r2 l3 t0 lines">\(3\)</td>
+<td class="c m b1 r1 l0 t0 lines">\(\lowlight{3}\)</td>
+<td class="c m b1 r1 l0 t0 lines">\(\lowlight{6}\)</td>
+<td class="c m b1 r1 l0 t0 lines">\(9\)</td>
+<td class="c m b1 r1 l0 t0 lines">\(\lowlight{12}\)</td>
+<td class="c m b1 r1 l0 t0 lines">\(\lowlight{15}\)</td>
+<td class="c m b1 r1 l0 t0 lines">\(\lowlight{18}\)</td>
+<td class="c m b1 r1 l0 t0 lines">\(\lowlight{21}\)</td>
+<td class="c m b1 r1 l0 t0 lines">\(\lowlight{24}\)</td>
+<td class="c m b1 r3 l0 t0 lines">\(\lowlight{27}\)</td>
+</tr>
+<tr>
+<td class="c m b1 r2 l3 t0 lines">\(4\)</td>
+<td class="c m b1 r1 l0 t0 lines">\(\lowlight{4}\)</td>
+<td class="c m b1 r1 l0 t0 lines">\(\lowlight{8}\)</td>
+<td class="c m b1 r1 l0 t0 lines">\(\lowlight{12}\)</td>
+<td class="c m b1 r1 l0 t0 lines">\(16\)</td>
+<td class="c m b1 r1 l0 t0 lines">\(\lowlight{20}\)</td>
+<td class="c m b1 r1 l0 t0 lines">\(\lowlight{24}\)</td>
+<td class="c m b1 r1 l0 t0 lines">\(\lowlight{28}\)</td>
+<td class="c m b1 r1 l0 t0 lines">\(\lowlight{32}\)</td>
+<td class="c m b1 r3 l0 t0 lines">\(\lowlight{36}\)</td>
+</tr>
+<tr>
+<td class="c m b1 r2 l3 t0 lines">\(5\)</td>
+<td class="c m b1 r1 l0 t0 lines">\(\lowlight{5}\)</td>
+<td class="c m b1 r1 l0 t0 lines">\(\lowlight{10}\)</td>
+<td class="c m b1 r1 l0 t0 lines">\(\lowlight{15}\)</td>
+<td class="c m b1 r1 l0 t0 lines">\(\lowlight{20}\)</td>
+<td class="c m b1 r1 l0 t0 lines">\(25\)</td>
+<td class="c m b1 r1 l0 t0 lines">\(\lowlight{30}\)</td>
+<td class="c m b1 r1 l0 t0 lines">\(\lowlight{35}\)</td>
+<td class="c m b1 r1 l0 t0 lines">\(\lowlight{40}\)</td>
+<td class="c m b1 r3 l0 t0 lines">\(\lowlight{45}\)</td>
+</tr>
+<tr>
+<td class="c m b1 r2 l3 t0 lines">\(6\)</td>
+<td class="c m b1 r1 l0 t0 lines">\(\lowlight{6}\)</td>
+<td class="c m b1 r1 l0 t0 lines">\(\lowlight{12}\)</td>
+<td class="c m b1 r1 l0 t0 lines">\(\lowlight{18}\)</td>
+<td class="c m b1 r1 l0 t0 lines">\(\lowlight{24}\)</td>
+<td class="c m b1 r1 l0 t0 lines">\(\lowlight{30}\)</td>
+<td class="c m b1 r1 l0 t0 lines">\(36\)</td>
+<td class="c m b1 r1 l0 t0 lines">\(\lowlight{42}\)</td>
+<td class="c m b1 r1 l0 t0 lines">\(\lowlight{48}\)</td>
+<td class="c m b1 r3 l0 t0 lines">\(\lowlight{54}\)</td>
+</tr>
+<tr>
+<td class="c m b1 r2 l3 t0 lines">\(7\)</td>
+<td class="c m b1 r1 l0 t0 lines">\(\lowlight{7}\)</td>
+<td class="c m b1 r1 l0 t0 lines">\(\lowlight{14}\)</td>
+<td class="c m b1 r1 l0 t0 lines">\(\lowlight{21}\)</td>
+<td class="c m b1 r1 l0 t0 lines">\(\lowlight{28}\)</td>
+<td class="c m b1 r1 l0 t0 lines">\(\lowlight{35}\)</td>
+<td class="c m b1 r1 l0 t0 lines">\(\lowlight{42}\)</td>
+<td class="c m b1 r1 l0 t0 lines">\(49\)</td>
+<td class="c m b1 r1 l0 t0 lines">\(\lowlight{56}\)</td>
+<td class="c m b1 r3 l0 t0 lines">\(\lowlight{63}\)</td>
+</tr>
+<tr>
+<td class="c m b1 r2 l3 t0 lines">\(8\)</td>
+<td class="c m b1 r1 l0 t0 lines">\(\lowlight{8}\)</td>
+<td class="c m b1 r1 l0 t0 lines">\(\lowlight{16}\)</td>
+<td class="c m b1 r1 l0 t0 lines">\(\lowlight{24}\)</td>
+<td class="c m b1 r1 l0 t0 lines">\(\lowlight{32}\)</td>
+<td class="c m b1 r1 l0 t0 lines">\(\lowlight{40}\)</td>
+<td class="c m b1 r1 l0 t0 lines">\(\lowlight{48}\)</td>
+<td class="c m b1 r1 l0 t0 lines">\(\lowlight{56}\)</td>
+<td class="c m b1 r1 l0 t0 lines">\(64\)</td>
+<td class="c m b1 r3 l0 t0 lines">\(\lowlight{72}\)</td>
+</tr>
+<tr>
+<td class="c m b3 r2 l3 t0 lines">\(9\)</td>
+<td class="c m b3 r1 l0 t0 lines">\(\lowlight{9}\)</td>
+<td class="c m b3 r1 l0 t0 lines">\(\lowlight{18}\)</td>
+<td class="c m b3 r1 l0 t0 lines">\(\lowlight{27}\)</td>
+<td class="c m b3 r1 l0 t0 lines">\(\lowlight{36}\)</td>
+<td class="c m b3 r1 l0 t0 lines">\(\lowlight{45}\)</td>
+<td class="c m b3 r1 l0 t0 lines">\(\lowlight{54}\)</td>
+<td class="c m b3 r1 l0 t0 lines">\(\lowlight{63}\)</td>
+<td class="c m b3 r1 l0 t0 lines">\(\lowlight{72}\)</td>
+<td class="c m b3 r3 l0 t0 lines">\(81\)</td>
+</tr>
+</table>
+<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">8.1.3<span class="period">.</span></span><span class="space"> </span>Multiplication table with squares</figcaption></figure></div>
+</div></div></section><section class="subsection" id="yWl"><h3 class="heading hide-type">
+<span class="type">Subsection</span> <span class="codenumber">8.1.2</span> <span class="title">Square Root Decimal Values</span>
+</h3>
+<p id="kqd">Most square roots have decimal places that go on forever. Take \(\sqrt{5}\) as an example. The number \(5\) is between two perfect squares, \(4\) and \(9\text{.}\) Therefore, as demonstrated in <a class="xref" data-knowl="./knowl/figure-compare-square-roots.html" title="Figure 8.1.4">Figure 8.1.4</a>, \(\sqrt{4}\lt\sqrt{5}\lt\sqrt{9}\text{.}\) In other words,</p>
+<div class="displaymath">
+\begin{equation*}
+2\lt\sqrt{5}\lt3
+\end{equation*}
+</div>
+<p class="continuation">So \(\sqrt{5}\) has a decimal value somewhere between \(2\) and \(3\text{.}\)</p>
+<figure class="figure figure-like" id="figure-compare-square-roots"><div class="image-box" style="width: 100%; margin-left: 0%; margin-right: 0%;">
+<img src="images/image-110.svg" role="img" class="contained" alt=""><div class="image-archive">
+<a href="images/image-110.eps">eps</a><a href="images/image-110.pdf">pdf</a><a href="images/image-110.png">png</a><a href="images/image-110.svg">svg</a><a href="images/image-110.tex">tex</a>
+</div>
+</div>
+<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">8.1.4<span class="period">.</span></span><span class="space"> </span>\(2\lt\sqrt{5}\lt3\)</figcaption></figure><p id="Qxm">With a calculator, we can see:</p>
+<div class="displaymath">
+\begin{equation*}
+\sqrt{5}\approx2.236
+\end{equation*}
+</div>
+<p class="continuation">Actually the decimal will not terminate, and that is why we used the \(\approx\) symbol instead of an equals sign. To get \(2.236\) we rounded down slightly from the true value of \(\sqrt{5}\text{.}\) With a calculator, we can check that \(2.236^2=4.999696\text{,}\) a little shy of \(5\text{.}\)</p>
+<p id="rFz">When the radicand is a perfect square, its square root is a rational number. If the radicand is not a perfect square, the square root is irrational. (It has a decimal that goes on forever without any pattern that is easy to see.) We want to be able to estimate square roots without using a calculator.</p>
+<article class="example example-like" id="example-179"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-example-179"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">8.1.5</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-example-179"><article class="example example-like"><p id="p-1331">To estimate \(\sqrt{10}\) without a calculator, we can find the nearest perfect squares that are whole numbers on either side of \(10\text{.}\) Recall that the perfect squares are \(1, 4, 9, 16, 25, 36, 49, 64,\dots\) The perfect square that is just below \(10\) is \(9\) and the perfect square just above \(10\) is \(16\text{.}\)</p>
+<div class="sidebyside"><div class="sbsrow" style="margin-left:26.5%;margin-right:26.5%;"><div class="sbspanel top" style="width:100%;">
+<img src="images/image-111.svg" role="img" class="contained" alt=""><div class="image-archive">
+<a href="images/image-111.eps">eps</a><a href="images/image-111.pdf">pdf</a><a href="images/image-111.png">png</a><a href="images/image-111.svg">svg</a><a href="images/image-111.tex">tex</a>
+</div>
+</div></div></div>
+<p id="p-1332">This tells us that \(\sqrt{10}\) is between \(\sqrt{9}\) and \(\sqrt{16}\text{,}\) or between \(3\) and \(4\text{.}\) We can also say that \(\sqrt{10}\) is much closer to \(3\) than \(4\) because \(10\) is closer to \(9\text{,}\) so we think \(3.1\) or \(3.2\) would be a good estimate.</p>
+<p id="p-1333">To check our estimates (\(3.1\) or \(3.2\)) we can square them and see if the result is close to \(10\text{.}\) We find \(3.1^2=9.61\) and \(3.2^2=10.24\text{,}\) so our estimates are pretty good.</p></article></div>
+<article class="exercise exercise-like" id="wib"><a data-knowl="" class="id-ref exercise-knowl original" data-refid="hk-wib"><h6 class="heading">
+<span class="type">Checkpoint</span><span class="space"> </span><span class="codenumber">8.1.6</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-wib"><article class="exercise exercise-like"><p id="p-1334">The WeBWorK problem with ID “webwork-65” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article></div></section><section class="subsection" id="Jaa"><h3 class="heading hide-type">
+<span class="type">Subsection</span> <span class="codenumber">8.1.3</span> <span class="title">Cube Root and Higher Order Roots</span>
+</h3>
+<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;">
+<div class="sbspanel top" style="width:47%;">
+<p id="p-1335">The concept behind a square root easily extends to a <dfn class="terminology">cube root</dfn>. What if we have a number in mind, like \(64\text{,}\) and we would like to know what number can be multiplied with itself <em class="emphasis">three</em> times to make \(64\text{?}\)</p>
+<p id="p-1336">A geometric visualization of the same idea is to imagine a cube with \(64\) units of area inside it. What would an edge length have to be? We use \(\sqrt[3]{64}\) to represent that edge length.</p>
+</div>
+<div class="sbspanel top" style="width:47%;">
+<img src="images/image-112.svg" role="img" class="contained" alt=""><div class="image-archive">
+<a href="images/image-112.eps">eps</a><a href="images/image-112.pdf">pdf</a><a href="images/image-112.png">png</a><a href="images/image-112.svg">svg</a><a href="images/image-112.tex">tex</a>
+</div>
+</div>
+</div></div>
+<article class="definition definition-like" id="definition-nth-root"><h6 class="heading">
+<span class="type">Definition</span><span class="space"> </span><span class="codenumber">8.1.7</span><span class="period">.</span><span class="space"> </span><span class="title">\(n\)th Root.</span>
+</h6>
+<p id="p-1337">Given a number \(x\text{,}\) if \(\overbrace{r\cdot r\cdot \cdots \cdot r}^{n\text{ times}}=x\) for some number \(r\text{,}\) then \(r\) is called an <dfn class="terminology">\(n\)th root</dfn>  of \(x\text{.}\) (Or if you prefer, when \(r^n=x\text{.}\))</p>
+<ul class="disc">
+<li id="li-260"><p id="p-1338">When \(n\) is odd, there is always exactly one real number \(n\)th root for any \(x\text{,}\) and we write \(\sqrt[n]{x}\) to mean that one \(n\)th root.</p></li>
+<li id="li-261"><p id="p-1339">When \(n\) is even and \(x\) is positive, there are two real number \(n\)th roots, one of which is positive and the other of which is negative. We write \(\sqrt[n]{x}\) to mean the positive \(n\)th root.</p></li>
+<li id="li-262"><p id="p-1340">When \(n\) is even and \(x\) is negative, there aren't any real number \(n\)th roots, and we say that \(\sqrt[n]{x}\) is “not a real number”.</p></li>
+</ul>
+<p id="p-1341">The \(\sqrt[n]{\phantom{x}}\) symbol is called the <dfn class="terminology">\(n\)th radical</dfn>  or the <dfn class="terminology">\(n\)th root</dfn>.  We call expressions with the \(\sqrt[n]{\phantom{x}}\) symbol <dfn class="terminology">radical expressions</dfn>. The number inside the radical is called the <dfn class="terminology">radicand</dfn>.  The <dfn class="terminology">index</dfn>  of a radical is the number \(n\) in \(\sqrt[n]{\phantom{x}}\text{.}\)</p></article><p id="p-1342">As noted earlier, when we have \(\sqrt[3]{\phantom{x}}\text{,}\) we can say “cube root” instead of “\(3\)rd root”. Also, when we have \(\sqrt[2]{\phantom{x}}\text{,}\) we can say “square root” instead of “\(2\)nd root” and we can simply write \(\sqrt{x}\) instead.</p>
+<p id="p-1343">For some examples of \(n\)th roots:</p>
+<ul class="disc">
+<li id="li-263"><p id="p-1344">\(\sqrt[3]{8}=2\text{,}\) because \(\overbrace{2\cdot2\cdot2}^{\text{3 instances}}=8\text{.}\)</p></li>
+<li id="li-264"><p id="p-1345">\(\sqrt[4]{81}=3\text{,}\) because \(\overbrace{3\cdot3\cdot3\cdot3}^{\text{4 instances}}=81\text{.}\)</p></li>
+<li id="li-265"><p id="p-1346">\(\sqrt[5]{-32}=-2\text{,}\) because \(\overbrace{(-2)\cdot(-2)\cdot(-2)\cdot(-2)\cdot(-2)}^{\text{5 instances}}=-32\text{.}\)</p></li>
+</ul>
+<p id="p-1347">As with square roots, in general an \(n\)th root's decimal value is a decimal that goes on forever. For example, \(\sqrt[3]{20}\approx2.714\ldots\text{.}\) For practical applications, we may want to use a calculator to find a decimal approximation to an \(n\)th root. Some calculators will do this for you directly, and some will not.</p>
+<ul class="disc">
+<li id="li-266"><p id="p-1348">Maybe your calculator has a button that looks like \(\sqrt[x]{y}\text{.}\) Then you should be able to type something like <code class="code-inline tex2jax_ignore">3 </code>\(\sqrt[x]{y}\)<code class="code-inline tex2jax_ignore"> 20</code> to get \(\sqrt[3]{20}\approx2.714\ldots\text{.}\)</p></li>
+<li id="li-267"><p id="p-1349">Maybe your calculator has a button that looks like \(\sqrt[n]{\phantom{y}}\text{.}\) Then you should be able to type something like <code class="code-inline tex2jax_ignore">3 </code>\(\sqrt[n]{\phantom{y}}\)<code class="code-inline tex2jax_ignore"> 20</code> to get \(\sqrt[3]{20}\approx2.714\ldots\text{.}\)</p></li>
+<li id="li-268"><p id="p-1350">Maybe your calculator allows you to type letters, parentheses, and commas, and you can type <code class="code-inline tex2jax_ignore">root(3,20)</code> to get \(\sqrt[3]{20}\approx2.714\ldots\text{.}\)</p></li>
+<li id="li-269"><p id="p-1351">Maybe your calculator allows you to type letters, parentheses, and commas, but the syntax for an \(n\)th root is reversed from the last example, and you can type <code class="code-inline tex2jax_ignore">root(20,3)</code> to get \(\sqrt[3]{20}\approx2.714\ldots\text{.}\)</p></li>
+<li id="li-270"><p id="p-1352">If your calculator has none of the above options, then you should be able to type <code class="code-inline tex2jax_ignore">20^(1/3)</code> as a way to get \(\sqrt[3]{20}\approx2.714\ldots\text{.}\) This is technically using mathematics we will learn in <code class="code-inline tex2jax_ignore">[cross-reference to target(s) "section-radical-expressions-and-rational-exponents" missing or not unique]</code>.</p></li>
+</ul>
+<p class="continuation">Try using your own calculator to calculate \(\sqrt[3]{20}\) so that you can become familiar with whatever method it uses.</p>
+<article class="example example-like" id="example-180"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-example-180"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">8.1.8</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-example-180"><article class="example example-like"><div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;">
+<div class="sbspanel top" style="width:70%;"><p id="p-1353">A pyramid has a square base, and its height is equal to one side length of the square at its base. In this situation, the volume \(V\) of the pyramid, in <span class="quantity">in<sup>3</sup></span>, is given by \(V=\frac{1}{3}s^3\text{,}\) where \(s\) is the pyramid's base side length in <span class="quantity">in</span>. Archimedes dropped the pyramid in a bathtub, and judging by how high the water level rose, the volume of the pyramid is <span class="quantity">243 in<sup>3</sup></span> (a little more than <span class="quantity">1 gal</span>). How tall is the pyramid?</p></div>
+<div class="sbspanel top" style="width:24%;">
+<img src="images/image-113.svg" role="img" class="contained" alt=""><div class="image-archive">
+<a href="images/image-113.eps">eps</a><a href="images/image-113.pdf">pdf</a><a href="images/image-113.png">png</a><a href="images/image-113.svg">svg</a><a href="images/image-113.tex">tex</a>
+</div>
+</div>
+</div></div>
+<p id="p-1354">The equation tells us that:</p>
+<div class="displaymath">
+\begin{equation*}
+243=\frac{1}{3}s^3
+\end{equation*}
+</div>
+<p class="continuation">We can multiply on both sides by \(3\) and:</p>
+<div class="displaymath">
+\begin{equation*}
+729=s^3
+\end{equation*}
+</div>
+<p class="continuation">This means that \(s\) is \(\sqrt[3]{729}\text{.}\) A calculator tells us that this is \(9\text{.}\) So the pyramid's height is \(9\) inches.</p></article></div></section><section class="subsection" id="LkD"><h3 class="heading hide-type">
+<span class="type">Subsection</span> <span class="codenumber">8.1.4</span> <span class="title">Roots of Negative Numbers</span>
+</h3>
+<p id="cLE">Can we find the square root of a negative number, such as \(\sqrt{-64}\text{?}\) How about its cube root, \(\sqrt[3]{-64}\text{?}\)</p>
+<p id="p-1356">As noted in <a class="xref" data-knowl="./knowl/definition-nth-root.html" title="Definition 8.1.7: \(n\)th Root">Defintion 8.1.7</a>, when the index of an \(n\)th root is odd, there will always be a real number \(n\)th root even when the radicand is negative. For example, \(\sqrt[3]{-64}\) is \(-4\text{,}\) because \((-4)(-4)(-4)=-64\text{.}\)</p>
+<p id="p-1357">When the index of an \(n\)th root is even, it is a problem to have a negative radicand. For example, to find \(\sqrt{-64}\text{,}\) you would need to find a value \(r\) so that \(r\cdot r=-64\text{.}\) But whether \(r\) is positive or negative, multiplying it by itself will give a positive result. It could never be \(-64\text{.}\) So there is no way to have a real number square root of a negative number. And the same thing is true for <em class="emphasis">any</em> even index \(n\)th root with a negative radicand, such as \(\sqrt[4]{-64}\text{.}\) An even-indexed root of a negative number is not a real number.</p>
+<aside class="aside aside-like" id="gSH"><h6 class="heading"><span class="title">Imaginary Numbers.</span></h6>
+<p id="CtH">Mathematicians imagined a new type of number, neither positive nor negative, that would multiply by itself to make a negative result. But that is beyond the scope of this section.</p></aside><p id="ISN">If you are confronted with an expression like \(\sqrt{-25}\) or \(\sqrt[4]{-16}\) (any square root or even-indexed root of a negative number), you can state that the expression “is not real” or that it is “not defined” (as a real number). Don't get carried away though. Expressions like \(\sqrt[3]{-27}\) and \(\sqrt[5]{-1}\) <em class="emphasis">are</em> defined, because the index is odd.</p></section><section class="subsection" id="subsection-72"><h3 class="heading hide-type">
+<span class="type">Subsection</span> <span class="codenumber">8.1.5</span> <span class="title">Radical Rules and Exponent Rules</span>
+</h3>
+<p id="p-1360">In an earlier chapter, we learned some algebra rules for exponents. A summary of these rules is in <code class="code-inline tex2jax_ignore">[cross-reference to target(s) "list-exponent-rules" missing or not unique]</code>. There are a couple of very similar rules for radicals, presented here without motivation. (These rules are easier to explain once we study <code class="code-inline tex2jax_ignore">[cross-reference to target(s) "section-radical-expressions-and-rational-exponents" missing or not unique]</code>.)</p>
+<figure class="list table-like" id="list-radical-rules"><figcaption><span class="type">List</span><span class="space"> </span><span class="codenumber">8.1.9<span class="period">.</span></span><span class="space"> </span>Rules of Radicals for Multiplication and Division</figcaption><div class="named-list-content">
+<div class="introduction" id="introduction-33"><p id="p-1361">If \(a\) and \(b\) are positive real numbers, and \(m\) is a positive <a class="xref" data-knowl="./knowl/item-integer-definition.html" title="Item: Integers">integer</a>, then we have the following rules:</p></div>
+<dl class="description-list">
+<dt id="item-radical-rules-product">Root of a Product Rule</dt>
+<dd><p id="p-1362">\(\displaystyle \sqrt[m]{a\cdot b} = \sqrt[m]{a} \cdot \sqrt[m]{b}\)</p></dd>
+<dt id="item-radical-rules-quotient">Root of a Quotient Rule</dt>
+<dd><p id="p-1363">\(\sqrt[m]{\frac{a}{b}} = \frac{\sqrt[m]{a}}{\sqrt[m]{b}}\) as long as \(b \neq 0\)</p></dd>
+</dl>
+</div></figure><p id="p-1364">Knowing these algebra rules helps to make complicated radical expressions look simpler.</p>
+<article class="example example-like" id="example-181"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-example-181"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">8.1.10</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-example-181"><article class="example example-like"><p id="p-1365">Simplify \(\sqrt{18}\text{.}\) Anything we can do to make the radicand a smaller simpler number is helpful. Note that \(18=9\cdot2\text{,}\) so we can write</p>
+<div class="displaymath">
+\begin{align*}
+\sqrt{18}\amp=\sqrt{9\cdot 2}\\
+\amp=\sqrt{9}\cdot\sqrt{2}\amp\amp\text{according to the }\knowl{./knowl/item-radical-rules-product.html}{\text{Root of a Product Rule}}\\
+\amp=3\sqrt{2}
+\end{align*}
+</div>
+<p class="continuation">This expression \(3\sqrt{2}\) is considered “simpler” than \(\sqrt{18}\) because the radicand is so much smaller.</p></article></div>
+<article class="exercise exercise-like" id="exercise-130"><a data-knowl="" class="id-ref exercise-knowl original" data-refid="hk-exercise-130"><h6 class="heading">
+<span class="type">Checkpoint</span><span class="space"> </span><span class="codenumber">8.1.11</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-exercise-130"><article class="exercise exercise-like"><p id="p-1366">The WeBWorK problem with ID “webwork-66” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article></div>
+<article class="example example-like" id="example-182"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-example-182"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">8.1.12</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-example-182"><article class="example example-like"><p id="p-1367">Simplify \(\sqrt[3]{80}\text{.}\) Anything we can do to make the radicand a smaller simpler number is helpful. With lessons learned from the previous examples, maybe there is a way to rewrite \(80\) as the product of two numbers in a helpful way. Since we have a <em class="emphasis">cube</em> root, writing \(80\) as a product of a perfect <em class="emphasis">cube</em> would be helpful. We can write \(80=8\cdot10\text{,}\) where \(8\) is a perfect cube.</p>
+<div class="displaymath">
+\begin{align*}
+\sqrt[3]{80}\amp=\sqrt[3]{8\cdot 10}\\
+\amp=\sqrt[3]{8}\cdot\sqrt[3]{10}\amp\amp\text{according to the }\knowl{./knowl/item-radical-rules-product.html}{\text{Root of a Product Rule}}\\
+\amp=2\sqrt[3]{10}
+\end{align*}
+</div>
+<p class="continuation">This expression \(2\sqrt[3]{10}\) is considered “simpler” than \(\sqrt[3]{80}\) because the radicand is so much smaller.</p></article></div>
+<article class="exercise exercise-like" id="exercise-131"><a data-knowl="" class="id-ref exercise-knowl original" data-refid="hk-exercise-131"><h6 class="heading">
+<span class="type">Checkpoint</span><span class="space"> </span><span class="codenumber">8.1.13</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-exercise-131"><article class="exercise exercise-like"><p id="p-1368">The WeBWorK problem with ID “webwork-67” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article></div>
+<p id="p-1369">When a radical is applied to a fraction, the <a class="xref" data-knowl="./knowl/item-radical-rules-quotient.html" title="Item: Root of a Quotient Rule">Root of a Quotient Rule</a> is useful.</p>
+<article class="example example-like" id="example-183"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-example-183"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">8.1.14</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-example-183"><article class="example example-like"><p id="p-1370">Simplify \(\sqrt{\frac{8}{25}}\text{.}\) According to the <a class="xref" data-knowl="./knowl/item-radical-rules-quotient.html" title="Item: Root of a Quotient Rule">Root of a Quotient Rule</a>,</p>
+<div class="displaymath">
+\begin{align*}
+\sqrt{\frac{8}{25}}\amp=\frac{\sqrt{8}}{\sqrt{25}}\\
+\amp=\frac{\sqrt{8}}{5}\\
+\amp=\frac{\sqrt{4\cdot2}}{5}\\
+\amp=\frac{\sqrt{4}\cdot\sqrt{2}}{5}\\
+\amp=\frac{2\sqrt{2}}{5}
+\end{align*}
+</div>
+<p class="continuation">This is as simple as we can make this expression, unless you prefer to write it as \(\frac{2}{5}\sqrt{2}\text{.}\)</p></article></div>
+<article class="exercise exercise-like" id="ALy"><a data-knowl="" class="id-ref exercise-knowl original" data-refid="hk-ALy"><h6 class="heading">
+<span class="type">Checkpoint</span><span class="space"> </span><span class="codenumber">8.1.15</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-ALy"><article class="exercise exercise-like"><p id="p-1371">The WeBWorK problem with ID “webwork-68” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article></div></section><section class="subsection" id="BXn"><h3 class="heading hide-type">
+<span class="type">Subsection</span> <span class="codenumber">8.1.6</span> <span class="title">Multiplying Square Root Expressions</span>
+</h3>
+<p id="p-1372">We can use the <a class="xref" data-knowl="./knowl/item-radical-rules-product.html" title="Item: Root of a Product Rule">Root of a Product Rule</a> and the <a class="xref" data-knowl="./knowl/item-radical-rules-quotient.html" title="Item: Root of a Quotient Rule">Root of a Quotient Rule</a> to multiply and divide square root expressions. We want to simplify each radical first to keep the radicands as small as possible.</p>
+<article class="example example-like" id="tnv"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-tnv"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">8.1.16</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-tnv"><article class="example example-like"><p id="HTQ">Multiply \(\sqrt{8}\cdot\sqrt{54}\text{.}\)</p>
+<div class="solutions">
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-mHl" id="mHl"><span class="type">Explanation</span></a><div class="hidden-content tex2jax_ignore" id="hk-mHl"><div class="solution solution-like">
+<p id="VnB">We will simplify each radical first, and then multiply them together. We do not want to multiply \(8\cdot54\) because we will end up with a larger number that is harder to factor.</p>
+<div class="displaymath">
+\begin{align*}
+\sqrt{8}\cdot\sqrt{54}\amp=\sqrt{4\cdot2}\cdot\sqrt{9\cdot6}\\
+\amp=\sqrt{4}\cdot\sqrt{2}\cdot\sqrt{9}\cdot\sqrt{6}\\
+\amp=2\sqrt{2}\cdot3\sqrt{6}\\
+\amp=6\sqrt{2}\cdot\sqrt{6}\\
+\amp=6\sqrt{12}\\
+\amp=6\sqrt{4\cdot3}\\
+\amp=6\sqrt{4}\cdot\sqrt{3}\\
+\amp=6\cdot2\sqrt{3}\\
+\amp=12\sqrt{3}
+\end{align*}
+</div>
+<p class="continuation">It is worth noting that this is considered as simple as we canmake it, because the radicand of \(3\) is so small.</p>
+</div></div>
+</div></article></div>
+<article class="exercise exercise-like" id="FBN"><a data-knowl="" class="id-ref exercise-knowl original" data-refid="hk-FBN"><h6 class="heading">
+<span class="type">Checkpoint</span><span class="space"> </span><span class="codenumber">8.1.17</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-FBN"><article class="exercise exercise-like"><p id="p-1375">The WeBWorK problem with ID “webwork-69” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article></div>
+<article class="example example-like" id="ZuE"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-ZuE"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">8.1.18</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-ZuE"><article class="example example-like"><p id="oaZ">Multiply \(\sqrt{\frac{6}{5}}\cdot\sqrt{\frac{3}{5}}\text{.}\)</p>
+<div class="solutions">
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-SOu" id="SOu"><span class="type">Explanation</span></a><div class="hidden-content tex2jax_ignore" id="hk-SOu"><div class="solution solution-like">
+<p id="hBT">First multiply the fractions together under the radical. Then look for further simplifications.</p>
+<div class="displaymath">
+\begin{align*}
+\sqrt{\frac{6}{5}}\cdot\sqrt{\frac{3}{5}}\amp=\sqrt{\frac{6}{5}\cdot\frac{3}{5}}\\
+\amp=\sqrt{\frac{18}{25}}\\
+\amp=\frac{\sqrt{18}}{\sqrt{25}}\\
+\amp=\frac{\sqrt{9\cdot2}}{5}\\
+\amp=\frac{3\sqrt{2}}{5}
+\end{align*}
+</div>
+</div></div>
+</div></article></div></section><section class="subsection" id="iew"><h3 class="heading hide-type">
+<span class="type">Subsection</span> <span class="codenumber">8.1.7</span> <span class="title">Adding and Subtracting Square Root Expressions</span>
+</h3>
+<p id="tuM">We learned the <a class="xref" data-knowl="./knowl/item-radical-rules-product.html" title="Item: Root of a Product Rule">Root of a Product Rule</a> previously and applied this to multiplication of square roots, but we cannot apply this property to the operations of addition or subtraction. Here are two examples to demonstrate why not.</p>
+<div class="displaymath">
+\begin{align*}
+\sqrt{9}+\sqrt{16}\amp\wonder{=}\sqrt{9+16}\amp\sqrt{169}-\sqrt{25}\amp\wonder{=}\sqrt{169-25}\\
+3+4\amp\wonder{=}\sqrt{25}\amp13-5\amp\wonder{=}\sqrt{144}\\
+7\amp\reject{=}5\amp8\amp\reject{=}12
+\end{align*}
+</div>
+<p class="continuation">We do not get the same result if we combine radical sums and differences in the same way we can combine radical products and quotiens.</p>
+<p id="ZBV">To add and subtract radical expressions, we need to recognize that we can only add and subtract like terms. In this case, we will call them <dfn class="terminology">like radicals</dfn>. Adding like radicals will work just like adding like terms. In the same way that \(x+3x=4x\) combines two like terms, \(\sqrt{5}+3\sqrt{5}=4\sqrt{5}\) combines two like radicals.</p>
+<article class="example example-like" id="lIW"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-lIW"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">8.1.19</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-lIW"><article class="example example-like"><p id="Uii">Simplify \(\sqrt{2}+\sqrt{8}\text{.}\)</p>
+<div class="solutions">
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-yVD" id="yVD"><span class="type">Explanation</span></a><div class="hidden-content tex2jax_ignore" id="hk-yVD"><div class="solution solution-like">
+<p id="NJc">First, simplify each radical. Simplifying is the best way to understand whether or not we even have two like radicals that could be combined.</p>
+<div class="displaymath">
+\begin{align*}
+\sqrt{2}+\sqrt{8}\amp=\sqrt{2}+\sqrt{4\cdot2}\\
+\amp=\sqrt{2}+2\sqrt{2}\\
+\amp=3\sqrt{2}
+\end{align*}
+</div>
+</div></div>
+</div></article></div>
+<article class="exercise exercise-like" id="eex"><a data-knowl="" class="id-ref exercise-knowl original" data-refid="hk-eex"><h6 class="heading">
+<span class="type">Checkpoint</span><span class="space"> </span><span class="codenumber">8.1.20</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-eex"><article class="exercise exercise-like"><p id="p-1382">The WeBWorK problem with ID “webwork-70” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article></div>
+<article class="example example-like" id="RQf"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-RQf"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">8.1.21</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-RQf"><article class="example example-like"><p id="Apr">Simplify \(\sqrt{2}+\sqrt{27}\text{.}\)</p>
+<div class="solutions">
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-fcM" id="fcM"><span class="type">Explanation</span></a><div class="hidden-content tex2jax_ignore" id="hk-fcM"><div class="solution solution-like">
+<div class="displaymath" id="ZXu">
+\begin{align*}
+\sqrt{2}+\sqrt{27}\amp=\sqrt{2}+\sqrt{9\cdot3}\\
+\amp=\sqrt{2}+3\sqrt{3}
+\end{align*}
+</div>
+<p class="continuation">We cannot simplify the expression further because \(\sqrt{2}\) and \(\sqrt{3}\) are not like radicals.</p>
+</div></div>
+</div></article></div>
+<article class="example example-like" id="xXo"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-xXo"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">8.1.22</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-xXo"><article class="example example-like"><p id="gwA">Simplify \(\sqrt{6}-\sqrt{18}\cdot\sqrt{12}\text{.}\)</p>
+<div class="solutions">
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-LjV" id="LjV"><span class="type">Explanation</span></a><div class="hidden-content tex2jax_ignore" id="hk-LjV"><div class="solution solution-like">
+<p id="GeD">In this example, we should multiply the latter two square roots first (after simplifying them) and then see if we have like radicals.</p>
+<div class="displaymath">
+\begin{align*}
+\sqrt{6}-\sqrt{18}\cdot\sqrt{12}\amp=\sqrt{6}-\sqrt{9\cdot2}\cdot\sqrt{4\cdot3}\\
+\amp=\sqrt{6}-3\sqrt{2}\cdot2\sqrt{3}\\
+\amp=\sqrt{6}-6\sqrt{2}\cdot\sqrt{3}\\
+\amp=\sqrt{6}-6\sqrt{6}\\
+\amp=-5\sqrt{6}
+\end{align*}
+</div>
+</div></div>
+</div></article></div></section><section class="subsection" id="usO"><h3 class="heading hide-type">
+<span class="type">Subsection</span> <span class="codenumber">8.1.8</span> <span class="title">Distributing with Square Roots</span>
+</h3>
+<p id="RXw">In <code class="code-inline tex2jax_ignore">[cross-reference to target(s) "section-multiplying-polynomials" missing or not unique]</code>, we learned how to multiply polynomials like \(2(x+3)\) and \((x+2)(x+3)\text{.}\) All the methods we learned there apply when we multiply square root expressions. We will look at a few examples done with different methods.</p>
+<article class="example example-like" id="CHh"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-CHh"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">8.1.23</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-CHh"><article class="example example-like"><p id="YSb">Multiply \(\sqrt{5}\left(\sqrt{3}-\sqrt{2}\right)\text{.}\)</p>
+<div class="solutions">
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-DFw" id="DFw"><span class="type">Explanation</span></a><div class="hidden-content tex2jax_ignore" id="hk-DFw"><div class="solution solution-like">
+<p id="eHn">We will use the distributive property to do this problem:</p>
+<div class="displaymath">
+\begin{align*}
+\sqrt{5}\left(\sqrt{3}-\sqrt{2}\right)\amp=\sqrt{5}\cdot\sqrt{3}-\sqrt{5}\cdot\sqrt{2}\\
+\amp=\sqrt{15}-\sqrt{10}
+\end{align*}
+</div>
+</div></div>
+</div></article></div>
+<article class="example example-like" id="iOq"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-iOq"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">8.1.24</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-iOq"><article class="example example-like"><p id="EZk">Multiply \(\left(\sqrt{6}+\sqrt{12}\right)\left(\sqrt{3}-\sqrt{2}\right)\text{.}\)</p>
+<div class="solutions">
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-jMF" id="jMF"><span class="type">Explanation</span></a><div class="hidden-content tex2jax_ignore" id="hk-jMF"><div class="solution solution-like">
+<p id="KOw">We will use the <abbr class="acronym">FOIL</abbr> Method to expand the product. This time, there is an opportunity to simplify some of the radicals after multiplying.</p>
+<div class="displaymath">
+\begin{align*}
+\left(\sqrt{6}+\sqrt{12}\right)\left(\sqrt{3}-\sqrt{2}\right)\amp=\sqrt{6}\cdot\sqrt{3}-\sqrt{6}\cdot\sqrt{2}+\sqrt{12}\cdot\sqrt{3}-\sqrt{12}\cdot\sqrt{2}\\
+\amp=\sqrt{18}-\sqrt{12}+\sqrt{36}-\sqrt{24}\\
+\amp=3\sqrt{2}-2\sqrt{3}+6-2\sqrt{6}
+\end{align*}
+</div>
+</div></div>
+</div></article></div>
+<article class="example example-like" id="OVz"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-OVz"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">8.1.25</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-OVz"><article class="example example-like"><p id="lgt">Expand \(\left(\sqrt{3}-\sqrt{2}\right)^2\text{.}\)</p>
+<div class="solutions">
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-PTO" id="PTO"><span class="type">Explanation</span></a><div class="hidden-content tex2jax_ignore" id="hk-PTO"><div class="solution solution-like">
+<p id="qVF">We will use the <abbr class="acronym">FOIL</abbr> method to expand this expression:</p>
+<div class="displaymath">
+\begin{align*}
+\left(\sqrt{3}-\sqrt{2}\right)^2\amp=\left(\sqrt{3}-\sqrt{2}\right)\left(\sqrt{3}-\sqrt{2}\right)\\
+\amp=\left(\sqrt{3}\right)^2-\sqrt{3}\cdot\sqrt{2}-\sqrt{2}\cdot\sqrt{3}+\left(\sqrt{2}\right)^2\\
+\amp=3-\sqrt{6}-\sqrt{6}+2\\
+\amp=5-2\sqrt{6}
+\end{align*}
+</div>
+</div></div>
+</div></article></div>
+<article class="example example-like" id="vcI"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-vcI"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">8.1.26</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-vcI"><article class="example example-like"><p id="RnC">Multiply \(\left(\sqrt{5}-\sqrt{7}\right)\left(\sqrt{5}+\sqrt{7}\right)\text{.}\)</p>
+<div class="solutions">
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-waX" id="waX"><span class="type">Explanation</span></a><div class="hidden-content tex2jax_ignore" id="hk-waX"><div class="solution solution-like">
+<p id="XcO">We can once again use the <abbr class="acronym">FOIL</abbr> method to expand this expression. (But it is worth noting that this expression is in the special form \((a-b)(a+b)\) and will simplify to \(a^2-b^2\text{.}\))</p>
+<div class="displaymath">
+\begin{align*}
+\left(\sqrt{5}-\sqrt{7}\right)\left(\sqrt{5}+\sqrt{7}\right)\amp=\left(\sqrt{5}\right)^2+\sqrt{5}\cdot\sqrt{7}-\sqrt{7}\cdot\sqrt{5}-\left(\sqrt{7}\right)^2\\
+\amp=5+\sqrt{35}-\sqrt{35}-7\\
+\amp=-2
+\end{align*}
+</div>
+</div></div>
+</div></article></div></section><section class="reading-questions" id="reading-questions-25"><h3 class="heading hide-type">
+<span class="type">Reading Questions</span> <span class="codenumber">8.1.9</span> <span class="title">Reading Questions</span>
+</h3>
+<article class="exercise exercise-like" id="exercise-135"><h6 class="heading"><span class="codenumber">1<span class="period">.</span></span></h6>
+<p id="p-1396">Is there a difference between \(\sqrt[3]{2}\) and \(3\sqrt{2}\text{?}\) Explain.</p></article><article class="exercise exercise-like" id="exercise-136"><h6 class="heading"><span class="codenumber">2<span class="period">.</span></span></h6>
+<p id="p-1397">Choose one of the radical rules from <a class="xref" data-knowl="./knowl/list-radical-rules.html" title="List 8.1.9: Rules of Radicals for Multiplication and Division">List 8.1.9</a>. Then find its counterpart in the exponent rules from <code class="code-inline tex2jax_ignore">[cross-reference to target(s) "list-exponent-rules" missing or not unique]</code>.</p></article><article class="exercise exercise-like" id="exercise-137"><h6 class="heading"><span class="codenumber">3<span class="period">.</span></span></h6>
+<p id="p-1398">Describe a way you can visualize \(\sqrt{81}\) in a geometric shape. Describe a way you can visualize \(\sqrt[3]{27}\) in a geometric shape.</p></article></section></section></div></main>
+</div>
+</body>
+</html>

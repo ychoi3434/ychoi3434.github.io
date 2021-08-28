@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*       on 2021-08-28T19:50:28Z       *-->
+<!--*   A recent stable commit (2020-08-09):   *-->
+<!--* 98f21740783f166a773df4dc83cab5293ab63a4a *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<html lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>ORCCA Introduction to Equations</title>
+<meta name="Keywords" content="Authored in PreTeXt">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+<script>window.MathJax = {
+  tex: {
+    inlineMath: [['\\(','\\)']],
+    tags: "none",
+    useLabelIds: true,
+    tagSide: "right",
+    tagIndent: ".8em",
+    packages: {'[+]': ['base', 'extpfeil', 'ams', 'amscd', 'newcommand', 'knowl', 'sfrac']}
+  },
+  options: {
+    ignoreHtmlClass: "tex2jax_ignore",
+    processHtmlClass: "has_am",
+  },
+  chtml: {
+    scale: 0.88,
+    mtextInheritFont: true
+  },
+  loader: {
+    load: ['input/asciimath', '[tex]/extpfeil', '[tex]/amscd', '[tex]/newcommand', '[pretext]/mathjaxknowl3.js'],
+    paths: {pretext: "https://pretextbook.org/js/lib"},
+  },
+/* support for the sfrac command in MathJax (Beveled fraction) */
+  startup: {
+    ready() {
+      //
+      // Creating a simple "sfrac" package on-the-fly
+      //
+      const Configuration = MathJax._.input.tex.Configuration.Configuration;
+      const CommandMap = MathJax._.input.tex.SymbolMap.CommandMap;
+      
+      new CommandMap('sfrac', {
+        sfrac: 'SFrac'
+        }, {
+        SFrac(parser, name) {
+        const num = parser.ParseArg(name);
+        const den = parser.ParseArg(name);
+        const frac = parser.create('node', 'mfrac', [num, den], {bevelled: true});
+        parser.Push(frac);
+        }
+      });
+      //
+      // Create the package for the overridden macros
+      //
+      Configuration.create('sfrac', {
+        handler: {macro: ['sfrac']}
+      });
+      
+    MathJax.startup.defaultReady();
+    }
+  },
+};
+</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext_add_on.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script xmlns:svg="http://www.w3.org/2000/svg">sagecellEvalName='Evaluate (Sage)';
+</script><link xmlns:svg="http://www.w3.org/2000/svg" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://fonts.googleapis.com/css?family=Inconsolata:400,700&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/pretext.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/pretext_add_on.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/banner_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/toc_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/knowls_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/style_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/colors_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/setcolors.css" rel="stylesheet" type="text/css">
+<!-- 2019-10-12: Temporary - CSS file for experiments with styling --><link xmlns:svg="http://www.w3.org/2000/svg" href="developer.css" rel="stylesheet" type="text/css">
+</head>
+<body id="PCC-ORCCA" class="mathbook-book has-toc has-sidebar-left">
+<a class="assistive" href="#content">Skip to main content</a><div xmlns:svg="http://www.w3.org/2000/svg" id="latex-macros" class="hidden-content" style="display:none">\(\require{cancel}\newcommand{\abs}[1]{\left\lvert#1\right\rvert}
+\newcommand{\point}[2]{\left(#1,#2\right)}
+\newcommand{\highlight}[1]{\definecolor{sapphire}{RGB}{59,90,125} {\color{sapphire}{{#1}}}}
+\newcommand{\firsthighlight}[1]{\definecolor{sapphire}{RGB}{59,90,125} {\color{sapphire}{{#1}}}}
+\newcommand{\secondhighlight}[1]{\definecolor{emerald}{RGB}{20,97,75} {\color{emerald}{{#1}}}}
+\newcommand{\unhighlight}[1]{{\color{black}{{#1}}}}
+\newcommand{\lowlight}[1]{{\color{lightgray}{#1}}}
+\newcommand{\attention}[1]{\mathord{\overset{\downarrow}{#1}}}
+\newcommand{\nextoperation}[1]{\mathord{\boxed{#1}}}
+\newcommand{\substitute}[1]{{\color{blue}{{#1}}}}
+\newcommand{\pinover}[2]{\overset{\overset{\mathrm{\ #2\ }}{|}}{\strut #1 \strut}}
+\newcommand{\addright}[1]{{\color{blue}{{{}+#1}}}}
+\newcommand{\addleft}[1]{{\color{blue}{{#1+{}}}}}
+\newcommand{\subtractright}[1]{{\color{blue}{{{}-#1}}}}
+\newcommand{\multiplyright}[2][\cdot]{{\color{blue}{{{}#1#2}}}}
+\newcommand{\multiplyleft}[2][\cdot]{{\color{blue}{{#2#1{}}}}}
+\newcommand{\divideunder}[2]{\frac{#1}{{\color{blue}{{#2}}}}}
+\newcommand{\divideright}[1]{{\color{blue}{{{}\div#1}}}}
+\newcommand{\negate}[1]{{\color{blue}{{-}}}\left(#1\right)}
+\newcommand{\cancelhighlight}[1]{\definecolor{sapphire}{RGB}{59,90,125}{\color{sapphire}{{\cancel{#1}}}}}
+\newcommand{\secondcancelhighlight}[1]{\definecolor{emerald}{RGB}{20,97,75}{\color{emerald}{{\bcancel{#1}}}}}
+\newcommand{\thirdcancelhighlight}[1]{\definecolor{amethyst}{RGB}{112,72,91}{\color{amethyst}{{\xcancel{#1}}}}}
+\newcommand{\confirm}[1]{\stackrel{\checkmark}{#1}}
+\newcommand{\reject}[1]{\stackrel{\text{no}}{#1}}
+\newcommand{\wonder}[1]{\stackrel{\text{?}}{#1}}
+\newcommand{\apple}{\text{🍎}}
+\newcommand{\banana}{\text{🍌}}
+\newcommand{\pear}{\text{🍐}}
+\newcommand{\cat}{\text{🐱}}
+\newcommand{\dog}{\text{🐶}}
+\newcommand{\lt}{&lt;}
+\newcommand{\gt}{&gt;}
+\newcommand{\amp}{&amp;}
+\)</div>
+<header id="masthead" class="smallbuttons"><div class="banner"><div class="container">
+<a id="logo-link" href="http://www.pcc.edu/ORCCA" target="_blank"><img src="images/ORCCAbrandlogo.png" alt="Logo image"></a><div class="title-container">
+<h1 class="heading"><a href="orcca.html"><span class="title">RVCC Elementary Algebra</span></a></h1>
+<p class="byline">Department of Mathematics and Computer Science</p>
+</div>
+</div></div>
+<nav xmlns:svg="http://www.w3.org/2000/svg" id="primary-navbar" class="navbar"><div class="container">
+<div class="navbar-top-buttons">
+<button class="sidebar-left-toggle-button button active" aria-label="Show or hide table of contents sidebar">Contents</button><div class="tree-nav toolbar toolbar-divisor-3">
+<a class="index-button toolbar-item button" href="index-1.html" title="Index">Index</a><span class="threebuttons"><a id="previousbutton" class="previous-button toolbar-item button" href="chapter-linear-equations-and-inequalities-modified.html" title="Previous">Prev</a><a id="upbutton" class="up-button button toolbar-item" href="chapter-linear-equations-and-inequalities-modified.html" title="Up">Up</a><a id="nextbutton" class="next-button button toolbar-item" href="section-linear-equations.html" title="Next">Next</a></span>
+</div>
+</div>
+<div class="navbar-bottom-buttons toolbar toolbar-divisor-4">
+<button class="sidebar-left-toggle-button button toolbar-item active">Contents</button><a class="previous-button toolbar-item button" href="chapter-linear-equations-and-inequalities-modified.html" title="Previous">Prev</a><a class="up-button button toolbar-item" href="chapter-linear-equations-and-inequalities-modified.html" title="Up">Up</a><a class="next-button button toolbar-item" href="section-linear-equations.html" title="Next">Next</a>
+</div>
+</div></nav></header><div class="page">
+<div xmlns:svg="http://www.w3.org/2000/svg" id="sidebar-left" class="sidebar" role="navigation"><div class="sidebar-content">
+<nav id="toc"><ul>
+<li class="link frontmatter">
+<a href="frontmatter.html" data-scroll="JVg"><span class="title">Front Matter</span></a><ul><li><a href="colophon-1.html" data-scroll="colophon-1">Colophon</a></li></ul>
+</li>
+<li class="link part"><a href="part-all-of-the-chapters.html" data-scroll="part-all-of-the-chapters"><span class="codenumber">I</span> <span class="title"></span></a></li>
+<li class="link">
+<a href="chapter-introduction-to-algebra.html" data-scroll="dNX"><span class="codenumber">1</span> <span class="title">Introduction to Algebra</span></a><ul>
+<li><a href="section-real-numbers-and-the-number-line.html" data-scroll="ipv">Real Numbers and the Number Line</a></li>
+<li><a href="section-properties-of-real-numbers.html" data-scroll="tNy">Properties of Real Numbers</a></li>
+<li><a href="section-simplifying-and-writing-algebraic-expressions.html" data-scroll="xRO">Simplifying and Writing Algebraic Expressions</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="chapter-linear-equations-and-inequalities-modified.html" data-scroll="sWV"><span class="codenumber">2</span> <span class="title">Linear Equations and Inequalities</span></a><ul>
+<li><a href="section-introduction-to-equations.html" data-scroll="fwy" class="active">Introduction to Equations</a></li>
+<li><a href="section-linear-equations.html" data-scroll="xVO">Linear Equations</a></li>
+<li><a href="section-introduction-to-problem-solving.html" data-scroll="Wul">Introduction to Problem Solving</a></li>
+<li><a href="section-formulas.html" data-scroll="Nnq">Formulas</a></li>
+<li><a href="section-linear-inequalities.html" data-scroll="Nuc">Linear Inequalities</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="chapter-graphing-equations.html" data-scroll="gID"><span class="codenumber">3</span> <span class="title">Graphing Lines</span></a><ul>
+<li><a href="section-introduction-to-graphing.html" data-scroll="YTJ">Introduction to Graphing</a></li>
+<li><a href="section-equations-in-two-variables.html" data-scroll="QXY">Equations in Two Variables</a></li>
+<li><a href="section-intercepts-horizontal-and-vertical-lines.html" data-scroll="ByF">Intercepts: Horizontal and Vertical Lines</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="chapter-systems-of-linear-equations-in-two-variables.html" data-scroll="xGO"><span class="codenumber">4</span> <span class="title">Systems of Linear Equations</span></a><ul>
+<li><a href="section-solving-systems-of-linear-equations-graphically-and-numerically.html" data-scroll="njo">Solving Systems of Linear Equations Graphically and Numerically</a></li>
+<li><a href="section-solving-systems-of-linear-equations-by-substitution.html" data-scroll="zdh">Solving Systems of Linear Equations by Substitution</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="chapter-polynomials-and-exponents-modified.html" data-scroll="onc"><span class="codenumber">5</span> <span class="title">Exponents and Polynomials</span></a><ul>
+<li><a href="section-rules-for-exponents.html" data-scroll="KHJ">Rules for Exponents</a></li>
+<li><a href="section-adding-and-subtracting-polynomials.html" data-scroll="VvN">Addition and Subtraction of Polynomials</a></li>
+<li><a href="section-multiplication-of-polynomials.html" data-scroll="IcY">Multiplication of Polynomials</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="chapter-radical-expressions-and-equations.html" data-scroll="chapter-radical-expressions-and-equations"><span class="codenumber">6</span> <span class="title">Radical Expressions and Equations</span></a><ul>
+<li><a href="section-introduction-to-factoring.html" data-scroll="duD">Introduction to Factoring</a></li>
+<li><a href="section-factoring-trinomials.html" data-scroll="Mrf">Factoring Trinomials</a></li>
+<li><a href="section-solving-equations-by-factoring.html" data-scroll="DXi">Solving Equations by Factoring 1 (Quadratics)</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="chapter-rational-expressions.html" data-scroll="RzF"><span class="codenumber">7</span> <span class="title">Rational Expressions</span></a><ul>
+<li><a href="section-introduction-to-rational-expressions.html" data-scroll="Moo">Introduction to Rational Expressions</a></li>
+<li><a href="section-multiplication-and-division-of-rational-expressions.html" data-scroll="Vps">Multiplication and Division of Rational Expressions</a></li>
+<li><a href="section-addition-and-subtraction-with-like-denominators.html" data-scroll="KBw">Addition and Subtraction of Rational Expressions with Like Denominators</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="chapter-radical-expressions-and-functions.html" data-scroll="chapter-radical-expressions-and-functions"><span class="codenumber">8</span> <span class="title">Quantities in the Physical World</span></a><ul><li><a href="section-radical-expressions-and-functions.html" data-scroll="GAK">Radical Expressions and Functions</a></li></ul>
+</li>
+<li class="link backmatter"><a href="backmatter.html" data-scroll="jDj"><span class="title">Appendices</span></a></li>
+<li class="link">
+<a href="appendix-basic-math-review.html" data-scroll="appendix-basic-math-review"><span class="codenumber">A</span> <span class="title">Basic Math Review</span></a><ul>
+<li><a href="section-arithmetic-with-negative-numbers.html" data-scroll="qBB">Arithmetic with Negative Numbers</a></li>
+<li><a href="section-fractions-and-fraction-arithmetic.html" data-scroll="VAa">Fractions and Fraction Arithmetic</a></li>
+<li><a href="section-absolute-value-and-square-root.html" data-scroll="GAK">Absolute Value and Square Root</a></li>
+<li><a href="section-percentages.html" data-scroll="Chi">Percentages</a></li>
+<li><a href="section-order-of-operations.html" data-scroll="aog">Order of Operations</a></li>
+<li><a href="section-set-notation-and-types-of-numbers.html" data-scroll="Fdo">Set Notation and Types of Numbers</a></li>
+</ul>
+</li>
+<li class="link"><a href="appendix-unit-conversions.html" data-scroll="appendix-unit-conversions"><span class="codenumber">B</span> <span class="title">Unit Conversions</span></a></li>
+<li class="link"><a href="index-1.html" data-scroll="index-1"><span class="title">Index</span></a></li>
+</ul></nav><div class="extras"><nav><a class="mathbook-link" href="https://pretextbook.org">Authored in PreTeXt</a><a href="https://www.mathjax.org"><img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" alt="Powered by MathJax"></a></nav></div>
+</div></div>
+<main class="main"><div id="content" class="pretext-content"><section xmlns:svg="http://www.w3.org/2000/svg" class="section" id="fwy"><h2 class="heading hide-type">
+<span class="type">Section</span> <span class="codenumber">2.1</span> <span class="title">Introduction to Equations</span>
+</h2>
+<section class="introduction" id="Jme"><p id="jSw">We have learned how to check whether a specific number is a solution to an equation or inequality. In this section, we will begin learning how to <em class="emphasis">find</em> the solution(s) to basic equations ourselves.</p></section><section class="subsection" id="Odb"><h3 class="heading hide-type">
+<span class="type">Subsection</span> <span class="codenumber">2.1.1</span> <span class="title">Imagine Filling in the Blanks</span>
+</h3>
+<p id="qrC">Let's start with a very simple situation—so simple, that you might have success entirely in your head without writing much down. It's not exactly the algebra we hope you will learn, but the example may serve as a good warm up.</p>
+<article class="example example-like" id="PSo"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-PSo"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">2.1.1</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-PSo"><article class="example example-like"><p id="EQG">A number plus \(2\) is \(6\text{.}\) What is that number?</p>
+<p id="kXP">You may be so familiar with basic arithmetic that you know the answer already. The <em class="emphasis">algebra</em> approach is to translate “A number plus \(2\) is \(6\)” into a math statement—in this case, an equation:</p>
+<div class="displaymath">
+\begin{equation*}
+x+2=6
+\end{equation*}
+</div>
+<p class="continuation">where \(x\) is the number we are trying to find. And then ask what should be substituted in for \(x\) to make the equation true.</p>
+<p id="ReY">Now, how do you determine what \(x\) is? One valid option is to just <em class="emphasis">imagine</em> what number you could put in place of \(x\) that would result in a true equation.</p>
+<ul class="disc">
+<li id="li-63"><p id="p-199">Would \(0\) work? No, that would mean \(0+2=6\text{,}\) which is false.</p></li>
+<li id="li-64"><p id="p-200">Would \(17\) work? No, that would mean \(17+2=6\text{,}\) which is false.</p></li>
+<li id="li-65"><p id="p-201">Would \(4\) work? Yes, because \(4+2=6\) is a true equation.</p></li>
+</ul>
+<p id="xmh">So one solution to \(x+2=6\) is \(4\text{.}\) No other numbers are going to be solutions, because when you add \(2\) to something smaller than \(4\text{,}\) the result is going to be smaller than \(6\text{,}\) and when you add \(2\) to something larger than \(4\text{,}\) the result is going to be larger than \(6\text{.}\)</p></article></div>
+<p id="WyL">This approach might work for you to solve <em class="emphasis">very basic</em> equations, but in general equations are going to be too complicated to solve in your head this way. So we move on to more systematic approaches.</p></section><section class="subsection" id="ukk"><h3 class="heading hide-type">
+<span class="type">Subsection</span> <span class="codenumber">2.1.2</span> <span class="title">The Basic Principle of Algebra</span>
+</h3>
+<p id="CFU">Let's revisit <a class="xref" data-knowl="./knowl/example-first-solution.html" title="Example 2.1.1">Example 2.1.1</a>, thinking it through differently.</p>
+<article class="example example-like" id="vZx"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-vZx"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">2.1.2</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-vZx"><article class="example example-like"><p id="dtq">If a number plus \(2\) is \(6\text{,}\) what is the number?</p>
+<p id="JAz">If a number <em class="emphasis">plus</em> \(2\) is \(6\text{,}\) the number is a little smaller than \(6\text{,}\) and we should be able to <em class="emphasis">subtract</em> \(2\) from \(6\) and get that unknown number. Doing that: \(6-2=4\text{.}\) Thinking things through this way, we are using the <em class="emphasis">opposite</em> operation from addition: subtraction.</p></article></div>
+<p id="iNd">Let's try this strategy with another riddle.</p>
+<article class="example example-like" id="cgG"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-cgG"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">2.1.3</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-cgG"><article class="example example-like"><p id="pHI">If a number minus \(2\) is \(6\text{,}\) what is the number? Now we have a number a little larger than \(6\) in mind. This time, if we <em class="emphasis">add</em> \(2\) to \(6\) we will find the unknown number. So the unknown number is \(6+2=8\text{.}\)</p></article></div>
+<p id="OUm">Does this strategy work with multiplication and division?</p>
+<article class="example example-like" id="InP"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-InP"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">2.1.4</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-InP"><article class="example example-like"><p id="VOR">If a number times \(2\) is \(6\text{,}\) what is the number? The mystery number is small, since it gets multipled by \(2\) to make \(6\text{.}\) If we <em class="emphasis">divide</em> \(6\) by \(2\text{,}\) we will find the unknown number. So the unknown number is \(\frac{6}{2}=3\text{.}\)</p></article></div>
+<article class="example example-like" id="ouY"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-ouY"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">2.1.5</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-ouY"><article class="example example-like"><p id="BWa">If a number divided by \(2\) equals \(6\text{,}\) what is the number? Now we must have had a larger number to start with, since cutting it in half made \(6\text{.}\) If we <em class="emphasis">multiply</em> \(6\) by \(2\text{,}\) we find the unknown number is \(6\cdot2=12\text{.}\)</p></article></div>
+<aside class="aside aside-like" id="aside-1"><h6 class="heading"><span class="title">Abbreviation for “pound”.</span></h6>
+<p id="p-212">Why is “lb” the abbreviation for “pound”? It has a connection to a balance scale, which is the symbol for the Zodiac sign <em class="alert">L</em>i<em class="alert">b</em>ra.</p></aside><p id="p-213">These examples explore an important principle for solving an equation—applying an opposite arithmetic operation. We can revisit <a class="xref" data-knowl="./knowl/example-first-solution.html" title="Example 2.1.1">Example 2.1.1</a> and more intentionally apply this strategy. If a number plus \(2\) is \(6\text{,}\) what is the number? As is common in algebra, we use \(x\) to represent the unknown number. The question translates into the math equation</p>
+<div class="displaymath">
+\begin{equation*}
+x+2=6\text{.}
+\end{equation*}
+</div>
+<p class="continuation">Try to envision the equals sign as the middle of a balanced scale. The left side has \(2\) one-pound objects and a block with unknown weight \(x\) lb. Together, the weight on the left is \(x+2\text{.}\) The right side has \(6\) one-pound objects. <a class="xref" data-knowl="./knowl/figure-balance-scale.html" title="Figure 2.1.6">Figure 2.1.6</a> shows the scale.</p>
+<div class="sidebyside"><div class="sbsrow" style="margin-left:1.5%;margin-right:1.5%;">
+<div class="sbspanel top" style="width:48.4536082474227%;"><figure class="figure figure-like" id="LpM"><img src="images/image-8.svg" role="img" class="contained" alt="a balance scale; its left arm has one box marked x lb and two boxes marked 1 lb; its right arm has six boxes marked 1 lb; the scale is in a state of balance"><div class="image-archive">
+<a href="images/image-8.eps">eps</a><a href="images/image-8.pdf">pdf</a><a href="images/image-8.png">png</a><a href="images/image-8.svg">svg</a><a href="images/image-8.tex">tex</a>
+</div>
+<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">2.1.6<span class="period">.</span></span><span class="space"> </span>Balance scale representing \(x+2=6\text{.}\)</figcaption></figure></div>
+<div class="sbspanel top" style="width:48.4536082474227%;"><figure class="figure figure-like" id="rwV"><img src="images/image-9.svg" role="img" class="contained" alt="a balance scale; its left arm has a box marked x lb; its right arm has four boxes marked 1 lb; the scale is in a state of balance"><div class="image-archive">
+<a href="images/image-9.eps">eps</a><a href="images/image-9.pdf">pdf</a><a href="images/image-9.png">png</a><a href="images/image-9.svg">svg</a><a href="images/image-9.tex">tex</a>
+</div>
+<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">2.1.7<span class="period">.</span></span><span class="space"> </span>Balance scale representing the solution to \(x+2=6\text{,}\) after taking away \(2\) from each side.</figcaption></figure></div>
+</div></div>
+<p id="HpN">To find the weight of the unknown block, we can take away \(2\) one-pound blocks from <em class="emphasis">each</em> side of the scale (to keep the scale balanced). <a class="xref" data-knowl="./knowl/figure-balance-scale-solution.html" title="Figure 2.1.7">Figure 2.1.7</a> shows the solution.</p>
+<p id="nwW">An equation is like a balanced scale, as the two sides of the equation are equal. In the same way that we can take away \(2\) lb from <em class="emphasis">each</em> side of a balanced scale, we can subtract \(2\) from <em class="emphasis">each</em> side of the equation. So instead of two pictures of balance scales, we can use algebra symbols and solve the equation \(x+2=6\) in the following manner:</p>
+<div class="displaymath">
+\begin{align*}
+x+2\amp=6\amp\amp\text{a balanced scale}\\
+x+2\subtractright{2}\amp=6\subtractright{2}\amp\amp\text{remove the same quantity from each side}\\
+x\amp=4\amp\amp\text{still balanced; now it tells you the solution}
+\end{align*}
+</div>
+<p id="TEf">It's important to note that each line shows what is called an <dfn class="terminology">equivalent equation</dfn>.  In other words, each equation shown is algebraically equivalent to the one above it and will have exactly the same solution(s). The final equivalent equation \(x=4\) tells us that the <dfn class="terminology">solution</dfn> to the equation is \(4\text{.}\) The <dfn class="terminology">solution set</dfn> to this equation is the set that lists every solution to the equation. For this example, the solution set is \(\{4\}\text{.}\)</p>
+<p id="p-217">In <a class="xref" data-knowl="./knowl/figure-geogebra-solve-one-step.html" title="Figure 2.1.8">Figure 2.1.8</a>, try adding or subtracting something to each side of the equation to find its solution.</p>
+<figure class="figure figure-like" id="figure-geogebra-solve-one-step"><iframe id="geogebra-solve-one-step" width="600" height="200" src="geogebra-solve-one-step-if.html"></iframe><figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">2.1.8<span class="period">.</span></span><span class="space"> </span>Allowing Variables to Vary</figcaption></figure><p id="p-218">We have learned we can add or subtract the same number on both sides of the equals sign, just like we can add or remove the same amount of weight on a balanced scale. Can we multiply and divide the same number on both sides of the equals sign? Let's look at <a class="xref" data-knowl="./knowl/example-two-x-equals-six.html" title="Example 2.1.4">Example 2.1.4</a> again: If a number times \(2\) is \(6\text{,}\) what is the number? Another balance scale can help visualize this.</p>
+<div class="sidebyside"><div class="sbsrow" style="margin-left:1.5%;margin-right:1.5%;">
+<div class="sbspanel bottom" style="width:48.4536082474227%;"><figure class="figure figure-like" id="XEe"><img src="images/image-10.svg" role="img" class="contained" alt="a balance scale; its left arm has two boxes marked x lb; its right arm has six boxes marked 1 lb; the scale is in a state of balance"><div class="image-archive">
+<a href="images/image-10.eps">eps</a><a href="images/image-10.pdf">pdf</a><a href="images/image-10.png">png</a><a href="images/image-10.svg">svg</a><a href="images/image-10.tex">tex</a>
+</div>
+<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">2.1.9<span class="period">.</span></span><span class="space"> </span>Balance scale representing the equation \(2x=6\text{.}\)</figcaption></figure></div>
+<div class="sbspanel bottom" style="width:48.4536082474227%;"><figure class="figure figure-like" id="DLn"><img src="images/image-11.svg" role="img" class="contained" alt="a balance scale; its left arm has a box marked x lb; its right arm has three boxes marked 1 lb; the scale is in a state of balance"><div class="image-archive">
+<a href="images/image-11.eps">eps</a><a href="images/image-11.pdf">pdf</a><a href="images/image-11.png">png</a><a href="images/image-11.svg">svg</a><a href="images/image-11.tex">tex</a>
+</div>
+<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">2.1.10<span class="period">.</span></span><span class="space"> </span>Balance scale representing the solution to \(2x=6\text{,}\) after cutting each side in half.</figcaption></figure></div>
+</div></div>
+<p id="LZG">Currently, the scale is balanced. If we cut the weight in half on both sides, the scale should still be balanced.</p>
+<p id="sgP">We can see from the scale that \(x=3\) is correct. Removing half of the weight from each side of the scale is like dividing both sides of an equation by \(2\text{:}\)</p>
+<div class="displaymath">
+\begin{align*}
+2x\amp=6\\
+\divideunder{2x}{2}\amp=\divideunder{6}{2}\\
+x\amp=3
+\end{align*}
+</div>
+<p class="continuation">The equivalent equation in this example is \(x=3\text{,}\) which tells us that the solution to the equation is \(3\) and the solution set is \(\{3\}\text{.}\)</p>
+<article class="remark remark-like" id="AJq"><h6 class="heading">
+<span class="type">Remark</span><span class="space"> </span><span class="codenumber">2.1.11</span><span class="period">.</span>
+</h6>
+<p id="fiD">Note that when we divide each side of an equation by a number, we use the fraction line in place of the division symbol. The fact that \(\frac{6}{2}=6\div2\) is a reminder that the fraction line and division symbol have the same purpose. The division symbol is rarely used in later math courses.</p></article><p id="YnY">Similarly, we could multiply each side of an equation by \(2\text{,}\) just like we can keep a scale balanced if we double the weight on each side. We will summarize these properties.</p>
+<article class="fact theorem-like" id="UCh"><h6 class="heading">
+<span class="type">Fact</span><span class="space"> </span><span class="codenumber">2.1.12</span><span class="period">.</span><span class="space"> </span><span class="title">Properties of Equivalent Equations.</span>
+</h6>
+<p id="zbu">If there is an equation \(\text{Left}=\text{Right}\text{,}\) we can do the following to obtain an equivalent equation.</p>
+<div class="tabular-box natural-width"><table class="tabular">
+<tr>
+<td class="l m b0 r0 l0 t0 lines">\(\text{Left}\addright{c}=\text{Right}\addright{c}\)</td>
+<td class="l m b0 r0 l0 t0 lines">\(\text{Left}\subtractright{c}=\text{Right}\subtractright{c}\)</td>
+<td class="l m b0 r0 l0 t0 lines">\(\text{(Left)}\multiplyright{c}=\text{(Right)}\multiplyright{c}\)</td>
+<td class="l m b0 r0 l0 t0 lines">\(\displaystyle\divideunder{\text{Left}}{c}=\divideunder{\text{Right}}{c}\)</td>
+</tr>
+<tr>
+<td class="l t b0 r0 l0 t0" style="max-width:138px;"><p id="p-224">(add the same number to each side)</p></td>
+<td class="l t b0 r0 l0 t0" style="max-width:138px;"><p id="p-225">(subtract the same number from each side)</p></td>
+<td class="l t b0 r0 l0 t0" style="max-width:138px;"><p id="p-226">(multiply each side of the equation by the same <em class="emphasis">non-zero</em> number)</p></td>
+<td class="l t b0 r0 l0 t0" style="max-width:138px;"><p id="p-227">(divide each side of the equation by the same <em class="emphasis">non-zero</em> number)</p></td>
+</tr>
+</table></div></article></section><section class="subsection" id="art"><h3 class="heading hide-type">
+<span class="type">Subsection</span> <span class="codenumber">2.1.3</span> <span class="title">Solving One-Step Equations and Stating Solution Sets</span>
+</h3>
+<p id="kCq">Notice that when we solved equations in <a href="section-introduction-to-equations.html#ukk" class="internal" title="Subsection 2.1.2: The Basic Principle of Algebra">Subsection 2.1.2</a>, the final equation looked like \(x=\text{number}\text{,}\) where the variable \(x\) is separated from other numbers and stands alone on one side of the equals sign. The goal of solving any equation is to <em class="emphasis">isolate the variable</em> in this same manner.</p>
+<p id="QJz">Putting together both strategies (applying the opposite operation and balancing equations like a scale) that we just explored, we summarize how to solve a one-step linear equation.</p>
+<article class="algorithm theorem-like" id="teR"><h6 class="heading">
+<span class="type">Process</span><span class="space"> </span><span class="codenumber">2.1.13</span><span class="period">.</span><span class="space"> </span><span class="title">Steps to Solving Simple (One-Step) Linear Equations.</span>
+</h6>
+<dl id="YJx" class="description-list">
+<dt id="xHG">Apply</dt>
+<dd><p id="OFR">Apply the opposite operation to both sides of the equation. If a number was added to the variable, subtract that number, and vice versa. If the variable was multiplied by a number, divide by that number, and vice versa.</p></dd>
+<dt id="dOP">Check</dt>
+<dd><p id="uNa">Check the solution. This means, verify that what you think is the solution actually solves the equation. For one reason, it's human to have made a simple arithmetic mistake, and by checking you will protect yourself from this. For another reason, there are situations where solving an equation will tell you that certain numbers are <em class="emphasis">possible</em> solutions, but they do not actually solve the original equation. Checking solutions will catch these situations.</p></dd>
+<dt id="JVY">Summarize</dt>
+<dd><p id="aUj">State the solution set, or in the case of application problems, summarize the result using a complete sentence and appropriate units.</p></dd>
+</dl></article><p id="wQI">Let's look at a few examples.</p>
+<article class="example example-like" id="Zma"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-Zma"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">2.1.14</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-Zma"><article class="example example-like"><p id="idj">Solve for \(y\) in the equation \(7+y=3\text{.}\)</p>
+<div class="solutions">
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-ptn" id="ptn"><span class="type">Explanation</span></a><div class="hidden-content tex2jax_ignore" id="hk-ptn"><div class="solution solution-like"><div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;">
+<div class="sbspanel top" style="width:47%;">
+<p id="fEc">To isolate \(y\text{,}\) we need to remove \(7\) from the left side. Since \(7\) is being <em class="emphasis">added</em> to \(y\text{,}\) we need to <em class="emphasis">subtract</em> \(7\) from each side of the equation.</p>
+<div class="displaymath">
+\begin{align*}
+7+y\amp=3\\
+7+y\subtractright{7}\amp=3\subtractright{7}\\
+y\amp=-4
+\end{align*}
+</div>
+</div>
+<div class="sbspanel top" style="width:47%;">
+<p id="LLl">We should always check the solution when we solve equations. For this problem, we will substitute \(y\) in the original equation with \(-4\text{:}\)</p>
+<div class="displaymath">
+\begin{align*}
+7+y\amp=3\\
+7+(\substitute{-4})\amp\wonder{=}3\\
+3\amp\confirm{=}3
+\end{align*}
+</div>
+<p class="continuation">The solution \(-4\) is checked, so the solution set is \(\{-4\}\text{.}\)</p>
+</div>
+</div></div></div></div>
+</div></article></div>
+<article class="exercise exercise-like" id="xOK"><a data-knowl="" class="id-ref exercise-knowl original" data-refid="hk-xOK"><h6 class="heading">
+<span class="type">Checkpoint</span><span class="space"> </span><span class="codenumber">2.1.15</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-xOK"><article class="exercise exercise-like"><p id="p-238">The WeBWorK problem with ID “webwork-14” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article></div>
+<article class="exercise exercise-like" id="dVT"><a data-knowl="" class="id-ref exercise-knowl original" data-refid="hk-dVT"><h6 class="heading">
+<span class="type">Checkpoint</span><span class="space"> </span><span class="codenumber">2.1.16</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-dVT"><article class="exercise exercise-like"><p id="p-239">The WeBWorK problem with ID “webwork-15” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article></div>
+<p id="cXR">Note that in solving the equation in <a class="xref" data-knowl="./knowl/exercise-solve-equation-solution-on-left.html" title="Checkpoint 2.1.16">Checkpoint 2.1.16</a> we found that \(-5=a\text{,}\) and did not bother to write \(a=-5\text{.}\) All that really matters is that we ended with a clear statement of what \(a\) must be equal to.</p>
+<article class="example example-like" id="Ftj"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-Ftj"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">2.1.17</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-Ftj"><article class="example example-like"><p id="Oks">The formula for a circle's circumference is \(c=\pi d\text{,}\) where \(c\) stands for circumference, \(d\) stands for diameter, and \(\pi\) is a constant with the value of \(3.1415926\ldots\text{.}\) If a circle's circumference is <span class="quantity">12\(\pi\) ft</span>, find this circle's diameter.</p>
+<div class="solutions">
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-VAw" id="VAw"><span class="type">Explanation</span></a><div class="hidden-content tex2jax_ignore" id="hk-VAw"><div class="solution solution-like">
+<p id="cJw">The circumference is given as \(12\pi\) feet. Approximating \(\pi\) with \(3.14\text{,}\) this means the circumference is approximately <span class="quantity">37.68 ft</span>. It is nice to have a rough understanding of how long the circumference is, but if we use \(3.14\) instead of \(\pi\text{,}\) we are using a slightly smaller number than \(\pi\text{,}\) and the result of any calculations we do would not be as accurate. This is why we will use the symbol \(\pi\) throughout solving this equation and round only at the end in the conclusion summary (if necessary).</p>
+<p id="IQF">We will substitute \(c\) in the formula with \(12\pi\) and solve for \(d\text{:}\)</p>
+<div class="displaymath">
+\begin{align*}
+c\amp=\pi d\\
+\substitute{12\pi}\amp=\pi d\\
+\divideunder{12\pi}{\pi}\amp=\divideunder{\pi d}{\pi}\\
+12\amp=d
+\end{align*}
+</div>
+<p id="oXO">So the circle's diameter is <span class="quantity">12 ft</span>.</p>
+</div></div>
+</div></article></div>
+<article class="example example-like" id="lAs"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-lAs"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">2.1.18</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-lAs"><article class="example example-like"><p id="urB">Solve for \(b\) in \(-b=2\text{.}\)</p>
+<div class="solutions">
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-BHF" id="BHF"><span class="type">Explanation</span></a><div class="hidden-content tex2jax_ignore" id="hk-BHF"><div class="solution solution-like">
+<p id="p-246">Note that \(b\) is not yet isolated as there is a negative sign in front of it. One way to solve for \(b\) is to “negate” both sides:</p>
+<div class="displaymath">
+\begin{align*}
+-b\amp=2\\
+\negate{-b}\amp=\negate{2}\\
+b\amp=-2
+\end{align*}
+</div>
+<p id="Bmg">We removed the negative sign from \(-b\) by negating both sides. A second way to remove the negative sign \(-1\) from \(-b\) is to divide both sides by \(-1\text{.}\) If you view the original \(-b\) as \(-1\cdot b\text{,}\) then this approach resembles the solution from <a class="xref" data-knowl="./knowl/exercise-solve-equation-solution-on-left.html" title="Checkpoint 2.1.16">Checkpoint 2.1.16</a>.</p>
+<div class="displaymath">
+\begin{align*}
+-b\amp=2\\
+-1\cdot b\amp=2\\
+\divideunder{-1\cdot b}{-1}\amp=\divideunder{2}{-1}\\
+b\amp=-2
+\end{align*}
+</div>
+<p id="p-248">A third way to remove the original negative sign is to use the fact that \(-1\cdot(-b)=b\text{.}\) So we could multiply on each side by \(-1\text{.}\)</p>
+<div class="displaymath">
+\begin{align*}
+-b\amp=2\\
+\multiplyleft{-1}(-b)\amp=\multiplyleft{-1}(2)\\
+b\amp=-2
+\end{align*}
+</div>
+<p id="NAy">We will check the solution by substituting \(b\) in the original equation with \(-2\text{:}\)</p>
+<div class="displaymath">
+\begin{align*}
+-b\amp=2\\
+-(\substitute{-2})\amp\confirm{=}2
+\end{align*}
+</div>
+<p id="tHH">The solution \(-2\) is checked and the solution set is \(\{-2\}\text{.}\)</p>
+</div></div>
+</div></article></div></section><section class="subsection" id="GyC"><h3 class="heading hide-type">
+<span class="type">Subsection</span> <span class="codenumber">2.1.4</span> <span class="title">Solving One-Step Equations Involving Fractions</span>
+</h3>
+<p id="Jfa">When equations have fractions, solving them will make use of the same principles. You may need to use fraction arithmetic, and there may be special considerations that will make the calculations easier. So we have separated the following examples.</p>
+<article class="example example-like" id="Kdc"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-Kdc"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">2.1.19</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-Kdc"><article class="example example-like"><p id="ayK">Solve for \(g\) in \(\frac{2}{3}+g=\frac{1}{2}\text{.}\)</p>
+<div class="solutions">
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-hOO" id="hOO"><span class="type">Explanation</span></a><div class="hidden-content tex2jax_ignore" id="hk-hOO"><div class="solution solution-like"><div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;">
+<div class="sbspanel top" style="width:47%;">
+<p id="ZOQ">In <code class="code-inline tex2jax_ignore">[cross-reference to target(s) "section-linear-equations-and-inequalities-with-fractions" missing or not unique]</code>, we will learn a skill to avoid fraction operations entirely in equations like this one. For now, let's solve the equation by using subtraction to isolate \(g\text{:}\)</p>
+<div class="displaymath">
+\begin{align*}
+\frac{2}{3}+g\amp=\frac{1}{2}\\
+\frac{2}{3}+g\subtractright{\frac{2}{3}}\amp=\frac{1}{2}\subtractright{\frac{2}{3}}\\
+g\amp=\frac{3}{6}-\frac{4}{6}\\
+g\amp=-\frac{1}{6}
+\end{align*}
+</div>
+</div>
+<div class="sbspanel top" style="width:47%;">
+<p id="FVZ">We will check the solution by substituting \(g\) in the original equation with \(-\frac{1}{6}\text{:}\)</p>
+<div class="displaymath">
+\begin{align*}
+\frac{2}{3}+g\amp=\frac{1}{2}\\
+\frac{2}{3}+\left(\substitute{-\frac{1}{6}}\right)\amp\wonder{=}\frac{1}{2}\\
+\frac{4}{6}+\left(-\frac{1}{6}\right)\amp\wonder{=}\frac{1}{2}\\
+\frac{3}{6}\amp\confirm{=}\frac{1}{2}
+\end{align*}
+</div>
+<p class="continuation">The solution \(-\frac{1}{6}\) is checked and the solution set is \(\left\{-\frac{1}{6}\right\}\text{.}\)</p>
+</div>
+</div></div></div></div>
+</div></article></div>
+<article class="exercise exercise-like" id="bbn"><a data-knowl="" class="id-ref exercise-knowl original" data-refid="hk-bbn"><h6 class="heading">
+<span class="type">Checkpoint</span><span class="space"> </span><span class="codenumber">2.1.20</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-bbn"><article class="exercise exercise-like"><p id="p-255">The WeBWorK problem with ID “webwork-16” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article></div>
+<article class="example example-like" id="qkl"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-qkl"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">2.1.21</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-qkl"><article class="example example-like"><p id="GFT">Solve for \(c\) in \(\frac{c}{5}=4\text{.}\)</p>
+<div class="solutions">
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-NVX" id="NVX"><span class="type">Explanation</span></a><div class="hidden-content tex2jax_ignore" id="hk-NVX"><div class="solution solution-like"><div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;">
+<div class="sbspanel top" style="width:47%;">
+<p id="KFS">Note that the fraction line here implies division, so our variable \(c\) is being divided by \(5\text{.}\) The opposite operation is to <em class="emphasis">multiply</em> by \(5\text{:}\)</p>
+<div class="displaymath">
+\begin{align*}
+\frac{c}{5}\amp=4\\
+\multiplyleft{5}\frac{c}{5}\amp=\multiplyleft{5}4\\
+c\amp=20
+\end{align*}
+</div>
+</div>
+<div class="sbspanel top" style="width:47%;">
+<p id="qNb">We will check the solution by substituting \(c\) in the original equation with \(20\text{:}\)</p>
+<div class="displaymath">
+\begin{align*}
+\frac{c}{5}\amp=4\\
+\frac{\substitute{20}}{5}\amp\confirm{=}4
+\end{align*}
+</div>
+<p class="continuation">The solution \(20\) is checked and the solution set is \(\{20\}\text{.}\)</p>
+</div>
+</div></div></div></div>
+</div></article></div>
+<article class="example example-like" id="Wru"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-Wru"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">2.1.22</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-Wru"><article class="example example-like"><p id="mNc">Solve for \(d\) in \(-\frac{1}{3}d=6\text{.}\)</p>
+<div class="solutions">
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-udg" id="udg"><span class="type">Explanation</span></a><div class="hidden-content tex2jax_ignore" id="hk-udg"><div class="solution solution-like">
+<p id="WUk">It's true that in this example, the variable \(d\) is <em class="emphasis">multiplied</em> by \(-\frac{1}{3}\text{.}\) This means that <em class="emphasis">dividing</em> each side by \(-\frac{1}{3}\) would be a valid strategy for solving this equation. However, dividing by a fraction could lead to human error, so consider this alternative strategy: multiply by \(-3\text{.}\)</p>
+<div class="displaymath">
+\begin{align*}
+-\frac{1}{3}d\amp=6\\
+\multiplyleft{(-3)}\left(-\frac{1}{3}d\right)\amp=\multiplyleft{(-3)}6\\
+d\amp=-18
+\end{align*}
+</div>
+<p id="jiC">If you choose to divide each side by \(-\frac{1}{3}\text{,}\) that will work out as well:</p>
+<div class="displaymath">
+\begin{align*}
+-\frac{1}{3}d\amp=6\\
+\divideunder{-\frac{1}{3}d}{-\frac{1}{3}}\amp=\divideunder{6}{-\frac{1}{3}}\\
+d\amp=\frac{6}{1}\cdot\frac{-3}{1}\amp\amp\text{Review fraction division in }\href{section-fractions-and-fraction-arithmetic.html}{\text{A.2}}\text{.}\\
+d\amp=-18
+\end{align*}
+</div>
+<p class="continuation">This gives the same solution.</p>
+<p id="PpL">We will check the solution by substituting \(d\) in the original equation with \(-18\text{:}\)</p>
+<div class="displaymath">
+\begin{align*}
+-\frac{1}{3}d\amp=6\\
+-\frac{1}{3}\cdot(\substitute{-18})\amp\wonder{=}6\\
+6\amp\confirm{=}6
+\end{align*}
+</div>
+<p id="vwU">The solution \(-18\) is checked and the solution set is \(\{-18\}\text{.}\)</p>
+</div></div>
+</div></article></div>
+<article class="example example-like" id="CyD"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-CyD"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">2.1.23</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-CyD"><article class="example example-like"><p id="SUl">Solve for \(x\) in \(\frac{3x}{4}=10\text{.}\)</p>
+<div class="solutions">
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-akp" id="akp"><span class="type">Explanation</span></a><div class="hidden-content tex2jax_ignore" id="hk-akp"><div class="solution solution-like">
+<p id="bEd">The variable \(x\) appears to have <em class="emphasis">two</em> operations that apply to it: first multiplication by \(3\text{,}\) and then division by \(4\text{.}\) But note that</p>
+<div class="displaymath">
+\begin{equation*}
+\frac{3x}{4}=\frac{3}{4}\cdot\frac{x}{1}=\frac{3}{4}x\text{.}
+\end{equation*}
+</div>
+<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;">
+<div class="sbspanel top" style="width:47%;">
+<p id="HLm">If we view the left side this way, we can get away with solving the equation in one step, by multiplying on each side by the reciprocal of \(\frac{3}{4}\text{.}\)</p>
+<div class="displaymath">
+\begin{align*}
+\frac{3x}{4}\amp=10\\
+\frac{3}{4}x\amp=10\\
+\multiplyleft{\frac{4}{3}}\frac{3}{4}x\amp=\multiplyleft{\frac{4}{3}}10\\
+x\amp=\frac{4}{3}\cdot\frac{10}{1}\\
+x\amp=\frac{40}{3}
+\end{align*}
+</div>
+</div>
+<div class="sbspanel top" style="width:47%;">
+<p id="nSv">We will check the solution by substituting \(x\) in the original equation with \(\frac{40}{3}\text{:}\)</p>
+<div class="displaymath">
+\begin{align*}
+\frac{3x}{4}\amp=10\\
+\frac{3\left(\substitute{\frac{40}{3}}\right)}{4}\amp\wonder{=}10\\
+\frac{40}{4}\amp\wonder{=}10\\
+10\amp\confirm{=}10
+\end{align*}
+</div>
+<p class="continuation">The solution \(\frac{40}{3}\) is checked and the solution set is \(\left\{\frac{40}{3}\right\}\text{.}\)</p>
+</div>
+</div></div>
+</div></div>
+</div></article></div>
+<article class="exercise exercise-like" id="Hiw"><a data-knowl="" class="id-ref exercise-knowl original" data-refid="hk-Hiw"><h6 class="heading">
+<span class="type">Checkpoint</span><span class="space"> </span><span class="codenumber">2.1.24</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-Hiw"><article class="exercise exercise-like"><p id="p-268">The WeBWorK problem with ID “webwork-17” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article></div></section><section class="reading-questions" id="reading-questions-3"><h3 class="heading hide-type">
+<span class="type">Reading Questions</span> <span class="codenumber">2.1.5</span> <span class="title">Reading Questions</span>
+</h3>
+<article class="exercise exercise-like" id="exercise-24"><h6 class="heading"><span class="codenumber">1<span class="period">.</span></span></h6>
+<p id="p-269">If you imagine the equation \(2x+3=11\) as a balance scale with boxes on each side, how many boxes do you imagine on the left side? How many <em class="emphasis">types</em> of boxes do you imagine on the left side?</p></article><article class="exercise exercise-like" id="exercise-25"><h6 class="heading"><span class="codenumber">2<span class="period">.</span></span></h6>
+<p id="p-270">What is the opposite operation of multiplying by a negative number?</p></article><article class="exercise exercise-like" id="exercise-26"><h6 class="heading"><span class="codenumber">3<span class="period">.</span></span></h6>
+<p id="p-271">Every time you solve an equation, there is something you should do to guarantee success. Describe what that thing is that you should do.</p></article></section></section></div></main>
+</div>
+</body>
+</html>

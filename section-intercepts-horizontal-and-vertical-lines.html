@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*       on 2021-08-28T19:50:33Z       *-->
+<!--*   A recent stable commit (2020-08-09):   *-->
+<!--* 98f21740783f166a773df4dc83cab5293ab63a4a *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<html lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>ORCCA Intercepts: Horizontal and Vertical Lines</title>
+<meta name="Keywords" content="Authored in PreTeXt">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+<script>window.MathJax = {
+  tex: {
+    inlineMath: [['\\(','\\)']],
+    tags: "none",
+    useLabelIds: true,
+    tagSide: "right",
+    tagIndent: ".8em",
+    packages: {'[+]': ['base', 'extpfeil', 'ams', 'amscd', 'newcommand', 'knowl', 'sfrac']}
+  },
+  options: {
+    ignoreHtmlClass: "tex2jax_ignore",
+    processHtmlClass: "has_am",
+  },
+  chtml: {
+    scale: 0.88,
+    mtextInheritFont: true
+  },
+  loader: {
+    load: ['input/asciimath', '[tex]/extpfeil', '[tex]/amscd', '[tex]/newcommand', '[pretext]/mathjaxknowl3.js'],
+    paths: {pretext: "https://pretextbook.org/js/lib"},
+  },
+/* support for the sfrac command in MathJax (Beveled fraction) */
+  startup: {
+    ready() {
+      //
+      // Creating a simple "sfrac" package on-the-fly
+      //
+      const Configuration = MathJax._.input.tex.Configuration.Configuration;
+      const CommandMap = MathJax._.input.tex.SymbolMap.CommandMap;
+      
+      new CommandMap('sfrac', {
+        sfrac: 'SFrac'
+        }, {
+        SFrac(parser, name) {
+        const num = parser.ParseArg(name);
+        const den = parser.ParseArg(name);
+        const frac = parser.create('node', 'mfrac', [num, den], {bevelled: true});
+        parser.Push(frac);
+        }
+      });
+      //
+      // Create the package for the overridden macros
+      //
+      Configuration.create('sfrac', {
+        handler: {macro: ['sfrac']}
+      });
+      
+    MathJax.startup.defaultReady();
+    }
+  },
+};
+</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext_add_on.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script xmlns:svg="http://www.w3.org/2000/svg">sagecellEvalName='Evaluate (Sage)';
+</script><link xmlns:svg="http://www.w3.org/2000/svg" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://fonts.googleapis.com/css?family=Inconsolata:400,700&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/pretext.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/pretext_add_on.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/banner_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/toc_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/knowls_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/style_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/colors_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/setcolors.css" rel="stylesheet" type="text/css">
+<!-- 2019-10-12: Temporary - CSS file for experiments with styling --><link xmlns:svg="http://www.w3.org/2000/svg" href="developer.css" rel="stylesheet" type="text/css">
+</head>
+<body id="PCC-ORCCA" class="mathbook-book has-toc has-sidebar-left">
+<a class="assistive" href="#content">Skip to main content</a><div xmlns:svg="http://www.w3.org/2000/svg" id="latex-macros" class="hidden-content" style="display:none">\(\require{cancel}\newcommand{\abs}[1]{\left\lvert#1\right\rvert}
+\newcommand{\point}[2]{\left(#1,#2\right)}
+\newcommand{\highlight}[1]{\definecolor{sapphire}{RGB}{59,90,125} {\color{sapphire}{{#1}}}}
+\newcommand{\firsthighlight}[1]{\definecolor{sapphire}{RGB}{59,90,125} {\color{sapphire}{{#1}}}}
+\newcommand{\secondhighlight}[1]{\definecolor{emerald}{RGB}{20,97,75} {\color{emerald}{{#1}}}}
+\newcommand{\unhighlight}[1]{{\color{black}{{#1}}}}
+\newcommand{\lowlight}[1]{{\color{lightgray}{#1}}}
+\newcommand{\attention}[1]{\mathord{\overset{\downarrow}{#1}}}
+\newcommand{\nextoperation}[1]{\mathord{\boxed{#1}}}
+\newcommand{\substitute}[1]{{\color{blue}{{#1}}}}
+\newcommand{\pinover}[2]{\overset{\overset{\mathrm{\ #2\ }}{|}}{\strut #1 \strut}}
+\newcommand{\addright}[1]{{\color{blue}{{{}+#1}}}}
+\newcommand{\addleft}[1]{{\color{blue}{{#1+{}}}}}
+\newcommand{\subtractright}[1]{{\color{blue}{{{}-#1}}}}
+\newcommand{\multiplyright}[2][\cdot]{{\color{blue}{{{}#1#2}}}}
+\newcommand{\multiplyleft}[2][\cdot]{{\color{blue}{{#2#1{}}}}}
+\newcommand{\divideunder}[2]{\frac{#1}{{\color{blue}{{#2}}}}}
+\newcommand{\divideright}[1]{{\color{blue}{{{}\div#1}}}}
+\newcommand{\negate}[1]{{\color{blue}{{-}}}\left(#1\right)}
+\newcommand{\cancelhighlight}[1]{\definecolor{sapphire}{RGB}{59,90,125}{\color{sapphire}{{\cancel{#1}}}}}
+\newcommand{\secondcancelhighlight}[1]{\definecolor{emerald}{RGB}{20,97,75}{\color{emerald}{{\bcancel{#1}}}}}
+\newcommand{\thirdcancelhighlight}[1]{\definecolor{amethyst}{RGB}{112,72,91}{\color{amethyst}{{\xcancel{#1}}}}}
+\newcommand{\confirm}[1]{\stackrel{\checkmark}{#1}}
+\newcommand{\reject}[1]{\stackrel{\text{no}}{#1}}
+\newcommand{\wonder}[1]{\stackrel{\text{?}}{#1}}
+\newcommand{\apple}{\text{🍎}}
+\newcommand{\banana}{\text{🍌}}
+\newcommand{\pear}{\text{🍐}}
+\newcommand{\cat}{\text{🐱}}
+\newcommand{\dog}{\text{🐶}}
+\newcommand{\lt}{&lt;}
+\newcommand{\gt}{&gt;}
+\newcommand{\amp}{&amp;}
+\)</div>
+<header id="masthead" class="smallbuttons"><div class="banner"><div class="container">
+<a id="logo-link" href="http://www.pcc.edu/ORCCA" target="_blank"><img src="images/ORCCAbrandlogo.png" alt="Logo image"></a><div class="title-container">
+<h1 class="heading"><a href="orcca.html"><span class="title">RVCC Elementary Algebra</span></a></h1>
+<p class="byline">Department of Mathematics and Computer Science</p>
+</div>
+</div></div>
+<nav xmlns:svg="http://www.w3.org/2000/svg" id="primary-navbar" class="navbar"><div class="container">
+<div class="navbar-top-buttons">
+<button class="sidebar-left-toggle-button button active" aria-label="Show or hide table of contents sidebar">Contents</button><div class="tree-nav toolbar toolbar-divisor-3">
+<a class="index-button toolbar-item button" href="index-1.html" title="Index">Index</a><span class="threebuttons"><a id="previousbutton" class="previous-button toolbar-item button" href="section-equations-in-two-variables.html" title="Previous">Prev</a><a id="upbutton" class="up-button button toolbar-item" href="chapter-graphing-equations.html" title="Up">Up</a><a id="nextbutton" class="next-button button toolbar-item" href="chapter-systems-of-linear-equations-in-two-variables.html" title="Next">Next</a></span>
+</div>
+</div>
+<div class="navbar-bottom-buttons toolbar toolbar-divisor-4">
+<button class="sidebar-left-toggle-button button toolbar-item active">Contents</button><a class="previous-button toolbar-item button" href="section-equations-in-two-variables.html" title="Previous">Prev</a><a class="up-button button toolbar-item" href="chapter-graphing-equations.html" title="Up">Up</a><a class="next-button button toolbar-item" href="chapter-systems-of-linear-equations-in-two-variables.html" title="Next">Next</a>
+</div>
+</div></nav></header><div class="page">
+<div xmlns:svg="http://www.w3.org/2000/svg" id="sidebar-left" class="sidebar" role="navigation"><div class="sidebar-content">
+<nav id="toc"><ul>
+<li class="link frontmatter">
+<a href="frontmatter.html" data-scroll="JVg"><span class="title">Front Matter</span></a><ul><li><a href="colophon-1.html" data-scroll="colophon-1">Colophon</a></li></ul>
+</li>
+<li class="link part"><a href="part-all-of-the-chapters.html" data-scroll="part-all-of-the-chapters"><span class="codenumber">I</span> <span class="title"></span></a></li>
+<li class="link">
+<a href="chapter-introduction-to-algebra.html" data-scroll="dNX"><span class="codenumber">1</span> <span class="title">Introduction to Algebra</span></a><ul>
+<li><a href="section-real-numbers-and-the-number-line.html" data-scroll="ipv">Real Numbers and the Number Line</a></li>
+<li><a href="section-properties-of-real-numbers.html" data-scroll="tNy">Properties of Real Numbers</a></li>
+<li><a href="section-simplifying-and-writing-algebraic-expressions.html" data-scroll="xRO">Simplifying and Writing Algebraic Expressions</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="chapter-linear-equations-and-inequalities-modified.html" data-scroll="sWV"><span class="codenumber">2</span> <span class="title">Linear Equations and Inequalities</span></a><ul>
+<li><a href="section-introduction-to-equations.html" data-scroll="fwy">Introduction to Equations</a></li>
+<li><a href="section-linear-equations.html" data-scroll="xVO">Linear Equations</a></li>
+<li><a href="section-introduction-to-problem-solving.html" data-scroll="Wul">Introduction to Problem Solving</a></li>
+<li><a href="section-formulas.html" data-scroll="Nnq">Formulas</a></li>
+<li><a href="section-linear-inequalities.html" data-scroll="Nuc">Linear Inequalities</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="chapter-graphing-equations.html" data-scroll="gID"><span class="codenumber">3</span> <span class="title">Graphing Lines</span></a><ul>
+<li><a href="section-introduction-to-graphing.html" data-scroll="YTJ">Introduction to Graphing</a></li>
+<li><a href="section-equations-in-two-variables.html" data-scroll="QXY">Equations in Two Variables</a></li>
+<li><a href="section-intercepts-horizontal-and-vertical-lines.html" data-scroll="ByF" class="active">Intercepts: Horizontal and Vertical Lines</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="chapter-systems-of-linear-equations-in-two-variables.html" data-scroll="xGO"><span class="codenumber">4</span> <span class="title">Systems of Linear Equations</span></a><ul>
+<li><a href="section-solving-systems-of-linear-equations-graphically-and-numerically.html" data-scroll="njo">Solving Systems of Linear Equations Graphically and Numerically</a></li>
+<li><a href="section-solving-systems-of-linear-equations-by-substitution.html" data-scroll="zdh">Solving Systems of Linear Equations by Substitution</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="chapter-polynomials-and-exponents-modified.html" data-scroll="onc"><span class="codenumber">5</span> <span class="title">Exponents and Polynomials</span></a><ul>
+<li><a href="section-rules-for-exponents.html" data-scroll="KHJ">Rules for Exponents</a></li>
+<li><a href="section-adding-and-subtracting-polynomials.html" data-scroll="VvN">Addition and Subtraction of Polynomials</a></li>
+<li><a href="section-multiplication-of-polynomials.html" data-scroll="IcY">Multiplication of Polynomials</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="chapter-radical-expressions-and-equations.html" data-scroll="chapter-radical-expressions-and-equations"><span class="codenumber">6</span> <span class="title">Radical Expressions and Equations</span></a><ul>
+<li><a href="section-introduction-to-factoring.html" data-scroll="duD">Introduction to Factoring</a></li>
+<li><a href="section-factoring-trinomials.html" data-scroll="Mrf">Factoring Trinomials</a></li>
+<li><a href="section-solving-equations-by-factoring.html" data-scroll="DXi">Solving Equations by Factoring 1 (Quadratics)</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="chapter-rational-expressions.html" data-scroll="RzF"><span class="codenumber">7</span> <span class="title">Rational Expressions</span></a><ul>
+<li><a href="section-introduction-to-rational-expressions.html" data-scroll="Moo">Introduction to Rational Expressions</a></li>
+<li><a href="section-multiplication-and-division-of-rational-expressions.html" data-scroll="Vps">Multiplication and Division of Rational Expressions</a></li>
+<li><a href="section-addition-and-subtraction-with-like-denominators.html" data-scroll="KBw">Addition and Subtraction of Rational Expressions with Like Denominators</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="chapter-radical-expressions-and-functions.html" data-scroll="chapter-radical-expressions-and-functions"><span class="codenumber">8</span> <span class="title">Quantities in the Physical World</span></a><ul><li><a href="section-radical-expressions-and-functions.html" data-scroll="GAK">Radical Expressions and Functions</a></li></ul>
+</li>
+<li class="link backmatter"><a href="backmatter.html" data-scroll="jDj"><span class="title">Appendices</span></a></li>
+<li class="link">
+<a href="appendix-basic-math-review.html" data-scroll="appendix-basic-math-review"><span class="codenumber">A</span> <span class="title">Basic Math Review</span></a><ul>
+<li><a href="section-arithmetic-with-negative-numbers.html" data-scroll="qBB">Arithmetic with Negative Numbers</a></li>
+<li><a href="section-fractions-and-fraction-arithmetic.html" data-scroll="VAa">Fractions and Fraction Arithmetic</a></li>
+<li><a href="section-absolute-value-and-square-root.html" data-scroll="GAK">Absolute Value and Square Root</a></li>
+<li><a href="section-percentages.html" data-scroll="Chi">Percentages</a></li>
+<li><a href="section-order-of-operations.html" data-scroll="aog">Order of Operations</a></li>
+<li><a href="section-set-notation-and-types-of-numbers.html" data-scroll="Fdo">Set Notation and Types of Numbers</a></li>
+</ul>
+</li>
+<li class="link"><a href="appendix-unit-conversions.html" data-scroll="appendix-unit-conversions"><span class="codenumber">B</span> <span class="title">Unit Conversions</span></a></li>
+<li class="link"><a href="index-1.html" data-scroll="index-1"><span class="title">Index</span></a></li>
+</ul></nav><div class="extras"><nav><a class="mathbook-link" href="https://pretextbook.org">Authored in PreTeXt</a><a href="https://www.mathjax.org"><img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" alt="Powered by MathJax"></a></nav></div>
+</div></div>
+<main class="main"><div id="content" class="pretext-content"><section xmlns:svg="http://www.w3.org/2000/svg" class="section" id="ByF"><h2 class="heading hide-type">
+<span class="type">Section</span> <span class="codenumber">3.3</span> <span class="title">Intercepts: Horizontal and Vertical Lines</span>
+</h2>
+<section class="introduction" id="AKU"><p id="DTV">The equations of horizontal and vertical lines distinguish them from other line equations enough to merit a special investigation. In addition, pairs of lines that are parallel or perpendicular to each other have interesting features and properties. This section examines the geometric features of these types of lines.</p>
+<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;">
+<div class="sbspanel top" style="width:47%;"><figure class="figure figure-like" id="xuP"><img src="images/image-64.svg" role="img" class="contained" alt="the graph of a horizontal line passing through the point (0,3)"><div class="image-archive">
+<a href="images/image-64.eps">eps</a><a href="images/image-64.pdf">pdf</a><a href="images/image-64.png">png</a><a href="images/image-64.svg">svg</a><a href="images/image-64.tex">tex</a>
+</div>
+<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">3.3.1<span class="period">.</span></span><span class="space"> </span>Horizontal Line</figcaption></figure></div>
+<div class="sbspanel top" style="width:47%;"><figure class="figure figure-like" id="dBY"><img src="images/image-65.svg" role="img" class="contained" alt="the graph of a vertical line passing through the point (3,0)"><div class="image-archive">
+<a href="images/image-65.eps">eps</a><a href="images/image-65.pdf">pdf</a><a href="images/image-65.png">png</a><a href="images/image-65.svg">svg</a><a href="images/image-65.tex">tex</a>
+</div>
+<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">3.3.2<span class="period">.</span></span><span class="space"> </span>Vertical Line</figcaption></figure></div>
+</div></div>
+<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;">
+<div class="sbspanel top" style="width:47%;"><figure class="figure figure-like" id="JJh"><img src="images/image-66.svg" role="img" class="contained" alt="the graph of two parallel slanted lines"><div class="image-archive">
+<a href="images/image-66.eps">eps</a><a href="images/image-66.pdf">pdf</a><a href="images/image-66.png">png</a><a href="images/image-66.svg">svg</a><a href="images/image-66.tex">tex</a>
+</div>
+<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">3.3.3<span class="period">.</span></span><span class="space"> </span>Two Parallel Lines</figcaption></figure></div>
+<div class="sbspanel top" style="width:47%;"><figure class="figure figure-like" id="pQq"><img src="images/image-67.svg" role="img" class="contained" alt="the graph of a slanted line and the line that crosses it at a 90 degree angle"><div class="image-archive">
+<a href="images/image-67.eps">eps</a><a href="images/image-67.pdf">pdf</a><a href="images/image-67.png">png</a><a href="images/image-67.svg">svg</a><a href="images/image-67.tex">tex</a>
+</div>
+<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">3.3.4<span class="period">.</span></span><span class="space"> </span>Two Perpendicular Lines</figcaption></figure></div>
+</div></div></section><section class="subsection" id="KVE"><h3 class="heading hide-type">
+<span class="type">Subsection</span> <span class="codenumber">3.3.1</span> <span class="title">Horizontal Lines and Vertical Lines</span>
+</h3>
+<p id="yeJ">We learned in <code class="code-inline tex2jax_ignore">[cross-reference to target(s) "section-standard-form" missing or not unique]</code> that all lines can be written in <code class="code-inline tex2jax_ignore">[cross-reference to target(s) "equation-standard-form" missing or not unique]</code>. When either \(A\) or \(B\) equal \(0\text{,}\) we end up with a horizontal or vertical line, as we will soon see. Let's take the standard form line equation, \(Ax+Bx=C\text{,}\) and one at a time let \(A=0\) and \(B=0\) and simplify each equation.</p>
+<div class="displaymath" id="elS">
+\begin{align*}
+Ax+By\amp=C\amp Ax+By\amp=C\\
+\substitute{0}x+By\amp=C\amp Ax+\substitute{0}y\amp=C\\
+By\amp=C\amp Ax\amp=C\\
+y\amp=\divideunder{C}{B}\amp x\amp=\divideunder{C}{A}\\
+y\amp=k\amp x\amp=h
+\end{align*}
+</div>
+<p class="continuation">At the end we just renamed the constant numbers \(\frac{C}{B}\) and \(\frac{C}{A}\) to \(k\) and \(h\) because of tradition. What is important, is that you view \(h\) and \(k\) (as well as \(A\text{,}\) \(B\text{,}\) and \(C\)) as constants: numbers that have some specific value and don't change in the context of one problem.</p>
+<p id="Ktb">Think about one of these equations: \(y=k\text{.}\) It says that the \(y\)-value is the same no matter where you are on the line. If you wanted to plot points on this line, you are free to move far to the left or far to the right on the \(x\)-axis, but then you always move up (or down) to make the \(y\)-value equal \(k\text{.}\) What does such a line look like?</p>
+<article class="example example-like" id="MKR"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-MKR"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">3.3.5</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-MKR"><article class="example example-like"><div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;">
+<div class="sbspanel top" style="width:47%;"><p id="p-640">Let's plot the line with equation \(y=3\text{.}\) (Note that this is the same as \(0x+1y=3\text{.}\)) To plot some points, it doesn't matter what \(x\)-values we use. All that matters is that \(y\) is <em class="emphasis">always</em> \(3\text{.}\)</p></div>
+<div class="sbspanel top" style="width:47%;"><figure class="figure figure-like" id="mlQ"><img src="images/image-68.svg" role="img" class="contained" alt="a horizontal line at y=3"><div class="image-archive">
+<a href="images/image-68.eps">eps</a><a href="images/image-68.pdf">pdf</a><a href="images/image-68.png">png</a><a href="images/image-68.svg">svg</a><a href="images/image-68.tex">tex</a>
+</div>
+<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">3.3.6<span class="period">.</span></span><span class="space"> </span>\(y=3\)</figcaption></figure></div>
+</div></div>
+<p id="GeH">A line like this is <dfn class="terminology">horizontal</dfn>,  parallel to the horizontal axis. All lines with an equation in the form</p>
+<div class="displaymath">
+\begin{equation*}
+y=k
+\end{equation*}
+</div>
+<p class="continuation">(or, in standard form, \(0x+By=C\)) are <dfn class="terminology">horizontal</dfn>.</p></article></div>
+<article class="example example-like" id="sSa"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-sSa"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">3.3.7</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-sSa"><article class="example example-like"><div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;">
+<div class="sbspanel top" style="width:47%;">
+<p id="p-642">Let's plot the line with equation \(x=5\text{.}\) Points on the line always have \(x=5\text{,}\) so if we wanted to make a table for plotting points, we are <em class="emphasis">required</em> to make all of the \(x\)-values be \(5\text{.}\) From there, we have complete freedom to let \(y\) take any value. Here we take some random \(y\)-values.</p>
+<table class="tabular">
+<tr>
+<td class="l m b2 r1 l0 t0 lines">\(x\)</td>
+<td class="l m b2 r0 l0 t0 lines">\(y\)</td>
+</tr>
+<tr>
+<td class="l m b0 r1 l0 t0 lines">\(5\)</td>
+<td class="l m b0 r0 l0 t0 lines">\(-6\)</td>
+</tr>
+<tr>
+<td class="l m b0 r1 l0 t0 lines">\(5\)</td>
+<td class="l m b0 r0 l0 t0 lines">\(-2\)</td>
+</tr>
+<tr>
+<td class="l m b0 r1 l0 t0 lines">\(5\)</td>
+<td class="l m b0 r0 l0 t0 lines">\(1\)</td>
+</tr>
+<tr>
+<td class="l m b0 r1 l0 t0 lines">\(5\)</td>
+<td class="l m b0 r0 l0 t0 lines">\(5\)</td>
+</tr>
+</table>
+<p id="p-643">These points are plotted in <a class="xref" data-knowl="./knowl/figure-vertical-line-example.html" title="Figure 3.3.8">Figure 3.3.8</a>.</p>
+</div>
+<div class="sbspanel top" style="width:47%;"><figure class="figure figure-like" id="KOA"><img src="images/image-69.svg" role="img" class="contained" alt="a vertical line at x=5"><div class="image-archive">
+<a href="images/image-69.eps">eps</a><a href="images/image-69.pdf">pdf</a><a href="images/image-69.png">png</a><a href="images/image-69.svg">svg</a><a href="images/image-69.tex">tex</a>
+</div>
+<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">3.3.8<span class="period">.</span></span><span class="space"> </span>\(x=5\)</figcaption></figure></div>
+</div></div>
+<p id="p-644">Note that the equation for this line is the same as \(x+0y=5\text{.}\) An alternative for making a table is to choose our \(y\)-values first and substitute them into the equation.</p>
+<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular">
+<tr>
+<td class="l m b2 r0 l0 t0 lines">\(y\)</td>
+<td class="l m b2 r1 l0 t0 lines">\(x+0y=5\implies x=5\)</td>
+<td class="l m b2 r0 l0 t0 lines">Ordered Pair</td>
+</tr>
+<tr>
+<td class="l m b0 r0 l0 t0 lines">\(-6\)</td>
+<td class="l m b0 r1 l0 t0 lines">\(x+0(-6)=5\implies x=5\)</td>
+<td class="l m b0 r0 l0 t0 lines">\((5,-6)\)</td>
+</tr>
+<tr>
+<td class="l m b0 r0 l0 t0 lines">\(-2\)</td>
+<td class="l m b0 r1 l0 t0 lines">\(x+0(-2)=5\implies x=5\)</td>
+<td class="l m b0 r0 l0 t0 lines">\((5,-2)\)</td>
+</tr>
+<tr>
+<td class="l m b0 r0 l0 t0 lines">\(1\)</td>
+<td class="l m b0 r1 l0 t0 lines">\(x+0(1)=5\implies x=5\)</td>
+<td class="l m b0 r0 l0 t0 lines">\((5,1)\)</td>
+</tr>
+<tr>
+<td class="l m b0 r0 l0 t0 lines">\(5\)</td>
+<td class="l m b0 r1 l0 t0 lines">\(x+0(5)=5\implies x=5\)</td>
+<td class="l m b0 r0 l0 t0 lines">\((5,5)\)</td>
+</tr>
+</table></div></div></div>
+<p id="p-645">In each case no matter what value \(y\) is, we find that the equation tells us that \(x=5\text{.}\)</p>
+<p id="eHr">A line like this is <dfn class="terminology">vertical</dfn>,  parallel to the vertical axis. All lines with an equation in the form</p>
+<div class="displaymath">
+\begin{equation*}
+x=h
+\end{equation*}
+</div>
+<p class="continuation">(or, in standard form, \(Ax+0y=C\)) are vertical.</p></article></div>
+<article class="example example-like" id="YZj"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-YZj"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">3.3.9</span><span class="period">.</span><span class="space"> </span><span class="title">Zero Slope.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-YZj"><article class="example example-like"><p id="qVJ">In <code class="code-inline tex2jax_ignore">[cross-reference to target(s) "exercise-jogging-on-mt-hood" missing or not unique]</code>, we learned that a horizontal line's slope is \(0\text{,}\) because the distance doesn't change as time moves on. So the numerator in the <code class="code-inline tex2jax_ignore">[cross-reference to target(s) "equation-slope-formula" missing or not unique]</code> is \(0\text{.}\) Now, if we know a line's slope and its \(y\)-intercept, we can use <code class="code-inline tex2jax_ignore">[cross-reference to target(s) "equation-slope-intercept-form" missing or not unique]</code> to write its equation:</p>
+<div class="displaymath">
+\begin{align*}
+y\amp=mx+b\\
+y\amp=0x+b\\
+y\amp=b
+\end{align*}
+</div>
+<p class="continuation">This provides us with an alternative way to think about equations of horizontal lines. They have a certain \(y\)-intercept \(b\text{,}\) and they have slope \(0\text{.}\)</p>
+<p id="XcS">We use horizontal lines to model scenarios where there is no change in \(y\)-values, like when Kato stopped for \(12\) hours (he deserved a rest)!</p></article></div>
+<article class="exercise exercise-like" id="ncO"><a data-knowl="" class="id-ref exercise-knowl original" data-refid="hk-ncO"><h6 class="heading">
+<span class="type">Checkpoint</span><span class="space"> </span><span class="codenumber">3.3.10</span><span class="period">.</span><span class="space"> </span><span class="title">Plotting Points.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-ncO"><article class="exercise exercise-like"><p id="p-649">The WeBWorK problem with ID “webwork-40” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article></div>
+<article class="example example-like" id="Fgs"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-Fgs"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">3.3.11</span><span class="period">.</span><span class="space"> </span><span class="title">Slope of a Vertical Line.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-Fgs"><article class="example example-like"><p id="Dkb">What is the slope of a vertical line? <a class="xref" data-knowl="./knowl/figure-vertical-lines.html" title="Figure 3.3.12">Figure 3.3.12</a> shows three lines passing through the origin, each steeper than the last. In each graph, you can see a slope triangle that uses a “run” of \(1\) unit.</p>
+<figure class="figure figure-like" id="vFC"><div class="sidebyside"><div class="sbsrow" style="margin-left:0.666666666666667%;margin-right:0.666666666666667%;">
+<div class="sbspanel top" style="width:32.4324324324324%;">
+<img src="images/image-70.svg" role="img" class="contained" alt="a line with a slope of 1/1=1"><div class="image-archive">
+<a href="images/image-70.eps">eps</a><a href="images/image-70.pdf">pdf</a><a href="images/image-70.png">png</a><a href="images/image-70.svg">svg</a><a href="images/image-70.tex">tex</a>
+</div>
+</div>
+<div class="sbspanel top" style="width:32.4324324324324%;">
+<img src="images/image-71.svg" role="img" class="contained" alt="a line with a slope of 2/1=2, which is steeper than the first line"><div class="image-archive">
+<a href="images/image-71.eps">eps</a><a href="images/image-71.pdf">pdf</a><a href="images/image-71.png">png</a><a href="images/image-71.svg">svg</a><a href="images/image-71.tex">tex</a>
+</div>
+</div>
+<div class="sbspanel top" style="width:32.4324324324324%;">
+<img src="images/image-72.svg" role="img" class="contained" alt="a line with a slope of 4/1=4, which is steeper than the previous two lines"><div class="image-archive">
+<a href="images/image-72.eps">eps</a><a href="images/image-72.pdf">pdf</a><a href="images/image-72.png">png</a><a href="images/image-72.svg">svg</a><a href="images/image-72.tex">tex</a>
+</div>
+</div>
+</div></div>
+<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">3.3.12<span class="period">.</span></span><span class="space"> </span></figcaption></figure><p id="jrk">If we continued making the line steeper and steeper until it was vertical, the slope triangle would still have a “run” of \(1\text{,}\) but the “rise” would become larger and larger with no upper limit. The slope would be \(m=\frac{\text{very large}}{1}\text{.}\) Actually if the line is vertical, the “rise” segment we've drawn, will never intercept the line. So the slope of a vertical line can be thought of as “infinitely large.” We usually say that the slope of a vertical line is <em class="emphasis">undefined</em>. Some people say that a vertical line <em class="emphasis">has no slope.</em></p></article></div>
+<article class="fact theorem-like" id="fact-undefined-slope"><h6 class="heading">
+<span class="type">Fact</span><span class="space"> </span><span class="codenumber">3.3.13</span><span class="period">.</span>
+</h6>
+<p id="p-652">The slope of a vertical line is undefined.</p></article><article class="remark remark-like" id="RuK"><h6 class="heading">
+<span class="type">Remark</span><span class="space"> </span><span class="codenumber">3.3.14</span><span class="period">.</span>
+</h6>
+<p id="RnG">Be careful not to mix up “no slope” (which means “its slope is undefined”) with “has slope \(0\text{.}\)” If a line has slope \(0\text{,}\) it <em class="emphasis">does</em> have a slope.</p>
+<p id="p-654">If you are familiar with NBA basketball, some players wear number \(0\text{.}\) That's not the same thing as “not having a number”. This is similar to the situation with having slope \(0\) versus not having slope.</p></article><article class="exercise exercise-like" id="TjX"><a data-knowl="" class="id-ref exercise-knowl original" data-refid="hk-TjX"><h6 class="heading">
+<span class="type">Checkpoint</span><span class="space"> </span><span class="codenumber">3.3.15</span><span class="period">.</span><span class="space"> </span><span class="title">Plotting Points.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-TjX"><article class="exercise exercise-like"><p id="p-655">The WeBWorK problem with ID “webwork-41” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article></div>
+<article class="example example-like" id="lnB"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-lnB"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">3.3.16</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-lnB"><article class="example example-like"><p id="bML">Let \(x\) represent the price of a new \(60\)-inch television at Target on Black Friday (which was \(\$650\)), and let \(y\) be the number of hours you will watch something on this TV over its lifetime. What is the relationship between \(x\) and \(y\text{?}\)</p>
+<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;">
+<div class="sbspanel top" style="width:47%;"><p id="HTU">Well, there is no getting around the fact that \(x=650\text{.}\) As for \(y\text{,}\) without any extra information about your viewing habits, it could theoretically be as low as \(0\) or it could be anything larger than that. If we graph this scenario, we have to graph the equation \(x=650\) which we now know to give a vertical line, and we get <a class="xref" data-knowl="./knowl/figure-television.html" title="Figure 3.3.17">Figure 3.3.17</a>.</p></div>
+<div class="sbspanel top" style="width:47%;"><figure class="figure figure-like" id="obd"><img src="images/image-73.svg" role="img" class="contained" alt="the vertical line x=650, starting at the point (650,0) with an arrow pointing upward"><div class="image-archive">
+<a href="images/image-73.eps">eps</a><a href="images/image-73.pdf">pdf</a><a href="images/image-73.png">png</a><a href="images/image-73.svg">svg</a><a href="images/image-73.tex">tex</a>
+</div>
+<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">3.3.17<span class="period">.</span></span><span class="space"> </span>New TV: hours watched versus purchase price; negative \(y\)-values omitted since they make no sense in context</figcaption></figure></div>
+</div></div></article></div>
+<figure class="figure figure-like" id="gDI"><div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular" id="gKZ">
+<tr>
+<td class="l t b2 r2 l0 t0 lines">Horizontal Lines</td>
+<td class="l t b2 r0 l0 t0 lines">Vertical Lines</td>
+</tr>
+<tr>
+<td class="l t b1 r2 l0 t0" style="max-width:282px;">
+<p id="VXz">A line is <dfn class="terminology">horizontal</dfn> if and only if its equation can be written</p>
+<div class="displaymath">
+\begin{equation*}
+y=k
+\end{equation*}
+</div>
+<p class="continuation">for some constant \(k\text{.}\)</p>
+</td>
+<td class="l t b1 r0 l0 t0" style="max-width:282px;">
+<p id="CeI">A line is <dfn class="terminology">vertical</dfn> if and only if its equation can be written</p>
+<div class="displaymath">
+\begin{equation*}
+x=h
+\end{equation*}
+</div>
+<p class="continuation">for some constant \(h\text{.}\)</p>
+</td>
+</tr>
+<tr>
+<td class="l t b1 r2 l0 t0" style="max-width:282px;">
+<p id="ilR">In <code class="code-inline tex2jax_ignore">[cross-reference to target(s) "equation-standard-form" missing or not unique]</code>, any line with equation</p>
+<div class="displaymath">
+\begin{equation*}
+0x+By=C
+\end{equation*}
+</div>
+<p class="continuation">is horizontal.</p>
+</td>
+<td class="l t b1 r0 l0 t0" style="max-width:282px;">
+<p id="Ota">In <code class="code-inline tex2jax_ignore">[cross-reference to target(s) "equation-standard-form" missing or not unique]</code>, any line with equation</p>
+<div class="displaymath">
+\begin{equation*}
+Ax+0y=C
+\end{equation*}
+</div>
+<p class="continuation">is vertical.</p>
+</td>
+</tr>
+<tr>
+<td class="l t b1 r2 l0 t0" style="max-width:282px;"><p id="uAj">If the line with equation \(y=k\) is horizontal, it has a \(y\)-intercept at \((0,k)\) and has slope \(0\text{.}\)</p></td>
+<td class="l t b1 r0 l0 t0" style="max-width:282px;"><p id="aHs">If the line with equation \(x=h\) is vertical, it has an \(x\)-intercept at \((h,0)\) and its slope is <em class="emphasis">undefined</em>. Some say it has <em class="emphasis">no</em> slope, and some say the slope is <em class="emphasis">infinitely large</em>.</p></td>
+</tr>
+<tr>
+<td class="l t b0 r2 l0 t0" style="max-width:282px;">
+<p id="GOB">In the <code class="code-inline tex2jax_ignore">[cross-reference to target(s) "equation-slope-intercept-form" missing or not unique]</code>, any line with equation</p>
+<div class="displaymath">
+\begin{equation*}
+y=0x+b
+\end{equation*}
+</div>
+<p class="continuation">is horizontal.</p>
+</td>
+<td class="l t b0 r0 l0 t0" style="max-width:282px;"><p id="mVK">It's impossible to write the equation of a vertical line in <code class="code-inline tex2jax_ignore">[cross-reference to target(s) "equation-slope-intercept-form" missing or not unique]</code>, because vertical lines do not have a defined slope.</p></td>
+</tr>
+</table></div></div></div>
+<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">3.3.18<span class="period">.</span></span><span class="space"> </span>Summary of Horizontal and Vertical Line Equations</figcaption></figure></section><section class="subsection" id="rcN"><h3 class="heading hide-type">
+<span class="type">Subsection</span> <span class="codenumber">3.3.2</span> <span class="title">Parallel Lines</span>
+</h3>
+<article class="example example-like" id="zrg"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-zrg"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">3.3.19</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-zrg"><article class="example example-like"><div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;">
+<div class="sbspanel top" style="width:47%;">
+<p id="Uim">Two trees were planted in the same year, and their growth over time is modeled by the two lines in <a class="xref" data-knowl="./knowl/figure-trees.html" title="Figure 3.3.20">Figure 3.3.20</a>. Use linear equations to model each tree's growth, and interpret their meanings in this context.</p>
+<p id="Apv">We can see Tree 1's equation is \(y=\frac{2}{3}x+2\text{,}\) and Tree 2's equation is \(y=\frac{2}{3}x+5\text{.}\) Tree 1 was \(2\) feet tall when it was planted, and Tree 2 was \(5\) feet tall when it was planted. Both trees have been growing at the same rate, \(\frac{2}{3}\) feet per year, or \(2\) feet every \(3\) years.</p>
+</div>
+<div class="sbspanel top" style="width:47%;"><figure class="figure figure-like" id="MDN"><img src="images/image-74.svg" role="img" class="contained" alt="This is a Cartesian grid with two parallel lines. Tree 1 has a slope triangle from (0,2) to (3,4) for a slope of 2/3. Tree 2 has a slope triangle from (0,5) to (3.7) for a slope of 2/3."><div class="image-archive">
+<a href="images/image-74.eps">eps</a><a href="images/image-74.pdf">pdf</a><a href="images/image-74.png">png</a><a href="images/image-74.svg">svg</a><a href="images/image-74.tex">tex</a>
+</div>
+<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">3.3.20<span class="period">.</span></span><span class="space"> </span>Two Trees' Growth Chart</figcaption></figure></div>
+</div></div>
+<p id="gwE">An important observation right now is that those two lines are parallel. Why? For lines with positive slopes, the bigger a line's slope, the steeper the line is slanted. As a result, if two lines have the same slope, they are slanted at the same angle, thus they are parallel.</p></article></div>
+<article class="fact theorem-like" id="fyp"><h6 class="heading">
+<span class="type">Fact</span><span class="space"> </span><span class="codenumber">3.3.21</span><span class="period">.</span>
+</h6>
+<p id="YSf">Any two vertical lines are parallel to each other. For two non-vertical lines, they are parallel if and only if they have the same slope.</p></article><article class="exercise exercise-like" id="rMH"><a data-knowl="" class="id-ref exercise-knowl original" data-refid="hk-rMH"><h6 class="heading">
+<span class="type">Checkpoint</span><span class="space"> </span><span class="codenumber">3.3.22</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-rMH"><article class="exercise exercise-like"><p id="p-670">The WeBWorK problem with ID “webwork-42” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article></div>
+<article class="exercise exercise-like" id="XTQ"><a data-knowl="" class="id-ref exercise-knowl original" data-refid="hk-XTQ"><h6 class="heading">
+<span class="type">Checkpoint</span><span class="space"> </span><span class="codenumber">3.3.23</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-XTQ"><article class="exercise exercise-like"><p id="p-671">The WeBWorK problem with ID “webwork-43” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article></div></section><section class="subsection" id="XjW"><h3 class="heading hide-type">
+<span class="type">Subsection</span> <span class="codenumber">3.3.3</span> <span class="title">Perpendicular Lines</span>
+</h3>
+<p id="qAk">The slopes of two perpendicular lines have a special relationship too.</p>
+<p id="WHt"><a class="xref" data-knowl="./knowl/figure-perpendicular-lines.html" title="Figure 3.3.24">Figure 3.3.24</a> walks you through an explanation of this relationship.</p>
+<figure class="figure figure-like" id="PcU"><div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;">
+<div class="sbspanel top" style="width:31%;"><figure class="figure figure-like" id="TcT"><img src="images/image-75.svg" role="img" class="contained" alt="the graph of two perpendicular lines, where one has a slope of m"><div class="image-archive">
+<a href="images/image-75.eps">eps</a><a href="images/image-75.pdf">pdf</a><a href="images/image-75.png">png</a><a href="images/image-75.svg">svg</a><a href="images/image-75.tex">tex</a>
+</div>
+<figcaption><span class="codenumber">(a)</span><span class="space"> </span>Two generic perpendicular lines, where one has slope \(m\text{.}\)</figcaption></figure></div>
+<div class="sbspanel top" style="width:31%;"><figure class="figure figure-like" id="zkc"><img src="images/image-76.svg" role="img" class="contained" alt="the previous graph with a slope triangle added; the rise is m and the run is 1"><div class="image-archive">
+<a href="images/image-76.eps">eps</a><a href="images/image-76.pdf">pdf</a><a href="images/image-76.png">png</a><a href="images/image-76.svg">svg</a><a href="images/image-76.tex">tex</a>
+</div>
+<figcaption><span class="codenumber">(b)</span><span class="space"> </span>Since the one slope is \(m\text{,}\) we can draw a slope triangle with “run” \(1\) and “rise” \(m\text{.}\)</figcaption></figure></div>
+<div class="sbspanel top" style="width:31%;"><figure class="figure figure-like" id="frl"><img src="images/image-77.svg" role="img" class="contained" alt="the previous graph with the perpendicular line and its slope triangle added; the perpendicular line has a rise of -1 and a run of m which gives a slope of -1/m"><div class="image-archive">
+<a href="images/image-77.eps">eps</a><a href="images/image-77.pdf">pdf</a><a href="images/image-77.png">png</a><a href="images/image-77.svg">svg</a><a href="images/image-77.tex">tex</a>
+</div>
+<figcaption><span class="codenumber">(c)</span><span class="space"> </span>A <em class="emphasis">congruent</em> slope triangle can be drawn for the perpendicular line. It's legs have the same lengths, but in different positions, and one is negative.</figcaption></figure></div>
+</div></div>
+<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">3.3.24<span class="period">.</span></span><span class="space"> </span>The relationship between slopes of perpendicular lines</figcaption></figure><p id="COC">The second line in <a class="xref" data-knowl="./knowl/figure-perpendicular-lines.html" title="Figure 3.3.24">Figure 3.3.24</a> has slope</p>
+<div class="displaymath">
+\begin{equation*}
+\frac{\Delta y}{\Delta x}=\frac{-1}{m}=-\frac{1}{m}\text{.}
+\end{equation*}
+</div>
+<article class="fact theorem-like" id="kii"><h6 class="heading">
+<span class="type">Fact</span><span class="space"> </span><span class="codenumber">3.3.25</span><span class="period">.</span>
+</h6>
+<p id="EZo">A vertical line and a horizontal line are perpendicular. For two lines that are neither vertical nor horizontal, they are perpendicular if and only if the slope of one is the negative reciprocal of the slope of the other. That is, if one has slope \(m\text{,}\) the other has slope \(-\frac{1}{m}\text{.}\)</p>
+<p id="lgx">Another way to say this is that the product of the slopes of two perpendicular lines is \(-1\) (assuming both of the lines have a slope in the first place). That is, if there are two perpendicular lines and we let \(m_1\) and \(m_2\) represent their slopes, then \(m_1\cdot m_2=-1\text{.}\)</p></article><p id="iVL">Not convinced? Here are three pairs of perpendicular lines where we can see if the pattern holds.</p>
+<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;">
+<div class="sbspanel top" style="width:31%;"><figure class="figure figure-like" id="Lyu"><img src="images/image-78.svg" role="img" class="contained" alt="the graph of lines y=2x-2 and y=-1/2x+2 showing that they are perpendicular lines."><div class="image-archive">
+<a href="images/image-78.eps">eps</a><a href="images/image-78.pdf">pdf</a><a href="images/image-78.png">png</a><a href="images/image-78.svg">svg</a><a href="images/image-78.tex">tex</a>
+</div>
+<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">3.3.26<span class="period">.</span></span><span class="space"> </span>Graphing \(y=2x-2\) and \(y=-\frac{1}{2}x+2\text{.}\) Note the relationship between their slopes: \(2=-\frac{1}{-\sfrac{1}{2}}\)</figcaption></figure></div>
+<div class="sbspanel top" style="width:31%;"><figure class="figure figure-like" id="rFD"><img src="images/image-79.svg" role="img" class="contained" alt="the graph of lines y=-3x+4 and y=1/3x-3 showing that they are perpendicular."><div class="image-archive">
+<a href="images/image-79.eps">eps</a><a href="images/image-79.pdf">pdf</a><a href="images/image-79.png">png</a><a href="images/image-79.svg">svg</a><a href="images/image-79.tex">tex</a>
+</div>
+<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">3.3.27<span class="period">.</span></span><span class="space"> </span>Graphing \(y=-3x+4\) and \(y=\frac{1}{3}x-3\text{.}\) Note the relationship between their slopes: \(-3=-\frac{1}{\sfrac{1}{3}}\)</figcaption></figure></div>
+<div class="sbspanel top" style="width:31%;"><figure class="figure figure-like" id="XMM"><img src="images/image-80.svg" role="img" class="contained" alt="the graph of lines y=x and y=-x showing that they are perpendicular"><div class="image-archive">
+<a href="images/image-80.eps">eps</a><a href="images/image-80.pdf">pdf</a><a href="images/image-80.png">png</a><a href="images/image-80.svg">svg</a><a href="images/image-80.tex">tex</a>
+</div>
+<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">3.3.28<span class="period">.</span></span><span class="space"> </span>Graphing \(y=x\) and \(y=-x\text{.}\) Note the relationship between their slopes: \(1=-\frac{1}{-1}\)</figcaption></figure></div>
+</div></div>
+<article class="example example-like" id="EaZ"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-EaZ"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">3.3.29</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-EaZ"><article class="example example-like"><p id="sKW">Line \(A\) passes through \((-2,10)\) and \((3,-10)\text{.}\) Line \(B\) passes through \((-4,-4)\) and \((8,-1)\text{.}\) Determine whether these two lines are parallel, perpendicular or neither.</p>
+<div class="solutions">
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-gSd" id="gSd"><span class="type">Explanation</span></a><div class="hidden-content tex2jax_ignore" id="hk-gSd"><div class="solution solution-like">
+<p id="wKV">We will use the slope formula to find both lines' slopes:</p>
+<div class="displaymath">
+\begin{align*}
+\text{Line }A\text{'s slope}\amp=\frac{y_2-y_1}{x_2-x_1}\amp\text{Line }B\text{'s slope}\amp=\frac{y_2-y_1}{x_2-x_1}\\
+\amp=\frac{-10-10}{3-(-2)}\amp\amp=\frac{-1-(-4)}{8-(-4)}\\
+\amp=\frac{-20}{5}\amp\amp=\frac{3}{12}\\
+\amp=-4\amp\amp=\frac{1}{4}
+\end{align*}
+</div>
+<p id="cSe">Their slopes are not the same, so those two lines are not parallel.</p>
+<p id="IZn">The product of their slopes is \((-4)\cdot\frac{1}{4}=-1\text{,}\) which means the two lines are perpendicular.</p>
+</div></div>
+</div></article></div>
+<article class="exercise exercise-like" id="cDJ"><a data-knowl="" class="id-ref exercise-knowl original" data-refid="hk-cDJ"><h6 class="heading">
+<span class="type">Checkpoint</span><span class="space"> </span><span class="codenumber">3.3.30</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-cDJ"><article class="exercise exercise-like"><p id="p-682">The WeBWorK problem with ID “webwork-44” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article></div></section><section class="reading-questions" id="reading-questions-12"><h3 class="heading hide-type">
+<span class="type">Reading Questions</span> <span class="codenumber">3.3.4</span> <span class="title">Reading Questions</span>
+</h3>
+<article class="exercise exercise-like" id="exercise-78"><h6 class="heading"><span class="codenumber">1<span class="period">.</span></span></h6>
+<p id="p-683">Explain the difference between a line that has no slope and a line that has slope \(0\text{.}\)</p></article><article class="exercise exercise-like" id="exercise-79"><h6 class="heading"><span class="codenumber">2<span class="period">.</span></span></h6>
+<p id="p-684">If you make a table of \(x\)- and \(y\)-values for either a horizontal line or a vertical line, what is going to happen in one of the two columns?</p></article><article class="exercise exercise-like" id="exercise-80"><h6 class="heading"><span class="codenumber">3<span class="period">.</span></span></h6>
+<p id="p-685">If you know two points on one line, and you know two points on a second line, what could you do to determine whether or not the two lines are perpendicular?</p></article></section></section></div></main>
+</div>
+</body>
+</html>

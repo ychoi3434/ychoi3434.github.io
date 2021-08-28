@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*       on 2021-08-28T19:50:40Z       *-->
+<!--*   A recent stable commit (2020-08-09):   *-->
+<!--* 98f21740783f166a773df4dc83cab5293ab63a4a *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<html lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>ORCCA Solving Equations by Factoring 1 (Quadratics)</title>
+<meta name="Keywords" content="Authored in PreTeXt">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+<script>window.MathJax = {
+  tex: {
+    inlineMath: [['\\(','\\)']],
+    tags: "none",
+    useLabelIds: true,
+    tagSide: "right",
+    tagIndent: ".8em",
+    packages: {'[+]': ['base', 'extpfeil', 'ams', 'amscd', 'newcommand', 'knowl', 'sfrac']}
+  },
+  options: {
+    ignoreHtmlClass: "tex2jax_ignore",
+    processHtmlClass: "has_am",
+  },
+  chtml: {
+    scale: 0.88,
+    mtextInheritFont: true
+  },
+  loader: {
+    load: ['input/asciimath', '[tex]/extpfeil', '[tex]/amscd', '[tex]/newcommand', '[pretext]/mathjaxknowl3.js'],
+    paths: {pretext: "https://pretextbook.org/js/lib"},
+  },
+/* support for the sfrac command in MathJax (Beveled fraction) */
+  startup: {
+    ready() {
+      //
+      // Creating a simple "sfrac" package on-the-fly
+      //
+      const Configuration = MathJax._.input.tex.Configuration.Configuration;
+      const CommandMap = MathJax._.input.tex.SymbolMap.CommandMap;
+      
+      new CommandMap('sfrac', {
+        sfrac: 'SFrac'
+        }, {
+        SFrac(parser, name) {
+        const num = parser.ParseArg(name);
+        const den = parser.ParseArg(name);
+        const frac = parser.create('node', 'mfrac', [num, den], {bevelled: true});
+        parser.Push(frac);
+        }
+      });
+      //
+      // Create the package for the overridden macros
+      //
+      Configuration.create('sfrac', {
+        handler: {macro: ['sfrac']}
+      });
+      
+    MathJax.startup.defaultReady();
+    }
+  },
+};
+</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext_add_on.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script xmlns:svg="http://www.w3.org/2000/svg">sagecellEvalName='Evaluate (Sage)';
+</script><link xmlns:svg="http://www.w3.org/2000/svg" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://fonts.googleapis.com/css?family=Inconsolata:400,700&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/pretext.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/pretext_add_on.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/banner_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/toc_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/knowls_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/style_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/colors_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/setcolors.css" rel="stylesheet" type="text/css">
+<!-- 2019-10-12: Temporary - CSS file for experiments with styling --><link xmlns:svg="http://www.w3.org/2000/svg" href="developer.css" rel="stylesheet" type="text/css">
+</head>
+<body id="PCC-ORCCA" class="mathbook-book has-toc has-sidebar-left">
+<a class="assistive" href="#content">Skip to main content</a><div xmlns:svg="http://www.w3.org/2000/svg" id="latex-macros" class="hidden-content" style="display:none">\(\require{cancel}\newcommand{\abs}[1]{\left\lvert#1\right\rvert}
+\newcommand{\point}[2]{\left(#1,#2\right)}
+\newcommand{\highlight}[1]{\definecolor{sapphire}{RGB}{59,90,125} {\color{sapphire}{{#1}}}}
+\newcommand{\firsthighlight}[1]{\definecolor{sapphire}{RGB}{59,90,125} {\color{sapphire}{{#1}}}}
+\newcommand{\secondhighlight}[1]{\definecolor{emerald}{RGB}{20,97,75} {\color{emerald}{{#1}}}}
+\newcommand{\unhighlight}[1]{{\color{black}{{#1}}}}
+\newcommand{\lowlight}[1]{{\color{lightgray}{#1}}}
+\newcommand{\attention}[1]{\mathord{\overset{\downarrow}{#1}}}
+\newcommand{\nextoperation}[1]{\mathord{\boxed{#1}}}
+\newcommand{\substitute}[1]{{\color{blue}{{#1}}}}
+\newcommand{\pinover}[2]{\overset{\overset{\mathrm{\ #2\ }}{|}}{\strut #1 \strut}}
+\newcommand{\addright}[1]{{\color{blue}{{{}+#1}}}}
+\newcommand{\addleft}[1]{{\color{blue}{{#1+{}}}}}
+\newcommand{\subtractright}[1]{{\color{blue}{{{}-#1}}}}
+\newcommand{\multiplyright}[2][\cdot]{{\color{blue}{{{}#1#2}}}}
+\newcommand{\multiplyleft}[2][\cdot]{{\color{blue}{{#2#1{}}}}}
+\newcommand{\divideunder}[2]{\frac{#1}{{\color{blue}{{#2}}}}}
+\newcommand{\divideright}[1]{{\color{blue}{{{}\div#1}}}}
+\newcommand{\negate}[1]{{\color{blue}{{-}}}\left(#1\right)}
+\newcommand{\cancelhighlight}[1]{\definecolor{sapphire}{RGB}{59,90,125}{\color{sapphire}{{\cancel{#1}}}}}
+\newcommand{\secondcancelhighlight}[1]{\definecolor{emerald}{RGB}{20,97,75}{\color{emerald}{{\bcancel{#1}}}}}
+\newcommand{\thirdcancelhighlight}[1]{\definecolor{amethyst}{RGB}{112,72,91}{\color{amethyst}{{\xcancel{#1}}}}}
+\newcommand{\confirm}[1]{\stackrel{\checkmark}{#1}}
+\newcommand{\reject}[1]{\stackrel{\text{no}}{#1}}
+\newcommand{\wonder}[1]{\stackrel{\text{?}}{#1}}
+\newcommand{\apple}{\text{🍎}}
+\newcommand{\banana}{\text{🍌}}
+\newcommand{\pear}{\text{🍐}}
+\newcommand{\cat}{\text{🐱}}
+\newcommand{\dog}{\text{🐶}}
+\newcommand{\lt}{&lt;}
+\newcommand{\gt}{&gt;}
+\newcommand{\amp}{&amp;}
+\)</div>
+<header id="masthead" class="smallbuttons"><div class="banner"><div class="container">
+<a id="logo-link" href="http://www.pcc.edu/ORCCA" target="_blank"><img src="images/ORCCAbrandlogo.png" alt="Logo image"></a><div class="title-container">
+<h1 class="heading"><a href="orcca.html"><span class="title">RVCC Elementary Algebra</span></a></h1>
+<p class="byline">Department of Mathematics and Computer Science</p>
+</div>
+</div></div>
+<nav xmlns:svg="http://www.w3.org/2000/svg" id="primary-navbar" class="navbar"><div class="container">
+<div class="navbar-top-buttons">
+<button class="sidebar-left-toggle-button button active" aria-label="Show or hide table of contents sidebar">Contents</button><div class="tree-nav toolbar toolbar-divisor-3">
+<a class="index-button toolbar-item button" href="index-1.html" title="Index">Index</a><span class="threebuttons"><a id="previousbutton" class="previous-button toolbar-item button" href="section-factoring-trinomials.html" title="Previous">Prev</a><a id="upbutton" class="up-button button toolbar-item" href="chapter-radical-expressions-and-equations.html" title="Up">Up</a><a id="nextbutton" class="next-button button toolbar-item" href="chapter-rational-expressions.html" title="Next">Next</a></span>
+</div>
+</div>
+<div class="navbar-bottom-buttons toolbar toolbar-divisor-4">
+<button class="sidebar-left-toggle-button button toolbar-item active">Contents</button><a class="previous-button toolbar-item button" href="section-factoring-trinomials.html" title="Previous">Prev</a><a class="up-button button toolbar-item" href="chapter-radical-expressions-and-equations.html" title="Up">Up</a><a class="next-button button toolbar-item" href="chapter-rational-expressions.html" title="Next">Next</a>
+</div>
+</div></nav></header><div class="page">
+<div xmlns:svg="http://www.w3.org/2000/svg" id="sidebar-left" class="sidebar" role="navigation"><div class="sidebar-content">
+<nav id="toc"><ul>
+<li class="link frontmatter">
+<a href="frontmatter.html" data-scroll="JVg"><span class="title">Front Matter</span></a><ul><li><a href="colophon-1.html" data-scroll="colophon-1">Colophon</a></li></ul>
+</li>
+<li class="link part"><a href="part-all-of-the-chapters.html" data-scroll="part-all-of-the-chapters"><span class="codenumber">I</span> <span class="title"></span></a></li>
+<li class="link">
+<a href="chapter-introduction-to-algebra.html" data-scroll="dNX"><span class="codenumber">1</span> <span class="title">Introduction to Algebra</span></a><ul>
+<li><a href="section-real-numbers-and-the-number-line.html" data-scroll="ipv">Real Numbers and the Number Line</a></li>
+<li><a href="section-properties-of-real-numbers.html" data-scroll="tNy">Properties of Real Numbers</a></li>
+<li><a href="section-simplifying-and-writing-algebraic-expressions.html" data-scroll="xRO">Simplifying and Writing Algebraic Expressions</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="chapter-linear-equations-and-inequalities-modified.html" data-scroll="sWV"><span class="codenumber">2</span> <span class="title">Linear Equations and Inequalities</span></a><ul>
+<li><a href="section-introduction-to-equations.html" data-scroll="fwy">Introduction to Equations</a></li>
+<li><a href="section-linear-equations.html" data-scroll="xVO">Linear Equations</a></li>
+<li><a href="section-introduction-to-problem-solving.html" data-scroll="Wul">Introduction to Problem Solving</a></li>
+<li><a href="section-formulas.html" data-scroll="Nnq">Formulas</a></li>
+<li><a href="section-linear-inequalities.html" data-scroll="Nuc">Linear Inequalities</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="chapter-graphing-equations.html" data-scroll="gID"><span class="codenumber">3</span> <span class="title">Graphing Lines</span></a><ul>
+<li><a href="section-introduction-to-graphing.html" data-scroll="YTJ">Introduction to Graphing</a></li>
+<li><a href="section-equations-in-two-variables.html" data-scroll="QXY">Equations in Two Variables</a></li>
+<li><a href="section-intercepts-horizontal-and-vertical-lines.html" data-scroll="ByF">Intercepts: Horizontal and Vertical Lines</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="chapter-systems-of-linear-equations-in-two-variables.html" data-scroll="xGO"><span class="codenumber">4</span> <span class="title">Systems of Linear Equations</span></a><ul>
+<li><a href="section-solving-systems-of-linear-equations-graphically-and-numerically.html" data-scroll="njo">Solving Systems of Linear Equations Graphically and Numerically</a></li>
+<li><a href="section-solving-systems-of-linear-equations-by-substitution.html" data-scroll="zdh">Solving Systems of Linear Equations by Substitution</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="chapter-polynomials-and-exponents-modified.html" data-scroll="onc"><span class="codenumber">5</span> <span class="title">Exponents and Polynomials</span></a><ul>
+<li><a href="section-rules-for-exponents.html" data-scroll="KHJ">Rules for Exponents</a></li>
+<li><a href="section-adding-and-subtracting-polynomials.html" data-scroll="VvN">Addition and Subtraction of Polynomials</a></li>
+<li><a href="section-multiplication-of-polynomials.html" data-scroll="IcY">Multiplication of Polynomials</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="chapter-radical-expressions-and-equations.html" data-scroll="chapter-radical-expressions-and-equations"><span class="codenumber">6</span> <span class="title">Radical Expressions and Equations</span></a><ul>
+<li><a href="section-introduction-to-factoring.html" data-scroll="duD">Introduction to Factoring</a></li>
+<li><a href="section-factoring-trinomials.html" data-scroll="Mrf">Factoring Trinomials</a></li>
+<li><a href="section-solving-equations-by-factoring.html" data-scroll="DXi" class="active">Solving Equations by Factoring 1 (Quadratics)</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="chapter-rational-expressions.html" data-scroll="RzF"><span class="codenumber">7</span> <span class="title">Rational Expressions</span></a><ul>
+<li><a href="section-introduction-to-rational-expressions.html" data-scroll="Moo">Introduction to Rational Expressions</a></li>
+<li><a href="section-multiplication-and-division-of-rational-expressions.html" data-scroll="Vps">Multiplication and Division of Rational Expressions</a></li>
+<li><a href="section-addition-and-subtraction-with-like-denominators.html" data-scroll="KBw">Addition and Subtraction of Rational Expressions with Like Denominators</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="chapter-radical-expressions-and-functions.html" data-scroll="chapter-radical-expressions-and-functions"><span class="codenumber">8</span> <span class="title">Quantities in the Physical World</span></a><ul><li><a href="section-radical-expressions-and-functions.html" data-scroll="GAK">Radical Expressions and Functions</a></li></ul>
+</li>
+<li class="link backmatter"><a href="backmatter.html" data-scroll="jDj"><span class="title">Appendices</span></a></li>
+<li class="link">
+<a href="appendix-basic-math-review.html" data-scroll="appendix-basic-math-review"><span class="codenumber">A</span> <span class="title">Basic Math Review</span></a><ul>
+<li><a href="section-arithmetic-with-negative-numbers.html" data-scroll="qBB">Arithmetic with Negative Numbers</a></li>
+<li><a href="section-fractions-and-fraction-arithmetic.html" data-scroll="VAa">Fractions and Fraction Arithmetic</a></li>
+<li><a href="section-absolute-value-and-square-root.html" data-scroll="GAK">Absolute Value and Square Root</a></li>
+<li><a href="section-percentages.html" data-scroll="Chi">Percentages</a></li>
+<li><a href="section-order-of-operations.html" data-scroll="aog">Order of Operations</a></li>
+<li><a href="section-set-notation-and-types-of-numbers.html" data-scroll="Fdo">Set Notation and Types of Numbers</a></li>
+</ul>
+</li>
+<li class="link"><a href="appendix-unit-conversions.html" data-scroll="appendix-unit-conversions"><span class="codenumber">B</span> <span class="title">Unit Conversions</span></a></li>
+<li class="link"><a href="index-1.html" data-scroll="index-1"><span class="title">Index</span></a></li>
+</ul></nav><div class="extras"><nav><a class="mathbook-link" href="https://pretextbook.org">Authored in PreTeXt</a><a href="https://www.mathjax.org"><img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" alt="Powered by MathJax"></a></nav></div>
+</div></div>
+<main class="main"><div id="content" class="pretext-content"><section xmlns:svg="http://www.w3.org/2000/svg" class="section" id="DXi"><h2 class="heading hide-type">
+<span class="type">Section</span> <span class="codenumber">6.3</span> <span class="title">Solving Equations by Factoring 1 (Quadratics)</span>
+</h2>
+<section class="introduction" id="NFp"><p id="yZh">Recall that in <a href="section-radical-expressions-and-functions.html#Jaa" class="internal" title="Subsection 8.1.3: Cube Root and Higher Order Roots">Subsection 8.1.3</a>, we learned to evaluate the cube root of a number, say \(\sqrt[3]{8}\text{,}\) we can type <code class="code-inline tex2jax_ignore">8^(1/3)</code> into a calculator. This suggests that \(\sqrt[3]{8}=8^{\sfrac{1}{3}}\text{.}\) In this section, we will learn why this is true, and how to simplify expressions with rational exponents.</p>
+<p id="fgq">Many learners will find a review of exponent rules to be helpful before continuing with the current section. <code class="code-inline tex2jax_ignore">[cross-reference to target(s) "section-introduction-to-exponent-rules" missing or not unique]</code> covers an introduction to exponent rules, and there is more in <code class="code-inline tex2jax_ignore">[cross-reference to target(s) "section-more-exponent-rules" missing or not unique]</code>. The basic rules are summarized in <code class="code-inline tex2jax_ignore">[cross-reference to target(s) "list-exponent-rules" missing or not unique]</code>. These rules are still true and we can use them throughout this section whenever they might help.</p></section><section class="subsection" id="ker"><h3 class="heading hide-type">
+<span class="type">Subsection</span> <span class="codenumber">6.3.1</span> <span class="title">Radical Expressions and Rational Exponents</span>
+</h3>
+<p id="ruI">Compare the following calculations:</p>
+<div class="displaymath">
+\begin{align*}
+\sqrt{9}\cdot\sqrt{9}\amp=3\cdot3\amp9^{\sfrac{1}{2}}\cdot9^{\sfrac{1}{2}}\amp=9^{\sfrac{1}{2}+\sfrac{1}{2}}\\
+\amp=9\amp\amp=9^{1}\\
+\amp\amp\amp=9
+\end{align*}
+</div>
+<p class="continuation">If we rewrite the above calculations with exponents, we have:</p>
+<div class="displaymath">
+\begin{align*}
+\left(\sqrt{9}\right)^2\amp=9\amp\left(9^{\sfrac{1}{2}}\right)^2\amp=9
+\end{align*}
+</div>
+<p class="continuation">Since \(\sqrt{9}\) and \(9^{\sfrac{1}{2}}\) are both positive, and squaring either of them generates the same number, we conclude that:</p>
+<div class="displaymath">
+\begin{equation*}
+\sqrt{9}=9^{\sfrac{1}{2}}
+\end{equation*}
+</div>
+<p class="continuation">We can verify this result by entering <code class="code-inline tex2jax_ignore">9^(1/2)</code> into a calculator, and we get <code class="code-inline tex2jax_ignore">3</code>. In general for any non-negative real number \(a\text{,}\) we have:</p>
+<div class="displaymath">
+\begin{equation*}
+\sqrt{a}=a^{\sfrac{1}{2}}
+\end{equation*}
+</div>
+<p id="XBR">Similarly, when \(a\) is non-negative all of the following are true:</p>
+<div class="displaymath">
+\begin{align*}
+\sqrt[2]{a}\amp=a^{\sfrac{1}{2}}\amp\sqrt[3]{a}\amp=a^{\sfrac{1}{3}}\amp\sqrt[4]{a}\amp=a^{\sfrac{1}{4}}\amp\sqrt[5]{a}\amp=a^{\sfrac{1}{5}}\amp\cdots
+\end{align*}
+</div>
+<p id="p-1060">For example, when we see \(16^{\sfrac{1}{4}}\text{,}\) that is equal to \(\sqrt[4]{16}\text{,}\) which we know is \(2\) because \(\overbrace{2\cdot2\cdot2\cdot2}^{\text{four times}}=16\text{.}\) How can we relate this to the exponential expression \(16^{\sfrac{1}{4}}\text{?}\) In a sense, we are cutting up \(16\) into \(4\) equal parts. But not parts that you <em class="emphasis">add</em> together, rather parts that you <em class="emphasis">multiply</em> together.</p>
+<p id="p-1061">Let's summarize this information with a new exponent rule.</p>
+<article class="fact theorem-like" id="yhW"><h6 class="heading">
+<span class="type">Fact</span><span class="space"> </span><span class="codenumber">6.3.1</span><span class="period">.</span><span class="space"> </span><span class="title">Radicals and Rational Exponents Rule.</span>
+</h6>
+<p id="Oif">If \(m\) is any natural number, and \(a\) is any non-negative real number, then</p>
+<div class="displaymath">
+\begin{equation*}
+a^{\sfrac{1}{m}}=\sqrt[m]{a}\text{.}
+\end{equation*}
+</div>
+<p class="continuation">Additionally, if \(m\) is an <em class="emphasis">odd</em> natural number, then even when \(a\) is negative, we still have \(a^{\sfrac{1}{m}}=\sqrt[m]{a}\text{.}\)</p></article><article class="warning remark-like" id="KKJ"><h6 class="heading">
+<span class="type">Warning</span><span class="space"> </span><span class="codenumber">6.3.2</span><span class="period">.</span><span class="space"> </span><span class="title">Exponents on Negative Bases.</span>
+</h6>
+<p id="MsS">Some computers and calculators follow different conventions when there is an exponent on a negative base. To see an example of this, visit <a class="external" href="http://www.wolframalpha.com/" target="_blank"><span class="booktitle">WolframAlpha</span></a> and try entering <code class="code-inline tex2jax_ignore">cuberoot(-8)</code>, and then try <code class="code-inline tex2jax_ignore">(-8)^(1/3)</code>, and you will get different results. <code class="code-inline tex2jax_ignore">cuberoot(-8)</code> will come out as \(-2\text{,}\) but <code class="code-inline tex2jax_ignore">(-8)^(1/3)</code> will come out as a certain non-real complex number. Most likely, any calculator you are using <em class="emphasis">does</em> behave as in <a class="xref" data-knowl="./knowl/fact-rational-exponent-rule-i.html" title="Fact 6.3.1: Radicals and Rational Exponents Rule">Fact 6.3.1</a>, but you should confirm this.</p></article><p id="DJa">With the <a class="xref" data-knowl="./knowl/fact-rational-exponent-rule-i.html" title="Fact 6.3.1: Radicals and Rational Exponents Rule">Radicals and Rational Exponents Rule</a>, we can re-write radical expressions as expressions with rational exponents.</p>
+<article class="example example-like" id="tyd"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-tyd"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">6.3.3</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-tyd"><article class="example example-like"><p id="EOt">Write the radical expression \(\sqrt[3]{6}\) as an expression with a rational exponent. Then use a calculator to find its decimal approximation.</p>
+<p id="kVC">According to the <a class="xref" data-knowl="./knowl/fact-rational-exponent-rule-i.html" title="Fact 6.3.1: Radicals and Rational Exponents Rule">Radicals and Rational Exponents Rule</a>, \(\sqrt[3]{6}=6^{\sfrac{1}{3}}\text{.}\) A calculator tells us that <code class="code-inline tex2jax_ignore">6^(1/3)</code> works out to approximately \(1.817\text{.}\)</p></article></div>
+<p id="jQj">For many examples that follow, we will not need a calculator. We will, however, need to recognize the roots in <a class="xref" data-knowl="./knowl/figure-small-roots.html" title="Figure 6.3.4">Figure 6.3.4</a>.</p>
+<figure class="figure figure-like" id="hFx"><div class="tabular-box natural-width"><table class="tabular" id="NMG">
+<tr>
+<td class="c m b2 r0 l0 t0 lines">Square Roots</td>
+<td class="c m b2 r0 l0 t0 lines">Cube Roots</td>
+<td class="c m b2 r0 l0 t0 lines">\(4^{\text{th}}\)-Roots</td>
+<td class="c m b2 r0 l0 t0 lines">\(5^{\text{th}}\)-Roots</td>
+<td class="c m b2 r0 l0 t0 lines">Roots of Powers of \(2\)</td>
+</tr>
+<tr>
+<td class="c m b0 r0 l0 t0 lines">\(\sqrt{1}=1\)</td>
+<td class="c m b0 r0 l0 t0 lines">\(\sqrt[3]{1}=1\)</td>
+<td class="c m b0 r0 l0 t0 lines">\(\sqrt[4]{1}=1\)</td>
+<td class="c m b0 r0 l0 t0 lines">\(\sqrt[5]{1}=1\)</td>
+<td class="c m b0 r0 l0 t0 lines"></td>
+</tr>
+<tr>
+<td class="c m b0 r0 l0 t0 lines">\(\sqrt{4}=2\)</td>
+<td class="c m b0 r0 l0 t0 lines">\(\sqrt[3]{8}=2\)</td>
+<td class="c m b0 r0 l0 t0 lines">\(\sqrt[4]{16}=2\)</td>
+<td class="c m b0 r0 l0 t0 lines">\(\sqrt[5]{32}=2\)</td>
+<td class="c m b0 r0 l0 t0 lines">\(\sqrt{4}=2\)</td>
+</tr>
+<tr>
+<td class="c m b0 r0 l0 t0 lines">\(\sqrt{9}=3\)</td>
+<td class="c m b0 r0 l0 t0 lines">\(\sqrt[3]{27}=3\)</td>
+<td class="c m b0 r0 l0 t0 lines">\(\sqrt[4]{81}=3\)</td>
+<td class="c m b0 r0 l0 t0 lines"></td>
+<td class="c m b0 r0 l0 t0 lines">\(\sqrt[3]{8}=2\)</td>
+</tr>
+<tr>
+<td class="c m b0 r0 l0 t0 lines">\(\sqrt{16}=4\)</td>
+<td class="c m b0 r0 l0 t0 lines">\(\sqrt[3]{64}=4\)</td>
+<td class="c m b0 r0 l0 t0 lines"></td>
+<td class="c m b0 r0 l0 t0 lines"></td>
+<td class="c m b0 r0 l0 t0 lines">\(\sqrt[4]{16}=2\)</td>
+</tr>
+<tr>
+<td class="c m b0 r0 l0 t0 lines">\(\sqrt{25}=5\)</td>
+<td class="c m b0 r0 l0 t0 lines">\(\sqrt[3]{125}=5\)</td>
+<td class="c m b0 r0 l0 t0 lines"></td>
+<td class="c m b0 r0 l0 t0 lines"></td>
+<td class="c m b0 r0 l0 t0 lines">\(\sqrt[5]{32}=2\)</td>
+</tr>
+<tr>
+<td class="c m b0 r0 l0 t0 lines">\(\sqrt{36}=6\)</td>
+<td class="c m b0 r0 l0 t0 lines"></td>
+<td class="c m b0 r0 l0 t0 lines"></td>
+<td class="c m b0 r0 l0 t0 lines"></td>
+<td class="c m b0 r0 l0 t0 lines">\(\sqrt[6]{64}=2\)</td>
+</tr>
+<tr>
+<td class="c m b0 r0 l0 t0 lines">\(\sqrt{49}=7\)</td>
+<td class="c m b0 r0 l0 t0 lines"></td>
+<td class="c m b0 r0 l0 t0 lines"></td>
+<td class="c m b0 r0 l0 t0 lines"></td>
+<td class="c m b0 r0 l0 t0 lines">\(\sqrt[7]{128}=2\)</td>
+</tr>
+<tr>
+<td class="c m b0 r0 l0 t0 lines">\(\sqrt{64}=8\)</td>
+<td class="c m b0 r0 l0 t0 lines"></td>
+<td class="c m b0 r0 l0 t0 lines"></td>
+<td class="c m b0 r0 l0 t0 lines"></td>
+<td class="c m b0 r0 l0 t0 lines">\(\sqrt[8]{256}=2\)</td>
+</tr>
+<tr>
+<td class="c m b0 r0 l0 t0 lines">\(\sqrt{81}=9\)</td>
+<td class="c m b0 r0 l0 t0 lines"></td>
+<td class="c m b0 r0 l0 t0 lines"></td>
+<td class="c m b0 r0 l0 t0 lines"></td>
+<td class="c m b0 r0 l0 t0 lines">\(\sqrt[9]{512}=2\)</td>
+</tr>
+<tr>
+<td class="c m b0 r0 l0 t0 lines">\(\sqrt{100}=10\)</td>
+<td class="c m b0 r0 l0 t0 lines"></td>
+<td class="c m b0 r0 l0 t0 lines"></td>
+<td class="c m b0 r0 l0 t0 lines"></td>
+<td class="c m b0 r0 l0 t0 lines">\(\sqrt[10]{1024}=2\)</td>
+</tr>
+<tr>
+<td class="c m b0 r0 l0 t0 lines">\(\sqrt{121}=11\)</td>
+<td class="c m b0 r0 l0 t0 lines"></td>
+<td class="c m b0 r0 l0 t0 lines"></td>
+<td class="c m b0 r0 l0 t0 lines"></td>
+<td class="c m b0 r0 l0 t0 lines"></td>
+</tr>
+<tr>
+<td class="c m b0 r0 l0 t0 lines">\(\sqrt{144}=12\)</td>
+<td class="c m b0 r0 l0 t0 lines"></td>
+<td class="c m b0 r0 l0 t0 lines"></td>
+<td class="c m b0 r0 l0 t0 lines"></td>
+<td class="c m b0 r0 l0 t0 lines"></td>
+</tr>
+</table></div>
+<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">6.3.4<span class="period">.</span></span><span class="space"> </span>Small Roots of Appropriate Natural Numbers</figcaption></figure><article class="example example-like" id="ZFm"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-ZFm"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">6.3.5</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-ZFm"><article class="example example-like"><p id="RcL">Write the expressions in radical form using the <a class="xref" data-knowl="./knowl/fact-rational-exponent-rule-i.html" title="Fact 6.3.1: Radicals and Rational Exponents Rule">Radicals and Rational Exponents Rule</a> and simplify the results.</p>
+<ol class="lower-alpha cols3">
+<li id="sHf">\(\displaystyle 4^{\sfrac{1}{2}}\)</li>
+<li id="YOo">\(\displaystyle (-9)^{\sfrac{1}{2}}\)</li>
+<li id="EVx">\(\displaystyle -16^{\sfrac{1}{4}}\)</li>
+<li id="lcG">\(\displaystyle 64^{-\sfrac{1}{3}}\)</li>
+<li id="RjP">\(\displaystyle (-27)^{\sfrac{1}{3}}\)</li>
+<li id="xqY">\(\displaystyle 3^{\sfrac{1}{2}}\cdot3^{\sfrac{1}{2}}\)</li>
+</ol>
+<div class="solutions">
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-tMy" id="tMy"><span class="type">Explanation</span></a><div class="hidden-content tex2jax_ignore" id="hk-tMy"><div class="solution solution-like"><ol id="vuH" class="lower-alpha">
+<li id="JFq"><p id="Gpl">\(\displaystyle \begin{aligned}[t]
+4^{\sfrac{1}{2}}\amp=\sqrt{4}\\
+\amp=2
+\end{aligned}\)</p></li>
+<li id="pMz"><p id="mwu">\(\begin{aligned}[t]
+(-9)^{\sfrac{1}{2}}\amp=\sqrt{-9}
+\end{aligned}\)This value is non-real.</p></li>
+<li id="VTI">
+<p id="SDD">Without parentheses around \(-16\text{,}\) the negative sign in this problem should be left out of the radical.</p>
+<p id="yKM">\(\begin{aligned}[t]
+-16^{\sfrac{1}{4}}\amp=-\sqrt[4]{16}\\
+\amp=-2
+\end{aligned}\)</p>
+</li>
+<li id="CaR">
+<p id="p-1074">Here we will use the <code class="code-inline tex2jax_ignore">[cross-reference to target(s) "item-exponent-rules-negative-exponent-definition" missing or not unique]</code>.</p>
+<p id="eRV">\(\begin{aligned}[t]
+64^{-\sfrac{1}{3}}\amp=\frac{1}{64^{\sfrac{1}{3}}}\\
+\amp=\frac{1}{\sqrt[3]{64}}\\
+\amp=\frac{1}{4}
+\end{aligned}\)</p>
+</li>
+<li id="iia"><p id="KZe">\(\displaystyle \begin{aligned}[t]
+(-27)^{\sfrac{1}{3}}\amp=\sqrt[3]{-27}\\
+\amp=-3
+\end{aligned}\)</p></li>
+<li id="Opj"><p id="rgn">\(\displaystyle \begin{aligned}[t]
+3^{\sfrac{1}{2}}\cdot3^{\sfrac{1}{2}}\amp=\sqrt{3}\cdot\sqrt{3}\\
+\amp=\sqrt{3\cdot 3}\\
+\amp=\sqrt{9}\\
+\amp=3
+\end{aligned}\)</p></li>
+</ol></div></div>
+</div></article></div>
+<p id="PXs">The <a class="xref" data-knowl="./knowl/fact-rational-exponent-rule-i.html" title="Fact 6.3.1: Radicals and Rational Exponents Rule">Radicals and Rational Exponents Rule</a> applies to variables in expressions just as much as it does to numbers.</p>
+<article class="example example-like" id="FMv"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-FMv"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">6.3.6</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-FMv"><article class="example example-like"><p id="xjU">Write the expressions as simplified as they can be using radicals.</p>
+<ol class="lower-alpha cols4">
+<li id="aDB"><p id="DuF">\(\displaystyle 2x^{-\sfrac{1}{2}}\)</p></li>
+<li id="GKK"><p id="jBO">\(\displaystyle (5x)^{\sfrac{1}{3}}\)</p></li>
+<li id="mRT"><p id="PIX">\(\displaystyle \left(-27x^{12}\right)^{\sfrac{1}{3}}\)</p></li>
+<li id="SZc"><p id="vQg">\(\displaystyle \left(\frac{16x}{81y^8}\right)^{\sfrac{1}{4}}\)</p></li>
+</ol>
+<div class="solutions">
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-ZTH" id="ZTH"><span class="type">Explanation</span></a><div class="hidden-content tex2jax_ignore" id="hk-ZTH"><div class="solution solution-like"><ol id="bBQ" class="lower-alpha">
+<li id="zgl">
+<p id="bXp">Note that in this example the exponent is only applied to the \(x\text{.}\) Making this type of observation should be our first step for each of these exercises.</p>
+<div class="displaymath">
+\begin{align*}
+2x^{-\sfrac{1}{2}}\amp=\frac{2}{x^{\sfrac{1}{2}}} \amp\amp\text{by the }[cross-reference to target(s) "item-exponent-rules-negative-exponent-definition" missing or not unique]\\
+\amp=\frac{2}{\sqrt{x}} \amp\amp\text{by the } \knowl{./knowl/fact-rational-exponent-rule-i.html}{\text{Radicals and Rational Exponents Rule}}
+\end{align*}
+</div>
+</li>
+<li id="fnu">
+<p id="Iey">In this exercise, the exponent applies to both the \(5\) and \(x\text{.}\)</p>
+<div class="displaymath">
+\begin{align*}
+(5x)^{\sfrac{1}{3}}\amp=\sqrt[3]{5x} \amp\amp\text{by the } \knowl{./knowl/fact-rational-exponent-rule-i.html}{\text{Radicals and Rational Exponents Rule}}
+\end{align*}
+</div>
+</li>
+<li id="LuD">
+<p id="olH">We start out as with the previous exercise. As in the previous exercise, we have a choice as to how to simplify this expression. Here we should note that we <em class="emphasis">do</em> know what the cube root of \(-27\) is, so we will take the path to splitting up the expression, using the <code class="code-inline tex2jax_ignore">[cross-reference to target(s) "item-exponent-rules-product-to-a-power" missing or not unique]</code>, before applying the root.</p>
+<div class="displaymath">
+\begin{align*}
+\left(-27x^{12}\right)^{\sfrac{1}{3}}\amp=\sqrt[3]{-27x^{12}}\\
+\end{align*}
+<p class="intertext">Here we notice that \(-27\) has a nice cube root, so it is good to break up the radical.</p>
+\begin{align*}
+\amp=\sqrt[3]{-27}\sqrt[3]{x^{12}}\\
+\amp=-3\sqrt[3]{x^{12}}
+\end{align*}
+</div>
+<p class="continuation">Can this be simplified more? There are two ways to think about that. One way is to focus on the cube root and see that \(x^4\) cubes to make \(x^{12}\text{,}\) and the other way is to convert the cube root back to a fraction exponent and use exponent rules.</p>
+<div class="displaymath">
+\begin{align*}
+\amp=-3\sqrt[3]{x^4x^4x^4}\amp\amp=-3\left(x^{12}\right)^{\sfrac{1}{3}}\\
+\amp=-3x^4\amp\amp=-3x^{12\cdot\sfrac{1}{3}}\\
+\amp\amp\amp=-3x^{4}
+\end{align*}
+</div>
+</li>
+<li id="rBM">
+<p id="UsQ">We'll use the exponent rule for a fraction raised to a power.</p>
+<div class="displaymath" id="AzZ">
+\begin{align*}
+\left(\frac{16x}{81y^8}\right)^{\sfrac{1}{4}}\amp=\frac{\left(16x\right)^{\sfrac{1}{4}}}{\left(81y^8\right)^{\sfrac{1}{4}}} \amp\amp\text{by the } [cross-reference to target(s) "item-exponent-rules-quotient-to-a-power" missing or not unique]\\
+\amp=\frac{16^{\sfrac{1}{4}}\cdot x^{\sfrac{1}{4}}}{81^{\sfrac{1}{4}} \cdot \left(y^8\right)^{\sfrac{1}{4}}} \amp\amp\text{by the } [cross-reference to target(s) "item-exponent-rules-product-to-a-power" missing or not unique]\\
+\amp=\frac{16^{\sfrac{1}{4}}\cdot x^{\sfrac{1}{4}}}{81^{\sfrac{1}{4}}\cdot y^2}\\
+\amp=\frac{\sqrt[4]{16}\cdot \sqrt[4]{x}}{\sqrt[4]{81}\cdot y^2} \amp\amp\text{by the } \knowl{./knowl/fact-rational-exponent-rule-i.html}{\text{Radicals and Rational Exponents Rule}}\\
+\amp=\frac{2\sqrt[4]{x}}{3y^2}
+\end{align*}
+</div>
+</li>
+</ol></div></div>
+</div></article></div>
+<article class="remark remark-like" id="Kwo"><h6 class="heading">
+<span class="type">Remark</span><span class="space"> </span><span class="codenumber">6.3.7</span><span class="period">.</span>
+</h6>
+<p id="awx">In general, it is easier to do algebra with rational exponents on variables than with radicals of variables. You should use <a class="xref" data-knowl="./knowl/fact-rational-exponent-rule-i.html" title="Fact 6.3.1: Radicals and Rational Exponents Rule">Radicals and Rational Exponents Rule</a> to convert from rational exponents to radicals on variables <em class="emphasis">only as a last step</em> in simplifying.</p></article><p id="weB">The <a class="xref" data-knowl="./knowl/fact-rational-exponent-rule-i.html" title="Fact 6.3.1: Radicals and Rational Exponents Rule">Radicals and Rational Exponents Rule</a> describes what can be done when there is a fractional exponent and the numerator is a \(1\text{.}\) The numerator doesn't have to be a \(1\) though and we need guidance for that situation.</p>
+<article class="fact theorem-like" id="epf"><h6 class="heading">
+<span class="type">Fact</span><span class="space"> </span><span class="codenumber">6.3.8</span><span class="period">.</span><span class="space"> </span><span class="title">Full Radicals and Rational Exponents Rule.</span>
+</h6>
+<p id="upo">If \(m\) and \(n\) are natural numbers such that \(\frac{m}{n}\) is a reduced fraction, and \(a\) is any non-negative real number, then</p>
+<div class="displaymath">
+\begin{equation*}
+a^{\sfrac{m}{n}}=\sqrt[n]{a^m}=\left(\sqrt[n]{a}\right)^m\text{.}
+\end{equation*}
+</div>
+<p class="continuation">Additionally, if \(n\) is an <em class="emphasis">odd</em> natural number, then even when \(a\) is negative, we still have \(a^{\sfrac{m}{n}}=\sqrt[n]{a^m}=\left(\sqrt[n]{a}\right)^m\text{.}\)</p></article><article class="example example-like" id="example-147"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-example-147"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">6.3.9</span><span class="period">.</span><span class="space"> </span><span class="title">Guitar Frets.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-example-147"><article class="example example-like"><p id="p-1093">On a guitar, there are \(12\) frets separating a note and the same note one octave higher. By moving from one fret to another that is five frets away, the frequency of the note changes by a factor of \(2^{5/12}\text{.}\) Use the <a class="xref" data-knowl="./knowl/fact-rational-exponent-rule-ii.html" title="Fact 6.3.8: Full Radicals and Rational Exponents Rule">Full Radicals and Rational Exponents Rule</a> to write this number as a radical expression. And use a calculator to find this number as a decimal.</p>
+<div class="solutions">
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-97" id="solution-97"><span class="type">Explanation</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-97"><div class="solution solution-like">
+<p id="p-1094">According to the <a class="xref" data-knowl="./knowl/fact-rational-exponent-rule-ii.html" title="Fact 6.3.8: Full Radicals and Rational Exponents Rule">Full Radicals and Rational Exponents Rule</a>,</p>
+<div class="displaymath">
+\begin{align*}
+2^{5/12}\amp=\sqrt[12]{2^5}\\
+\amp=\sqrt[12]{32}
+\end{align*}
+</div>
+<p id="p-1095">A calculator says \(2^{5/12}\approx1.334\cdots\text{.}\) The fact that this is very close to \(\frac{4}{3}\approx1.333\ldots\) is important. It is part of the explanation for why two notes that are five frets apart on the same string would sound good to human ears when played together as a chord (known as a “fourth,” in music).</p>
+</div></div>
+</div></article></div>
+<article class="remark remark-like" id="qDx"><h6 class="heading">
+<span class="type">Remark</span><span class="space"> </span><span class="codenumber">6.3.10</span><span class="period">.</span>
+</h6>
+<p id="GDG">By the <a class="xref" data-knowl="./knowl/fact-rational-exponent-rule-ii.html" title="Fact 6.3.8: Full Radicals and Rational Exponents Rule">Full Radicals and Rational Exponents Rule</a>, there are two ways to express \(a^{\sfrac{m}{n}}\) as a radical expression:</p>
+<div class="displaymath">
+\begin{align*}
+a^{\sfrac{m}{n}}\amp=\sqrt[n]{a^m}\amp\amp\text{and}\amp a^{\sfrac{m}{n}}\amp=\left(\sqrt[n]{a}\right)^m
+\end{align*}
+</div>
+<p class="continuation">There are different times to use each formula. In general, use \(a^{\sfrac{m}{n}}=\sqrt[n]{a^m}\) for variables and \(a^{\sfrac{m}{n}}=\left(\sqrt[n]{a}\right)^m\) for numbers.</p></article><article class="example example-like" id="lTE"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-lTE"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">6.3.11</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-lTE"><article class="example example-like"><ol id="drd" class="lower-alpha">
+<li id="XIV"><p id="gHi">Consider the expression \(27^{\sfrac{4}{3}}\text{.}\) Use both versions of the <a class="xref" data-knowl="./knowl/fact-rational-exponent-rule-ii.html" title="Fact 6.3.8: Full Radicals and Rational Exponents Rule">Full Radicals and Rational Exponents Rule</a> to explain why <a class="xref" data-knowl="./knowl/remark-two-representations-of-rational-exponents.html" title="Remark 6.3.10">Remark 6.3.10</a> says that with numbers, \(a^{\sfrac{m}{n}}=\left(\sqrt[n]{a}\right)^m\) is preferred.</p></li>
+<li id="DQe"><p id="MOr">Consider the expression \(x^{\sfrac{4}{3}}\text{.}\) Use both versions of the <a class="xref" data-knowl="./knowl/fact-rational-exponent-rule-ii.html" title="Fact 6.3.8: Full Radicals and Rational Exponents Rule">Full Radicals and Rational Exponents Rule</a> to explain why <a class="xref" data-knowl="./knowl/remark-two-representations-of-rational-exponents.html" title="Remark 6.3.10">Remark 6.3.10</a> says that with variables, \(a^{\sfrac{m}{n}}=\sqrt[n]{a^m}\) is preferred.</p></li>
+</ol>
+<div class="solutions">
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-GaQ" id="GaQ"><span class="type">Explanation</span></a><div class="hidden-content tex2jax_ignore" id="hk-GaQ"><div class="solution solution-like"><ol id="HIZ" class="lower-alpha">
+<li id="jXn">
+<p id="sVA">The expression \(27^{\sfrac{4}{3}}\) can be evaluated in the following two ways.</p>
+<div class="displaymath">
+\begin{align*}
+27^{\sfrac{4}{3}}\amp=\sqrt[3]{27^4}\amp\amp\text{by the first part of the } \knowl{./knowl/fact-rational-exponent-rule-ii.html}{\text{Full Radicals and Rational Exponents Rule}}\\
+\amp=\sqrt[3]{531441}\\
+\amp=81\\
+\amp\amp\text{or}\\
+27^{\sfrac{4}{3}}\amp=\left(\sqrt[3]{27}\right)^4\amp\amp\text{by the second part of the } \knowl{./knowl/fact-rational-exponent-rule-ii.html}{\text{Full Radicals and Rational Exponents Rule}}\\
+\amp=3^4\\
+\amp=81
+\end{align*}
+</div>
+<p class="continuation">The calculation using \(a^{\sfrac{m}{n}}=\left(\sqrt[n]{a}\right)^m\) worked with smaller numbers and can be done without a calculator. This is why we made the general recommendation in <a class="xref" data-knowl="./knowl/remark-two-representations-of-rational-exponents.html" title="Remark 6.3.10">Remark 6.3.10</a>.</p>
+</li>
+<li id="Qew">
+<p id="ZcJ">The expression \(x^{\sfrac{4}{3}}\) can be evaluated in the following two ways.</p>
+<div class="displaymath">
+\begin{align*}
+x^{\sfrac{4}{3}}\amp=\sqrt[3]{x^4}\amp\amp\text{by the first part of } \knowl{./knowl/fact-rational-exponent-rule-ii.html}{\text{Full Radicals and Rational Exponents Rule}}\\
+\amp\amp\text{or}\\
+x^{\sfrac{4}{3}}\amp=\left(\sqrt[3]{x}\right)^4\amp\amp\text{by the second part of the } \knowl{./knowl/fact-rational-exponent-rule-ii.html}{\text{Full Radicals and Rational Exponents Rule}}
+\end{align*}
+</div>
+<p class="continuation">In this case, the simplification using \(a^{\sfrac{m}{n}}=\sqrt[n]{a^m}\) is just shorter looking and easier to write. This is why we made the general recommendation in <a class="xref" data-knowl="./knowl/remark-two-representations-of-rational-exponents.html" title="Remark 6.3.10">Remark 6.3.10</a>.</p>
+</li>
+</ol></div></div>
+</div></article></div>
+<article class="example example-like" id="SaN"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-SaN"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">6.3.12</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-SaN"><article class="example example-like"><p id="Jym">Simplify the expressions using <a class="xref" data-knowl="./knowl/fact-rational-exponent-rule-ii.html" title="Fact 6.3.8: Full Radicals and Rational Exponents Rule">Fact 6.3.8</a>.</p>
+<ol class="lower-alpha cols3">
+<li id="wlF"><p id="FjS">\(\displaystyle 8^{\sfrac{2}{3}}\)</p></li>
+<li id="li-188"><p id="p-1105">\(\displaystyle (64x)^{-\sfrac{2}{3}}\)</p></li>
+<li id="oHg"><p id="xFt">\(\displaystyle \left(-\frac{27}{64}\right)^{\sfrac{2}{3}}\)</p></li>
+</ol>
+<div class="solutions">
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-mhZ" id="mhZ"><span class="type">Explanation</span></a><div class="hidden-content tex2jax_ignore" id="hk-mhZ"><div class="solution solution-like"><ol id="nQi" class="lower-alpha">
+<li id="UOp">
+<p id="p-1108">We will use the second part of the <a class="xref" data-knowl="./knowl/fact-rational-exponent-rule-ii.html" title="Fact 6.3.8: Full Radicals and Rational Exponents Rule">Full Radicals and Rational Exponents Rule</a>, since this expression only involves a number base (not variable).</p>
+<p id="dMC">\(\begin{aligned}
+8^{\sfrac{2}{3}}\amp=\left(\sqrt[3]{8}\right)^2\\
+\amp=2^2\\
+\amp=4
+\end{aligned}\)</p>
+</li>
+<li id="AVy"><p id="p-1110">\(\displaystyle \begin{aligned}[t]
+(64x)^{-\sfrac{2}{3}}\amp=\frac{1}{(64x)^{\sfrac{2}{3}}}\\
+\amp=\frac{1}{64^{\sfrac{2}{3}}x^{\sfrac{2}{3}}}\\
+\amp=\frac{1}{\left(\sqrt[3]{64}\right)^2\sqrt[3]{x^2}}\\
+\amp=\frac{1}{4^2\sqrt[3]{x^2}}\\
+\amp=\frac{1}{16\sqrt[3]{x^2}}
+\end{aligned}\)</p></li>
+<li id="NjQ">
+<p id="Wid">In this problem the negative can be associated with either the numerator or the denominator, but not both. We choose the numerator.</p>
+<div class="displaymath" id="Cpm">
+\begin{align*}
+\left(-\frac{27}{64}\right)^{\sfrac{2}{3}}\amp=\left(\sqrt[3]{-\frac{27}{64}}\right)^2  \amp\amp\text{by the second part of the } \knowl{./knowl/fact-rational-exponent-rule-ii.html}{\text{Full Radicals and Rational Exponents Rule}}\\
+\amp=\left(\frac{\sqrt[3]{-27}}{\sqrt[3]{64}}\right)^2\\
+\amp=\left(\frac{-3}{4}\right)^2\\
+\amp=\frac{(-3)^2}{(4)^2}\\
+\amp=\frac{9}{16}
+\end{align*}
+</div>
+</li>
+</ol></div></div>
+</div></article></div></section><section class="subsection" id="QlA"><h3 class="heading hide-type">
+<span class="type">Subsection</span> <span class="codenumber">6.3.2</span> <span class="title">More Expressions with Rational Exponents</span>
+</h3>
+<p id="clK">To recap, here is a “complete” list of exponent and radical rules.</p>
+<figure class="list table-like" id="vnq"><figcaption><span class="type">List</span><span class="space"> </span><span class="codenumber">6.3.13<span class="period">.</span></span><span class="space"> </span>Complete List of Exponent Rules</figcaption><div class="named-list-content"><dl class="description-list">
+<dt id="kHh">Product Rule</dt>
+<dd><p id="iwv">\(\displaystyle a^{n} \cdot a^{m} = a^{n+m}\)</p></dd>
+<dt id="QOq">Power to a Power Rule</dt>
+<dd><p id="ODE">\(\displaystyle (a^{n})^{m} = a^{n\cdot m}\)</p></dd>
+<dt id="wVz">Product to a Power Rule</dt>
+<dd><p id="uKN">\(\displaystyle (ab)^{n} = a^{n} \cdot b^{n}\)</p></dd>
+<dt id="dcI">Quotient Rule</dt>
+<dd><p id="aRW">\(\dfrac{a^{n}}{a^{m}} = a^{n-m}\text{,}\) as long as \(a \neq 0\)</p></dd>
+<dt id="JjR">Quotient to a Power Rule</dt>
+<dd><p id="GZf">\(\left( \dfrac{a}{b} \right)^{n} = \dfrac{a^{n}}{b^{n}}\text{,}\) as long as \(b \neq 0\)</p></dd>
+<dt id="pra">Zero Exponent Rule</dt>
+<dd><p id="ngo">\(a^{0} = 1\) for \(a\neq0\)</p></dd>
+<dt id="Vyj">Negative Exponent Rule</dt>
+<dd><p id="Tnx">\(\displaystyle a^{-n} = \frac{1}{a^n}\)</p></dd>
+<dt id="BFs">Negative Exponent Reciprocal Rule</dt>
+<dd><p id="zuG">\(\displaystyle \frac{1}{a^{-n}} = a^n\)</p></dd>
+<dt id="hMB">Negative Exponent on Fraction Rule</dt>
+<dd><p id="fBP">\(\displaystyle \left(\frac{x}{y}\right)^{-n}=\left(\frac{y}{x}\right)^{n}\)</p></dd>
+<dt id="NTK">Radical and Rational Exponent Rule</dt>
+<dd><p id="LIY">\(\displaystyle x^{\sfrac{1}{n}}=\sqrt[n]{x}\)</p></dd>
+<dt id="uaT">Radical and Rational Exponent Rule</dt>
+<dd><p id="rQh">\(x^{\sfrac{m}{n}}=\left(\sqrt[n]{x}\right)^m\text{,}\) usually for numbers</p></dd>
+<dt id="aic">Radical and Rational Exponent Rule</dt>
+<dd><p id="XXq">\(x^{\sfrac{m}{n}}=\sqrt[n]{x^m}\text{,}\) usually for variables</p></dd>
+</dl></div></figure><article class="example example-like" id="CRP"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-CRP"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">6.3.14</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-CRP"><article class="example example-like"><p id="pFv">Convert the following radical expressions into expressions with rational exponents, and simplify them if possible.</p>
+<ol class="lower-alpha cols2">
+<li id="tqZ"><p id="Eez">\(\displaystyle \dfrac{1}{\sqrt{x}}\)</p></li>
+<li id="Zyi"><p id="klI">\(\displaystyle \dfrac{1}{\sqrt[3]{25}}\)</p></li>
+</ol>
+<div class="solutions">
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-Spi" id="Spi"><span class="type">Explanation</span></a><div class="hidden-content tex2jax_ignore" id="hk-Spi"><div class="solution solution-like"><ol id="TXr" class="lower-alpha">
+<li id="FFr"><div class="displaymath" id="QsR">
+\begin{align*}
+\frac{1}{\sqrt{x}}\amp=\frac{1}{x^{\sfrac{1}{2}}}\amp\amp\text{by the } \knowl{./knowl/fact-rational-exponent-rule-i.html}{\text{Radicals and Rational Exponents Rule}}\\
+\amp=x^{-\sfrac{1}{2}}\amp\amp\text{by the } [cross-reference to target(s) "item-exponent-rules-negative-exponent-definition" missing or not unique]
+\end{align*}
+</div></li>
+<li id="lMA"><div class="displaymath" id="wAa">
+\begin{align*}
+\frac{1}{\sqrt[3]{25}}\amp=\frac{1}{25^{\sfrac{1}{3}}}\amp\amp\text{by the } \knowl{./knowl/fact-rational-exponent-rule-i.html}{\text{Radicals and Rational Exponents Rule}}\\
+\amp=\frac{1}{\left(5^2\right)^{\sfrac{1}{3}}}\\
+\amp=\frac{1}{5^{2\cdot\sfrac{1}{3}}}\amp\amp\text{by the } [cross-reference to target(s) "item-exponent-rules-power-to-a-power" missing or not unique]\\
+\amp=\frac{1}{5^{\sfrac{2}{3}}}\\
+\amp=5^{-\sfrac{2}{3}}\amp\amp\text{by the } [cross-reference to target(s) "item-exponent-rules-negative-exponent-definition" missing or not unique]
+\end{align*}
+</div></li>
+</ol></div></div>
+</div></article></div>
+<p id="IsT">Learners of these simplifications often find it challenging, so we now include a many examples of varying difficulty.</p>
+<article class="example example-like" id="iYY"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-iYY"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">6.3.15</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-iYY"><article class="example example-like"><p id="VME">Use exponent properties in <a class="xref" data-knowl="./knowl/list-exponent-rules-complete.html" title="List 6.3.13: Complete List of Exponent Rules">List 6.3.13</a> to simplify the expressions, and write all final versions using radicals.</p>
+<ol class="lower-alpha cols3">
+<li id="RTJ"><p id="cHj">\(\displaystyle 2w^{\sfrac{7}{8}}\)</p></li>
+<li id="yaS"><p id="IOs">\(\displaystyle \frac{1}{2}y^{-\sfrac{1}{2}}\)</p></li>
+<li id="eib"><p id="oVB">\(\displaystyle \left(27b\right)^{\sfrac{2}{3}}\)</p></li>
+<li id="Kpk"><p id="VcK">\(\displaystyle \left(-8p^6\right)^{\sfrac{5}{3}}\)</p></li>
+<li id="qwt"><p id="BjT">\(\displaystyle \sqrt{x^3}\cdot\sqrt[4]{x}\)</p></li>
+<li id="WDC"><p id="hrc">\(\displaystyle h^{\sfrac{1}{3}}+h^{\sfrac{1}{3}}+h^{\sfrac{1}{3}}\)</p></li>
+<li id="CKL"><p id="Nyl">\(\displaystyle \frac{\sqrt{z}}{\sqrt[3]{z}}\)</p></li>
+<li id="iRU"><p id="tFu">\(\displaystyle \sqrt{\sqrt[4]{q}}\)</p></li>
+<li id="OZd"><p id="ZMD">\(\displaystyle 3\left(c^{\sfrac{1}{2}}+d^{\sfrac{1}{2}}\right)^2\)</p></li>
+<li id="vgm"><p id="FTM">\(\displaystyle 3\left(4k^{\sfrac{2}{3}}\right)^{-\sfrac{1}{2}}\)</p></li>
+</ol>
+<div class="solutions">
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-ywr" id="ywr"><span class="type">Explanation</span></a><div class="hidden-content tex2jax_ignore" id="hk-ywr"><div class="solution solution-like"><ol id="AeA" class="lower-alpha">
+<li id="bnv"><div class="displaymath" id="maV">
+\begin{align*}
+2w^{\sfrac{7}{8}}\amp=2\sqrt[8]{w^7}\amp\amp\text{by the } \knowl{./knowl/fact-rational-exponent-rule-ii.html}{\text{Full Radicals and Rational Exponents Rule}}
+\end{align*}
+</div></li>
+<li id="HuE"><div class="displaymath" id="Sie">
+\begin{align*}
+\frac{1}{2}y^{-\sfrac{1}{2}}\amp=\frac{1}{2}\frac{1}{y^{\sfrac{1}{2}}}\amp\amp\text{by the } [cross-reference to target(s) "item-exponent-rules-negative-exponent-definition" missing or not unique]\\
+\amp=\frac{1}{2}\frac{1}{\sqrt{y}}\amp\amp\text{by the } \knowl{./knowl/fact-rational-exponent-rule-ii.html}{\text{Full Radicals and Rational Exponents Rule}}\\
+\amp=\frac{1}{2\sqrt{y}}
+\end{align*}
+</div></li>
+<li id="nBN"><div class="displaymath" id="ypn">
+\begin{align*}
+\left(27b\right)^{\sfrac{2}{3}}\amp=\left(27\right)^{\sfrac{2}{3}}\cdot\left(b\right)^{\sfrac{2}{3}}\amp\amp\text{by the } [cross-reference to target(s) "item-exponent-rules-product-to-a-power" missing or not unique]\\
+\amp=\left(\sqrt[3]{27}\right)^2\cdot\sqrt[3]{b^2}\amp\amp\text{by the } \knowl{./knowl/fact-rational-exponent-rule-ii.html}{\text{Full Radicals and Rational Exponents Rule}}\\
+\amp=3^2\cdot\sqrt[3]{b^2}\\
+\amp=9\sqrt[3]{b^2}
+\end{align*}
+</div></li>
+<li id="TIW"><div class="displaymath" id="eww">
+\begin{align*}
+\left(-8p^6\right)^{\sfrac{5}{3}}\amp=\left(-8\right)^{\sfrac{5}{3}}\cdot\left(p^6\right)^{\sfrac{5}{3}}\amp\amp\text{by the } [cross-reference to target(s) "item-exponent-rules-product-to-a-power" missing or not unique]\\
+\amp=\left(-8\right)^{\sfrac{5}{3}}\cdot p^{6\cdot\sfrac{5}{3}}\amp\amp\text{by the } [cross-reference to target(s) "item-exponent-rules-power-to-a-power" missing or not unique]\\
+\amp=\left(\sqrt[3]{-8}\right)^5\cdot p^{10}\amp\amp\text{by the } \knowl{./knowl/fact-rational-exponent-rule-ii.html}{\text{Full Radicals and Rational Exponents Rule}}\\
+\amp=(-2)^5\cdot p^{10}\\
+\amp=-32p^{10}
+\end{align*}
+</div></li>
+<li id="zQf"><div class="displaymath" id="KDF">
+\begin{align*}
+\sqrt{x^3}\cdot\sqrt[4]{x}\amp=x^{\sfrac{3}{2}}\cdot x^{\sfrac{1}{4}}\amp\amp\text{by the } \knowl{./knowl/fact-rational-exponent-rule-ii.html}{\text{Full Radicals and Rational Exponents Rule}}\\
+\amp=x^{\sfrac{3}{2}+\sfrac{1}{4}}\amp\amp\text{by the } [cross-reference to target(s) "item-exponent-rules-product" missing or not unique]\\
+\amp=x^{\sfrac{6}{4}+\sfrac{1}{4}}\\
+\amp=x^{\sfrac{7}{4}}\\
+\amp=\sqrt[4]{x^7}\amp\amp\text{by the } \knowl{./knowl/fact-rational-exponent-rule-ii.html}{\text{Full Radicals and Rational Exponents Rule}}
+\end{align*}
+</div></li>
+<li id="fXo"><div class="displaymath" id="qKO">
+\begin{align*}
+h^{\sfrac{1}{3}}+h^{\sfrac{1}{3}}+h^{\sfrac{1}{3}}\amp=3h^{\sfrac{1}{3}}\\
+\amp=3\sqrt[3]{h}\amp\amp\text{by the } \knowl{./knowl/fact-rational-exponent-rule-i.html}{\text{Radicals and Rational Exponents Rule}}
+\end{align*}
+</div></li>
+<li id="Mex"><div class="displaymath" id="WRX">
+\begin{align*}
+\frac{\sqrt{z}}{\sqrt[3]{z}}\amp=\frac{z^{\sfrac{1}{2}}}{z^{\sfrac{1}{3}}}\amp\amp\text{by the } \knowl{./knowl/fact-rational-exponent-rule-i.html}{\text{Radicals and Rational Exponents Rule}}\\
+\amp=z^{\sfrac{1}{2}-\sfrac{1}{3}}\amp\amp\text{by the } [cross-reference to target(s) "item-exponent-rules-quotient" missing or not unique]\\
+\amp=z^{\sfrac{3}{6}-\sfrac{2}{6}}\\
+\amp=z^{\sfrac{1}{6}}\\
+\amp=\sqrt[6]{z}\amp\amp\text{by the } \knowl{./knowl/fact-rational-exponent-rule-i.html}{\text{Radicals and Rational Exponents Rule}}
+\end{align*}
+</div></li>
+<li id="slG"><div class="displaymath" id="CZg">
+\begin{align*}
+\sqrt{\sqrt[4]{q}}\amp=\sqrt{q^{\sfrac{1}{4}}}\amp\amp\text{by the } \knowl{./knowl/fact-rational-exponent-rule-i.html}{\text{Radicals and Rational Exponents Rule}}\\
+\amp=\left(q^{\sfrac{1}{4}}\right)^{\sfrac{1}{2}}\amp\amp\text{by the } \knowl{./knowl/fact-rational-exponent-rule-i.html}{\text{Radicals and Rational Exponents Rule}}\\
+\amp=q^{\sfrac{1}{4}\cdot\sfrac{1}{2}}\amp\amp\text{by the } [cross-reference to target(s) "item-exponent-rules-power-to-a-power" missing or not unique]\\
+\amp=q^{\sfrac{1}{8}}\\
+\amp=\sqrt[8]{q}\amp\amp\text{by the } \knowl{./knowl/fact-rational-exponent-rule-i.html}{\text{Radicals and Rational Exponents Rule}}
+\end{align*}
+</div></li>
+<li id="YsP"><div class="displaymath" id="jgp">
+\begin{alignat*}{2}
+3\left(c^{\sfrac{1}{2}}+d^{\sfrac{1}{2}}\right)^2\amp=3\left(c^{\sfrac{1}{2}}+d^{\sfrac{1}{2}}\right)\left(c^{\sfrac{1}{2}}+d^{\sfrac{1}{2}}\right)\\
+\amp=3\left(\left(c^{\sfrac{1}{2}}\right)^2+2c^{\sfrac{1}{2}}\cdot d^{\sfrac{1}{2}}+\left(d^{\sfrac{1}{2}}\right)^2\right)\\
+\amp=3\left(c^{\sfrac{1}{2}\cdot 2}+2c^{\sfrac{1}{2}}\cdot d^{\sfrac{1}{2}}+d^{\sfrac{1}{2}\cdot 2}\right)\\
+\amp=3\left(c+2c^{\sfrac{1}{2}}\cdot d^{\sfrac{1}{2}}+d\right)\\
+\amp=3\left(c+2(cd)^{\sfrac{1}{2}}+d\right)\amp\amp\text{by the } [cross-reference to target(s) "item-exponent-rules-product-to-a-power" missing or not unique]\\
+\amp=3\left(c+2\sqrt{cd}+d\right)\amp\amp\text{by the } \knowl{./knowl/fact-rational-exponent-rule-i.html}{\text{Radicals and Rational Exponents Rule}}\\
+\amp=3c+6\sqrt{cd}+3d
+\end{alignat*}
+</div></li>
+<li id="EzY"><div class="displaymath" id="Pny">
+\begin{align*}
+3\left(4k^{\sfrac{2}{3}}\right)^{-\sfrac{1}{2}}\amp=\frac{3}{\left(4k^{\sfrac{2}{3}}\right)^{\sfrac{1}{2}}}\amp\amp\text{by the } [cross-reference to target(s) "item-exponent-rules-negative-exponent-definition" missing or not unique]\\
+\amp=\frac{3}{4^{\sfrac{1}{2}}\left(k^{\sfrac{2}{3}}\right)^{\sfrac{1}{2}}}\amp\amp\text{by the } [cross-reference to target(s) "item-exponent-rules-product-to-a-power" missing or not unique]\\
+\amp=\frac{3}{4^{\sfrac{1}{2}}k^{\sfrac{2}{3}\cdot\sfrac{1}{2}}}\amp\amp\text{by the } [cross-reference to target(s) "item-exponent-rules-power-to-a-power" missing or not unique]\\
+\amp=\frac{3}{4^{\sfrac{1}{2}}k^{\sfrac{1}{3}}}\\
+\amp=\frac{3}{\sqrt{4}\cdot\sqrt[3]{k}}\amp\amp\text{by the } \knowl{./knowl/fact-rational-exponent-rule-i.html}{\text{Radicals and Rational Exponents Rule}}\\
+\amp=\frac{3}{2\sqrt[3]{k}}
+\end{align*}
+</div></li>
+</ol></div></div>
+</div></article></div>
+<article class="example example-like" id="example-152"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-example-152"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">6.3.16</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-example-152"><article class="example example-like"><p id="p-1155">Use the radical properties in <a class="xref" data-knowl="./knowl/list-exponent-rules-complete.html" title="List 6.3.13: Complete List of Exponent Rules">List 6.3.13</a> to simplify the following expressions, answering with positive rational exponents only (no radicals).</p>
+<ol class="lower-alpha cols3">
+<li id="li-229"><p id="p-1156">\(\displaystyle \sqrt[7]{128y^4}\)</p></li>
+<li id="li-230"><p id="p-1157">\(\displaystyle \frac{\sqrt[3]{64z^2}}{\sqrt[4]{z}}\)</p></li>
+<li id="li-231"><p id="p-1158">\(\displaystyle \frac{\sqrt{36x}}{\sqrt[5]{x^3}}\)</p></li>
+<li id="li-232"><p id="p-1159">\(\displaystyle \sqrt[3]{n^2}\sqrt[4]{n^3}\)</p></li>
+<li id="li-233"><p id="p-1160">\(\displaystyle \sqrt[7]{\sqrt[3]{x}}\)</p></li>
+</ol>
+<div class="solutions">
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-102" id="solution-102"><span class="type">Explanation</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-102"><div class="solution solution-like"><ol id="p-1161" class="lower-alpha">
+<li id="li-234"><div class="displaymath" id="p-1162">
+\begin{align*}
+\sqrt[7]{128y^4}\amp=(128y^4)^{\sfrac{1}{7}}\amp\amp\text{by the}~\knowl{./knowl/fact-rational-exponent-rule-i.html}{\text{Radicals and Rational Exponents Rule}}\\
+\amp=(128)^{\sfrac{1}{7}}(y^4)^{\sfrac{1}{7}}\amp\amp\text{by the}~[cross-reference to target(s) "item-exponent-rules-product-to-a-power" missing or not unique]\\
+\amp=\sqrt[7]{128}(y^4)^{\sfrac{1}{7}}\amp\amp\text{by the}~\knowl{./knowl/fact-rational-exponent-rule-i.html}{\text{Radicals and Rational Exponents Rule}}\\
+\amp=2y^{\sfrac{4}{7}}\amp\amp\text{by the}~[cross-reference to target(s) "item-exponent-rules-power-to-a-power" missing or not unique]
+\end{align*}
+</div></li>
+<li id="li-235"><div class="displaymath" id="p-1163">
+\begin{align*}
+\frac{\sqrt[3]{64z^2}}{\sqrt[4]{z}}\amp=\frac{(64z^2)^{\sfrac{1}{3}}}{z^{\sfrac{1}{4}}}\amp\amp\text{by the}~\knowl{./knowl/fact-rational-exponent-rule-i.html}{\text{Radicals and Rational Exponents Rule}}\\
+\amp=\frac{(64)^{\sfrac{1}{3}}(z^2)^{\sfrac{1}{3}}}{z^{\sfrac{1}{4}}}\amp\amp\text{by the}~[cross-reference to target(s) "item-exponent-rules-product-to-a-power" missing or not unique]\\
+\amp=\frac{\sqrt[3]{64}(z^2)^{\sfrac{1}{3}}}{z^{\sfrac{1}{4}}}\amp\amp\text{by the}~\knowl{./knowl/fact-rational-exponent-rule-i.html}{\text{Radicals and Rational Exponents Rule}}\\
+\amp=\frac{4z^{\sfrac{2}{3}}}{z^{\sfrac{1}{4}}}\amp\amp\text{by the}~[cross-reference to target(s) "item-exponent-rules-power-to-a-power" missing or not unique]\\
+\amp=4z^{\sfrac{2}{3}-\sfrac{1}{4}}\amp\amp\text{by the}~[cross-reference to target(s) "item-exponent-rules-quotient" missing or not unique]\\
+\amp=4z^{\sfrac{8}{12}-\sfrac{3}{12}}\\
+\amp=4z^{\sfrac{5}{12}}
+\end{align*}
+</div></li>
+<li id="li-236"><div class="displaymath" id="p-1164">
+\begin{align*}
+\frac{\sqrt{36x}}{\sqrt[5]{x^3}}\amp=\frac{(36x)^{\sfrac{1}{2}}}{x^{\sfrac{3}{5}}}\amp\amp\text{by the}~\knowl{./knowl/fact-rational-exponent-rule-ii.html}{\text{Full Radicals and Rational Exponents Rule}}\\
+\amp=\frac{36^{\sfrac{1}{2}}x^{\sfrac{1}{2}}}{x^{\sfrac{3}{5}}}\amp\amp\text{by the}~[cross-reference to target(s) "item-exponent-rules-product-to-a-power" missing or not unique]\\
+\amp=\frac{\sqrt{36}x^{\sfrac{1}{2}}}{x^{\sfrac{3}{5}}}\amp\amp\text{by the}~\knowl{./knowl/fact-rational-exponent-rule-ii.html}{\text{Full Radicals and Rational Exponents Rule}}\\
+\amp=6x^{\sfrac{1}{2}-\sfrac{3}{5}}\amp\amp\text{by the}~[cross-reference to target(s) "item-exponent-rules-quotient" missing or not unique]\\
+\amp=6x^{\sfrac{5}{10}-\sfrac{6}{10}}\\
+\amp=6x^{\sfrac{-1}{10}}\\
+\amp=\frac{6}{x^{\sfrac{1}{10}}}\amp\amp\text{by the}~[cross-reference to target(s) "item-exponent-rules-negative-exponent-definition" missing or not unique]
+\end{align*}
+</div></li>
+<li id="li-237"><div class="displaymath" id="p-1165">
+\begin{align*}
+\sqrt[3]{n^2}\sqrt[4]{n^3}\amp=n^{\sfrac{2}{3}}n^{\sfrac{3}{4}}\amp\amp\text{by the}~\knowl{./knowl/fact-rational-exponent-rule-ii.html}{\text{Full Radicals and Rational Exponents Rule}}\\
+\amp=n^{\sfrac{2}{3}+\sfrac{3}{4}}\amp\amp\text{by the}~[cross-reference to target(s) "item-exponent-rules-product" missing or not unique]\\
+\amp=n^{\sfrac{8}{12}+\sfrac{9}{12}}\\
+\amp=n^{\sfrac{17}{12}}
+\end{align*}
+</div></li>
+<li id="li-238"><div class="displaymath" id="p-1166">
+\begin{align*}
+\sqrt[7]{\sqrt[3]{x}}\amp=\sqrt[7]{x^{\sfrac{1}{3}}}\amp\amp\text{by the}~\knowl{./knowl/fact-rational-exponent-rule-i.html}{\text{Radicals and Rational Exponents Rule}}\\
+\amp=\left(x^{\sfrac{1}{3}}\right)^{\sfrac{1}{7}}\amp\amp\text{by the}~\knowl{./knowl/fact-rational-exponent-rule-i.html}{\text{Radicals and Rational Exponents Rule}}\\
+\amp=x^{\sfrac{1}{21}}\amp\amp\text{by the}~[cross-reference to target(s) "item-exponent-rules-power-to-a-power" missing or not unique]
+\end{align*}
+</div></li>
+</ol></div></div>
+</div></article></div>
+<p id="oAc">We will end a with a short application of rational exponents. <a class="external" href="https://en.wikipedia.org/wiki/Kepler%27s_laws_of_planetary_motion" target="_blank">Kepler's Laws of Orbital Motion</a><a data-knowl="" class="id-ref fn-knowl original" data-refid="hk-fn-6" id="fn-6"><sup> 1 </sup></a> describe how planets orbit stars and how satellites orbit planets. In particular, his third law has a rational exponent, which we will now explore.</p>
+<div class="hidden-content tex2jax_ignore" id="hk-fn-6"><div class="fn"><a class="external" href="https://en.wikipedia.org/wiki/Kepler%27s_laws_of_planetary_motion" target="_blank">en.wikipedia.org/wiki/Kepler%27s_laws_of_planetary_motion</a></div></div>
+<article class="example example-like" id="Pgh"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-Pgh"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">6.3.17</span><span class="period">.</span><span class="space"> </span><span class="title">Kepler and the Satellite.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-Pgh"><article class="example example-like"><p id="BTN">Kepler's third law of motion says that for objects with a roughly circular orbit that the time (in hours) that it takes to make one full revolution around the planet, \(T\text{,}\) is proportional to three-halves power of the distance (in kilometers) from the center of the planet to the satellite, \(r\text{.}\) For the Earth, it looks like this:</p>
+<div class="displaymath">
+\begin{equation*}
+T=\frac{2\pi}{\sqrt{G\cdot M_E}}r^{\sfrac{3}{2}}
+\end{equation*}
+</div>
+<p class="continuation">In this case, both \(G\) and \(M_E\) are constants. \(G\) stands for the <a class="external" href="https://en.wikipedia.org/wiki/Gravitational_constant" target="_blank">universal gravitational constant</a><a data-knowl="" class="id-ref fn-knowl original" data-refid="hk-fn-7" id="fn-7"><sup> 2 </sup></a> where \(G\) is about \(8.65\times 10^{-13}\) <span class="quantity"><sup>km<sup>3</sup></sup>⁄<sub>kg·h<sup>2</sup></sub></span> and \(M_E\) stands for the <a class="external" href="https://en.wikipedia.org/wiki/Earth_mass" target="_blank">mass of the Earth</a><a data-knowl="" class="id-ref fn-knowl original" data-refid="hk-fn-8" id="fn-8"><sup> 3 </sup></a> where \(M_E\) is about \(5.972\times 10^{24}\) <span class="quantity">kg</span>. Inputting these values into this formula yields a simplified version that looks like this:</p>
+<div class="displaymath">
+\begin{equation*}
+T\approx2.76\times 10^{-6}r^{\sfrac{3}{2}}
+\end{equation*}
+</div>
+<div class="hidden-content tex2jax_ignore" id="hk-fn-7"><div class="fn"><a class="external" href="https://en.wikipedia.org/wiki/Gravitational_constant" target="_blank">en.wikipedia.org/wiki/Gravitational_constant</a></div></div>
+<div class="hidden-content tex2jax_ignore" id="hk-fn-8"><div class="fn"><a class="external" href="https://en.wikipedia.org/wiki/Earth_mass" target="_blank">en.wikipedia.org/wiki/Earth_mass</a></div></div>
+<p id="iaW">Most satellites orbit in what is called <a class="external" href="https://en.wikipedia.org/wiki/Low_Earth_orbit" target="_blank">low Earth orbit</a><a data-knowl="" class="id-ref fn-knowl original" data-refid="hk-fn-9" id="fn-9"><sup> 4 </sup></a>, including the international space station which orbits at about <span class="quantity">340 km</span> above from Earth's surface. The Earth's average radius is about <span class="quantity">6380 km</span>. Find the period of the international space station.</p>
+<div class="hidden-content tex2jax_ignore" id="hk-fn-9"><div class="fn"><a class="external" href="https://en.wikipedia.org/wiki/Low_Earth_orbit" target="_blank">en.wikipedia.org/wiki/Low_Earth_orbit</a></div></div>
+<div class="solutions">
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-eDA" id="eDA"><span class="type">Explanation</span></a><div class="hidden-content tex2jax_ignore" id="hk-eDA"><div class="solution solution-like">
+<p id="glJ">The formula has already been identified, but the input takes just a little thought. The formula uses \(r\) as the distance from the center of the Earth to the satellite, so to find \(r\) we need to combine the radius of the Earth and the distance to the satellite above the surface of the Earth. </p>
+<div class="displaymath">
+\begin{align*}
+r\amp=340+6380\\
+\amp=6720
+\end{align*}
+</div>
+<p class="continuation">Now we can input this value into the formula and evaluate.</p>
+<div class="displaymath">
+\begin{align*}
+T\amp\approx2.76\cdot 10^{-6}r^{\sfrac{3}{2}}\\
+\amp\approx2.76\cdot 10^{-6}(\substitute{6720})^{\sfrac{3}{2}}\\
+\amp\approx2.76\cdot 10^{-6}\left(\sqrt{6720}\right)^3\\
+\amp\approx1.52
+\end{align*}
+</div>
+<p class="continuation">The formula tells us that it takes a little more than an hour and a half for the ISS to orbit the Earth! That works out to 15 or 16 sunrises per day.</p>
+</div></div>
+</div></article></div></section><section class="reading-questions" id="reading-questions-21"><h3 class="heading hide-type">
+<span class="type">Reading Questions</span> <span class="codenumber">6.3.3</span> <span class="title">Reading Questions</span>
+</h3>
+<article class="exercise exercise-like" id="exercise-118"><h6 class="heading"><span class="codenumber">1<span class="period">.</span></span></h6>
+<p id="p-1171">Raising a number to a reciprocal power (like \(\frac{1}{2}\) or \(\frac{1}{5}\)) is the same as doing what other thing to that number?</p></article><article class="exercise exercise-like" id="exercise-119"><h6 class="heading"><span class="codenumber">2<span class="period">.</span></span></h6>
+<p id="p-1172">When the exponent on an expression is a fraction like \(\frac{3}{5}\text{,}\) which part of the fraction is essentially the index of a radical?</p></article></section></section></div></main>
+</div>
+</body>
+</html>

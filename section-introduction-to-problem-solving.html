@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*       on 2021-08-28T19:50:30Z       *-->
+<!--*   A recent stable commit (2020-08-09):   *-->
+<!--* 98f21740783f166a773df4dc83cab5293ab63a4a *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<html lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>ORCCA Introduction to Problem Solving</title>
+<meta name="Keywords" content="Authored in PreTeXt">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+<script>window.MathJax = {
+  tex: {
+    inlineMath: [['\\(','\\)']],
+    tags: "none",
+    useLabelIds: true,
+    tagSide: "right",
+    tagIndent: ".8em",
+    packages: {'[+]': ['base', 'extpfeil', 'ams', 'amscd', 'newcommand', 'knowl', 'sfrac']}
+  },
+  options: {
+    ignoreHtmlClass: "tex2jax_ignore",
+    processHtmlClass: "has_am",
+  },
+  chtml: {
+    scale: 0.88,
+    mtextInheritFont: true
+  },
+  loader: {
+    load: ['input/asciimath', '[tex]/extpfeil', '[tex]/amscd', '[tex]/newcommand', '[pretext]/mathjaxknowl3.js'],
+    paths: {pretext: "https://pretextbook.org/js/lib"},
+  },
+/* support for the sfrac command in MathJax (Beveled fraction) */
+  startup: {
+    ready() {
+      //
+      // Creating a simple "sfrac" package on-the-fly
+      //
+      const Configuration = MathJax._.input.tex.Configuration.Configuration;
+      const CommandMap = MathJax._.input.tex.SymbolMap.CommandMap;
+      
+      new CommandMap('sfrac', {
+        sfrac: 'SFrac'
+        }, {
+        SFrac(parser, name) {
+        const num = parser.ParseArg(name);
+        const den = parser.ParseArg(name);
+        const frac = parser.create('node', 'mfrac', [num, den], {bevelled: true});
+        parser.Push(frac);
+        }
+      });
+      //
+      // Create the package for the overridden macros
+      //
+      Configuration.create('sfrac', {
+        handler: {macro: ['sfrac']}
+      });
+      
+    MathJax.startup.defaultReady();
+    }
+  },
+};
+</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext_add_on.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script xmlns:svg="http://www.w3.org/2000/svg">sagecellEvalName='Evaluate (Sage)';
+</script><link xmlns:svg="http://www.w3.org/2000/svg" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://fonts.googleapis.com/css?family=Inconsolata:400,700&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/pretext.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/pretext_add_on.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/banner_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/toc_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/knowls_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/style_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/colors_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/setcolors.css" rel="stylesheet" type="text/css">
+<!-- 2019-10-12: Temporary - CSS file for experiments with styling --><link xmlns:svg="http://www.w3.org/2000/svg" href="developer.css" rel="stylesheet" type="text/css">
+</head>
+<body id="PCC-ORCCA" class="mathbook-book has-toc has-sidebar-left">
+<a class="assistive" href="#content">Skip to main content</a><div xmlns:svg="http://www.w3.org/2000/svg" id="latex-macros" class="hidden-content" style="display:none">\(\require{cancel}\newcommand{\abs}[1]{\left\lvert#1\right\rvert}
+\newcommand{\point}[2]{\left(#1,#2\right)}
+\newcommand{\highlight}[1]{\definecolor{sapphire}{RGB}{59,90,125} {\color{sapphire}{{#1}}}}
+\newcommand{\firsthighlight}[1]{\definecolor{sapphire}{RGB}{59,90,125} {\color{sapphire}{{#1}}}}
+\newcommand{\secondhighlight}[1]{\definecolor{emerald}{RGB}{20,97,75} {\color{emerald}{{#1}}}}
+\newcommand{\unhighlight}[1]{{\color{black}{{#1}}}}
+\newcommand{\lowlight}[1]{{\color{lightgray}{#1}}}
+\newcommand{\attention}[1]{\mathord{\overset{\downarrow}{#1}}}
+\newcommand{\nextoperation}[1]{\mathord{\boxed{#1}}}
+\newcommand{\substitute}[1]{{\color{blue}{{#1}}}}
+\newcommand{\pinover}[2]{\overset{\overset{\mathrm{\ #2\ }}{|}}{\strut #1 \strut}}
+\newcommand{\addright}[1]{{\color{blue}{{{}+#1}}}}
+\newcommand{\addleft}[1]{{\color{blue}{{#1+{}}}}}
+\newcommand{\subtractright}[1]{{\color{blue}{{{}-#1}}}}
+\newcommand{\multiplyright}[2][\cdot]{{\color{blue}{{{}#1#2}}}}
+\newcommand{\multiplyleft}[2][\cdot]{{\color{blue}{{#2#1{}}}}}
+\newcommand{\divideunder}[2]{\frac{#1}{{\color{blue}{{#2}}}}}
+\newcommand{\divideright}[1]{{\color{blue}{{{}\div#1}}}}
+\newcommand{\negate}[1]{{\color{blue}{{-}}}\left(#1\right)}
+\newcommand{\cancelhighlight}[1]{\definecolor{sapphire}{RGB}{59,90,125}{\color{sapphire}{{\cancel{#1}}}}}
+\newcommand{\secondcancelhighlight}[1]{\definecolor{emerald}{RGB}{20,97,75}{\color{emerald}{{\bcancel{#1}}}}}
+\newcommand{\thirdcancelhighlight}[1]{\definecolor{amethyst}{RGB}{112,72,91}{\color{amethyst}{{\xcancel{#1}}}}}
+\newcommand{\confirm}[1]{\stackrel{\checkmark}{#1}}
+\newcommand{\reject}[1]{\stackrel{\text{no}}{#1}}
+\newcommand{\wonder}[1]{\stackrel{\text{?}}{#1}}
+\newcommand{\apple}{\text{🍎}}
+\newcommand{\banana}{\text{🍌}}
+\newcommand{\pear}{\text{🍐}}
+\newcommand{\cat}{\text{🐱}}
+\newcommand{\dog}{\text{🐶}}
+\newcommand{\lt}{&lt;}
+\newcommand{\gt}{&gt;}
+\newcommand{\amp}{&amp;}
+\)</div>
+<header id="masthead" class="smallbuttons"><div class="banner"><div class="container">
+<a id="logo-link" href="http://www.pcc.edu/ORCCA" target="_blank"><img src="images/ORCCAbrandlogo.png" alt="Logo image"></a><div class="title-container">
+<h1 class="heading"><a href="orcca.html"><span class="title">RVCC Elementary Algebra</span></a></h1>
+<p class="byline">Department of Mathematics and Computer Science</p>
+</div>
+</div></div>
+<nav xmlns:svg="http://www.w3.org/2000/svg" id="primary-navbar" class="navbar"><div class="container">
+<div class="navbar-top-buttons">
+<button class="sidebar-left-toggle-button button active" aria-label="Show or hide table of contents sidebar">Contents</button><div class="tree-nav toolbar toolbar-divisor-3">
+<a class="index-button toolbar-item button" href="index-1.html" title="Index">Index</a><span class="threebuttons"><a id="previousbutton" class="previous-button toolbar-item button" href="section-linear-equations.html" title="Previous">Prev</a><a id="upbutton" class="up-button button toolbar-item" href="chapter-linear-equations-and-inequalities-modified.html" title="Up">Up</a><a id="nextbutton" class="next-button button toolbar-item" href="section-formulas.html" title="Next">Next</a></span>
+</div>
+</div>
+<div class="navbar-bottom-buttons toolbar toolbar-divisor-4">
+<button class="sidebar-left-toggle-button button toolbar-item active">Contents</button><a class="previous-button toolbar-item button" href="section-linear-equations.html" title="Previous">Prev</a><a class="up-button button toolbar-item" href="chapter-linear-equations-and-inequalities-modified.html" title="Up">Up</a><a class="next-button button toolbar-item" href="section-formulas.html" title="Next">Next</a>
+</div>
+</div></nav></header><div class="page">
+<div xmlns:svg="http://www.w3.org/2000/svg" id="sidebar-left" class="sidebar" role="navigation"><div class="sidebar-content">
+<nav id="toc"><ul>
+<li class="link frontmatter">
+<a href="frontmatter.html" data-scroll="JVg"><span class="title">Front Matter</span></a><ul><li><a href="colophon-1.html" data-scroll="colophon-1">Colophon</a></li></ul>
+</li>
+<li class="link part"><a href="part-all-of-the-chapters.html" data-scroll="part-all-of-the-chapters"><span class="codenumber">I</span> <span class="title"></span></a></li>
+<li class="link">
+<a href="chapter-introduction-to-algebra.html" data-scroll="dNX"><span class="codenumber">1</span> <span class="title">Introduction to Algebra</span></a><ul>
+<li><a href="section-real-numbers-and-the-number-line.html" data-scroll="ipv">Real Numbers and the Number Line</a></li>
+<li><a href="section-properties-of-real-numbers.html" data-scroll="tNy">Properties of Real Numbers</a></li>
+<li><a href="section-simplifying-and-writing-algebraic-expressions.html" data-scroll="xRO">Simplifying and Writing Algebraic Expressions</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="chapter-linear-equations-and-inequalities-modified.html" data-scroll="sWV"><span class="codenumber">2</span> <span class="title">Linear Equations and Inequalities</span></a><ul>
+<li><a href="section-introduction-to-equations.html" data-scroll="fwy">Introduction to Equations</a></li>
+<li><a href="section-linear-equations.html" data-scroll="xVO">Linear Equations</a></li>
+<li><a href="section-introduction-to-problem-solving.html" data-scroll="Wul" class="active">Introduction to Problem Solving</a></li>
+<li><a href="section-formulas.html" data-scroll="Nnq">Formulas</a></li>
+<li><a href="section-linear-inequalities.html" data-scroll="Nuc">Linear Inequalities</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="chapter-graphing-equations.html" data-scroll="gID"><span class="codenumber">3</span> <span class="title">Graphing Lines</span></a><ul>
+<li><a href="section-introduction-to-graphing.html" data-scroll="YTJ">Introduction to Graphing</a></li>
+<li><a href="section-equations-in-two-variables.html" data-scroll="QXY">Equations in Two Variables</a></li>
+<li><a href="section-intercepts-horizontal-and-vertical-lines.html" data-scroll="ByF">Intercepts: Horizontal and Vertical Lines</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="chapter-systems-of-linear-equations-in-two-variables.html" data-scroll="xGO"><span class="codenumber">4</span> <span class="title">Systems of Linear Equations</span></a><ul>
+<li><a href="section-solving-systems-of-linear-equations-graphically-and-numerically.html" data-scroll="njo">Solving Systems of Linear Equations Graphically and Numerically</a></li>
+<li><a href="section-solving-systems-of-linear-equations-by-substitution.html" data-scroll="zdh">Solving Systems of Linear Equations by Substitution</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="chapter-polynomials-and-exponents-modified.html" data-scroll="onc"><span class="codenumber">5</span> <span class="title">Exponents and Polynomials</span></a><ul>
+<li><a href="section-rules-for-exponents.html" data-scroll="KHJ">Rules for Exponents</a></li>
+<li><a href="section-adding-and-subtracting-polynomials.html" data-scroll="VvN">Addition and Subtraction of Polynomials</a></li>
+<li><a href="section-multiplication-of-polynomials.html" data-scroll="IcY">Multiplication of Polynomials</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="chapter-radical-expressions-and-equations.html" data-scroll="chapter-radical-expressions-and-equations"><span class="codenumber">6</span> <span class="title">Radical Expressions and Equations</span></a><ul>
+<li><a href="section-introduction-to-factoring.html" data-scroll="duD">Introduction to Factoring</a></li>
+<li><a href="section-factoring-trinomials.html" data-scroll="Mrf">Factoring Trinomials</a></li>
+<li><a href="section-solving-equations-by-factoring.html" data-scroll="DXi">Solving Equations by Factoring 1 (Quadratics)</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="chapter-rational-expressions.html" data-scroll="RzF"><span class="codenumber">7</span> <span class="title">Rational Expressions</span></a><ul>
+<li><a href="section-introduction-to-rational-expressions.html" data-scroll="Moo">Introduction to Rational Expressions</a></li>
+<li><a href="section-multiplication-and-division-of-rational-expressions.html" data-scroll="Vps">Multiplication and Division of Rational Expressions</a></li>
+<li><a href="section-addition-and-subtraction-with-like-denominators.html" data-scroll="KBw">Addition and Subtraction of Rational Expressions with Like Denominators</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="chapter-radical-expressions-and-functions.html" data-scroll="chapter-radical-expressions-and-functions"><span class="codenumber">8</span> <span class="title">Quantities in the Physical World</span></a><ul><li><a href="section-radical-expressions-and-functions.html" data-scroll="GAK">Radical Expressions and Functions</a></li></ul>
+</li>
+<li class="link backmatter"><a href="backmatter.html" data-scroll="jDj"><span class="title">Appendices</span></a></li>
+<li class="link">
+<a href="appendix-basic-math-review.html" data-scroll="appendix-basic-math-review"><span class="codenumber">A</span> <span class="title">Basic Math Review</span></a><ul>
+<li><a href="section-arithmetic-with-negative-numbers.html" data-scroll="qBB">Arithmetic with Negative Numbers</a></li>
+<li><a href="section-fractions-and-fraction-arithmetic.html" data-scroll="VAa">Fractions and Fraction Arithmetic</a></li>
+<li><a href="section-absolute-value-and-square-root.html" data-scroll="GAK">Absolute Value and Square Root</a></li>
+<li><a href="section-percentages.html" data-scroll="Chi">Percentages</a></li>
+<li><a href="section-order-of-operations.html" data-scroll="aog">Order of Operations</a></li>
+<li><a href="section-set-notation-and-types-of-numbers.html" data-scroll="Fdo">Set Notation and Types of Numbers</a></li>
+</ul>
+</li>
+<li class="link"><a href="appendix-unit-conversions.html" data-scroll="appendix-unit-conversions"><span class="codenumber">B</span> <span class="title">Unit Conversions</span></a></li>
+<li class="link"><a href="index-1.html" data-scroll="index-1"><span class="title">Index</span></a></li>
+</ul></nav><div class="extras"><nav><a class="mathbook-link" href="https://pretextbook.org">Authored in PreTeXt</a><a href="https://www.mathjax.org"><img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" alt="Powered by MathJax"></a></nav></div>
+</div></div>
+<main class="main"><div id="content" class="pretext-content"><section xmlns:svg="http://www.w3.org/2000/svg" class="section" id="Wul"><h2 class="heading hide-type">
+<span class="type">Section</span> <span class="codenumber">2.3</span> <span class="title">Introduction to Problem Solving</span>
+</h2>
+<section class="introduction" id="UxU"><p id="AjE">This section discusses a technique that might make it easier for you to solve linear equations and inequalities when there are fractions present.</p></section><section class="subsection" id="CBu"><h3 class="heading hide-type">
+<span class="type">Subsection</span> <span class="codenumber">2.3.1</span> <span class="title">Introduction</span>
+</h3>
+<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;">
+<div class="sbspanel top" style="width:47%;">
+<p id="nVm">So far, in our last step of solving for a variable we have divided each side of the equation by a constant, as in:</p>
+<div class="displaymath">
+\begin{align*}
+2x\amp=10\\
+\divideunder{2x}{2} \amp= \divideunder{10}{2}\\
+x\amp=5
+\end{align*}
+</div>
+</div>
+<div class="sbspanel top" style="width:47%;">
+<p id="Ucv">If we have a coefficient that is a fraction, we <em class="emphasis">could</em> proceed in exactly the same manner:</p>
+<div class="displaymath">
+\begin{align*}
+\frac{1}{2}x\amp=10\\
+\divideunder{\frac{1}{2}x}{\frac{1}{2}} \amp= \divideunder{10}{\frac{1}{2}}\\
+x\amp=10\cdot \frac{2}{1}=20
+\end{align*}
+</div>
+</div>
+</div></div>
+<p id="MxW">What if our equation or inequality was more complicated though, for example \(\frac{1}{4}x+\frac{2}{3}=\frac{1}{6}\text{?}\) We would have to first do a lot of fraction arithmetic in order to then divide each side by the coefficient of \(x\text{.}\) An alternate approach is to instead <em class="emphasis">multiply</em> each side of the equation by just the right number that eliminates the denominator(s). In the equation \(\frac{1}{2}x=10\text{,}\) we could simply multiply each side of the equation by \(2\text{,}\) which would eliminate the denominator of \(2\text{:}\)</p>
+<div class="displaymath">
+\begin{align*}
+\frac{1}{2}x\amp=10\\
+\multiplyleft{2}\left(\frac{1}{2}x\right)\amp=\multiplyleft{2}10\\
+x\amp=20
+\end{align*}
+</div>
+<p class="continuation">For more complicated equations, multiply each side of the equation by the least common denominator (LCD) of all fractions appearing in the equation. In this way we can take one step to turn an equation full of fractions into an equation with no fractions.</p></section><section class="subsection" id="iID"><h3 class="heading hide-type">
+<span class="type">Subsection</span> <span class="codenumber">2.3.2</span> <span class="title">Eliminating Denominators</span>
+</h3>
+<article class="example example-like" id="EqH"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-EqH"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">2.3.1</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-EqH"><article class="example example-like"><div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;">
+<div class="sbspanel top" style="width:47%;">
+<p id="ZRH">Deshawn planted a sapling in his yard that was <span class="quantity">4 ft</span> tall. The tree will grow \(\frac{2}{3}\) of a foot every year. How many years will it take for his tree to be <span class="quantity">10 ft</span> tall?</p>
+<p id="FYQ">Since the tree grows \(\frac{2}{3}\) of a foot every year, we can use a table to help write a formula modeling the tree's growth:</p>
+</div>
+<div class="sbspanel fixed-width top" style="width:47%;"><table class="tabular" id="rzM">
+<tr>
+<td class="c m b2 r0 l0 t0 lines">Years Passed</td>
+<td class="c m b2 r0 l0 t0 lines">Tree's Height (ft)</td>
+</tr>
+<tr>
+<td class="c m b0 r0 l0 t0 lines">\(0\)</td>
+<td class="c m b0 r0 l0 t0 lines">\(4\)</td>
+</tr>
+<tr>
+<td class="c m b0 r0 l0 t0 lines">\(1\)</td>
+<td class="c m b0 r0 l0 t0 lines">\(4+\frac{2}{3}\)</td>
+</tr>
+<tr>
+<td class="c m b0 r0 l0 t0 lines">\(2\)</td>
+<td class="c m b0 r0 l0 t0 lines">\(4+\frac{2}{3}\cdot2\)</td>
+</tr>
+<tr>
+<td class="c m b0 r0 l0 t0 lines">\(\vdots\)</td>
+<td class="c m b0 r0 l0 t0 lines">\(\vdots\)</td>
+</tr>
+<tr>
+<td class="c m b0 r0 l0 t0 lines">\(y\)</td>
+<td class="c m b0 r0 l0 t0 lines">\(4+\frac{2}{3}y\)</td>
+</tr>
+</table></div>
+</div></div>
+<p id="mfZ">From this, we've determined that \(y\) years since the tree was planted, the tree's height will be \(4+\frac{2}{3}y\) feet. To find when Deshawn's tree will be \(10\) feet tall, we set up the equation</p>
+<div class="displaymath">
+\begin{equation*}
+4+\frac{2}{3}y=10
+\end{equation*}
+</div>
+<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;">
+<div class="sbspanel top" style="width:47%;">
+<p id="Sni">To solve the equation, we take note of the fraction and its denominator \(3\text{.}\) As the very first step, multiplying by \(3\) on each side will leave us with no fractions.</p>
+<div class="displaymath">
+\begin{align*}
+4+\frac{2}{3}y\amp=10\\
+\multiplyleft{3}\left(4+\frac{2}{3}y\right)\amp=\multiplyleft{3}10\\
+3\cdot4+3\cdot\frac{2}{3}y\amp=30\\
+12+2y\amp=30\\
+2y\amp=18\\
+y\amp=9
+\end{align*}
+</div>
+</div>
+<div class="sbspanel top" style="width:47%;">
+<p id="yur">Now we will check the solution \(9\) in the equation \(4+\frac{2}{3}y=10\text{:}\)</p>
+<div class="displaymath">
+\begin{align*}
+4+\frac{2}{3}y\amp=10\\
+4+\frac{2}{3}(\substitute{9})\amp\wonder{=}10\\
+4+6\amp\confirm{=}10
+\end{align*}
+</div>
+</div>
+</div></div>
+<p id="eBA">In summary, it will take \(9\) years for Deshawn's tree to reach \(10\) feet tall. The point of this example was to demonstrate that clearing denominators can make an equation fairly easy to solve.</p></article></div>
+<article class="example example-like" id="kxQ"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-kxQ"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">2.3.2</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-kxQ"><article class="example example-like"><p id="KIJ">Solve for \(x\) in \(\frac{1}{4}x+\frac{2}{3}=\frac{1}{6}\text{.}\)</p>
+<div class="solutions">
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-AFd" id="AFd"><span class="type">Explanation</span></a><div class="hidden-content tex2jax_ignore" id="hk-AFd"><div class="solution solution-like">
+<p id="Wnh">To solve this equation, we first need to identify the LCD of all fractions in the equation. On the left side we have \(\frac{1}{4}\) and \(\frac{2}{3}\text{.}\) On the right side we have \(\frac{1}{6}\text{.}\) The LCD of \(3, 4\text{,}\) and \(6\) is \(12\text{,}\) so we will multiply each side of the equation by \(12\) in order to eliminate <em class="emphasis">all</em> of the denominators:</p>
+<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;">
+<div class="sbspanel top" style="width:47%;"><div class="displaymath" id="Cuq">
+\begin{align*}
+\frac{1}{4}x+\frac{2}{3}\amp=\frac{1}{6}\\
+\multiplyleft{12}\left(\frac{1}{4}x+\frac{2}{3}\right)\amp=\multiplyleft{12}\frac{1}{6}\\
+12\cdot\left(\frac{1}{4}x\right)+12\cdot\left(\frac{2}{3}\right)\amp=12\cdot\frac{1}{6}\\
+3x+8\amp=2\\
+3x\amp=-6\\
+\divideunder{3x}{3}\amp=\divideunder{-6}{3}\\
+x\amp=-2
+\end{align*}
+</div></div>
+<div class="sbspanel top" style="width:47%;">
+<p id="iBz">Checking the solution \(-2\text{:}\)</p>
+<div class="displaymath">
+\begin{align*}
+\frac{1}{4}x+\frac{2}{3}\amp=\frac{1}{6}\\
+\frac{1}{4}(\substitute{-2})+\frac{2}{3}\amp\wonder{=}\frac{1}{6}\\
+-\frac{2}{4}+\frac{2}{3}\amp\wonder{=}\frac{1}{6}\\
+-\frac{6}{12}+\frac{8}{12}\amp\wonder{=}\frac{1}{6}\\
+\frac{2}{12}\amp\confirm{=}\frac{1}{6}
+\end{align*}
+</div>
+</div>
+</div></div>
+<p id="OII">The solution is therefore \(-2\) and the solution set is \(\{-2\}\text{.}\)</p>
+</div></div>
+</div></article></div>
+<article class="exercise exercise-like" id="exercise-34"><a data-knowl="" class="id-ref exercise-knowl original" data-refid="hk-exercise-34"><h6 class="heading">
+<span class="type">Checkpoint</span><span class="space"> </span><span class="codenumber">2.3.3</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-exercise-34"><article class="exercise exercise-like"><p id="p-383">The WeBWorK problem with ID “webwork-22” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article></div>
+<article class="example example-like" id="wMi"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-wMi"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">2.3.4</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-wMi"><article class="example example-like"><p id="WXb">Solve for \(a\) in the equation \(\frac{2}{3}(a+1)+5=\frac{1}{3}\text{.}\)</p>
+<div class="solutions">
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-MTv" id="MTv"><span class="type">Explanation</span></a><div class="hidden-content tex2jax_ignore" id="hk-MTv"><div class="solution solution-like">
+<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;">
+<div class="sbspanel top" style="width:47%;">
+<p id="nls">There are two fractions appearing here, but both have the same denominator \(3\text{.}\) So we can multiply by \(3\) on each side to clear denominators.</p>
+<div class="displaymath">
+\begin{align*}
+\frac{2}{3}(a+1)+5\amp=\frac{1}{3}\\
+\multiplyleft{3}\left(\frac{2}{3}(a+1)+5\right)\amp=\multiplyleft{3}\frac{1}{3}\\
+3\cdot\frac{2}{3}(a+1)+3\cdot5\amp=1\\
+2(a+1)+15\amp=1\\
+2a+2+15\amp=1\\
+2a+17\amp=1\\
+2a\amp=-16\\
+a\amp=-8
+\end{align*}
+</div>
+</div>
+<div class="sbspanel top" style="width:47%;">
+<p id="TsB">Check the solution \(-8\) in the equation \(\frac{2}{3}(a+1)+5=\frac{1}{3}\text{,}\) we find that:</p>
+<div class="displaymath">
+\begin{align*}
+\frac{2}{3}(a+1)+5\amp=\frac{1}{3}\\
+\frac{2}{3}(\substitute{-8}+1)+5\amp\wonder{=}\frac{1}{3}\\
+\frac{2}{3}(-7)+5\amp\wonder{=}\frac{1}{3}\\
+-\frac{14}{3}+\frac{15}{3}\amp\confirm{=}\frac{1}{3}
+\end{align*}
+</div>
+</div>
+</div></div>
+<p id="zzK">The solution is therefore \(-8\) and the solution set is \(\{-8\}\text{.}\)</p>
+</div></div>
+</div></article></div>
+<article class="example example-like" id="cTr"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-cTr"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">2.3.5</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-cTr"><article class="example example-like"><p id="Dek">Solve for \(b\) in the equation \(\frac{2b+1}{3}=\frac{2}{5}\text{.}\)</p>
+<div class="solutions">
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-taE" id="taE"><span class="type">Explanation</span></a><div class="hidden-content tex2jax_ignore" id="hk-taE"><div class="solution solution-like">
+<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;">
+<div class="sbspanel top" style="width:47%;">
+<p id="fGT">The structure of the equation is a little different from previous examples, but we can still see two denominators \(3\) and \(5\text{,}\) and find their LCM is \(15\text{.}\)</p>
+<div class="displaymath">
+\begin{align*}
+\frac{2b+1}{3}\amp=\frac{2}{5}\\
+\multiplyleft{15}\frac{2b+1}{3}\amp=\multiplyleft{15}\frac{2}{5}\\
+5(2b+1)\amp=6\\
+10b+5\amp=6\\
+10b\amp=1\\
+b\amp=\frac{1}{10}
+\end{align*}
+</div>
+</div>
+<div class="sbspanel top" style="width:47%;">
+<p id="LOc">Checking the solution \(\frac{1}{10}\text{:}\)</p>
+<div class="displaymath">
+\begin{align*}
+\frac{2b+1}{3}\amp=\frac{2}{5}\\
+\frac{2\left(\substitute{\frac{1}{10}}\right)+1}{3}\amp\wonder{=}\frac{2}{5}\\
+\frac{\frac{1}{5}+1}{3}\amp\wonder{=}\frac{2}{5}\\
+\frac{\frac{1}{5}+\frac{5}{5}}{3}\amp\wonder{=}\frac{2}{5}\\
+\frac{\frac{6}{5}}{3}\amp\wonder{=}\frac{2}{5}\\
+\frac{6}{5}\cdot \frac{1}{3}\amp\confirm{=}\frac{2}{5}
+\end{align*}
+</div>
+</div>
+</div></div>
+<p id="rVl">The solution is \(\frac{1}{10}\) and the solution set is \(\left\{\frac{1}{10}\right\}\text{.}\)</p>
+</div></div>
+</div></article></div>
+<article class="example example-like" id="juK"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-juK"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">2.3.6</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-juK"><article class="example example-like"><p id="VTV">Suppose we want to know the total cost for a box of cereal that weighs \(18\) ounces, assuming it costs the same per ounce as the \(21\)-ounce box. Letting \(C\) be this unknown cost (in dollars), we could set up the following proportion:</p>
+<div class="displaymath">
+\begin{align*}
+\frac{\text{cost in dollars}}{\text{weight in oz}}\amp=\frac{\text{cost in dollars}}{\text{weight in oz}}\\
+\frac{\$3.99}{21\,\text{oz}}\amp=\frac{\$C}{18\,\text{oz}}
+\end{align*}
+</div>
+<p class="continuation">We take a moment to rewrite the equation without units:</p>
+<div class="displaymath">
+\begin{equation*}
+\frac{3.99}{21}=\frac{C}{18}
+\end{equation*}
+</div>
+<p class="continuation">Next we want to recognize that each side contains a fraction. Our usual approach for solving this type of equation is to multiply each side by the least common denominator (LCD). In this case, the LCD of \(21\) and \(18\) is \(126\text{.}\) As with many other proportions we solve, it is often easier to just multiply each side by the common denominator of \(18\cdot 21\text{,}\) which we know will make each denominator cancel:</p>
+<div class="displaymath">
+\begin{align*}
+\frac{3.99}{21}\amp=\frac{C}{18}\\
+\multiplyleft{18\cdot21}\frac{3.99}{21}\amp=\frac{C}{18}\multiplyright{18\cdot21}\\
+18\cdot\cancelhighlight{21}\frac{3.99}{\cancelhighlight{21}}\amp=\frac{C}{\cancelhighlight{18}}\cdot\cancelhighlight{18}\cdot21\\
+71.82\amp=21C\\
+\divideunder{71.82}{21}\amp=\divideunder{21C}{21}\\
+C\amp=3.42
+\end{align*}
+</div>
+<p class="continuation">So assuming the cost is proportional to the cost of the \(21\)-ounce box, the cost for an \(18\)-ounce box of cereal would be \(\$3.42\text{.}\)</p></article></div>
+<article class="example example-like" id="JaA"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-JaA"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">2.3.7</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-JaA"><article class="example example-like"><p id="jlt">In a science lab, a container had \(21\) ounces of water at 9:00 AM. Water has been evaporating at the rate of \(3\) ounces every \(5\) minutes. When will there be \(8\) ounces of water left?</p>
+<div class="solutions">
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-ZhN" id="ZhN"><span class="type">Explanation</span></a><div class="hidden-content tex2jax_ignore" id="hk-ZhN"><div class="solution solution-like">
+<p id="Ycu">Since the container has been losing \(3\) oz of water every \(5\) minutes, it loses \(\frac{3}{5}\) oz every minute. In \(m\) minutes since 9:00 AM, the container would lose \(\frac{3}{5}m\) oz of water. Since the container had \(21\) oz of water at the beginning, the amount of water in the container can be modeled by \(21-\frac{3}{5}m\) (in oz).</p>
+<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;">
+<div class="sbspanel top" style="width:47%;">
+<p id="EjD">To find when there would be \(8\) oz of water left, we write and solve this equation:</p>
+<div class="displaymath">
+\begin{align*}
+21-\frac{3}{5}m\amp=8\\
+\multiplyleft{5}\left(21-\frac{3}{5}x\right)\amp=\multiplyleft{5}8\\
+5\cdot21-5\cdot\frac{3}{5}x\amp=40\\
+105-3m\amp=40\\
+105-3m\subtractright{105}\amp=40\subtractright{105}\\
+-3m\amp=-65\\
+\divideunder{-3m}{-3}\amp=\divideunder{-65}{-3}\\
+m\amp=\frac{65}{3}
+\end{align*}
+</div>
+</div>
+<div class="sbspanel top" style="width:47%;">
+<p id="kqM">Checking the solution \(\frac{65}{3}\text{:}\)</p>
+<div class="displaymath">
+\begin{align*}
+21-\frac{3}{5}m\amp=8\\
+21-\frac{3}{5}\left(\substitute{\frac{65}{3}}\right)\amp\wonder{=}8\\
+21-13\amp\confirm{=}8
+\end{align*}
+</div>
+</div>
+</div></div>
+<p id="QxV">Therefore the solution is \(\frac{65}{3}\text{.}\) As a mixed number, this is \(21\frac{2}{3}\text{.}\) In context, this means that \(21\) minutes and \(40\) seconds after 9:00 AM, at 9:21:40 AM, the container will have \(8\) ounces of water left.</p>
+</div></div>
+</div></article></div></section><section class="subsection" id="Swz"><h3 class="heading hide-type">
+<span class="type">Subsection</span> <span class="codenumber">2.3.3</span> <span class="title">Creating and Solving Proportions</span>
+</h3>
+<p id="PJk">Proportions can be used to solve many real-life applications where two quantities vary together. For example, if your home is worth more, your property tax will be more. If you have a larger amount of liquid Tylenol, you have more milligrams of the drug dissolved in that liquid. The key to using proportions is to first set up a ratio where all values are known. We then set up a second ratio that will be proportional to the first, but has an unknown value.</p>
+<article class="example example-like" id="YVF"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-YVF"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">2.3.8</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-YVF"><article class="example example-like"><p id="fnH">Property taxes for a residential property are proportional to the assessed value of the property. A certain home is assessed at \(\$234{,}100\) and its annual property taxes are \(\$2{,}518.92\text{.}\) What are the annual property taxes for the house next door that is assessed at \(\$287{,}500\text{?}\)</p>
+<div class="solutions">
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-pyr" id="pyr"><span class="type">Explanation</span></a><div class="hidden-content tex2jax_ignore" id="hk-pyr"><div class="solution solution-like">
+<p id="CwD">Let \(T\) be the annual property taxes (in dollars) for a property assessed at \(\$287{,}500\text{.}\) We can write and solve this proportion:</p>
+<div class="displaymath">
+\begin{align*}
+\frac{\text{tax}}{\text{property value}}\amp=\frac{\text{tax}}{\text{property value}}\\
+\frac{2518.92}{234100}\amp=\frac{T}{287500}
+\end{align*}
+</div>
+<p class="continuation">The least common denominator of this proportion is rather large, so we will instead multiply each side by \(234100\) and \(287500\) and simplify from there:</p>
+<div class="displaymath">
+\begin{align*}
+\frac{2518.92}{234100}\amp=\frac{T}{287500}\\
+\multiplyleft{234100\cdot287500}\frac{2518.92}{234100}\amp=\frac{T}{287500}\multiplyright{234100\cdot287500}\\
+287500\cdot2518.92 \amp=T\cdot 234100\\
+\frac{287500\cdot 2518.92}{234100} \amp=\frac{234100T}{234100}\\
+T\amp\approx3093.50
+\end{align*}
+</div>
+<p class="continuation">The property taxes for a property assessed at \(\$287{,}500\) are \(\$3{,}093.50\text{.}\)</p>
+</div></div>
+</div></article></div>
+<article class="example example-like" id="FcO"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-FcO"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">2.3.9</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-FcO"><article class="example example-like"><p id="LuQ">Tagging fish is a means of estimating the size of the population of fish in a lake. A sample of fish is taken, tagged, and then redistributed into the lake. Later when another sample is taken, some of those fish will have tags. The number of tagged fish are assumed to be proportional to the total number of fish. We can look at that relationship from the perspective of the entire lake, or just the second sample, and we get two ratios that should be proportional.</p>
+<div class="displaymath">
+\begin{equation*}
+\frac{\text{number of tagged fish in sample}}{\text{number of fish in sample}}=\frac{\text{number of tagged fish total}}{\text{number of fish total}}
+\end{equation*}
+</div>
+<p id="rBZ">Assume that \(90\) fish are caught and tagged. Once they are redistributed, a sample of \(200\) fish is taken. Of these, \(7\) are tagged. Estimate how many fish total are in the lake.</p>
+<div class="solutions">
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-VFA" id="VFA"><span class="type">Explanation</span></a><div class="hidden-content tex2jax_ignore" id="hk-VFA"><div class="solution solution-like">
+<p id="iDM">Let \(n\) be the number of fish in the lake. We can set up a proportion for this scenario:</p>
+<div class="displaymath">
+\begin{align*}
+\frac{7}{200}\amp=\frac{90}{n}
+\end{align*}
+</div>
+<p class="continuation">To solve for \(n\text{,}\) which is in a denominator, we'll need to multiply each side by both \(200\) and \(n\text{:}\)</p>
+<div class="displaymath">
+\begin{align*}
+\frac{7}{200}\amp=\frac{90}{n}\\
+\multiplyleft{200\cdot n}\frac{7}{200}\amp=\frac{90}{n}\multiplyright{200\cdot n}\\
+{\cancelhighlight{200}\cdot n}\cdot\frac{7}{\cancelhighlight{200}}\amp=\frac{90}{\cancelhighlight{n}}\cdot200\cdot\cancelhighlight{n}\\
+7n\amp=1800\\
+\frac{7n}{7}\amp=\frac{1800}{7}\\
+n\amp\approx 2471.4286
+\end{align*}
+</div>
+<p class="continuation">According to this sample, we can estimate that there are about \(2471\) fish in the lake.</p>
+</div></div>
+</div></article></div>
+<article class="exercise exercise-like" id="exercise-35"><a data-knowl="" class="id-ref exercise-knowl original" data-refid="hk-exercise-35"><h6 class="heading">
+<span class="type">Checkpoint</span><span class="space"> </span><span class="codenumber">2.3.10</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-exercise-35"><article class="exercise exercise-like"><p id="p-404">The WeBWorK problem with ID “webwork-23” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article></div>
+<article class="example example-like" id="Rrg"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-Rrg"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">2.3.11</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-Rrg"><article class="example example-like"><p id="DQr">Sarah is an architect and she's making a scale model of a building. The actual building will be <span class="quantity">30 ft</span> tall. In the model, the height of the building will be <span class="quantity">2 in</span>. How tall should she make the model of a person who is <span class="quantity">5 ft</span> <span class="quantity">6 in</span> tall so that the model is to scale?</p>
+<div class="solutions">
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-hTS" id="hTS"><span class="type">Explanation</span></a><div class="hidden-content tex2jax_ignore" id="hk-hTS"><div class="solution solution-like">
+<p id="uSe">Let \(h\) be the height of the person in Sarah's model, which we'll measure in inches. We'll create a proportion that compares the building and person's heights in the model to their heights in real life:</p>
+<div class="displaymath">
+\begin{align*}
+\frac{\text{height of model building in inches}}{\text{height of actual building in feet}}\amp=\frac{\text{height of model person in inches}}{\text{height of actual person in feet}}\\
+\frac{2\,\text{in}}{30\,\text{ft}}\amp=\frac{h\,\text{in}}{5\,\text{ft}\,6\text{in}}
+\end{align*}
+</div>
+<p class="continuation">Before we can just eliminate the units, we'll need to convert <span class="quantity">5 ft</span> <span class="quantity">6 in</span> to feet:</p>
+<div class="displaymath">
+\begin{equation*}
+\frac{2\,\text{in}}{30\,\text{ft}}=\frac{h\,\text{in}}{5.5\,\text{ft}}
+\end{equation*}
+</div>
+<p class="continuation">Now we can remove the units and continue solving:</p>
+<div class="displaymath">
+\begin{align*}
+\frac{2}{30}\amp=\frac{h}{5.5}\\
+\multiplyleft{30\cdot5.5}\frac{2}{30}\amp=\frac{h}{5.5}\multiplyright{30\cdot5.5}\\
+5.5\cdot 2 \amp= h\cdot 30\\
+11\amp=30h\\
+\frac{11}{30}\amp=\frac{30h}{30}\\
+\frac{11}{30}\amp=h\\
+h\amp\approx 0.3667
+\end{align*}
+</div>
+<p class="continuation">Sarah should make the model of a person who is <span class="quantity">5 ft</span> <span class="quantity">6 in</span> tall be \(\frac{11}{30}\) inches (about \(0.3667\) inches) tall.</p>
+</div></div>
+</div></article></div></section><section class="subsection" id="OPM"><h3 class="heading hide-type">
+<span class="type">Subsection</span> <span class="codenumber">2.3.4</span> <span class="title">Solving Inequalities with Fractions</span>
+</h3>
+<p id="YMo">The notion of clearing denominators can also apply when solving a linear inequality. Remember that with inequalities, the only difference in the process is that the inequality sign reverses direction whenever we multiply or divide each side by a negative number.</p>
+<article class="example example-like" id="Sum"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-Sum"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">2.3.12</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-Sum"><article class="example example-like"><p id="PsC">Solve for \(x\) in the inequality \(\frac{3}{4}x-2\gt\frac{4}{5}x\text{.}\) Write the solution set in both set-builder notation and interval notation.</p>
+<div class="solutions">
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-FoW" id="FoW"><span class="type">Explanation</span></a><div class="hidden-content tex2jax_ignore" id="hk-FoW"><div class="solution solution-like">
+<p id="wFe">The LCM of the denominators is \(20\text{,}\) so we start out multiplying each side of the inequality by \(20\text{.}\)</p>
+<div class="displaymath">
+\begin{align*}
+\frac{3}{4}x-2\amp\gt\frac{4}{5}x\\
+\multiplyleft{20}\left(\frac{3}{4}x-2\right)\amp\gt\multiplyleft{20}\frac{4}{5}x\\
+20\cdot\frac{3}{4}x-20\cdot2\amp\gt16x\\
+15x-40\amp\gt16x\\
+15x-40\subtractright{15x}\amp\gt16x\subtractright{15x}\\
+-40\amp\gt x\\
+x\amp\lt-40
+\end{align*}
+</div>
+<p id="p-410">The solution set in set-builder notation is \(\{x\mid x\lt-40\}\text{.}\) Note that it's equivalent to write \(\{x\mid-40\gt x\}\text{,}\) but it's easier to understand if we write \(x\) first in an inequality. The solution set in interval notation is \((-\infty,-40)\text{.}\)</p>
+</div></div>
+</div></article></div>
+<article class="exercise exercise-like" id="exercise-36"><a data-knowl="" class="id-ref exercise-knowl original" data-refid="hk-exercise-36"><h6 class="heading">
+<span class="type">Checkpoint</span><span class="space"> </span><span class="codenumber">2.3.13</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-exercise-36"><article class="exercise exercise-like"><p id="p-411">The WeBWorK problem with ID “webwork-24” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article></div>
+<article class="example example-like" id="eIE"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-eIE"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">2.3.14</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-eIE"><article class="example example-like"><p id="bGU">In a certain class, a student's grade is calculated by the average of their scores on three tests. Aidan scored \(78\%\) and \(54\%\) on the first two tests. If he wants to earn at least a grade of C \((70\%)\text{,}\) what's the lowest score he needs to earn on the third exam?</p>
+<div class="solutions">
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-RDo" id="RDo"><span class="type">Explanation</span></a><div class="hidden-content tex2jax_ignore" id="hk-RDo"><div class="solution solution-like">
+<p id="NDp">Assume Aidan will score \(x\%\) on the third test. To make his average test score greater than or equal to \(70\%\text{,}\) we write and solve this inequality:</p>
+<div class="displaymath">
+\begin{align*}
+\frac{78+54+x}{3}\amp\ge70\\
+\frac{132+x}{3}\amp\ge70\\
+\multiplyleft{3}\frac{132+x}{3}\amp\ge\multiplyleft{3}70\\
+132+x\amp\ge210\\
+x\amp\ge78
+\end{align*}
+</div>
+<p id="tKy">To earn at least a C grade, Aidan needs to score at least \(78\%\) on the third test.</p>
+</div></div>
+</div></article></div></section><section class="reading-questions" id="reading-questions-5"><h3 class="heading hide-type">
+<span class="type">Reading Questions</span> <span class="codenumber">2.3.5</span> <span class="title">Reading Questions</span>
+</h3>
+<article class="exercise exercise-like" id="exercise-37"><h6 class="heading"><span class="codenumber">1<span class="period">.</span></span></h6>
+<p id="p-415">What does LCD stand for? And what does it really <em class="emphasis">mean</em>?</p></article><article class="exercise exercise-like" id="exercise-38"><h6 class="heading"><span class="codenumber">2<span class="period">.</span></span></h6>
+<p id="p-416">When you clear denominators from an equation like \(\frac{2}{3}x+5=\frac{2}{7}\text{,}\) you will multiply by \(21\text{.}\) At first, what are the <em class="emphasis">two</em> things that you multiply by \(21\text{,}\) possibly requiring you to use some parentheses?</p></article><article class="exercise exercise-like" id="exercise-39"><h6 class="heading"><span class="codenumber">3<span class="period">.</span></span></h6>
+<p id="p-417">What is a proportional equation?</p></article></section></section></div></main>
+</div>
+</body>
+</html>

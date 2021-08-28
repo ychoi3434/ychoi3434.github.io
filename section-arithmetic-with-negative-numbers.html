@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*       on 2021-08-28T19:50:45Z       *-->
+<!--*   A recent stable commit (2020-08-09):   *-->
+<!--* 98f21740783f166a773df4dc83cab5293ab63a4a *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<html lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>ORCCA Arithmetic with Negative Numbers</title>
+<meta name="Keywords" content="Authored in PreTeXt">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+<script>window.MathJax = {
+  tex: {
+    inlineMath: [['\\(','\\)']],
+    tags: "none",
+    useLabelIds: true,
+    tagSide: "right",
+    tagIndent: ".8em",
+    packages: {'[+]': ['base', 'extpfeil', 'ams', 'amscd', 'newcommand', 'knowl', 'sfrac']}
+  },
+  options: {
+    ignoreHtmlClass: "tex2jax_ignore",
+    processHtmlClass: "has_am",
+  },
+  chtml: {
+    scale: 0.88,
+    mtextInheritFont: true
+  },
+  loader: {
+    load: ['input/asciimath', '[tex]/extpfeil', '[tex]/amscd', '[tex]/newcommand', '[pretext]/mathjaxknowl3.js'],
+    paths: {pretext: "https://pretextbook.org/js/lib"},
+  },
+/* support for the sfrac command in MathJax (Beveled fraction) */
+  startup: {
+    ready() {
+      //
+      // Creating a simple "sfrac" package on-the-fly
+      //
+      const Configuration = MathJax._.input.tex.Configuration.Configuration;
+      const CommandMap = MathJax._.input.tex.SymbolMap.CommandMap;
+      
+      new CommandMap('sfrac', {
+        sfrac: 'SFrac'
+        }, {
+        SFrac(parser, name) {
+        const num = parser.ParseArg(name);
+        const den = parser.ParseArg(name);
+        const frac = parser.create('node', 'mfrac', [num, den], {bevelled: true});
+        parser.Push(frac);
+        }
+      });
+      //
+      // Create the package for the overridden macros
+      //
+      Configuration.create('sfrac', {
+        handler: {macro: ['sfrac']}
+      });
+      
+    MathJax.startup.defaultReady();
+    }
+  },
+};
+</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext_add_on.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script xmlns:svg="http://www.w3.org/2000/svg">sagecellEvalName='Evaluate (Sage)';
+</script><link xmlns:svg="http://www.w3.org/2000/svg" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://fonts.googleapis.com/css?family=Inconsolata:400,700&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/pretext.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/pretext_add_on.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/banner_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/toc_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/knowls_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/style_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/colors_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/setcolors.css" rel="stylesheet" type="text/css">
+<!-- 2019-10-12: Temporary - CSS file for experiments with styling --><link xmlns:svg="http://www.w3.org/2000/svg" href="developer.css" rel="stylesheet" type="text/css">
+</head>
+<body id="PCC-ORCCA" class="mathbook-book has-toc has-sidebar-left">
+<a class="assistive" href="#content">Skip to main content</a><div xmlns:svg="http://www.w3.org/2000/svg" id="latex-macros" class="hidden-content" style="display:none">\(\require{cancel}\newcommand{\abs}[1]{\left\lvert#1\right\rvert}
+\newcommand{\point}[2]{\left(#1,#2\right)}
+\newcommand{\highlight}[1]{\definecolor{sapphire}{RGB}{59,90,125} {\color{sapphire}{{#1}}}}
+\newcommand{\firsthighlight}[1]{\definecolor{sapphire}{RGB}{59,90,125} {\color{sapphire}{{#1}}}}
+\newcommand{\secondhighlight}[1]{\definecolor{emerald}{RGB}{20,97,75} {\color{emerald}{{#1}}}}
+\newcommand{\unhighlight}[1]{{\color{black}{{#1}}}}
+\newcommand{\lowlight}[1]{{\color{lightgray}{#1}}}
+\newcommand{\attention}[1]{\mathord{\overset{\downarrow}{#1}}}
+\newcommand{\nextoperation}[1]{\mathord{\boxed{#1}}}
+\newcommand{\substitute}[1]{{\color{blue}{{#1}}}}
+\newcommand{\pinover}[2]{\overset{\overset{\mathrm{\ #2\ }}{|}}{\strut #1 \strut}}
+\newcommand{\addright}[1]{{\color{blue}{{{}+#1}}}}
+\newcommand{\addleft}[1]{{\color{blue}{{#1+{}}}}}
+\newcommand{\subtractright}[1]{{\color{blue}{{{}-#1}}}}
+\newcommand{\multiplyright}[2][\cdot]{{\color{blue}{{{}#1#2}}}}
+\newcommand{\multiplyleft}[2][\cdot]{{\color{blue}{{#2#1{}}}}}
+\newcommand{\divideunder}[2]{\frac{#1}{{\color{blue}{{#2}}}}}
+\newcommand{\divideright}[1]{{\color{blue}{{{}\div#1}}}}
+\newcommand{\negate}[1]{{\color{blue}{{-}}}\left(#1\right)}
+\newcommand{\cancelhighlight}[1]{\definecolor{sapphire}{RGB}{59,90,125}{\color{sapphire}{{\cancel{#1}}}}}
+\newcommand{\secondcancelhighlight}[1]{\definecolor{emerald}{RGB}{20,97,75}{\color{emerald}{{\bcancel{#1}}}}}
+\newcommand{\thirdcancelhighlight}[1]{\definecolor{amethyst}{RGB}{112,72,91}{\color{amethyst}{{\xcancel{#1}}}}}
+\newcommand{\confirm}[1]{\stackrel{\checkmark}{#1}}
+\newcommand{\reject}[1]{\stackrel{\text{no}}{#1}}
+\newcommand{\wonder}[1]{\stackrel{\text{?}}{#1}}
+\newcommand{\apple}{\text{🍎}}
+\newcommand{\banana}{\text{🍌}}
+\newcommand{\pear}{\text{🍐}}
+\newcommand{\cat}{\text{🐱}}
+\newcommand{\dog}{\text{🐶}}
+\newcommand{\lt}{&lt;}
+\newcommand{\gt}{&gt;}
+\newcommand{\amp}{&amp;}
+\)</div>
+<header id="masthead" class="smallbuttons"><div class="banner"><div class="container">
+<a id="logo-link" href="http://www.pcc.edu/ORCCA" target="_blank"><img src="images/ORCCAbrandlogo.png" alt="Logo image"></a><div class="title-container">
+<h1 class="heading"><a href="orcca.html"><span class="title">RVCC Elementary Algebra</span></a></h1>
+<p class="byline">Department of Mathematics and Computer Science</p>
+</div>
+</div></div>
+<nav xmlns:svg="http://www.w3.org/2000/svg" id="primary-navbar" class="navbar"><div class="container">
+<div class="navbar-top-buttons">
+<button class="sidebar-left-toggle-button button active" aria-label="Show or hide table of contents sidebar">Contents</button><div class="tree-nav toolbar toolbar-divisor-3">
+<a class="index-button toolbar-item button" href="index-1.html" title="Index">Index</a><span class="threebuttons"><a id="previousbutton" class="previous-button toolbar-item button" href="appendix-basic-math-review.html" title="Previous">Prev</a><a id="upbutton" class="up-button button toolbar-item" href="appendix-basic-math-review.html" title="Up">Up</a><a id="nextbutton" class="next-button button toolbar-item" href="section-fractions-and-fraction-arithmetic.html" title="Next">Next</a></span>
+</div>
+</div>
+<div class="navbar-bottom-buttons toolbar toolbar-divisor-4">
+<button class="sidebar-left-toggle-button button toolbar-item active">Contents</button><a class="previous-button toolbar-item button" href="appendix-basic-math-review.html" title="Previous">Prev</a><a class="up-button button toolbar-item" href="appendix-basic-math-review.html" title="Up">Up</a><a class="next-button button toolbar-item" href="section-fractions-and-fraction-arithmetic.html" title="Next">Next</a>
+</div>
+</div></nav></header><div class="page">
+<div xmlns:svg="http://www.w3.org/2000/svg" id="sidebar-left" class="sidebar" role="navigation"><div class="sidebar-content">
+<nav id="toc"><ul>
+<li class="link frontmatter">
+<a href="frontmatter.html" data-scroll="JVg"><span class="title">Front Matter</span></a><ul><li><a href="colophon-1.html" data-scroll="colophon-1">Colophon</a></li></ul>
+</li>
+<li class="link part"><a href="part-all-of-the-chapters.html" data-scroll="part-all-of-the-chapters"><span class="codenumber">I</span> <span class="title"></span></a></li>
+<li class="link">
+<a href="chapter-introduction-to-algebra.html" data-scroll="dNX"><span class="codenumber">1</span> <span class="title">Introduction to Algebra</span></a><ul>
+<li><a href="section-real-numbers-and-the-number-line.html" data-scroll="ipv">Real Numbers and the Number Line</a></li>
+<li><a href="section-properties-of-real-numbers.html" data-scroll="tNy">Properties of Real Numbers</a></li>
+<li><a href="section-simplifying-and-writing-algebraic-expressions.html" data-scroll="xRO">Simplifying and Writing Algebraic Expressions</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="chapter-linear-equations-and-inequalities-modified.html" data-scroll="sWV"><span class="codenumber">2</span> <span class="title">Linear Equations and Inequalities</span></a><ul>
+<li><a href="section-introduction-to-equations.html" data-scroll="fwy">Introduction to Equations</a></li>
+<li><a href="section-linear-equations.html" data-scroll="xVO">Linear Equations</a></li>
+<li><a href="section-introduction-to-problem-solving.html" data-scroll="Wul">Introduction to Problem Solving</a></li>
+<li><a href="section-formulas.html" data-scroll="Nnq">Formulas</a></li>
+<li><a href="section-linear-inequalities.html" data-scroll="Nuc">Linear Inequalities</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="chapter-graphing-equations.html" data-scroll="gID"><span class="codenumber">3</span> <span class="title">Graphing Lines</span></a><ul>
+<li><a href="section-introduction-to-graphing.html" data-scroll="YTJ">Introduction to Graphing</a></li>
+<li><a href="section-equations-in-two-variables.html" data-scroll="QXY">Equations in Two Variables</a></li>
+<li><a href="section-intercepts-horizontal-and-vertical-lines.html" data-scroll="ByF">Intercepts: Horizontal and Vertical Lines</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="chapter-systems-of-linear-equations-in-two-variables.html" data-scroll="xGO"><span class="codenumber">4</span> <span class="title">Systems of Linear Equations</span></a><ul>
+<li><a href="section-solving-systems-of-linear-equations-graphically-and-numerically.html" data-scroll="njo">Solving Systems of Linear Equations Graphically and Numerically</a></li>
+<li><a href="section-solving-systems-of-linear-equations-by-substitution.html" data-scroll="zdh">Solving Systems of Linear Equations by Substitution</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="chapter-polynomials-and-exponents-modified.html" data-scroll="onc"><span class="codenumber">5</span> <span class="title">Exponents and Polynomials</span></a><ul>
+<li><a href="section-rules-for-exponents.html" data-scroll="KHJ">Rules for Exponents</a></li>
+<li><a href="section-adding-and-subtracting-polynomials.html" data-scroll="VvN">Addition and Subtraction of Polynomials</a></li>
+<li><a href="section-multiplication-of-polynomials.html" data-scroll="IcY">Multiplication of Polynomials</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="chapter-radical-expressions-and-equations.html" data-scroll="chapter-radical-expressions-and-equations"><span class="codenumber">6</span> <span class="title">Radical Expressions and Equations</span></a><ul>
+<li><a href="section-introduction-to-factoring.html" data-scroll="duD">Introduction to Factoring</a></li>
+<li><a href="section-factoring-trinomials.html" data-scroll="Mrf">Factoring Trinomials</a></li>
+<li><a href="section-solving-equations-by-factoring.html" data-scroll="DXi">Solving Equations by Factoring 1 (Quadratics)</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="chapter-rational-expressions.html" data-scroll="RzF"><span class="codenumber">7</span> <span class="title">Rational Expressions</span></a><ul>
+<li><a href="section-introduction-to-rational-expressions.html" data-scroll="Moo">Introduction to Rational Expressions</a></li>
+<li><a href="section-multiplication-and-division-of-rational-expressions.html" data-scroll="Vps">Multiplication and Division of Rational Expressions</a></li>
+<li><a href="section-addition-and-subtraction-with-like-denominators.html" data-scroll="KBw">Addition and Subtraction of Rational Expressions with Like Denominators</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="chapter-radical-expressions-and-functions.html" data-scroll="chapter-radical-expressions-and-functions"><span class="codenumber">8</span> <span class="title">Quantities in the Physical World</span></a><ul><li><a href="section-radical-expressions-and-functions.html" data-scroll="GAK">Radical Expressions and Functions</a></li></ul>
+</li>
+<li class="link backmatter"><a href="backmatter.html" data-scroll="jDj"><span class="title">Appendices</span></a></li>
+<li class="link">
+<a href="appendix-basic-math-review.html" data-scroll="appendix-basic-math-review"><span class="codenumber">A</span> <span class="title">Basic Math Review</span></a><ul>
+<li><a href="section-arithmetic-with-negative-numbers.html" data-scroll="qBB" class="active">Arithmetic with Negative Numbers</a></li>
+<li><a href="section-fractions-and-fraction-arithmetic.html" data-scroll="VAa">Fractions and Fraction Arithmetic</a></li>
+<li><a href="section-absolute-value-and-square-root.html" data-scroll="GAK">Absolute Value and Square Root</a></li>
+<li><a href="section-percentages.html" data-scroll="Chi">Percentages</a></li>
+<li><a href="section-order-of-operations.html" data-scroll="aog">Order of Operations</a></li>
+<li><a href="section-set-notation-and-types-of-numbers.html" data-scroll="Fdo">Set Notation and Types of Numbers</a></li>
+</ul>
+</li>
+<li class="link"><a href="appendix-unit-conversions.html" data-scroll="appendix-unit-conversions"><span class="codenumber">B</span> <span class="title">Unit Conversions</span></a></li>
+<li class="link"><a href="index-1.html" data-scroll="index-1"><span class="title">Index</span></a></li>
+</ul></nav><div class="extras"><nav><a class="mathbook-link" href="https://pretextbook.org">Authored in PreTeXt</a><a href="https://www.mathjax.org"><img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" alt="Powered by MathJax"></a></nav></div>
+</div></div>
+<main class="main"><div id="content" class="pretext-content"><section xmlns:svg="http://www.w3.org/2000/svg" class="section" id="qBB"><h2 class="heading hide-type">
+<span class="type">Section</span> <span class="codenumber">A.1</span> <span class="title">Arithmetic with Negative Numbers</span>
+</h2>
+<section class="introduction" id="eBE"><p id="WuC">Adding, subtracting, multiplying, dividing, and raising to powers each have peculiarities when using negative numbers. This section reviews arithmetic with signed (both positive and negative) numbers.</p></section><section class="subsection" id="WIK"><h3 class="heading hide-type">
+<span class="type">Subsection</span> <span class="codenumber">A.1.1</span> <span class="title">Signed Numbers</span>
+</h3>
+<p id="fOo">Is it valid to subtract a large number from a smaller one? It may be hard to imagine what it would mean physically to subtract \(8\) cars from your garage if you only have \(1\) car in there in the first place. Nevertheless, mathematics has found a way to give meaning to expressions like \(1-8\) using <dfn class="terminology">signed numbers</dfn>.</p>
+<p id="LVx">In daily life, the signed numbers we might see most often are temperatures. Most people on Earth use the Celsius scale; if you're not familiar with the Celsius temperature scale, think about these examples:</p>
+<figure class="figure figure-like" id="YjP"><div class="image-box" style="width: 80%; margin-left: 10%; margin-right: 10%;">
+<img src="images/image-114.svg" role="img" class="contained" alt="a number line, with values in degrees Celsius; marks average temperature at North Pole in winter at -40; marks cold winter night at -10; marks water freezes at 0; marks cool autumn day at 13; marks human body temperature at 37"><div class="image-archive">
+<a href="images/image-114.eps">eps</a><a href="images/image-114.pdf">pdf</a><a href="images/image-114.png">png</a><a href="images/image-114.svg">svg</a><a href="images/image-114.tex">tex</a>
+</div>
+</div>
+<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">A.1.1<span class="period">.</span></span><span class="space"> </span>Number line with interesting Celsius temperatures</figcaption></figure><p id="scG"><a class="xref" data-knowl="./knowl/figure-celsius-temperatures.html" title="Figure 1.1.1">Figure 1.1.1</a> uses a <dfn class="terminology">number line</dfn>  to illustrate these positive and negative numbers.  A number line is a useful device for visualizing how numbers relate to each other and combine with each other. Values to the right of \(0\) are called <dfn class="terminology">positive</dfn> numbers and values to the left of \(0\) are called <dfn class="terminology">negative numbers</dfn>. </p>
+<article class="warning remark-like" id="vzP"><h6 class="heading">
+<span class="type">Warning</span><span class="space"> </span><span class="codenumber">A.1.2</span><span class="period">.</span><span class="space"> </span><span class="title">Subtraction Sign versus Negative Sign.</span>
+</h6>
+<p id="gTH">Unfortunately, the symbol we use for subtraction looks just like the symbol we use for marking a negative number. It will help to identify when a “minus” sign means “subtract” or means “negative.” The key is to see if there is a number to its left, not counting anything farther left than an open parenthesis. Here are some examples.</p>
+<ul class="disc">
+<li id="Onn"><p id="KXi">\(-13\) has one negative sign and no subtraction sign.</p></li>
+<li id="uuw"><p id="rer">\(20-13\) has no negative signs and one subtraction sign.</p></li>
+<li id="aBF"><p id="XlA">\(-20-13\) has a negative sign and then a subtraction sign.</p></li>
+<li id="GIO"><p id="DsJ">\((-20)(-13)\) has two negative signs and no subtraction sign.</p></li>
+</ul></article><article class="exercise exercise-like" id="xaH"><a data-knowl="" class="id-ref exercise-knowl original" data-refid="hk-xaH"><h6 class="heading">
+<span class="type">Checkpoint</span><span class="space"> </span><span class="codenumber">A.1.3</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-xaH"><article class="exercise exercise-like"><p id="p-1410">The WeBWorK problem with ID “webwork-71” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article></div></section><section class="subsection" id="CPT"><h3 class="heading hide-type">
+<span class="type">Subsection</span> <span class="codenumber">A.1.2</span> <span class="title">Adding</span>
+</h3>
+<p id="EqY">An easy way to think about adding two numbers with the <em class="emphasis">same sign</em> is to simply (at first) ignore the signs, and add the numbers as if they were both positive. Then make sure your result is either positive or negative, depending on what the sign was of the two numbers you started with.</p>
+<article class="example example-like" id="dhQ"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-dhQ"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">A.1.4</span><span class="period">.</span><span class="space"> </span><span class="title">Add Two Negative Numbers.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-dhQ"><article class="example example-like"><p id="thZ">If you needed to add \(-18\) and \(-7\text{,}\) note that both are negative. Maybe you have this expression in front of you:</p>
+<div class="displaymath">
+\begin{equation*}
+-18+-7
+\end{equation*}
+</div>
+<p class="continuation">but that “plus minus” is awkward, and in this book you are more likely to have this expression:</p>
+<div class="displaymath">
+\begin{equation*}
+-18+(-7)
+\end{equation*}
+</div>
+<p class="continuation">with extra parentheses. (How many subtraction signs do you see? How many negative signs?)</p>
+<p id="Zpi">Since <em class="emphasis">both</em> our terms are <em class="emphasis">negative</em>, we can add \(18\) and \(7\) to get \(25\) and immediately realize that our final result should be negative. So our result is \(-25\text{:}\)</p>
+<div class="displaymath">
+\begin{equation*}
+-18+(-7)=-25
+\end{equation*}
+</div></article></div>
+<p id="kyh">This approach works because adding numbers is like having two people tugging on a rope in one direction or the other, with strength indicated by each number. In <a class="xref" data-knowl="./knowl/example-add-two-negative.html" title="Example A.1.4: Add Two Negative Numbers">Example A.1.4</a> we have two people pulling to the left, one with strength \(18\text{,}\) the other with strength \(7\text{.}\) Their forces combine to pull <em class="emphasis">left</em> with strength \(25\text{,}\) giving us our total of \(-25\text{,}\) as illustrated in <a class="xref" data-knowl="./knowl/figure-working-together.html" title="Figure A.1.5">Figure A.1.5</a>.</p>
+<p id="QFq">If we are adding two numbers that have <em class="emphasis">opposite</em> signs, then the two people tugging the rope are opposing each other. If either of them is using more strength, then the overall effect will be a net pull in that person's direction. And the overall pull on the rope will be the <em class="emphasis">difference</em> of the two strengths. This is illustrated in <a class="xref" data-knowl="./knowl/figure-working-in-opposition.html" title="Figure A.1.6">Figure A.1.6</a>.</p>
+<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;">
+<div class="sbspanel top" style="width:47%;"><figure class="figure figure-like" id="RKJ"><img src="images/image-115.svg" role="img" class="contained" alt="a number line with Suriya marked at -18 and Kate marked at -7; two thin arrows extend from 0 pointing left, one to Suriya at -18 and one to Kate at -7; a thicker arrow representing Suriya plus Kate points to the left from 0 to -25"><div class="image-archive">
+<a href="images/image-115.eps">eps</a><a href="images/image-115.pdf">pdf</a><a href="images/image-115.png">png</a><a href="images/image-115.svg">svg</a><a href="images/image-115.tex">tex</a>
+</div>
+<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">A.1.5<span class="period">.</span></span><span class="space"> </span>Working together</figcaption></figure></div>
+<div class="sbspanel top" style="width:47%;"><figure class="figure figure-like" id="xRS"><img src="images/image-116.svg" role="img" class="contained" alt="a number line with Suriya marked at -15 and Kate marked at 12; one thin arrow extends from 0 pointing left to Suriya at -15, and another thin arrow extends from 0 pointing right to Kate at 12; a thicker arrow representing Suriya plus Kate points to the left from 0 to -3"><div class="image-archive">
+<a href="images/image-116.eps">eps</a><a href="images/image-116.pdf">pdf</a><a href="images/image-116.png">png</a><a href="images/image-116.svg">svg</a><a href="images/image-116.tex">tex</a>
+</div>
+<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">A.1.6<span class="period">.</span></span><span class="space"> </span>Working in opposition</figcaption></figure></div>
+</div></div>
+<article class="example example-like" id="JoZ"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-JoZ"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">A.1.7</span><span class="period">.</span><span class="space"> </span><span class="title">Adding One Number of Each Sign.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-JoZ"><article class="example example-like"><p id="Fwr">Here are four examples of addition where one number is positive and the other is negative.</p>
+<ol class="lower-alpha">
+<li id="XGZ">
+<p id="MMv">\(-15+12\)</p>
+<p id="sTE">We have one number of each sign, with sizes \(15\) and \(12\text{.}\) Their difference is \(3\text{.}\) But of the two numbers, the negative number dominated. So the result from adding these is \(-3\text{.}\)</p>
+</li>
+<li id="DOi">
+<p id="ZaN">\(200+(-100)\)</p>
+<p id="FhW">We have one number of each sign, with sizes \(200\) and \(100\text{.}\) Their difference is \(100\text{.}\) But of the two numbers, the positive number dominated. So the result from adding these is \(100\text{.}\)</p>
+</li>
+<li id="jVr">
+<p id="lpf">\(12.8+(-20)\)</p>
+<p id="Rwo">We have one number of each sign, with sizes \(12.8\) and \(20\text{.}\) Their difference is \(7.2\text{.}\) But of the two numbers, the negative number dominated. So the result from adding these is \(-7.2\text{.}\)</p>
+</li>
+<li id="QcA">
+<p id="xDx">\(-87.3+87.3\)</p>
+<p id="dKG">We have one number of each sign, both with size \(87.3\text{.}\) The opposing forces cancel each other, leaving a result of \(0\text{.}\)</p>
+</li>
+</ol></article></div>
+<article class="exercise exercise-like" id="VDr"><a data-knowl="" class="id-ref exercise-knowl original" data-refid="hk-VDr"><h6 class="heading">
+<span class="type">Checkpoint</span><span class="space"> </span><span class="codenumber">A.1.8</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-VDr"><article class="exercise exercise-like"><p id="p-1425">The WeBWorK problem with ID “webwork-72” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article></div></section><section class="subsection" id="iXc"><h3 class="heading hide-type">
+<span class="type">Subsection</span> <span class="codenumber">A.1.3</span> <span class="title">Subtracting</span>
+</h3>
+<p id="wMz">Perhaps you can handle a subtraction such as \(18-5\text{,}\) where a small positive number is subtracted from a larger number. There are other instances of subtraction that might leave you scratching your head. In such situations, we recommend that you view each subtraction as <em class="emphasis">adding</em> the opposite number.</p>
+<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel fixed-width top" style="width:100%;"><table class="tabular" id="sMA">
+<tr>
+<td class="l m b2 r1 l0 t0 lines"></td>
+<td class="c m b2 r1 l0 t0 lines">Original</td>
+<td class="c m b2 r0 l0 t0 lines">Adding the Opposite</td>
+</tr>
+<tr>
+<td class="l m b0 r1 l0 t0 lines">Subtracting a larger positive number:</td>
+<td class="c m b0 r1 l0 t0 lines">\(12-30\)</td>
+<td class="c m b0 r0 l0 t0 lines">\(12+(-30)\)</td>
+</tr>
+<tr>
+<td class="l m b0 r1 l0 t0 lines">Subtracting from a negative number:</td>
+<td class="c m b0 r1 l0 t0 lines">\(-8.1-17\)</td>
+<td class="c m b0 r0 l0 t0 lines">\(-8.1+(-17)\)</td>
+</tr>
+<tr>
+<td class="l m b0 r1 l0 t0 lines">Subtracting a negative number:</td>
+<td class="c m b0 r1 l0 t0 lines">\(42-(-23)\)</td>
+<td class="c m b0 r0 l0 t0 lines">\(42+23\)</td>
+</tr>
+</table></div></div></div>
+<p id="cTI">The benefit is that perhaps you already mastered addition with positive and negative numbers, and this strategy that you convert subtraction to addition means you don't have all that much more to learn. These examples might be computed as follows:</p>
+<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;">
+<div class="sbspanel top" style="width:32%;"><div class="displaymath" id="dZb">
+\begin{align*}
+12-30\amp=12+(-30)\\
+\amp=-18
+\end{align*}
+</div></div>
+<div class="sbspanel top" style="width:32%;"><div class="displaymath" id="Kgk">
+\begin{align*}
+-8.1-17\amp=-8.1+(-17)\\
+\amp=-25.1
+\end{align*}
+</div></div>
+<div class="sbspanel top" style="width:32%;"><div class="displaymath" id="qnt">
+\begin{align*}
+42-(-23)\amp=42+23\\
+\amp=65
+\end{align*}
+</div></div>
+</div></div>
+<article class="exercise exercise-like" id="NYS"><a data-knowl="" class="id-ref exercise-knowl original" data-refid="hk-NYS"><h6 class="heading">
+<span class="type">Checkpoint</span><span class="space"> </span><span class="codenumber">A.1.9</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-NYS"><article class="exercise exercise-like"><p id="p-1431">The WeBWorK problem with ID “webwork-73” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article></div></section><section class="subsection" id="Pel"><h3 class="heading hide-type">
+<span class="type">Subsection</span> <span class="codenumber">A.1.4</span> <span class="title">Multiplying</span>
+</h3>
+<p id="JaR">Making sense of multiplication of negative numbers isn't quite so straightforward, but it's possible. Should the product of \(3\) and \(-7\) be a positive number or a negative number? Remembering that we can view multiplication as repeated addition, we can see this result on a number line:</p>
+<figure class="figure figure-like" id="NKK"><div class="image-box" style="width: 47%; margin-left: 26.5%; margin-right: 26.5%;">
+<img src="images/image-117.svg" role="img" class="contained" alt="a number line with a curved arrow emanating from 0 and landing to the left at -7, then again from -7 to -14, and again from -14 to -21; text above the arrows says adding -7 three times"><div class="image-archive">
+<a href="images/image-117.eps">eps</a><a href="images/image-117.pdf">pdf</a><a href="images/image-117.png">png</a><a href="images/image-117.svg">svg</a><a href="images/image-117.tex">tex</a>
+</div>
+</div>
+<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">A.1.10<span class="period">.</span></span><span class="space"> </span>Viewing \(3\cdot(-7)\) as repeated addition</figcaption></figure><p id="pia"><a class="xref" data-knowl="./knowl/figure-positive-times-negative.html" title="Figure A.1.10">Figure A.1.10</a> illustrates that \(3\cdot(-7)=-21\text{,}\) and so it would seem that a positive number times a negative number will always give a negative result. (Note that it would not change things if the negative number came first in the product, since the order of multiplication doesn't affect the result.)</p>
+<p id="Vpj">What about the product \(-3\cdot(-7)\text{,}\) where both factors are negative? Should the product be positive or negative? If \(3\cdot(-7)\) can be seen as adding \(-7\) three times as in <a class="xref" data-knowl="./knowl/figure-negative-times-negative.html" title="Figure A.1.11">Figure A.1.11</a>, then it isn't too crazy to interpret \(-3\cdot(-7)\) as <em class="emphasis">subtracting</em> \(-7\) three times, as in <a class="xref" data-knowl="./knowl/figure-negative-times-negative.html" title="Figure A.1.11">Figure A.1.11</a>.</p>
+<figure class="figure figure-like" id="tRT"><div class="image-box" style="width: 47%; margin-left: 26.5%; margin-right: 26.5%;">
+<img src="images/image-118.svg" role="img" class="contained" alt="a number line with a curved arrow emanating from 0 and landing to the right at 7, then again from 7 to 14, and again from 14 to 21; text above the arrows says subtracting -7 three times"><div class="image-archive">
+<a href="images/image-118.eps">eps</a><a href="images/image-118.pdf">pdf</a><a href="images/image-118.png">png</a><a href="images/image-118.svg">svg</a><a href="images/image-118.tex">tex</a>
+</div>
+</div>
+<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">A.1.11<span class="period">.</span></span><span class="space"> </span>Viewing \(-3\cdot(-7)\) as repeated subtraction</figcaption></figure><p id="Bws">This illustrates that \(-3\cdot(-7)=21\text{,}\) and it would seem that a negative number times a negative number always gives a positive result.</p>
+<p id="hDB">Positive and negative numbers are not the whole story. The number \(0\) is neither positive nor negative. What happens with multiplication by \(0\text{?}\) You can choose to view \(7\cdot0\) as adding the number \(0\) seven times. And you can choose to view \(0\cdot7\) as adding the number \(7\) zero times. Either way, you really added nothing at all, which is the same as adding \(0\text{.}\)</p>
+<article class="fact theorem-like" id="ugb"><h6 class="heading">
+<span class="type">Fact</span><span class="space"> </span><span class="codenumber">A.1.12</span><span class="period">.</span><span class="space"> </span><span class="title">Multiplication by \(0\).</span>
+</h6>
+<p id="lDA">Multiplying any number by \(0\) results in \(0\text{.}\)</p></article><article class="exercise exercise-like" id="ank"><a data-knowl="" class="id-ref exercise-knowl original" data-refid="hk-ank"><h6 class="heading">
+<span class="type">Checkpoint</span><span class="space"> </span><span class="codenumber">A.1.13</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-ank"><article class="exercise exercise-like"><p id="p-1438">The WeBWorK problem with ID “webwork-74” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article></div></section><section class="subsection" id="vlu"><h3 class="heading hide-type">
+<span class="type">Subsection</span> <span class="codenumber">A.1.5</span> <span class="title">Powers</span>
+</h3>
+<p id="ZZc">For early sections of this book the only exponents you will see will be the <dfn class="terminology">natural numbers</dfn>  : \(\{1, 2, 3, \ldots\}\text{.}\) But negative numbers can and will arise as the <em class="emphasis">base</em> of a power.</p>
+<p id="Ggl">An exponent is a shorthand for how many times to multiply by the base. For example,</p>
+<div class="displaymath">
+\begin{equation*}
+(-2)^5\text{ means }\overbrace{(-2)\cdot(-2)\cdot(-2)\cdot(-2)\cdot(-2)}^{5\text{ instances}}
+\end{equation*}
+</div>
+<p id="mnu">Will the result here be positive or negative? Since we can view \((-2)^5\) as repeated multiplication, and we now understand that multiplying two negatives gives a positive result, this expression can be thought of this way:</p>
+<div class="displaymath">
+\begin{equation*}
+\underbrace{\underbrace{(-2)\cdot(-2)}_{\text{positive}}\cdot\underbrace{(-2)\cdot(-2)}_{\text{positive}}}_{\text{positive}}\cdot(-2)
+\end{equation*}
+</div>
+<p class="continuation">and that lone last negative number will be responsible for making the final product negative.</p>
+<p id="SuD">More generally, if the base of a power is negative, then whether or not the result is positive or negative depends on if the exponent is even or odd. It depends on whether or not the factors can all be paired up to “cancel” negative signs, or if there will be a lone factor left by itself.</p>
+<p id="yBM">Once you understand whether the result is positive or negative, for a moment you may forget about signs. Continuing the example, you may calculate that \(2^5=32\text{,}\) and then since we know \((-2)^5\) is negative, you can report</p>
+<div class="displaymath">
+\begin{equation*}
+(-2)^5=-32
+\end{equation*}
+</div>
+<article class="warning remark-like" id="bGY"><h6 class="heading">
+<span class="type">Warning</span><span class="space"> </span><span class="codenumber">A.1.14</span><span class="period">.</span><span class="space"> </span><span class="title">Negative Signs and Exponents.</span>
+</h6>
+<p id="NaQ">Expressions like \(-3^4\) may not mean what you think they mean. What base do you see here? The correct answer is \(3\text{.}\) The exponent \(4\) <em class="emphasis">only</em> applies to the \(3\text{,}\) not to \(-3\text{.}\) So this expression, \(-3^4\text{,}\) is actually the same as \(-\mathopen{}\left(3^4\right)\mathclose{}\text{,}\) which is \(-81\text{.}\) Be careful not to treat \(-3^4\) as having base \(-3\text{.}\) That would make it equivalent to \((-3)^4\text{,}\) which is <em class="emphasis">positive</em> \(81\text{.}\)</p></article><article class="exercise exercise-like" id="Gut"><a data-knowl="" class="id-ref exercise-knowl original" data-refid="hk-Gut"><h6 class="heading">
+<span class="type">Checkpoint</span><span class="space"> </span><span class="codenumber">A.1.15</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-Gut"><article class="exercise exercise-like"><p id="p-1445">The WeBWorK problem with ID “webwork-75” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article></div></section><section class="subsection" id="bsD"><h3 class="heading hide-type">
+<span class="type">Subsection</span> <span class="codenumber">A.1.6</span> <span class="title">Summary</span>
+</h3>
+<dl id="eIV" class="description-list">
+<dt id="Gnp">Addition</dt>
+<dd>
+<p id="dph">Add two negative numbers: add their positive counterparts and make the result negative.</p>
+<p id="Jwq">Add a positive with a negative: find their difference using subtraction, and keep the sign of the dominant number.</p>
+</dd>
+<dt id="muy">Subtraction</dt>
+<dd><p id="pDz">Any subtraction can be converted to addition of the opposite number. For all but the most basic subtractions, this is a useful strategy.</p></dd>
+<dt id="SBH">Multiplication</dt>
+<dd>
+<p id="VKI">Multiply two negative numbers: multiply their positive counterparts and make the result positive.</p>
+<p id="BRR">Multiply a positive with a negative: multiply their positive counterparts and make the result negative.</p>
+<p id="hZa">Multiply any number by \(0\text{:}\) the result will be \(0\text{.}\)</p>
+</dd>
+<dt id="yIQ">Division (not discussed in this section)</dt>
+<dd>
+<p id="Ogj">Division by some number is the same as multiplication by its reciprocal. So the multiplication rules can be adopted.</p>
+<p id="uns">Division of \(0\) by any nonzero number always results in \(0\text{.}\)</p>
+<p id="auB">Division of any number by \(0\) is always undefined.</p>
+</dd>
+<dt id="ePZ">Powers</dt>
+<dd>
+<p id="GBK">Raise a negative number to an even power: raise the positive counterpart to that power.</p>
+<p id="mIT">Raise a negative number to an odd power: raise the positive counterpart to that power, then make the result negative.</p>
+<p id="SQc">Expressions like \(-2^4\) mean \(-\mathopen{}\left(2^4\right)\mathclose{}\text{,}\) not \((-2)^4\text{.}\)</p>
+</dd>
+</dl></section><section class="exercises" id="HzM"><h3 class="heading hide-type">
+<span class="type">Exercises</span> <span class="codenumber">A.1.7</span> <span class="title">Exercises</span>
+</h3>
+<div class="exercisegroup" id="nGV"><div class="exercisegroup-exercises cols3">
+<article class="exercise exercise-like" id="mBC"><h6 class="heading"><span class="codenumber">1<span class="period">.</span></span></h6>
+<p id="p-1459">The WeBWorK problem with ID “webwork-76” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="SIL"><h6 class="heading"><span class="codenumber">2<span class="period">.</span></span></h6>
+<p id="p-1460">The WeBWorK problem with ID “webwork-77” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="yPU"><h6 class="heading"><span class="codenumber">3<span class="period">.</span></span></h6>
+<p id="p-1461">The WeBWorK problem with ID “webwork-78” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="eXd"><h6 class="heading"><span class="codenumber">4<span class="period">.</span></span></h6>
+<p id="p-1462">The WeBWorK problem with ID “webwork-79” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="Lem"><h6 class="heading"><span class="codenumber">5<span class="period">.</span></span></h6>
+<p id="p-1463">The WeBWorK problem with ID “webwork-80” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="rlv"><h6 class="heading"><span class="codenumber">6<span class="period">.</span></span></h6>
+<p id="p-1464">The WeBWorK problem with ID “webwork-81” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="XsE"><h6 class="heading"><span class="codenumber">7<span class="period">.</span></span></h6>
+<p id="p-1465">The WeBWorK problem with ID “webwork-82” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="DzN"><h6 class="heading"><span class="codenumber">8<span class="period">.</span></span></h6>
+<p id="p-1466">The WeBWorK problem with ID “webwork-83” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article>
+</div></div>
+<div class="exercisegroup" id="TOe"><div class="exercisegroup-exercises cols3">
+<article class="exercise exercise-like" id="jGW"><h6 class="heading"><span class="codenumber">9<span class="period">.</span></span></h6>
+<p id="p-1467">The WeBWorK problem with ID “webwork-84” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="POf"><h6 class="heading"><span class="codenumber">10<span class="period">.</span></span></h6>
+<p id="p-1468">The WeBWorK problem with ID “webwork-85” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="vVo"><h6 class="heading"><span class="codenumber">11<span class="period">.</span></span></h6>
+<p id="p-1469">The WeBWorK problem with ID “webwork-86” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="ccx"><h6 class="heading"><span class="codenumber">12<span class="period">.</span></span></h6>
+<p id="p-1470">The WeBWorK problem with ID “webwork-87” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="IjG"><h6 class="heading"><span class="codenumber">13<span class="period">.</span></span></h6>
+<p id="p-1471">The WeBWorK problem with ID “webwork-88” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="oqP"><h6 class="heading"><span class="codenumber">14<span class="period">.</span></span></h6>
+<p id="p-1472">The WeBWorK problem with ID “webwork-89” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article>
+</div></div>
+<div class="exercisegroup" id="zVn"><div class="exercisegroup-exercises cols2">
+<article class="exercise exercise-like" id="UxY"><h6 class="heading"><span class="codenumber">15<span class="period">.</span></span></h6>
+<p id="p-1473">The WeBWorK problem with ID “webwork-90” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="AFh"><h6 class="heading"><span class="codenumber">16<span class="period">.</span></span></h6>
+<p id="p-1474">The WeBWorK problem with ID “webwork-91” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="gMq"><h6 class="heading"><span class="codenumber">17<span class="period">.</span></span></h6>
+<p id="p-1475">The WeBWorK problem with ID “webwork-92” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="MTz"><h6 class="heading"><span class="codenumber">18<span class="period">.</span></span></h6>
+<p id="p-1476">The WeBWorK problem with ID “webwork-93” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article>
+</div></div>
+<div class="exercisegroup" id="gcw"><div class="exercisegroup-exercises cols3">
+<article class="exercise exercise-like" id="taI"><h6 class="heading"><span class="codenumber">19<span class="period">.</span></span></h6>
+<p id="p-1477">The WeBWorK problem with ID “webwork-94” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="ZhR"><h6 class="heading"><span class="codenumber">20<span class="period">.</span></span></h6>
+<p id="p-1478">The WeBWorK problem with ID “webwork-95” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="Fpa"><h6 class="heading"><span class="codenumber">21<span class="period">.</span></span></h6>
+<p id="p-1479">The WeBWorK problem with ID “webwork-96” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="lwj"><h6 class="heading"><span class="codenumber">22<span class="period">.</span></span></h6>
+<p id="p-1480">The WeBWorK problem with ID “webwork-97” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="RDs"><h6 class="heading"><span class="codenumber">23<span class="period">.</span></span></h6>
+<p id="p-1481">The WeBWorK problem with ID “webwork-98” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="xKB"><h6 class="heading"><span class="codenumber">24<span class="period">.</span></span></h6>
+<p id="p-1482">The WeBWorK problem with ID “webwork-99” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article>
+</div></div>
+<div class="exercisegroup" id="MjF"><div class="exercisegroup-exercises cols2">
+<article class="exercise exercise-like" id="dRK"><h6 class="heading"><span class="codenumber">25<span class="period">.</span></span></h6>
+<p id="p-1483">The WeBWorK problem with ID “webwork-100” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="JYT"><h6 class="heading"><span class="codenumber">26<span class="period">.</span></span></h6>
+<p id="p-1484">The WeBWorK problem with ID “webwork-101” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="qgc"><h6 class="heading"><span class="codenumber">27<span class="period">.</span></span></h6>
+<p id="p-1485">The WeBWorK problem with ID “webwork-102” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="Wnl"><h6 class="heading"><span class="codenumber">28<span class="period">.</span></span></h6>
+<p id="p-1486">The WeBWorK problem with ID “webwork-103” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="Cuu"><h6 class="heading"><span class="codenumber">29<span class="period">.</span></span></h6>
+<p id="p-1487">The WeBWorK problem with ID “webwork-104” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="iBD"><h6 class="heading"><span class="codenumber">30<span class="period">.</span></span></h6>
+<p id="p-1488">The WeBWorK problem with ID “webwork-105” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="OIM"><h6 class="heading"><span class="codenumber">31<span class="period">.</span></span></h6>
+<p id="p-1489">The WeBWorK problem with ID “webwork-106” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="uPV"><h6 class="heading"><span class="codenumber">32<span class="period">.</span></span></h6>
+<p id="p-1490">The WeBWorK problem with ID “webwork-107” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="aXe"><h6 class="heading"><span class="codenumber">33<span class="period">.</span></span></h6>
+<p id="p-1491">The WeBWorK problem with ID “webwork-108” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="Hen"><h6 class="heading"><span class="codenumber">34<span class="period">.</span></span></h6>
+<p id="p-1492">The WeBWorK problem with ID “webwork-109” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="nlw"><h6 class="heading"><span class="codenumber">35<span class="period">.</span></span></h6>
+<p id="p-1493">The WeBWorK problem with ID “webwork-110” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="TsF"><h6 class="heading"><span class="codenumber">36<span class="period">.</span></span></h6>
+<p id="p-1494">The WeBWorK problem with ID “webwork-111” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article>
+</div></div>
+<div class="exercisegroup" id="sqO"><div class="exercisegroup-exercises cols3">
+<article class="exercise exercise-like" id="zzO"><h6 class="heading"><span class="codenumber">37<span class="period">.</span></span></h6>
+<p id="p-1495">The WeBWorK problem with ID “webwork-112” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="fGX"><h6 class="heading"><span class="codenumber">38<span class="period">.</span></span></h6>
+<p id="p-1496">The WeBWorK problem with ID “webwork-113” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="LOg"><h6 class="heading"><span class="codenumber">39<span class="period">.</span></span></h6>
+<p id="p-1497">The WeBWorK problem with ID “webwork-114” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="rVp"><h6 class="heading"><span class="codenumber">40<span class="period">.</span></span></h6>
+<p id="p-1498">The WeBWorK problem with ID “webwork-115” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="Ycy"><h6 class="heading"><span class="codenumber">41<span class="period">.</span></span></h6>
+<p id="p-1499">The WeBWorK problem with ID “webwork-116” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="EjH"><h6 class="heading"><span class="codenumber">42<span class="period">.</span></span></h6>
+<p id="p-1500">The WeBWorK problem with ID “webwork-117” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="kqQ"><h6 class="heading"><span class="codenumber">43<span class="period">.</span></span></h6>
+<p id="p-1501">The WeBWorK problem with ID “webwork-118” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="QxZ"><h6 class="heading"><span class="codenumber">44<span class="period">.</span></span></h6>
+<p id="p-1502">The WeBWorK problem with ID “webwork-119” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="wFi"><h6 class="heading"><span class="codenumber">45<span class="period">.</span></span></h6>
+<p id="p-1503">The WeBWorK problem with ID “webwork-120” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="cMr"><h6 class="heading"><span class="codenumber">46<span class="period">.</span></span></h6>
+<p id="p-1504">The WeBWorK problem with ID “webwork-121” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="ITA"><h6 class="heading"><span class="codenumber">47<span class="period">.</span></span></h6>
+<p id="p-1505">The WeBWorK problem with ID “webwork-122” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="paJ"><h6 class="heading"><span class="codenumber">48<span class="period">.</span></span></h6>
+<p id="p-1506">The WeBWorK problem with ID “webwork-123” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article>
+</div></div>
+<div class="exercisegroup" id="YxX"><div class="exercisegroup-exercises cols2">
+<article class="exercise exercise-like" id="VhS"><h6 class="heading"><span class="codenumber">49<span class="period">.</span></span></h6>
+<p id="p-1507">The WeBWorK problem with ID “webwork-124” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="Bpb"><h6 class="heading"><span class="codenumber">50<span class="period">.</span></span></h6>
+<p id="p-1508">The WeBWorK problem with ID “webwork-125” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="hwk"><h6 class="heading"><span class="codenumber">51<span class="period">.</span></span></h6>
+<p id="p-1509">The WeBWorK problem with ID “webwork-126” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="NDt"><h6 class="heading"><span class="codenumber">52<span class="period">.</span></span></h6>
+<p id="p-1510">The WeBWorK problem with ID “webwork-127” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article>
+</div></div>
+<div class="exercisegroup" id="EFg">
+<h6 class="heading"><span class="title">Applications</span></h6>
+<div class="exercisegroup-exercises cols2">
+<article class="exercise exercise-like" id="tKC"><h6 class="heading"><span class="codenumber">53<span class="period">.</span></span></h6>
+<p id="p-1511">The WeBWorK problem with ID “webwork-128” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="ZRL"><h6 class="heading"><span class="codenumber">54<span class="period">.</span></span></h6>
+<p id="p-1512">The WeBWorK problem with ID “webwork-129” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="FYU"><h6 class="heading"><span class="codenumber">55<span class="period">.</span></span></h6>
+<p id="p-1513">The WeBWorK problem with ID “webwork-130” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="mgd"><h6 class="heading"><span class="codenumber">56<span class="period">.</span></span></h6>
+<p id="p-1514">The WeBWorK problem with ID “webwork-131” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article>
+</div>
+</div>
+<div class="exercisegroup" id="kMp">
+<h6 class="heading"><span class="title">Challenge</span></h6>
+<div class="exercisegroup-exercises"><article class="exercise exercise-like" id="Snm"><h6 class="heading"><span class="codenumber">57<span class="period">.</span></span></h6>
+<p id="p-1515">The WeBWorK problem with ID “webwork-132” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article></div>
+</div></section></section></div></main>
+</div>
+</body>
+</html>

@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*       on 2021-08-28T19:50:42Z       *-->
+<!--*   A recent stable commit (2020-08-09):   *-->
+<!--* 98f21740783f166a773df4dc83cab5293ab63a4a *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<html lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>ORCCA Addition and Subtraction of Rational Expressions with Like Denominators</title>
+<meta name="Keywords" content="Authored in PreTeXt">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+<script>window.MathJax = {
+  tex: {
+    inlineMath: [['\\(','\\)']],
+    tags: "none",
+    useLabelIds: true,
+    tagSide: "right",
+    tagIndent: ".8em",
+    packages: {'[+]': ['base', 'extpfeil', 'ams', 'amscd', 'newcommand', 'knowl', 'sfrac']}
+  },
+  options: {
+    ignoreHtmlClass: "tex2jax_ignore",
+    processHtmlClass: "has_am",
+  },
+  chtml: {
+    scale: 0.88,
+    mtextInheritFont: true
+  },
+  loader: {
+    load: ['input/asciimath', '[tex]/extpfeil', '[tex]/amscd', '[tex]/newcommand', '[pretext]/mathjaxknowl3.js'],
+    paths: {pretext: "https://pretextbook.org/js/lib"},
+  },
+/* support for the sfrac command in MathJax (Beveled fraction) */
+  startup: {
+    ready() {
+      //
+      // Creating a simple "sfrac" package on-the-fly
+      //
+      const Configuration = MathJax._.input.tex.Configuration.Configuration;
+      const CommandMap = MathJax._.input.tex.SymbolMap.CommandMap;
+      
+      new CommandMap('sfrac', {
+        sfrac: 'SFrac'
+        }, {
+        SFrac(parser, name) {
+        const num = parser.ParseArg(name);
+        const den = parser.ParseArg(name);
+        const frac = parser.create('node', 'mfrac', [num, den], {bevelled: true});
+        parser.Push(frac);
+        }
+      });
+      //
+      // Create the package for the overridden macros
+      //
+      Configuration.create('sfrac', {
+        handler: {macro: ['sfrac']}
+      });
+      
+    MathJax.startup.defaultReady();
+    }
+  },
+};
+</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext_add_on.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script xmlns:svg="http://www.w3.org/2000/svg">sagecellEvalName='Evaluate (Sage)';
+</script><link xmlns:svg="http://www.w3.org/2000/svg" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://fonts.googleapis.com/css?family=Inconsolata:400,700&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/pretext.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/pretext_add_on.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/banner_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/toc_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/knowls_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/style_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/colors_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/setcolors.css" rel="stylesheet" type="text/css">
+<!-- 2019-10-12: Temporary - CSS file for experiments with styling --><link xmlns:svg="http://www.w3.org/2000/svg" href="developer.css" rel="stylesheet" type="text/css">
+</head>
+<body id="PCC-ORCCA" class="mathbook-book has-toc has-sidebar-left">
+<a class="assistive" href="#content">Skip to main content</a><div xmlns:svg="http://www.w3.org/2000/svg" id="latex-macros" class="hidden-content" style="display:none">\(\require{cancel}\newcommand{\abs}[1]{\left\lvert#1\right\rvert}
+\newcommand{\point}[2]{\left(#1,#2\right)}
+\newcommand{\highlight}[1]{\definecolor{sapphire}{RGB}{59,90,125} {\color{sapphire}{{#1}}}}
+\newcommand{\firsthighlight}[1]{\definecolor{sapphire}{RGB}{59,90,125} {\color{sapphire}{{#1}}}}
+\newcommand{\secondhighlight}[1]{\definecolor{emerald}{RGB}{20,97,75} {\color{emerald}{{#1}}}}
+\newcommand{\unhighlight}[1]{{\color{black}{{#1}}}}
+\newcommand{\lowlight}[1]{{\color{lightgray}{#1}}}
+\newcommand{\attention}[1]{\mathord{\overset{\downarrow}{#1}}}
+\newcommand{\nextoperation}[1]{\mathord{\boxed{#1}}}
+\newcommand{\substitute}[1]{{\color{blue}{{#1}}}}
+\newcommand{\pinover}[2]{\overset{\overset{\mathrm{\ #2\ }}{|}}{\strut #1 \strut}}
+\newcommand{\addright}[1]{{\color{blue}{{{}+#1}}}}
+\newcommand{\addleft}[1]{{\color{blue}{{#1+{}}}}}
+\newcommand{\subtractright}[1]{{\color{blue}{{{}-#1}}}}
+\newcommand{\multiplyright}[2][\cdot]{{\color{blue}{{{}#1#2}}}}
+\newcommand{\multiplyleft}[2][\cdot]{{\color{blue}{{#2#1{}}}}}
+\newcommand{\divideunder}[2]{\frac{#1}{{\color{blue}{{#2}}}}}
+\newcommand{\divideright}[1]{{\color{blue}{{{}\div#1}}}}
+\newcommand{\negate}[1]{{\color{blue}{{-}}}\left(#1\right)}
+\newcommand{\cancelhighlight}[1]{\definecolor{sapphire}{RGB}{59,90,125}{\color{sapphire}{{\cancel{#1}}}}}
+\newcommand{\secondcancelhighlight}[1]{\definecolor{emerald}{RGB}{20,97,75}{\color{emerald}{{\bcancel{#1}}}}}
+\newcommand{\thirdcancelhighlight}[1]{\definecolor{amethyst}{RGB}{112,72,91}{\color{amethyst}{{\xcancel{#1}}}}}
+\newcommand{\confirm}[1]{\stackrel{\checkmark}{#1}}
+\newcommand{\reject}[1]{\stackrel{\text{no}}{#1}}
+\newcommand{\wonder}[1]{\stackrel{\text{?}}{#1}}
+\newcommand{\apple}{\text{🍎}}
+\newcommand{\banana}{\text{🍌}}
+\newcommand{\pear}{\text{🍐}}
+\newcommand{\cat}{\text{🐱}}
+\newcommand{\dog}{\text{🐶}}
+\newcommand{\lt}{&lt;}
+\newcommand{\gt}{&gt;}
+\newcommand{\amp}{&amp;}
+\)</div>
+<header id="masthead" class="smallbuttons"><div class="banner"><div class="container">
+<a id="logo-link" href="http://www.pcc.edu/ORCCA" target="_blank"><img src="images/ORCCAbrandlogo.png" alt="Logo image"></a><div class="title-container">
+<h1 class="heading"><a href="orcca.html"><span class="title">RVCC Elementary Algebra</span></a></h1>
+<p class="byline">Department of Mathematics and Computer Science</p>
+</div>
+</div></div>
+<nav xmlns:svg="http://www.w3.org/2000/svg" id="primary-navbar" class="navbar"><div class="container">
+<div class="navbar-top-buttons">
+<button class="sidebar-left-toggle-button button active" aria-label="Show or hide table of contents sidebar">Contents</button><div class="tree-nav toolbar toolbar-divisor-3">
+<a class="index-button toolbar-item button" href="index-1.html" title="Index">Index</a><span class="threebuttons"><a id="previousbutton" class="previous-button toolbar-item button" href="section-multiplication-and-division-of-rational-expressions.html" title="Previous">Prev</a><a id="upbutton" class="up-button button toolbar-item" href="chapter-rational-expressions.html" title="Up">Up</a><a id="nextbutton" class="next-button button toolbar-item" href="chapter-radical-expressions-and-functions.html" title="Next">Next</a></span>
+</div>
+</div>
+<div class="navbar-bottom-buttons toolbar toolbar-divisor-4">
+<button class="sidebar-left-toggle-button button toolbar-item active">Contents</button><a class="previous-button toolbar-item button" href="section-multiplication-and-division-of-rational-expressions.html" title="Previous">Prev</a><a class="up-button button toolbar-item" href="chapter-rational-expressions.html" title="Up">Up</a><a class="next-button button toolbar-item" href="chapter-radical-expressions-and-functions.html" title="Next">Next</a>
+</div>
+</div></nav></header><div class="page">
+<div xmlns:svg="http://www.w3.org/2000/svg" id="sidebar-left" class="sidebar" role="navigation"><div class="sidebar-content">
+<nav id="toc"><ul>
+<li class="link frontmatter">
+<a href="frontmatter.html" data-scroll="JVg"><span class="title">Front Matter</span></a><ul><li><a href="colophon-1.html" data-scroll="colophon-1">Colophon</a></li></ul>
+</li>
+<li class="link part"><a href="part-all-of-the-chapters.html" data-scroll="part-all-of-the-chapters"><span class="codenumber">I</span> <span class="title"></span></a></li>
+<li class="link">
+<a href="chapter-introduction-to-algebra.html" data-scroll="dNX"><span class="codenumber">1</span> <span class="title">Introduction to Algebra</span></a><ul>
+<li><a href="section-real-numbers-and-the-number-line.html" data-scroll="ipv">Real Numbers and the Number Line</a></li>
+<li><a href="section-properties-of-real-numbers.html" data-scroll="tNy">Properties of Real Numbers</a></li>
+<li><a href="section-simplifying-and-writing-algebraic-expressions.html" data-scroll="xRO">Simplifying and Writing Algebraic Expressions</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="chapter-linear-equations-and-inequalities-modified.html" data-scroll="sWV"><span class="codenumber">2</span> <span class="title">Linear Equations and Inequalities</span></a><ul>
+<li><a href="section-introduction-to-equations.html" data-scroll="fwy">Introduction to Equations</a></li>
+<li><a href="section-linear-equations.html" data-scroll="xVO">Linear Equations</a></li>
+<li><a href="section-introduction-to-problem-solving.html" data-scroll="Wul">Introduction to Problem Solving</a></li>
+<li><a href="section-formulas.html" data-scroll="Nnq">Formulas</a></li>
+<li><a href="section-linear-inequalities.html" data-scroll="Nuc">Linear Inequalities</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="chapter-graphing-equations.html" data-scroll="gID"><span class="codenumber">3</span> <span class="title">Graphing Lines</span></a><ul>
+<li><a href="section-introduction-to-graphing.html" data-scroll="YTJ">Introduction to Graphing</a></li>
+<li><a href="section-equations-in-two-variables.html" data-scroll="QXY">Equations in Two Variables</a></li>
+<li><a href="section-intercepts-horizontal-and-vertical-lines.html" data-scroll="ByF">Intercepts: Horizontal and Vertical Lines</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="chapter-systems-of-linear-equations-in-two-variables.html" data-scroll="xGO"><span class="codenumber">4</span> <span class="title">Systems of Linear Equations</span></a><ul>
+<li><a href="section-solving-systems-of-linear-equations-graphically-and-numerically.html" data-scroll="njo">Solving Systems of Linear Equations Graphically and Numerically</a></li>
+<li><a href="section-solving-systems-of-linear-equations-by-substitution.html" data-scroll="zdh">Solving Systems of Linear Equations by Substitution</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="chapter-polynomials-and-exponents-modified.html" data-scroll="onc"><span class="codenumber">5</span> <span class="title">Exponents and Polynomials</span></a><ul>
+<li><a href="section-rules-for-exponents.html" data-scroll="KHJ">Rules for Exponents</a></li>
+<li><a href="section-adding-and-subtracting-polynomials.html" data-scroll="VvN">Addition and Subtraction of Polynomials</a></li>
+<li><a href="section-multiplication-of-polynomials.html" data-scroll="IcY">Multiplication of Polynomials</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="chapter-radical-expressions-and-equations.html" data-scroll="chapter-radical-expressions-and-equations"><span class="codenumber">6</span> <span class="title">Radical Expressions and Equations</span></a><ul>
+<li><a href="section-introduction-to-factoring.html" data-scroll="duD">Introduction to Factoring</a></li>
+<li><a href="section-factoring-trinomials.html" data-scroll="Mrf">Factoring Trinomials</a></li>
+<li><a href="section-solving-equations-by-factoring.html" data-scroll="DXi">Solving Equations by Factoring 1 (Quadratics)</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="chapter-rational-expressions.html" data-scroll="RzF"><span class="codenumber">7</span> <span class="title">Rational Expressions</span></a><ul>
+<li><a href="section-introduction-to-rational-expressions.html" data-scroll="Moo">Introduction to Rational Expressions</a></li>
+<li><a href="section-multiplication-and-division-of-rational-expressions.html" data-scroll="Vps">Multiplication and Division of Rational Expressions</a></li>
+<li><a href="section-addition-and-subtraction-with-like-denominators.html" data-scroll="KBw" class="active">Addition and Subtraction of Rational Expressions with Like Denominators</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="chapter-radical-expressions-and-functions.html" data-scroll="chapter-radical-expressions-and-functions"><span class="codenumber">8</span> <span class="title">Quantities in the Physical World</span></a><ul><li><a href="section-radical-expressions-and-functions.html" data-scroll="GAK">Radical Expressions and Functions</a></li></ul>
+</li>
+<li class="link backmatter"><a href="backmatter.html" data-scroll="jDj"><span class="title">Appendices</span></a></li>
+<li class="link">
+<a href="appendix-basic-math-review.html" data-scroll="appendix-basic-math-review"><span class="codenumber">A</span> <span class="title">Basic Math Review</span></a><ul>
+<li><a href="section-arithmetic-with-negative-numbers.html" data-scroll="qBB">Arithmetic with Negative Numbers</a></li>
+<li><a href="section-fractions-and-fraction-arithmetic.html" data-scroll="VAa">Fractions and Fraction Arithmetic</a></li>
+<li><a href="section-absolute-value-and-square-root.html" data-scroll="GAK">Absolute Value and Square Root</a></li>
+<li><a href="section-percentages.html" data-scroll="Chi">Percentages</a></li>
+<li><a href="section-order-of-operations.html" data-scroll="aog">Order of Operations</a></li>
+<li><a href="section-set-notation-and-types-of-numbers.html" data-scroll="Fdo">Set Notation and Types of Numbers</a></li>
+</ul>
+</li>
+<li class="link"><a href="appendix-unit-conversions.html" data-scroll="appendix-unit-conversions"><span class="codenumber">B</span> <span class="title">Unit Conversions</span></a></li>
+<li class="link"><a href="index-1.html" data-scroll="index-1"><span class="title">Index</span></a></li>
+</ul></nav><div class="extras"><nav><a class="mathbook-link" href="https://pretextbook.org">Authored in PreTeXt</a><a href="https://www.mathjax.org"><img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" alt="Powered by MathJax"></a></nav></div>
+</div></div>
+<main class="main"><div id="content" class="pretext-content"><section xmlns:svg="http://www.w3.org/2000/svg" class="section" id="KBw"><h2 class="heading hide-type">
+<span class="type">Section</span> <span class="codenumber">7.3</span> <span class="title">Addition and Subtraction of Rational Expressions with Like Denominators</span>
+</h2>
+<section class="introduction" id="GfY"><p id="LzL">In the last section, we learned how to multiply and divide rational expressions. In this section, we will learn how to add and subtract rational expressions.</p></section><section class="subsection" id="qIF"><h3 class="heading hide-type">
+<span class="type">Subsection</span> <span class="codenumber">7.3.1</span> <span class="title">Introduction</span>
+</h3>
+<article class="example example-like" id="nNZ"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-nNZ"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">7.3.1</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-nNZ"><article class="example example-like"><p id="xwg">Julia is taking her family on a boat trip \(12\) miles down the river and back. The river flows at a speed of \(2\) miles per hour and she wants to drive the boat at a constant speed, \(v\) miles per hour downstream and back upstream. Due to the current of the river, the actual speed of travel is \(v+2\) miles per hour going downstream, and \(v-2\) miles per hour going upstream. If Julia plans to spend \(8\) hours for the whole trip, how fast should she drive the boat?</p>
+<p id="dDp">We need to review three forms of the formula for movement at a constant rate:</p>
+<div class="displaymath">
+\begin{align*}
+d\amp=vt\amp v\amp=\frac{d}{t}\amp t\amp=\frac{d}{v}
+\end{align*}
+</div>
+<p class="continuation">where \(d\) stands for distance, \(v\) represents speed, and \(t\) stands for time. According to the third form, the time it takes the boat to travel downstream is \(\frac{12}{v+2}\text{,}\) and the time it takes to get back upstream is \(\frac{12}{v-2}\text{.}\)</p>
+<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;">
+<div class="sbspanel top" style="width:47%;">
+<p id="JKy">The function to model the time of the whole trip is</p>
+<div class="displaymath">
+\begin{equation*}
+t(v)=\frac{12}{v-2}+\frac{12}{v+2}
+\end{equation*}
+</div>
+<p class="continuation">where \(t\) stands for time in hours, and \(v\) is the boat's speed in miles per hour. Let's look at the graph of this function in <a class="xref" data-knowl="./knowl/figure-boat-time-versus-speed.html" title="Figure 7.3.2">Figure 7.3.2</a>. Note that since the speed \(v\) and the time \(t(v)\) should be positive in context, it's only the first quadrant of <a class="xref" data-knowl="./knowl/figure-boat-time-versus-speed.html" title="Figure 7.3.2">Figure 7.3.2</a> that matters.</p>
+</div>
+<div class="sbspanel top" style="width:47%;"><figure class="figure figure-like" id="VYQ"><img src="images/image-107.svg" role="img" class="contained" alt="a Cartesian grid of the rational function which has 3 separate segments;a curve in the lower left quadrant;a middle curve that goes through the origin;a curve on the right that goes through the point (4,8)"><div class="image-archive">
+<a href="images/image-107.eps">eps</a><a href="images/image-107.pdf">pdf</a><a href="images/image-107.png">png</a><a href="images/image-107.svg">svg</a><a href="images/image-107.tex">tex</a>
+</div>
+<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">7.3.2<span class="period">.</span></span><span class="space"> </span>Graph of \(t(v)=\frac{12}{v-2}+\frac{12}{v+2}\) and \(t=8\)</figcaption></figure></div>
+</div></div>
+<p id="pRH">To find the speed that Julia should drive the boat to make the round trip last \(8\) hours we can use graphing technology to solve the equation</p>
+<div class="displaymath">
+\begin{equation*}
+\frac{12}{v-2}+\frac{12}{v+2}=8
+\end{equation*}
+</div>
+<p class="continuation">graphically and we see that \(v=4\text{.}\) This tells us that a speed of \(4\) miles per hour will give a total time of \(8\) hours to complete the trip. To go downstream it would take \(\frac{12}{v+2}=\frac{12}{4+2}=2\) hours; and to go upstream it would take \(\frac{12}{v-2}=\frac{12}{4-2}=6\) hours.</p></article></div>
+<p id="XOd">The point of this section is to work with expressions like \(\frac{12}{v-2}+\frac{12}{v+2}\text{,}\) where two rational expressions are added (or subtracted). There are times when it is useful to combine them into a single fraction. We will learn that the expression \(\frac{12}{v-2}+\frac{12}{v+2}\) is equal to the expression \(\frac{24v}{v^2-4}\text{,}\) and we will learn how to make that simplification.</p></section><section class="subsection" id="WPO"><h3 class="heading hide-type">
+<span class="type">Subsection</span> <span class="codenumber">7.3.2</span> <span class="title">Addition and Subtraction of Rational Expressions with the Same Denominator</span>
+</h3>
+<p id="DVm">The process of adding and subtracting rational expressions will be very similar to the process of adding and subtracting purely numerical fractions.</p>
+<p id="kcv">If the two expressions have the same denominator, then we can rely on the property of <a class="xref" data-knowl="./knowl/fact-add-fractions-with-same-denominator.html" title="Fact A.2.21: Adding/Subtracting with Fractions Having the Same Denominator">adding and subtracting fractions</a> and simplify that result.</p>
+<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;">
+<div class="sbspanel top" style="width:47%;">
+<p id="mXb">Let's review how to add fractions with the same denominator:</p>
+<div class="displaymath">
+\begin{align*}
+\frac{1}{10}+\frac{3}{10}\amp=\frac{1+3}{10}\\
+\amp=\frac{4}{10}\\
+\amp=\frac{2}{5}
+\end{align*}
+</div>
+</div>
+<div class="sbspanel top" style="width:47%;">
+<p id="Tek">We can add and subtract rational expressions in the same way:</p>
+<div class="displaymath">
+\begin{align*}
+\frac{2}{3x}-\frac{5}{3x}\amp=\frac{2-5}{3x}\\
+\amp=\frac{-3}{3x}\\
+\amp=-\frac{1}{x}
+\end{align*}
+</div>
+</div>
+</div></div>
+<figure class="list table-like" id="gjA"><figcaption><span class="type">List</span><span class="space"> </span><span class="codenumber">7.3.3<span class="period">.</span></span><span class="space"> </span>Steps to Adding/Subtracting Rational Expressions</figcaption><div class="named-list-content"><dl class="description-list">
+<dt id="jsB">Identify the LCD</dt>
+<dd><p id="HVl">Determine the least common denominator of all of the denominators.</p></dd>
+<dt id="PzK">Build</dt>
+<dd><p id="ocu">If necessary, build up each expression so that the denominators are the same.</p></dd>
+<dt id="vGT">Add/Subtract</dt>
+<dd><p id="UjD">Combine the numerators using the <a class="xref" data-knowl="./knowl/fact-add-fractions-with-same-denominator.html" title="Fact A.2.21: Adding/Subtracting with Fractions Having the Same Denominator">properties of adding and subtracting fractions</a>.</p></dd>
+<dt id="bOc">Simplify</dt>
+<dd><p id="AqM">Simplify the resulting rational expression as much as possible. This may require factoring the numerator.</p></dd>
+</dl></div></figure><article class="example example-like" id="Acr"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-Acr"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">7.3.4</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-Acr"><article class="example example-like"><p id="CfZ">Add the rational expressions: \(\dfrac{2x}{x+y}+\dfrac{2y}{x+y}\text{.}\)</p>
+<div class="solutions">
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-mnh" id="mnh"><span class="type">Explanation</span></a><div class="hidden-content tex2jax_ignore" id="hk-mnh"><div class="solution solution-like">
+<p id="gxV">These expressions already have a common denominator:</p>
+<div class="displaymath">
+\begin{align*}
+\frac{2x}{x+y}+\frac{2y}{x+y}\amp=\frac{2x+2y}{x+y}\\
+\amp=\frac{2\cancelhighlight{(x+y)}}{\cancelhighlight{x+y}}\\
+\amp=\frac{2}{1}\\
+\amp=2
+\end{align*}
+</div>
+<p class="continuation">Note that we didn't stop at \(\frac{2x+2y}{x+y}\text{.}\) If possible, we must simplify the numerator and denominator. Since this is a multivariable expression, this textbook ignores domain restrictions while canceling.</p>
+</div></div>
+</div></article></div></section><section class="subsection" id="CWX"><h3 class="heading hide-type">
+<span class="type">Subsection</span> <span class="codenumber">7.3.3</span> <span class="title">Addition and Subtraction of Rational Expressions with Different Denominators</span>
+</h3>
+<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;">
+<div class="sbspanel top" style="width:47%;"><p id="zlt">To add rational expressions with different denominators, we'll need to build each fraction to the least common denominator, in the same way we do with numerical fractions. Let's briefly review this process by adding \(\frac{3}{5}\) and \(\frac{1}{6}\text{:}\)</p></div>
+<div class="sbspanel top" style="width:47%;"><div class="displaymath" id="fsC">
+\begin{align*}
+\frac{3}{5}+\frac{1}{6}\amp=\frac{3}{5}\multiplyright{\frac{6}{6}}+\frac{1}{6}\multiplyright{\frac{5}{5}}\\
+\amp=\frac{18}{30}+\frac{5}{30}\\
+\amp=\frac{18+5}{30}\\
+\amp=\frac{23}{30}
+\end{align*}
+</div></div>
+</div></div>
+<p id="QjE">This exact method can be used when adding rational expressions containing variables. The key is that the expressions <em class="emphasis">must</em> have the same denominator before they can be added or subtracted. If they don't have this initially, then we'll identify the least common denominator and build each expression so that it has that denominator.</p>
+<p id="wqN">Let's apply this to adding the two expressions with denominators that are \(v-2\) and \(v+2\) from <a class="xref" data-knowl="./knowl/example-boat-river-rational-function.html" title="Example 7.3.1">Example 7.3.1</a>.</p>
+<article class="example example-like" id="sxS"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-sxS"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">7.3.5</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-sxS"><article class="example example-like"><p id="ini">Add the rational expressions and fully simplify the function given by \(t(v)=\frac{12}{v-2}+\frac{12}{v+2}\text{.}\)</p>
+<div class="solutions">
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-Suq" id="Suq"><span class="type">Explanation</span></a><div class="hidden-content tex2jax_ignore" id="hk-Suq"><div class="solution solution-like"><div class="displaymath" id="MFe">
+\begin{align*}
+t(v)\amp=\frac{12}{v-2}+\frac{12}{v+2}\\
+t(v)\amp=\frac{12}{v-2}\multiplyright{\frac{v+2}{v+2}}+\frac{12}{v+2}\multiplyright{\frac{v-2}{v-2}}\\
+t(v)\amp=\frac{12v+24}{(v-2)(v+2)}+\frac{12v-24}{(v+2)(v-2)}\\
+t(v)\amp=\frac{(12v+24)+(12v-24)}{(v+2)(v-2)}\\
+t(v)\amp=\frac{24v}{(v+2)(v-2)}
+\end{align*}
+</div></div></div>
+</div></article></div>
+<article class="example example-like" id="YFb"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-YFb"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">7.3.6</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-YFb"><article class="example example-like"><p id="Our">Add the rational expressions: \(\dfrac{2}{5x^2y}+\dfrac{3}{20xy^2}\)</p>
+<div class="solutions">
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-yBz" id="yBz"><span class="type">Explanation</span></a><div class="hidden-content tex2jax_ignore" id="hk-yBz"><div class="solution solution-like">
+<p id="sMn">The least common denominator of \(5x^2y\) and \(20xy^2\) must include two \(x\)'s and two \(y\)'s, as well as \(20\text{.}\) Thus it is \(20x^2y^2\text{.}\) We will build both denominators to \(20x^2y^2\) before doing addition.</p>
+<div class="displaymath">
+\begin{align*}
+\frac{2}{5x^2y}+\frac{3}{20xy^2}\amp=\frac{2}{5x^2y}\multiplyright{\frac{4y}{4y}}+\frac{3}{20xy^2}\multiplyright{\frac{x}{x}}\\
+\amp=\frac{8y}{20x^2y^2}+\frac{3x}{20x^2y^2}\\
+\amp=\frac{8y+3x}{20x^2y^2}
+\end{align*}
+</div>
+</div></div>
+</div></article></div>
+<p id="cxW">Let's look at a few more complicated examples.</p>
+<article class="example example-like" id="EMk"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-EMk"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">7.3.7</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-EMk"><article class="example example-like"><p id="uBA">Subtract the rational expressions: \(\dfrac{y}{y-2}-\dfrac{8y-8}{y^2-4}\)</p>
+<div class="solutions">
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-eII" id="eII"><span class="type">Explanation</span></a><div class="hidden-content tex2jax_ignore" id="hk-eII"><div class="solution solution-like">
+<p id="YTw">To start, we'll make sure each denominator is factored. Then we'll find the least common denominator and build each expression to that denominator. Then we will be able to combine the numerators and simplify the expression.</p>
+<div class="displaymath">
+\begin{align*}
+\frac{y}{y-2}-\frac{8y-8}{y^2-4}\amp=\frac{y}{y-2}-\frac{8y-8}{(y+2)(y-2)}\\
+\amp=\frac{y}{y-2}\multiplyright{\frac{y+2}{y+2}}-\frac{8y-8}{(y+2)(y-2)}\\
+\amp=\frac{y^2+2y}{(y+2)(y-2)}-\frac{8y-8}{(y+2)(y-2)}\\
+\amp=\frac{y^2+2y-\highlight{\attention{(}}8y-8\highlight{\attention{)}}}{(y+2)(y-2)}\\
+\amp=\frac{y^2+2y-8y+8}{(y+2)(y-2)}\\
+\amp=\frac{y^2-6y+8}{(y+2)(y-2)}\\
+\amp=\frac{\cancelhighlight{(y-2)}(y-4)}{(y+2)\cancelhighlight{(y-2)}}\\
+\amp=\frac{y-4}{y+2}, \text{ for } y\neq 2
+\end{align*}
+</div>
+<p class="continuation">Note that we must factor the numerator in \(\frac{y^2-6y+8}{(y+2)(y-2)}\) and try to reduce the fraction (which we did).</p>
+</div></div>
+</div></article></div>
+<article class="warning remark-like" id="Xej"><h6 class="heading">
+<span class="type">Warning</span><span class="space"> </span><span class="codenumber">7.3.8</span><span class="period">.</span>
+</h6>
+<p id="RoX">In <a class="xref" data-knowl="./knowl/example-subtract-rational-expressions-with-restriction.html" title="Example 7.3.7">Example 7.3.7</a>, be careful to subtract the entire numerator of \(8y-8\text{.}\) When this expression is in the numerator of \(\frac{8y-8}{(y+2)(y-2)}\text{,}\) it's implicitly grouped and doesn't need parentheses. But once \(8y-8\) is subtracted from \(y^2+2y\text{,}\) we need to add parentheses so the entire expression is subtracted.</p></article><p id="IFf">In the next example, we'll look at adding a rational expression to a polynomial. Much like adding a fraction and an integer, we'll rely on writing that expression as itself over one in order to build its denominator.</p>
+<article class="example example-like" id="kTt"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-kTt"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">7.3.9</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-kTt"><article class="example example-like"><p id="aIJ">Add the expressions: \(-\dfrac{2}{r-1}+r\)</p>
+<div class="solutions">
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-KPR" id="KPR"><span class="type">Explanation</span></a><div class="hidden-content tex2jax_ignore" id="hk-KPR"><div class="solution solution-like">
+<div class="displaymath" id="FaF">
+\begin{align*}
+-\frac{2}{r-1}+r\amp=-\frac{2}{r-1}+\frac{r}{1}\\
+\amp=-\frac{2}{r-1}+\frac{r}{1}\multiplyright{\frac{r-1}{r-1}}\\
+\amp=\frac{-2}{r-1}+\frac{r^2-r}{r-1}\\
+\amp=\frac{-2+r^2-r}{r-1}\\
+\amp=\frac{r^2-r-2}{r-1}\\
+\amp=\frac{(r-2)(r+1)}{r-1}
+\end{align*}
+</div>
+<p class="continuation">Note that we factored the numerator to reduce the fraction if possible. Even though it was not possible in this case, leaving it in factored form makes it easier to see that it is reduced.</p>
+</div></div>
+</div></article></div>
+<article class="example example-like" id="RaC"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-RaC"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">7.3.10</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-RaC"><article class="example example-like"><p id="GPS">Subtract the expressions: \(\dfrac{6}{x^2-2x-8}-\dfrac{1}{x^2+3x+2}\)</p>
+<div class="solutions">
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-qXa" id="qXa"><span class="type">Explanation</span></a><div class="hidden-content tex2jax_ignore" id="hk-qXa"><div class="solution solution-like">
+<p id="lhO">To start, we'll need to factor each of the denominators. After that, we'll identify the LCD and build each denominator accordingly. Then we can combine the numerators and simplify the resulting expression.</p>
+<div class="displaymath">
+\begin{align*}
+\frac{6}{x^2-2x-8}-\frac{1}{x^2+3x+2}\amp=\frac{6}{(x-4)(x+2)}-\frac{1}{(x+2)(x+1)}\\
+\amp=\frac{6}{(x-4)(x+2)}\multiplyright{\frac{x+1}{x+1}}-\frac{1}{(x+2)(x+1)}\multiplyright{\frac{x-4}{x-4}}\\
+\amp=\frac{6x+6}{(x-4)(x+2)(x+1)}-\frac{x-4}{(x+2)(x+1)(x-4)}\\
+\amp=\frac{6x+6-(x-4)}{(x-4)(x+2)(x+1)}\\
+\amp=\frac{6x+6-x+4}{(x-4)(x+2)(x+1)}\\
+\amp=\frac{5x+10}{(x-4)(x+2)(x+1)}\\
+\amp=\frac{5\cancelhighlight{(x+2)}}{(x-4)\cancelhighlight{(x+2)}(x+1)}\\
+\amp=\frac{5}{(x-4)(x+1)}, \text{ for }x\neq -2
+\end{align*}
+</div>
+</div></div>
+</div></article></div></section><section class="reading-questions" id="reading-questions-24"><h3 class="heading hide-type">
+<span class="type">Reading Questions</span> <span class="codenumber">7.3.4</span> <span class="title">Reading Questions</span>
+</h3>
+<article class="exercise exercise-like" id="exercise-127"><h6 class="heading"><span class="codenumber">1<span class="period">.</span></span></h6>
+<p id="p-1318">Describe how to add two rational expressions when they have the same denominator.</p></article><article class="exercise exercise-like" id="exercise-128"><h6 class="heading"><span class="codenumber">2<span class="period">.</span></span></h6>
+<p id="p-1319">Suppose you are adding two rational expressions where one of them has a quadratic denominator, and the other has a linear denominator. What is the first thing you should try to do with respect to the quadratic denominator?</p></article></section></section></div></main>
+</div>
+</body>
+</html>

@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*       on 2021-08-28T19:50:36Z       *-->
+<!--*   A recent stable commit (2020-08-09):   *-->
+<!--* 98f21740783f166a773df4dc83cab5293ab63a4a *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<html lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>ORCCA Addition and Subtraction of Polynomials</title>
+<meta name="Keywords" content="Authored in PreTeXt">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+<script>window.MathJax = {
+  tex: {
+    inlineMath: [['\\(','\\)']],
+    tags: "none",
+    useLabelIds: true,
+    tagSide: "right",
+    tagIndent: ".8em",
+    packages: {'[+]': ['base', 'extpfeil', 'ams', 'amscd', 'newcommand', 'knowl', 'sfrac']}
+  },
+  options: {
+    ignoreHtmlClass: "tex2jax_ignore",
+    processHtmlClass: "has_am",
+  },
+  chtml: {
+    scale: 0.88,
+    mtextInheritFont: true
+  },
+  loader: {
+    load: ['input/asciimath', '[tex]/extpfeil', '[tex]/amscd', '[tex]/newcommand', '[pretext]/mathjaxknowl3.js'],
+    paths: {pretext: "https://pretextbook.org/js/lib"},
+  },
+/* support for the sfrac command in MathJax (Beveled fraction) */
+  startup: {
+    ready() {
+      //
+      // Creating a simple "sfrac" package on-the-fly
+      //
+      const Configuration = MathJax._.input.tex.Configuration.Configuration;
+      const CommandMap = MathJax._.input.tex.SymbolMap.CommandMap;
+      
+      new CommandMap('sfrac', {
+        sfrac: 'SFrac'
+        }, {
+        SFrac(parser, name) {
+        const num = parser.ParseArg(name);
+        const den = parser.ParseArg(name);
+        const frac = parser.create('node', 'mfrac', [num, den], {bevelled: true});
+        parser.Push(frac);
+        }
+      });
+      //
+      // Create the package for the overridden macros
+      //
+      Configuration.create('sfrac', {
+        handler: {macro: ['sfrac']}
+      });
+      
+    MathJax.startup.defaultReady();
+    }
+  },
+};
+</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext_add_on.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script xmlns:svg="http://www.w3.org/2000/svg">sagecellEvalName='Evaluate (Sage)';
+</script><link xmlns:svg="http://www.w3.org/2000/svg" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://fonts.googleapis.com/css?family=Inconsolata:400,700&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/pretext.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/pretext_add_on.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/banner_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/toc_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/knowls_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/style_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/colors_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/setcolors.css" rel="stylesheet" type="text/css">
+<!-- 2019-10-12: Temporary - CSS file for experiments with styling --><link xmlns:svg="http://www.w3.org/2000/svg" href="developer.css" rel="stylesheet" type="text/css">
+</head>
+<body id="PCC-ORCCA" class="mathbook-book has-toc has-sidebar-left">
+<a class="assistive" href="#content">Skip to main content</a><div xmlns:svg="http://www.w3.org/2000/svg" id="latex-macros" class="hidden-content" style="display:none">\(\require{cancel}\newcommand{\abs}[1]{\left\lvert#1\right\rvert}
+\newcommand{\point}[2]{\left(#1,#2\right)}
+\newcommand{\highlight}[1]{\definecolor{sapphire}{RGB}{59,90,125} {\color{sapphire}{{#1}}}}
+\newcommand{\firsthighlight}[1]{\definecolor{sapphire}{RGB}{59,90,125} {\color{sapphire}{{#1}}}}
+\newcommand{\secondhighlight}[1]{\definecolor{emerald}{RGB}{20,97,75} {\color{emerald}{{#1}}}}
+\newcommand{\unhighlight}[1]{{\color{black}{{#1}}}}
+\newcommand{\lowlight}[1]{{\color{lightgray}{#1}}}
+\newcommand{\attention}[1]{\mathord{\overset{\downarrow}{#1}}}
+\newcommand{\nextoperation}[1]{\mathord{\boxed{#1}}}
+\newcommand{\substitute}[1]{{\color{blue}{{#1}}}}
+\newcommand{\pinover}[2]{\overset{\overset{\mathrm{\ #2\ }}{|}}{\strut #1 \strut}}
+\newcommand{\addright}[1]{{\color{blue}{{{}+#1}}}}
+\newcommand{\addleft}[1]{{\color{blue}{{#1+{}}}}}
+\newcommand{\subtractright}[1]{{\color{blue}{{{}-#1}}}}
+\newcommand{\multiplyright}[2][\cdot]{{\color{blue}{{{}#1#2}}}}
+\newcommand{\multiplyleft}[2][\cdot]{{\color{blue}{{#2#1{}}}}}
+\newcommand{\divideunder}[2]{\frac{#1}{{\color{blue}{{#2}}}}}
+\newcommand{\divideright}[1]{{\color{blue}{{{}\div#1}}}}
+\newcommand{\negate}[1]{{\color{blue}{{-}}}\left(#1\right)}
+\newcommand{\cancelhighlight}[1]{\definecolor{sapphire}{RGB}{59,90,125}{\color{sapphire}{{\cancel{#1}}}}}
+\newcommand{\secondcancelhighlight}[1]{\definecolor{emerald}{RGB}{20,97,75}{\color{emerald}{{\bcancel{#1}}}}}
+\newcommand{\thirdcancelhighlight}[1]{\definecolor{amethyst}{RGB}{112,72,91}{\color{amethyst}{{\xcancel{#1}}}}}
+\newcommand{\confirm}[1]{\stackrel{\checkmark}{#1}}
+\newcommand{\reject}[1]{\stackrel{\text{no}}{#1}}
+\newcommand{\wonder}[1]{\stackrel{\text{?}}{#1}}
+\newcommand{\apple}{\text{🍎}}
+\newcommand{\banana}{\text{🍌}}
+\newcommand{\pear}{\text{🍐}}
+\newcommand{\cat}{\text{🐱}}
+\newcommand{\dog}{\text{🐶}}
+\newcommand{\lt}{&lt;}
+\newcommand{\gt}{&gt;}
+\newcommand{\amp}{&amp;}
+\)</div>
+<header id="masthead" class="smallbuttons"><div class="banner"><div class="container">
+<a id="logo-link" href="http://www.pcc.edu/ORCCA" target="_blank"><img src="images/ORCCAbrandlogo.png" alt="Logo image"></a><div class="title-container">
+<h1 class="heading"><a href="orcca.html"><span class="title">RVCC Elementary Algebra</span></a></h1>
+<p class="byline">Department of Mathematics and Computer Science</p>
+</div>
+</div></div>
+<nav xmlns:svg="http://www.w3.org/2000/svg" id="primary-navbar" class="navbar"><div class="container">
+<div class="navbar-top-buttons">
+<button class="sidebar-left-toggle-button button active" aria-label="Show or hide table of contents sidebar">Contents</button><div class="tree-nav toolbar toolbar-divisor-3">
+<a class="index-button toolbar-item button" href="index-1.html" title="Index">Index</a><span class="threebuttons"><a id="previousbutton" class="previous-button toolbar-item button" href="section-rules-for-exponents.html" title="Previous">Prev</a><a id="upbutton" class="up-button button toolbar-item" href="chapter-polynomials-and-exponents-modified.html" title="Up">Up</a><a id="nextbutton" class="next-button button toolbar-item" href="section-multiplication-of-polynomials.html" title="Next">Next</a></span>
+</div>
+</div>
+<div class="navbar-bottom-buttons toolbar toolbar-divisor-4">
+<button class="sidebar-left-toggle-button button toolbar-item active">Contents</button><a class="previous-button toolbar-item button" href="section-rules-for-exponents.html" title="Previous">Prev</a><a class="up-button button toolbar-item" href="chapter-polynomials-and-exponents-modified.html" title="Up">Up</a><a class="next-button button toolbar-item" href="section-multiplication-of-polynomials.html" title="Next">Next</a>
+</div>
+</div></nav></header><div class="page">
+<div xmlns:svg="http://www.w3.org/2000/svg" id="sidebar-left" class="sidebar" role="navigation"><div class="sidebar-content">
+<nav id="toc"><ul>
+<li class="link frontmatter">
+<a href="frontmatter.html" data-scroll="JVg"><span class="title">Front Matter</span></a><ul><li><a href="colophon-1.html" data-scroll="colophon-1">Colophon</a></li></ul>
+</li>
+<li class="link part"><a href="part-all-of-the-chapters.html" data-scroll="part-all-of-the-chapters"><span class="codenumber">I</span> <span class="title"></span></a></li>
+<li class="link">
+<a href="chapter-introduction-to-algebra.html" data-scroll="dNX"><span class="codenumber">1</span> <span class="title">Introduction to Algebra</span></a><ul>
+<li><a href="section-real-numbers-and-the-number-line.html" data-scroll="ipv">Real Numbers and the Number Line</a></li>
+<li><a href="section-properties-of-real-numbers.html" data-scroll="tNy">Properties of Real Numbers</a></li>
+<li><a href="section-simplifying-and-writing-algebraic-expressions.html" data-scroll="xRO">Simplifying and Writing Algebraic Expressions</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="chapter-linear-equations-and-inequalities-modified.html" data-scroll="sWV"><span class="codenumber">2</span> <span class="title">Linear Equations and Inequalities</span></a><ul>
+<li><a href="section-introduction-to-equations.html" data-scroll="fwy">Introduction to Equations</a></li>
+<li><a href="section-linear-equations.html" data-scroll="xVO">Linear Equations</a></li>
+<li><a href="section-introduction-to-problem-solving.html" data-scroll="Wul">Introduction to Problem Solving</a></li>
+<li><a href="section-formulas.html" data-scroll="Nnq">Formulas</a></li>
+<li><a href="section-linear-inequalities.html" data-scroll="Nuc">Linear Inequalities</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="chapter-graphing-equations.html" data-scroll="gID"><span class="codenumber">3</span> <span class="title">Graphing Lines</span></a><ul>
+<li><a href="section-introduction-to-graphing.html" data-scroll="YTJ">Introduction to Graphing</a></li>
+<li><a href="section-equations-in-two-variables.html" data-scroll="QXY">Equations in Two Variables</a></li>
+<li><a href="section-intercepts-horizontal-and-vertical-lines.html" data-scroll="ByF">Intercepts: Horizontal and Vertical Lines</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="chapter-systems-of-linear-equations-in-two-variables.html" data-scroll="xGO"><span class="codenumber">4</span> <span class="title">Systems of Linear Equations</span></a><ul>
+<li><a href="section-solving-systems-of-linear-equations-graphically-and-numerically.html" data-scroll="njo">Solving Systems of Linear Equations Graphically and Numerically</a></li>
+<li><a href="section-solving-systems-of-linear-equations-by-substitution.html" data-scroll="zdh">Solving Systems of Linear Equations by Substitution</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="chapter-polynomials-and-exponents-modified.html" data-scroll="onc"><span class="codenumber">5</span> <span class="title">Exponents and Polynomials</span></a><ul>
+<li><a href="section-rules-for-exponents.html" data-scroll="KHJ">Rules for Exponents</a></li>
+<li><a href="section-adding-and-subtracting-polynomials.html" data-scroll="VvN" class="active">Addition and Subtraction of Polynomials</a></li>
+<li><a href="section-multiplication-of-polynomials.html" data-scroll="IcY">Multiplication of Polynomials</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="chapter-radical-expressions-and-equations.html" data-scroll="chapter-radical-expressions-and-equations"><span class="codenumber">6</span> <span class="title">Radical Expressions and Equations</span></a><ul>
+<li><a href="section-introduction-to-factoring.html" data-scroll="duD">Introduction to Factoring</a></li>
+<li><a href="section-factoring-trinomials.html" data-scroll="Mrf">Factoring Trinomials</a></li>
+<li><a href="section-solving-equations-by-factoring.html" data-scroll="DXi">Solving Equations by Factoring 1 (Quadratics)</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="chapter-rational-expressions.html" data-scroll="RzF"><span class="codenumber">7</span> <span class="title">Rational Expressions</span></a><ul>
+<li><a href="section-introduction-to-rational-expressions.html" data-scroll="Moo">Introduction to Rational Expressions</a></li>
+<li><a href="section-multiplication-and-division-of-rational-expressions.html" data-scroll="Vps">Multiplication and Division of Rational Expressions</a></li>
+<li><a href="section-addition-and-subtraction-with-like-denominators.html" data-scroll="KBw">Addition and Subtraction of Rational Expressions with Like Denominators</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="chapter-radical-expressions-and-functions.html" data-scroll="chapter-radical-expressions-and-functions"><span class="codenumber">8</span> <span class="title">Quantities in the Physical World</span></a><ul><li><a href="section-radical-expressions-and-functions.html" data-scroll="GAK">Radical Expressions and Functions</a></li></ul>
+</li>
+<li class="link backmatter"><a href="backmatter.html" data-scroll="jDj"><span class="title">Appendices</span></a></li>
+<li class="link">
+<a href="appendix-basic-math-review.html" data-scroll="appendix-basic-math-review"><span class="codenumber">A</span> <span class="title">Basic Math Review</span></a><ul>
+<li><a href="section-arithmetic-with-negative-numbers.html" data-scroll="qBB">Arithmetic with Negative Numbers</a></li>
+<li><a href="section-fractions-and-fraction-arithmetic.html" data-scroll="VAa">Fractions and Fraction Arithmetic</a></li>
+<li><a href="section-absolute-value-and-square-root.html" data-scroll="GAK">Absolute Value and Square Root</a></li>
+<li><a href="section-percentages.html" data-scroll="Chi">Percentages</a></li>
+<li><a href="section-order-of-operations.html" data-scroll="aog">Order of Operations</a></li>
+<li><a href="section-set-notation-and-types-of-numbers.html" data-scroll="Fdo">Set Notation and Types of Numbers</a></li>
+</ul>
+</li>
+<li class="link"><a href="appendix-unit-conversions.html" data-scroll="appendix-unit-conversions"><span class="codenumber">B</span> <span class="title">Unit Conversions</span></a></li>
+<li class="link"><a href="index-1.html" data-scroll="index-1"><span class="title">Index</span></a></li>
+</ul></nav><div class="extras"><nav><a class="mathbook-link" href="https://pretextbook.org">Authored in PreTeXt</a><a href="https://www.mathjax.org"><img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" alt="Powered by MathJax"></a></nav></div>
+</div></div>
+<main class="main"><div id="content" class="pretext-content"><section xmlns:svg="http://www.w3.org/2000/svg" class="section" id="VvN"><h2 class="heading hide-type">
+<span class="type">Section</span> <span class="codenumber">5.2</span> <span class="title">Addition and Subtraction of Polynomials</span>
+</h2>
+<section class="introduction" id="zGF"><p id="sTr">A polynomial is a particular type of algebraic expression.</p>
+<ul class="disc">
+<li id="Ujq"><p id="vVb">A company's sales, \(s\) (in millions of dollars), can be modeled by \(2.2t+5.8\text{,}\) where \(t\) stands for the number of years since \(2010\text{.}\)</p></li>
+<li id="Aqz"><p id="cck">The height of an object from the ground, \(h\) (in feet), launched upward from the top of a building can be modeled by \(-16t^2+32t+300\text{,}\) where \(t\) represents the amount of time (in seconds) since the launch.</p></li>
+<li id="gxI"><p id="Ijt">The volume of an open-top box with a square base, \(V\) (in cubic inches), can be calculated by \(30s^2-\frac{1}{2}s^2\text{,}\) where \(s\) stands for the length of the square base, and the box sides have to be cut from a certain square piece of metal.</p></li>
+</ul>
+<p id="ZaA">All of the expressions above are polynomials. In this section, we will learn some basic vocabulary relating to polynomials and we'll then learn how to add and subtract polynomials.</p></section><section class="subsection" id="BCW"><h3 class="heading hide-type">
+<span class="type">Subsection</span> <span class="codenumber">5.2.1</span> <span class="title">Polynomial Vocabulary</span>
+</h3>
+<p id="p-859">There is a lot of vocabulary associated with polynomials. We start this section with a flood of vocabulary terms and some examples of how to use them.</p>
+<article class="definition definition-like" id="PGB"><h6 class="heading">
+<span class="type">Definition</span><span class="space"> </span><span class="codenumber">5.2.1</span><span class="period">.</span>
+</h6>
+<p id="tYK">A <dfn class="terminology">polynomial</dfn> is an expression with one or more <a class="xref" data-knowl="./knowl/definition-term.html" title="Definition 1.3.1">terms</a> summed together. A term of a polynomial must either be a plain number or the product of a number and one or more variables raised to natural number powers. The expression \(0\) is also considered a polynomial, with zero terms.</p></article><article class="example example-like" id="example-108"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-example-108"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">5.2.2</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-example-108"><article class="example example-like"><ul id="Tlo" class="disc">
+<li id="li-123"><p id="nef">Here are three polynomials: \(x^2-5x+2\text{,}\) \(t^3-1\text{,}\) \(7y\text{.}\)</p></li>
+<li id="li-124"><p id="p-863">The expression \(3x^4y^3+7xy^2-12xy\) is an example of a polynomial in more than one variable.</p></li>
+<li id="MER"><p id="oqC">The polynomial \(x^2-5x+3\) has three terms: \(x^2\text{,}\) \(-5x\text{,}\) and \(3\text{.}\)</p></li>
+<li id="sMa"><p id="UxL">The polynomial \(3x^4+7xy^2-12xy\) also has three terms.</p></li>
+<li id="YTj"><p id="AEU">The polynomial \(t^3-1\) has two terms.</p></li>
+</ul></article></div>
+<article class="remark remark-like" id="MLV"><h6 class="heading">
+<span class="type">Remark</span><span class="space"> </span><span class="codenumber">5.2.3</span><span class="period">.</span>
+</h6>
+<p id="UqH">A polynomial will never have a variable in the denominator of a fraction or under a radical.</p></article><article class="definition definition-like" id="bUT"><h6 class="heading">
+<span class="type">Definition</span><span class="space"> </span><span class="codenumber">5.2.4</span><span class="period">.</span>
+</h6>
+<p id="Gnc">The <dfn class="terminology">coefficient</dfn> (or numerical coefficient) of a term in a polynomial is the numerical factor in the term.</p></article><article class="example example-like" id="example-109"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-example-109"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">5.2.5</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-example-109"><article class="example example-like"><ul id="zsx" class="disc">
+<li id="Fas"><p id="gMd">The coefficient of the term \(\frac{4}{3}x^6\) is \(\frac{4}{3}\text{.}\)</p></li>
+<li id="lhB"><p id="MTm">The coefficient of the second term of the polynomial \(x^2-5x+3\) is \(-5\text{.}\)</p></li>
+<li id="RoK"><p id="tav">The coefficient of the term \(\frac{y^7}{4}\) is \(\frac{1}{4}\text{.}\)</p></li>
+</ul></article></div>
+<article class="exercise exercise-like" id="Zan"><a data-knowl="" class="id-ref exercise-knowl original" data-refid="hk-Zan"><h6 class="heading">
+<span class="type">Checkpoint</span><span class="space"> </span><span class="codenumber">5.2.6</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-Zan"><article class="exercise exercise-like"><p id="p-873">The WeBWorK problem with ID “webwork-51” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article></div>
+<article class="definition definition-like" id="AxD"><h6 class="heading">
+<span class="type">Definition</span><span class="space"> </span><span class="codenumber">5.2.7</span><span class="period">.</span>
+</h6>
+<p id="ePM">A term in a polynomial with no variable factor is called a <dfn class="terminology">constant term</dfn>.</p></article><article class="example example-like" id="example-110"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-example-110"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">5.2.8</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-example-110"><article class="example example-like"><p id="Ecq">The constant term of the polynomial \(x^2-5x+3\) is \(3\text{.}\)</p></article></div>
+<article class="definition definition-like" id="Icc"><h6 class="heading">
+<span class="type">Definition</span><span class="space"> </span><span class="codenumber">5.2.9</span><span class="period">.</span>
+</h6>
+<p id="mul">The <dfn class="terminology">degree</dfn> of a term is one way to measure how “large” it is. When a term only has one variable, its degree is the exponent on that variable. When a term has more than one variable, its degree is the sum of the exponents on the variables. A constant term has degree \(0\text{.}\)</p></article><article class="example example-like" id="example-111"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-example-111"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">5.2.10</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-example-111"><article class="example example-like"><ul id="fzG" class="disc">
+<li id="xvT"><p id="fGK">The degree of \(5x^2\) is \(2\text{.}\)</p></li>
+<li id="dDc"><p id="LNT">The degree of \(-\frac{4}{7}y^5\) is \(5\text{.}\)</p></li>
+<li id="JKl"><p id="rVc">The degree of \(-4x^2y^3\) is \(5\text{.}\)</p></li>
+<li id="li-134"><p id="p-881">The degree of \(17\) is \(0\text{.}\) Constant terms always have \(0\) degree.</p></li>
+</ul></article></div>
+<article class="definition definition-like" id="ojl"><h6 class="heading">
+<span class="type">Definition</span><span class="space"> </span><span class="codenumber">5.2.11</span><span class="period">.</span>
+</h6>
+<p id="SBu">The <dfn class="terminology">degree of a nonzero polynomial</dfn> is the greatest degree that appears amongst its terms. </p></article><article class="definition definition-like" id="Uqu"><h6 class="heading">
+<span class="type">Definition</span><span class="space"> </span><span class="codenumber">5.2.12</span><span class="period">.</span>
+</h6>
+<p id="p-883">The <dfn class="terminology">leading term</dfn> of a polynomial is the term with the greatest degree (assuming there is no tie). The coefficient of a polynomial's leading term is called the polynomial's <dfn class="terminology">leading coefficient</dfn>.</p></article><article class="example example-like" id="example-112"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-example-112"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">5.2.13</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-example-112"><article class="example example-like"><p id="p-884">The degree of the polynomial \(4x^2-5x+3\) is \(2\) because the terms have degrees \(2\text{,}\) \(1\text{,}\) and \(0\text{,}\) respectively, and \(2\) is the largest. Its leading term is \(4x^2\text{,}\) and its leading coefficient is \(4\text{.}\)</p></article></div>
+<article class="remark remark-like" id="sTe"><h6 class="heading">
+<span class="type">Remark</span><span class="space"> </span><span class="codenumber">5.2.14</span><span class="period">.</span>
+</h6>
+<p id="AxQ">To help us recognize a polynomial's degree, the standard convention at this level is to write a polynomial's terms in order from highest degree to lowest degree. When a polynomial is written in this order, it is written in <dfn class="terminology">standard form</dfn>. For example, it is standard practice to write \(7-4x-x^2\) as \(-x^2-4x+7\) since \(-x^2\) is the leading term. By writing the polynomial in standard form, we can look at the first term to determine both the polynomial's degree and leading term.</p></article><p id="p-886">There are special names for polynomials with a small number of terms, and for polynomials with certain degrees.</p>
+<dl class="description-list">
+<dt id="li-135">monomial</dt>
+<dd><p id="p-887">A polynomial with one term, such as \(3x^5\text{,}\) is called a monomial.</p></dd>
+<dt id="li-136">binomial</dt>
+<dd><p id="p-888">A polynomial with two terms, such as \(3x^5+2x\text{,}\) is called a binomial. </p></dd>
+<dt id="li-137">trinomial</dt>
+<dd><p id="p-889">A polynomial with three terms, such as \(x^2-5x+3\text{,}\) is called a trinomial.</p></dd>
+<dt id="li-138">constant polynomial</dt>
+<dd><p id="p-890">A zeroth-degree polynomial is called a constant polynomial. An example is the polynomial \(7\text{,}\) which has degree zero.</p></dd>
+<dt id="li-139">linear polynomial</dt>
+<dd><p id="p-891">A first-degree polynomial is called a linear polynomial. An example is \(-2x+7\text{.}\)</p></dd>
+<dt id="li-140">quadratic polynomial</dt>
+<dd><p id="p-892">A second-degree polynomial is called a quadratic polynomial. An example is \(4x^2-2x+7\text{.}\)</p></dd>
+<dt id="li-141">cubic polynomial</dt>
+<dd><p id="p-893">A third-degree polynomial is called a cubic polynomial. An example is \(x^3+4x^2-2x+7\text{.}\)</p></dd>
+</dl>
+<p class="continuation">Fourth-degree and fifth-degree polynomials are called quartic and quintic polynomials, respectively.  If the degree of the polynomial, \(n\text{,}\) is greater than five, we'll simply call it an \(n\)th-degree polynomial. For example, the polynomial \(5x^8-4x^5+1\) is an \(8\)th-degree polynomial.</p></section><section class="subsection" id="hKf"><h3 class="heading hide-type">
+<span class="type">Subsection</span> <span class="codenumber">5.2.2</span> <span class="title">Adding and Subtracting Polynomials</span>
+</h3>
+<article class="example example-like" id="Fhw"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-Fhw"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">5.2.15</span><span class="period">.</span><span class="space"> </span><span class="title">Production Costs.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-Fhw"><article class="example example-like"><p id="ree">Bayani started a company that makes one product: one-gallon ketchup jugs for industrial kitchens. The company's production expenses only come from two things: supplies and labor. The cost of supplies, \(S\) (in thousands of dollars), can be modeled by \(S=0.05x^2+2x+30\text{,}\) where \(x\) is number of thousands of jugs of ketchup produced. The labor cost for his employees, \(L\) (in thousands of dollars), can be modeled by \(0.1x^2+4x\text{,}\) where \(x\) again represents the number of jugs they produce (in thousands of jugs). Find a model for the company's total production costs.</p>
+<p id="Xln">Since Bayani's company only has these two costs, we can find a model for the total production costs, \(C\) (in thousands of dollars), by adding the supply costs and the labor costs:</p>
+<div class="displaymath">
+\begin{equation*}
+C=\left(0.05x^2+2x+30\right)+\left(0.1x^2+4x\right)
+\end{equation*}
+</div>
+<p id="Dsw">To finish simplifying our total production cost model, we'll combine the like terms:</p>
+<div class="displaymath">
+\begin{align*}
+C \amp= 0.05x^2+0.1x^2+2x+4x+30\\
+\amp= 0.15x^2+6x+30
+\end{align*}
+</div>
+<p class="continuation">This simplified model can now calculate Bayani's total production costs \(C\) (in thousands of dollars) when the company produces \(x\) thousand jugs of ketchup.</p></article></div>
+<p id="wxR">In short, the process of adding two or more polynomials involves recognizing and then combining the like terms.</p>
+<article class="exercise exercise-like" id="pYy"><a data-knowl="" class="id-ref exercise-knowl original" data-refid="hk-pYy"><h6 class="heading">
+<span class="type">Checkpoint</span><span class="space"> </span><span class="codenumber">5.2.16</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-pYy"><article class="exercise exercise-like"><p id="p-898">The WeBWorK problem with ID “webwork-52” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article></div>
+<article class="example example-like" id="loF"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-loF"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">5.2.17</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-loF"><article class="example example-like"><p id="jzF">Simplify the expression \(\left(\frac{1}{2}x^2-\frac{2}{3}x-\frac{3}{2}\right)+\left(\frac{3}{2}x^2+\frac{7}{2}x-\frac{1}{4}\right)\text{.}\)</p>
+<div class="solutions">
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-fNO" id="fNO"><span class="type">Explanation</span></a><div class="hidden-content tex2jax_ignore" id="hk-fNO"><div class="solution solution-like"><div class="displaymath" id="QMh">
+\begin{align*}
+\amp\left(\frac{1}{2}x^2\firsthighlight{{}-\frac{2}{3}x}\secondhighlight{{}-\frac{3}{2}}\right)+\left(\frac{3}{2}x^2\firsthighlight{{}+\frac{7}{2}x}\secondhighlight{{}-\frac{1}{4}}\right)\\
+\amp=\left(\frac{1}{2}x^2+\frac{3}{2}x^2\right)+\left(\firsthighlight{-\frac{2}{3}x+\frac{7}{2}x}\right)+\left(\secondhighlight{-\frac{3}{2}+\left(-\frac{1}{4}\right)}\right)\\
+\amp= \left(\frac{4}{2}x^2\right)+\left(\firsthighlight{-\frac{4}{6}x+\frac{21}{6}x}\right)+\left(\secondhighlight{-\frac{6}{4}+\left(-\frac{1}{4}\right)}\right)\\
+\amp= \left(2x^2\right)+\firsthighlight{\frac{17}{6}x}+\left(\secondhighlight{-\frac{7}{4}}\right)\\
+\amp=2x^2\firsthighlight{{}+\frac{17}{6}x}\secondhighlight{{}-\frac{7}{4}}
+\end{align*}
+</div></div></div>
+</div></article></div>
+<article class="example example-like" id="RvO"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-RvO"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">5.2.18</span><span class="period">.</span><span class="space"> </span><span class="title">Profit, Revenue, and Costs.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-RvO"><article class="example example-like"><p id="PGO">From <a class="xref" data-knowl="./knowl/example-ketchup-production-costs.html" title="Example 5.2.15: Production Costs">Example 5.2.15</a>, we know Bayani's ketchup company's production costs, \(C\) (in thousands of dollars), for producing \(x\) thousand jugs of ketchup is modeled by \(C=0.15x^2+6x+30\text{.}\) The revenue, \(R\) (in thousands of dollars), from selling the ketchup can be modeled by \(R=13x\text{,}\) where \(x\) stands for the number of thousands of jugs of ketchup sold. The company's net profit can be calculated using the concept:</p>
+<div class="displaymath">
+\begin{equation*}
+\text{net profit} = \text{revenue}  -  \text{costs}
+\end{equation*}
+</div>
+<p class="continuation">Assuming all products produced will be sold, a polynomial to model the company's net profit, \(P\) (in thousands of dollars) is:</p>
+<div class="displaymath">
+\begin{align*}
+P \amp= R-C\\
+\amp= \left(13x\right)-\left(0.15x^2+6x+30\right)\\
+\amp= 13x-0.15x^2-6x-30\\
+\amp= -0.15x^2+\left(13x+(-6x)\right)-30\\
+\amp=-0.15x^2+7x-30
+\end{align*}
+</div></article></div>
+<p id="cFa">The key distinction between the addition and subtraction of polynomials is that when we subtract a polynomial, we must subtract each term in that polynomial.</p>
+<p id="gEZ">Notice that our first step in simplifying the expression in <a class="xref" data-knowl="./knowl/example-profit-revenue-and-costs.html" title="Example 5.2.18: Profit, Revenue, and Costs">Example 5.2.18</a> was to subtract <em class="emphasis">every</em> term in the second expression. We can also think of this as distributing a factor of \(-1\) across the second polynomial, \(0.15x^2+6x+30\text{,}\) and then adding these terms as follows:</p>
+<div class="displaymath">
+\begin{align*}
+P \amp= R-C\\
+\amp= \left(13x\right)-\left(0.15x^2+6x+30\right)\\
+\amp= 13x+(-1)(0.15x^2)+(-1)(6x)+(-1)(30)\\
+\amp= 13x-0.15x^2-6x-30\\
+\amp= -0.15x^2+\left(13x+(-6x)\right)-30\\
+\amp=-0.15x^2+7x-30
+\end{align*}
+</div>
+<article class="example example-like" id="xCX"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-xCX"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">5.2.19</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-xCX"><article class="example example-like"><p id="vNX">Subtract \(\left(5x^3+4x^2-6x\right)-\left(-3x^2+9x-2\right)\text{.}\)</p>
+<div class="solutions">
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-LUX" id="LUX"><span class="type">Explanation</span></a><div class="hidden-content tex2jax_ignore" id="hk-LUX"><div class="solution solution-like">
+<p id="wTq">We must first subtract every term in \(\left(-3x^2+9x-2\right)\) from \(\left(5x^3+4x^2-6x\right)\text{.}\) Then we can combine like terms.</p>
+<div class="displaymath">
+\begin{align*}
+\amp\left(5x^3+4x^2-6x\right)-\left(-3x^2+9x-2\right)\\
+\amp= 5x^3+4x^2-6x \highlight{{}+{}} 3x^2 \highlight{{}-{}} 9x \highlight{{}+{}} 2\\
+\amp= 5x^3+\left(4x^2+3x^2\right)+\left(-6x+(-9x)\right)+2\\
+\amp= 5x^3+7x^2-15x+2
+\end{align*}
+</div>
+</div></div>
+</div></article></div>
+<article class="exercise exercise-like" id="WfH"><a data-knowl="" class="id-ref exercise-knowl original" data-refid="hk-WfH"><h6 class="heading">
+<span class="type">Checkpoint</span><span class="space"> </span><span class="codenumber">5.2.20</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-WfH"><article class="exercise exercise-like"><p id="p-906">The WeBWorK problem with ID “webwork-53” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article></div>
+<p id="IMj">Let's look at one last example where the polynomial has multiple variables. Remember that like terms must have the same variable(s) with the same exponent.</p>
+<article class="example example-like" id="dKg"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-dKg"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">5.2.21</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-dKg"><article class="example example-like"><p id="bVg">Subtract \(\left( 3x^2y+8xy^2-17y^3 \right)-\left(2x^2y+11xy^2+4y^2 \right)\text{.}\)</p>
+<div class="solutions">
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-scg" id="scg"><span class="type">Explanation</span></a><div class="hidden-content tex2jax_ignore" id="hk-scg"><div class="solution solution-like">
+<p id="daz">Again, we'll begin by subtracting each term in \(\left(2x^2y+11xy^2+4y^2\right)\text{.}\) Once we've done this, we'll need to identify and combine like terms.</p>
+<div class="displaymath">
+\begin{align*}
+\amp\left( 3x^2y+8xy^2-17y^3 \right)-\left(2x^2y+11xy^2+4y^2\right)\\
+\amp=
+3x^2y+8xy^2-17y^3 \highlight{{}-{}} 2x^2y \highlight{{}-{}} 11xy^2 \highlight{{}-{}} 4y^2\\
+\amp=\left(3x^2y-2x^2y\right)+\left(8xy^2-11xy^2\right)+\left(-17y^3-4y^2\right)\\
+\amp= x^2y-3xy^2-17y^3-4y^2
+\end{align*}
+</div>
+</div></div>
+</div></article></div></section><section class="subsection" id="NRo"><h3 class="heading hide-type">
+<span class="type">Subsection</span> <span class="codenumber">5.2.3</span> <span class="title">Evaluating Polynomial Expressions</span>
+</h3>
+<p id="oTs">Evaluating expressions was introduced in <code class="code-inline tex2jax_ignore">[cross-reference to target(s) "section-variables-and-evaluating-expressions" missing or not unique]</code>, and involves replacing the variable(s) in an expression with specific numbers and calculating the result. Here, we will look at evaluating polynomial expressions.</p>
+<article class="example example-like" id="CmQ"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-CmQ"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">5.2.22</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-CmQ"><article class="example example-like"><p id="Icp">Evaluate the expression \(-12y^3+4y^2-9y+2\) for \(y=-5\text{.}\)</p>
+<div class="solutions">
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-Yjp" id="Yjp"><span class="type">Explanation</span></a><div class="hidden-content tex2jax_ignore" id="hk-Yjp"><div class="solution solution-like">
+<p id="JhI">We will replace \(y\) with \(-5\) and simplify the result:</p>
+<div class="displaymath">
+\begin{align*}
+-12y^3+4y^2-9y+2 \amp= -12(\substitute{-5})^3+4(\substitute{-5})^2-9(\substitute{-5})+2\\
+\amp= -12(-125)+4(25)+45+2\\
+\amp= 1647
+\end{align*}
+</div>
+</div></div>
+</div></article></div>
+<p id="MMi">Recall that in <code class="code-inline tex2jax_ignore">[cross-reference to target(s) "subsection-evaluating-expressions-with-negative-numbers" missing or not unique]</code> and <code class="code-inline tex2jax_ignore">[cross-reference to target(s) "example-evaluating-expressions-with-negative-numbers" missing or not unique]</code> we discussed how \((-5)^2\) and \(-5^2\) are not the same expressions. The first expression, \((-5)^2\text{,}\) represents the number \(-5\) squared, and is \((-5)(-5)=25\text{.}\) The second expression, \(-5^2\text{,}\) is the <em class="emphasis">opposite</em> of the number that you get after you square \(5\text{,}\) and is \(-5^2=-(5\cdot 5) = -25\text{.}\)</p>
+<article class="example example-like" id="itZ"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-itZ"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">5.2.23</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-itZ"><article class="example example-like"><p id="ojy">Evaluate the expression \(C=0.15x^2+6x+30\) from <a class="xref" data-knowl="./knowl/example-ketchup-production-costs.html" title="Example 5.2.15: Production Costs">Example 5.2.15</a> for \(x=10\) and explain what this means in context.</p>
+<div class="solutions">
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-Eqy" id="Eqy"><span class="type">Explanation</span></a><div class="hidden-content tex2jax_ignore" id="hk-Eqy"><div class="solution solution-like">
+<p id="poR">We will replace \(x\) with \(10\text{:}\)</p>
+<div class="displaymath">
+\begin{align*}
+C\amp=0.15x^2+6x+30\\
+\amp=0.15(\substitute{10})^2+6(\substitute{10})+30\\
+\amp=0.15(100)+60+30\\
+\amp=15+90\\
+\amp=105
+\end{align*}
+</div>
+<p class="continuation">The context was that \(x\) represents so many thousands of jugs of ketchup, and \(C\) represents the total cost, in thousands of dollars, to produce that many jugs. So in context, we can interpret this as it costing \(\$105{,}000\) to produce \(10{,}000\) jugs of ketchup.</p>
+</div></div>
+</div></article></div>
+<article class="exercise exercise-like" id="uIr"><a data-knowl="" class="id-ref exercise-knowl original" data-refid="hk-uIr"><h6 class="heading">
+<span class="type">Checkpoint</span><span class="space"> </span><span class="codenumber">5.2.24</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-uIr"><article class="exercise exercise-like"><p id="p-916">The WeBWorK problem with ID “webwork-54” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article></div></section><section class="reading-questions" id="reading-questions-16"><h3 class="heading hide-type">
+<span class="type">Reading Questions</span> <span class="codenumber">5.2.4</span> <span class="title">Reading Questions</span>
+</h3>
+<article class="exercise exercise-like" id="exercise-99"><h6 class="heading"><span class="codenumber">1<span class="period">.</span></span></h6>
+<p id="p-917">What are the names for a polynomial with one term? With two terms? With three terms? Care to take a guess at the name of a polynomial with four terms?</p></article><article class="exercise exercise-like" id="exercise-100"><h6 class="heading"><span class="codenumber">2<span class="period">.</span></span></h6>
+<p id="p-918">Adding and subtracting polynomials is mostly about combining <span class="fillin" role="img" aria-label="6-character blank" style="width: 2.727272727272727em;"></span> terms.</p></article><article class="exercise exercise-like" id="exercise-101"><h6 class="heading"><span class="codenumber">3<span class="period">.</span></span></h6>
+<p id="p-919">What should you be careful with when evaluating a polynomial for a negative number?</p></article></section></section></div></main>
+</div>
+</body>
+</html>

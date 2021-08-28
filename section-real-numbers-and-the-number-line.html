@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*       on 2021-08-28T19:50:26Z       *-->
+<!--*   A recent stable commit (2020-08-09):   *-->
+<!--* 98f21740783f166a773df4dc83cab5293ab63a4a *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<html lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>ORCCA Real Numbers and the Number Line</title>
+<meta name="Keywords" content="Authored in PreTeXt">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+<script>window.MathJax = {
+  tex: {
+    inlineMath: [['\\(','\\)']],
+    tags: "none",
+    useLabelIds: true,
+    tagSide: "right",
+    tagIndent: ".8em",
+    packages: {'[+]': ['base', 'extpfeil', 'ams', 'amscd', 'newcommand', 'knowl', 'sfrac']}
+  },
+  options: {
+    ignoreHtmlClass: "tex2jax_ignore",
+    processHtmlClass: "has_am",
+  },
+  chtml: {
+    scale: 0.88,
+    mtextInheritFont: true
+  },
+  loader: {
+    load: ['input/asciimath', '[tex]/extpfeil', '[tex]/amscd', '[tex]/newcommand', '[pretext]/mathjaxknowl3.js'],
+    paths: {pretext: "https://pretextbook.org/js/lib"},
+  },
+/* support for the sfrac command in MathJax (Beveled fraction) */
+  startup: {
+    ready() {
+      //
+      // Creating a simple "sfrac" package on-the-fly
+      //
+      const Configuration = MathJax._.input.tex.Configuration.Configuration;
+      const CommandMap = MathJax._.input.tex.SymbolMap.CommandMap;
+      
+      new CommandMap('sfrac', {
+        sfrac: 'SFrac'
+        }, {
+        SFrac(parser, name) {
+        const num = parser.ParseArg(name);
+        const den = parser.ParseArg(name);
+        const frac = parser.create('node', 'mfrac', [num, den], {bevelled: true});
+        parser.Push(frac);
+        }
+      });
+      //
+      // Create the package for the overridden macros
+      //
+      Configuration.create('sfrac', {
+        handler: {macro: ['sfrac']}
+      });
+      
+    MathJax.startup.defaultReady();
+    }
+  },
+};
+</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext_add_on.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script xmlns:svg="http://www.w3.org/2000/svg">sagecellEvalName='Evaluate (Sage)';
+</script><link xmlns:svg="http://www.w3.org/2000/svg" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://fonts.googleapis.com/css?family=Inconsolata:400,700&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/pretext.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/pretext_add_on.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/banner_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/toc_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/knowls_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/style_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/colors_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/setcolors.css" rel="stylesheet" type="text/css">
+<!-- 2019-10-12: Temporary - CSS file for experiments with styling --><link xmlns:svg="http://www.w3.org/2000/svg" href="developer.css" rel="stylesheet" type="text/css">
+</head>
+<body id="PCC-ORCCA" class="mathbook-book has-toc has-sidebar-left">
+<a class="assistive" href="#content">Skip to main content</a><div xmlns:svg="http://www.w3.org/2000/svg" id="latex-macros" class="hidden-content" style="display:none">\(\require{cancel}\newcommand{\abs}[1]{\left\lvert#1\right\rvert}
+\newcommand{\point}[2]{\left(#1,#2\right)}
+\newcommand{\highlight}[1]{\definecolor{sapphire}{RGB}{59,90,125} {\color{sapphire}{{#1}}}}
+\newcommand{\firsthighlight}[1]{\definecolor{sapphire}{RGB}{59,90,125} {\color{sapphire}{{#1}}}}
+\newcommand{\secondhighlight}[1]{\definecolor{emerald}{RGB}{20,97,75} {\color{emerald}{{#1}}}}
+\newcommand{\unhighlight}[1]{{\color{black}{{#1}}}}
+\newcommand{\lowlight}[1]{{\color{lightgray}{#1}}}
+\newcommand{\attention}[1]{\mathord{\overset{\downarrow}{#1}}}
+\newcommand{\nextoperation}[1]{\mathord{\boxed{#1}}}
+\newcommand{\substitute}[1]{{\color{blue}{{#1}}}}
+\newcommand{\pinover}[2]{\overset{\overset{\mathrm{\ #2\ }}{|}}{\strut #1 \strut}}
+\newcommand{\addright}[1]{{\color{blue}{{{}+#1}}}}
+\newcommand{\addleft}[1]{{\color{blue}{{#1+{}}}}}
+\newcommand{\subtractright}[1]{{\color{blue}{{{}-#1}}}}
+\newcommand{\multiplyright}[2][\cdot]{{\color{blue}{{{}#1#2}}}}
+\newcommand{\multiplyleft}[2][\cdot]{{\color{blue}{{#2#1{}}}}}
+\newcommand{\divideunder}[2]{\frac{#1}{{\color{blue}{{#2}}}}}
+\newcommand{\divideright}[1]{{\color{blue}{{{}\div#1}}}}
+\newcommand{\negate}[1]{{\color{blue}{{-}}}\left(#1\right)}
+\newcommand{\cancelhighlight}[1]{\definecolor{sapphire}{RGB}{59,90,125}{\color{sapphire}{{\cancel{#1}}}}}
+\newcommand{\secondcancelhighlight}[1]{\definecolor{emerald}{RGB}{20,97,75}{\color{emerald}{{\bcancel{#1}}}}}
+\newcommand{\thirdcancelhighlight}[1]{\definecolor{amethyst}{RGB}{112,72,91}{\color{amethyst}{{\xcancel{#1}}}}}
+\newcommand{\confirm}[1]{\stackrel{\checkmark}{#1}}
+\newcommand{\reject}[1]{\stackrel{\text{no}}{#1}}
+\newcommand{\wonder}[1]{\stackrel{\text{?}}{#1}}
+\newcommand{\apple}{\text{🍎}}
+\newcommand{\banana}{\text{🍌}}
+\newcommand{\pear}{\text{🍐}}
+\newcommand{\cat}{\text{🐱}}
+\newcommand{\dog}{\text{🐶}}
+\newcommand{\lt}{&lt;}
+\newcommand{\gt}{&gt;}
+\newcommand{\amp}{&amp;}
+\)</div>
+<header id="masthead" class="smallbuttons"><div class="banner"><div class="container">
+<a id="logo-link" href="http://www.pcc.edu/ORCCA" target="_blank"><img src="images/ORCCAbrandlogo.png" alt="Logo image"></a><div class="title-container">
+<h1 class="heading"><a href="orcca.html"><span class="title">RVCC Elementary Algebra</span></a></h1>
+<p class="byline">Department of Mathematics and Computer Science</p>
+</div>
+</div></div>
+<nav xmlns:svg="http://www.w3.org/2000/svg" id="primary-navbar" class="navbar"><div class="container">
+<div class="navbar-top-buttons">
+<button class="sidebar-left-toggle-button button active" aria-label="Show or hide table of contents sidebar">Contents</button><div class="tree-nav toolbar toolbar-divisor-3">
+<a class="index-button toolbar-item button" href="index-1.html" title="Index">Index</a><span class="threebuttons"><a id="previousbutton" class="previous-button toolbar-item button" href="chapter-introduction-to-algebra.html" title="Previous">Prev</a><a id="upbutton" class="up-button button toolbar-item" href="chapter-introduction-to-algebra.html" title="Up">Up</a><a id="nextbutton" class="next-button button toolbar-item" href="section-properties-of-real-numbers.html" title="Next">Next</a></span>
+</div>
+</div>
+<div class="navbar-bottom-buttons toolbar toolbar-divisor-4">
+<button class="sidebar-left-toggle-button button toolbar-item active">Contents</button><a class="previous-button toolbar-item button" href="chapter-introduction-to-algebra.html" title="Previous">Prev</a><a class="up-button button toolbar-item" href="chapter-introduction-to-algebra.html" title="Up">Up</a><a class="next-button button toolbar-item" href="section-properties-of-real-numbers.html" title="Next">Next</a>
+</div>
+</div></nav></header><div class="page">
+<div xmlns:svg="http://www.w3.org/2000/svg" id="sidebar-left" class="sidebar" role="navigation"><div class="sidebar-content">
+<nav id="toc"><ul>
+<li class="link frontmatter">
+<a href="frontmatter.html" data-scroll="JVg"><span class="title">Front Matter</span></a><ul><li><a href="colophon-1.html" data-scroll="colophon-1">Colophon</a></li></ul>
+</li>
+<li class="link part"><a href="part-all-of-the-chapters.html" data-scroll="part-all-of-the-chapters"><span class="codenumber">I</span> <span class="title"></span></a></li>
+<li class="link">
+<a href="chapter-introduction-to-algebra.html" data-scroll="dNX"><span class="codenumber">1</span> <span class="title">Introduction to Algebra</span></a><ul>
+<li><a href="section-real-numbers-and-the-number-line.html" data-scroll="ipv" class="active">Real Numbers and the Number Line</a></li>
+<li><a href="section-properties-of-real-numbers.html" data-scroll="tNy">Properties of Real Numbers</a></li>
+<li><a href="section-simplifying-and-writing-algebraic-expressions.html" data-scroll="xRO">Simplifying and Writing Algebraic Expressions</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="chapter-linear-equations-and-inequalities-modified.html" data-scroll="sWV"><span class="codenumber">2</span> <span class="title">Linear Equations and Inequalities</span></a><ul>
+<li><a href="section-introduction-to-equations.html" data-scroll="fwy">Introduction to Equations</a></li>
+<li><a href="section-linear-equations.html" data-scroll="xVO">Linear Equations</a></li>
+<li><a href="section-introduction-to-problem-solving.html" data-scroll="Wul">Introduction to Problem Solving</a></li>
+<li><a href="section-formulas.html" data-scroll="Nnq">Formulas</a></li>
+<li><a href="section-linear-inequalities.html" data-scroll="Nuc">Linear Inequalities</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="chapter-graphing-equations.html" data-scroll="gID"><span class="codenumber">3</span> <span class="title">Graphing Lines</span></a><ul>
+<li><a href="section-introduction-to-graphing.html" data-scroll="YTJ">Introduction to Graphing</a></li>
+<li><a href="section-equations-in-two-variables.html" data-scroll="QXY">Equations in Two Variables</a></li>
+<li><a href="section-intercepts-horizontal-and-vertical-lines.html" data-scroll="ByF">Intercepts: Horizontal and Vertical Lines</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="chapter-systems-of-linear-equations-in-two-variables.html" data-scroll="xGO"><span class="codenumber">4</span> <span class="title">Systems of Linear Equations</span></a><ul>
+<li><a href="section-solving-systems-of-linear-equations-graphically-and-numerically.html" data-scroll="njo">Solving Systems of Linear Equations Graphically and Numerically</a></li>
+<li><a href="section-solving-systems-of-linear-equations-by-substitution.html" data-scroll="zdh">Solving Systems of Linear Equations by Substitution</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="chapter-polynomials-and-exponents-modified.html" data-scroll="onc"><span class="codenumber">5</span> <span class="title">Exponents and Polynomials</span></a><ul>
+<li><a href="section-rules-for-exponents.html" data-scroll="KHJ">Rules for Exponents</a></li>
+<li><a href="section-adding-and-subtracting-polynomials.html" data-scroll="VvN">Addition and Subtraction of Polynomials</a></li>
+<li><a href="section-multiplication-of-polynomials.html" data-scroll="IcY">Multiplication of Polynomials</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="chapter-radical-expressions-and-equations.html" data-scroll="chapter-radical-expressions-and-equations"><span class="codenumber">6</span> <span class="title">Radical Expressions and Equations</span></a><ul>
+<li><a href="section-introduction-to-factoring.html" data-scroll="duD">Introduction to Factoring</a></li>
+<li><a href="section-factoring-trinomials.html" data-scroll="Mrf">Factoring Trinomials</a></li>
+<li><a href="section-solving-equations-by-factoring.html" data-scroll="DXi">Solving Equations by Factoring 1 (Quadratics)</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="chapter-rational-expressions.html" data-scroll="RzF"><span class="codenumber">7</span> <span class="title">Rational Expressions</span></a><ul>
+<li><a href="section-introduction-to-rational-expressions.html" data-scroll="Moo">Introduction to Rational Expressions</a></li>
+<li><a href="section-multiplication-and-division-of-rational-expressions.html" data-scroll="Vps">Multiplication and Division of Rational Expressions</a></li>
+<li><a href="section-addition-and-subtraction-with-like-denominators.html" data-scroll="KBw">Addition and Subtraction of Rational Expressions with Like Denominators</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="chapter-radical-expressions-and-functions.html" data-scroll="chapter-radical-expressions-and-functions"><span class="codenumber">8</span> <span class="title">Quantities in the Physical World</span></a><ul><li><a href="section-radical-expressions-and-functions.html" data-scroll="GAK">Radical Expressions and Functions</a></li></ul>
+</li>
+<li class="link backmatter"><a href="backmatter.html" data-scroll="jDj"><span class="title">Appendices</span></a></li>
+<li class="link">
+<a href="appendix-basic-math-review.html" data-scroll="appendix-basic-math-review"><span class="codenumber">A</span> <span class="title">Basic Math Review</span></a><ul>
+<li><a href="section-arithmetic-with-negative-numbers.html" data-scroll="qBB">Arithmetic with Negative Numbers</a></li>
+<li><a href="section-fractions-and-fraction-arithmetic.html" data-scroll="VAa">Fractions and Fraction Arithmetic</a></li>
+<li><a href="section-absolute-value-and-square-root.html" data-scroll="GAK">Absolute Value and Square Root</a></li>
+<li><a href="section-percentages.html" data-scroll="Chi">Percentages</a></li>
+<li><a href="section-order-of-operations.html" data-scroll="aog">Order of Operations</a></li>
+<li><a href="section-set-notation-and-types-of-numbers.html" data-scroll="Fdo">Set Notation and Types of Numbers</a></li>
+</ul>
+</li>
+<li class="link"><a href="appendix-unit-conversions.html" data-scroll="appendix-unit-conversions"><span class="codenumber">B</span> <span class="title">Unit Conversions</span></a></li>
+<li class="link"><a href="index-1.html" data-scroll="index-1"><span class="title">Index</span></a></li>
+</ul></nav><div class="extras"><nav><a class="mathbook-link" href="https://pretextbook.org">Authored in PreTeXt</a><a href="https://www.mathjax.org"><img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" alt="Powered by MathJax"></a></nav></div>
+</div></div>
+<main class="main"><div id="content" class="pretext-content"><section xmlns:svg="http://www.w3.org/2000/svg" class="section" id="ipv"><h2 class="heading hide-type">
+<span class="type">Section</span> <span class="codenumber">1.1</span> <span class="title">Real Numbers and the Number Line</span>
+</h2>
+<section class="introduction" id="Kbg"><p id="VMV">This section introduces the concepts of algebraic <em class="emphasis">equations</em> and <em class="emphasis">inequalities</em>, and what it means for a number to be a <em class="emphasis">solution</em> to an equation or inequality.</p></section><section class="subsection" id="WIK"><h3 class="heading hide-type">
+<span class="type">Subsection</span> <span class="codenumber">1.1.1</span> <span class="title">Signed Numbers</span>
+</h3>
+<p id="fOo">Is it valid to subtract a large number from a smaller one? It may be hard to imagine what it would mean physically to subtract \(8\) cars from your garage if you only have \(1\) car in there in the first place. Nevertheless, mathematics has found a way to give meaning to expressions like \(1-8\) using <dfn class="terminology">signed numbers</dfn>.</p>
+<p id="LVx">In daily life, the signed numbers we might see most often are temperatures. Most people on Earth use the Celsius scale; if you're not familiar with the Celsius temperature scale, think about these examples:</p>
+<figure class="figure figure-like" id="YjP"><div class="image-box" style="width: 80%; margin-left: 10%; margin-right: 10%;">
+<img src="images/image-1.svg" role="img" class="contained" alt="a number line, with values in degrees Celsius; marks average temperature at North Pole in winter at -40; marks cold winter night at -10; marks water freezes at 0; marks cool autumn day at 13; marks human body temperature at 37"><div class="image-archive">
+<a href="images/image-1.eps">eps</a><a href="images/image-1.pdf">pdf</a><a href="images/image-1.png">png</a><a href="images/image-1.svg">svg</a><a href="images/image-1.tex">tex</a>
+</div>
+</div>
+<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">1.1.1<span class="period">.</span></span><span class="space"> </span>Number line with interesting Celsius temperatures</figcaption></figure><p id="scG"><a class="xref" data-knowl="./knowl/figure-celsius-temperatures.html" title="Figure 1.1.1">Figure 1.1.1</a> uses a <dfn class="terminology">number line</dfn>  to illustrate these positive and negative numbers.  A number line is a useful device for visualizing how numbers relate to each other and combine with each other. Values to the right of \(0\) are called <dfn class="terminology">positive</dfn> numbers and values to the left of \(0\) are called <dfn class="terminology">negative numbers</dfn>. </p>
+<article class="warning remark-like" id="vzP"><h6 class="heading">
+<span class="type">Warning</span><span class="space"> </span><span class="codenumber">1.1.2</span><span class="period">.</span><span class="space"> </span><span class="title">Subtraction Sign versus Negative Sign.</span>
+</h6>
+<p id="gTH">Unfortunately, the symbol we use for subtraction looks just like the symbol we use for marking a negative number. It will help to identify when a “minus” sign means “subtract” or means “negative.” The key is to see if there is a number to its left, not counting anything farther left than an open parenthesis. Here are some examples.</p>
+<ul class="disc">
+<li id="Onn"><p id="KXi">\(-13\) has one negative sign and no subtraction sign.</p></li>
+<li id="uuw"><p id="rer">\(20-13\) has no negative signs and one subtraction sign.</p></li>
+<li id="aBF"><p id="XlA">\(-20-13\) has a negative sign and then a subtraction sign.</p></li>
+<li id="GIO"><p id="DsJ">\((-20)(-13)\) has two negative signs and no subtraction sign.</p></li>
+</ul></article><article class="exercise exercise-like" id="xaH"><a data-knowl="" class="id-ref exercise-knowl original" data-refid="hk-xaH"><h6 class="heading">
+<span class="type">Checkpoint</span><span class="space"> </span><span class="codenumber">1.1.3</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-xaH"><article class="exercise exercise-like"><p id="p-11">The WeBWorK problem with ID “webwork-1” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article></div></section><section class="subsection" id="RrG"><h3 class="heading hide-type">
+<span class="type">Subsection</span> <span class="codenumber">1.1.2</span> <span class="title">Different Number Sets</span>
+</h3>
+<p id="JkE">In the introduction, we mentioned how different sets of numbers are appropriate for different situations. Here are the basic sets of numbers that are used in basic algebra.</p>
+<dl id="prN" class="description-list">
+<dt id="qiL">Natural Numbers</dt>
+<dd>
+<p id="LQP">When we count, we begin: \(1, 2, 3, \dots\) and continue on in that pattern. These numbers are known as <dfn class="terminology">natural numbers</dfn>.</p>
+<p id="rXY">\(\mathbb{N}=\{1,2,3,\dots \}\)</p>
+</dd>
+<dt id="WpU">Whole Numbers</dt>
+<dd>
+<p id="Yfh">If we include zero, then we have the set of <dfn class="terminology">whole numbers</dfn>.</p>
+<p id="Emq">\(\{0,1,2,3,\dots \}\) has no standard symbol, but some options are \(\mathbb{N}_0\text{,}\) \(\mathbb{N}\cup\{0\}\text{,}\) and \(\mathbb{Z}_{\geq0}\text{.}\)</p>
+</dd>
+<dt id="Cxd">Integers</dt>
+<dd>
+<p id="ktz">If we include the negatives of whole numbers, then we have the set of <dfn class="terminology">integers</dfn>.</p>
+<p id="QAI">\(\mathbb{Z}=\{\dots,-3,-2,-1,0,1,2,3,\dots \}\text{.}\)</p>
+<p id="wHR">A \(\mathbb{Z}\) is used because one word in German for “numbers” is “Zahlen.”</p>
+</dd>
+<dt id="iEm">Rational Numbers</dt>
+<dd>
+<p id="cPa">A <dfn class="terminology">rational number</dfn> is any number that <em class="emphasis">can</em> be written as a fraction of integers, where the denominator is nonzero. Alternatively, a <dfn class="terminology">rational number</dfn> is any number that <em class="emphasis">can</em> be written with a decimal that terminates or that repeats.</p>
+<p id="IWj">\(\mathbb{Q}=\left\{0,1,-1,2,\frac{1}{2},-\frac{1}{2},-2,3,\frac{1}{3},-\frac{1}{3},-3,\frac{3}{2},\frac{2}{3}\ldots\right\}\)</p>
+<p id="pds">\(\mathbb{Q}=\left\{0,1,-1,2,0.5,-0.5,-2,3,0.\overline{3},-0.\overline{3},-3,1.5,0.\overline{6}\ldots\right\}\)</p>
+<p id="VkB">A \(\mathbb{Q}\) is used because fractions are <em class="emphasis">q</em>uotients of integers.</p>
+</dd>
+<dt id="OLv">Irrational Numbers</dt>
+<dd>
+<p id="BrK">Any number that <em class="emphasis">cannot</em> be written as a fraction of integers belongs to the set of <dfn class="terminology">irrational numbers</dfn>. Another way to say this is that any number whose decimal places goes on forever without repeating is an <dfn class="terminology">irrational number</dfn>. Some examples include \(\pi\approx3.1415926\ldots\text{,}\) \(\sqrt{15}\approx3.87298\ldots\text{,}\) \(e\approx2.71828\ldots\)</p>
+<p id="hyT">There is no standard symbol for the set of irrational numbers.</p>
+</dd>
+<dt id="uSE">Real Numbers</dt>
+<dd>
+<p id="NGc">Any number that can be marked somewhere on a number line is a <dfn class="terminology">real number</dfn>. Real numbers might be the only numbers you are familiar with. For a number to <em class="emphasis">not</em> be real, you have to start considering things called <em class="emphasis">complex numbers</em>, which are not our concern right now.</p>
+<p id="tNl">The set of real numbers can be denoted with \(\mathbb{R}\) for short.</p>
+</dd>
+</dl>
+<figure class="figure figure-like" id="VyW"><div class="image-box" style="width: 62%; margin-left: 19%; margin-right: 19%;">
+<img src="images/types-of-numbers.svg" role="img" class="contained" alt="a disc represents all real numbers; the disc is separated into two areas: one for irrational numbers with examples like pi, e, sqrt(15), and 1.010010001..., and the other for rational numbers with examples like 3/17, 1.25, and 4.3 repeating; within the rational area, there is a disc representing integers, with -42 as an example; within the integer area there is a region representing whole numbers with 0 as an example; within the whole numbers area there is a region representing natural numbers, with 23 as an example"><div class="image-archive">
+<a href="images/types-of-numbers.pdf">pdf</a><a href="images/types-of-numbers.png">png</a><a href="images/types-of-numbers.svg">svg</a><a href="images/types-of-numbers.tex">tex</a>
+</div>
+</div>
+<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">1.1.4<span class="period">.</span></span><span class="space"> </span>Types of Numbers</figcaption></figure><article class="warning remark-like" id="JrI"><h6 class="heading">
+<span class="type">Warning</span><span class="space"> </span><span class="codenumber">1.1.5</span><span class="period">.</span><span class="space"> </span><span class="title">Rational Numbers in Other Forms.</span>
+</h6>
+<p id="DQR">Any number that <em class="emphasis">can</em> be written as a ratio of integers is rational, even if it's not written that way at first. For example, these numbers might not look rational to you at first glance: \(-4\text{,}\) \(\sqrt{9}\text{,}\) \(0\pi\text{,}\) and \(\sqrt[3]{\sqrt{5}+2}-\sqrt[3]{\sqrt{5}-2}\text{.}\) But they are all rational, because they can respectively be written as \(\frac{-4}{1}\text{,}\) \(\frac{3}{1}\text{,}\) \(\frac{0}{1}\text{,}\) and \(\frac{1}{1}\text{.}\)</p></article><article class="example example-like" id="aLs"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-aLs"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">1.1.6</span><span class="period">.</span><span class="space"> </span><span class="title">Determine If Numbers Are This Type or That Type.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-aLs"><article class="example example-like"><p id="jYa">Determine which numbers from the set \(\left\{-102, -7.25, 0, \frac{\pi}{4}, 2, \frac{10}{3}, \sqrt{19}, \sqrt{25}, 10.\overline{7} \right\}\) are natural numbers, whole numbers, integers, rational numbers, irrational numbers, and real numbers.</p>
+<div class="solutions">
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-EHP" id="EHP"><span class="type">Explanation</span></a><div class="hidden-content tex2jax_ignore" id="hk-EHP"><div class="solution solution-like">
+<p id="aEo">All of these numbers are real numbers, because all of these numbers can be positioned on the real number line.</p>
+<p id="GLx">Each real number is either rational or irrational, and not both. \(-102\text{,}\) \(-7.25\text{,}\) \(0\text{,}\) and \(2\) are rational because we can see directly that their decimal expressions terminate. \(10.\overline{7}\) is also rational, because its decimal expression repeats. \(\frac{10}{3}\) is rational because it is a ratio of integers. And last but not least, \(\sqrt{25}\) is rational, because that's the same thing as \(5\text{.}\)</p>
+<p id="mSG">This leaves only \(\frac{\pi}{4}\) and \(\sqrt{19}\) as irrational numbers. Their decimal expressions go on forever without entering a repetitive cycle.</p>
+<p id="SZP">Only \(-102\text{,}\) \(0\text{,}\) \(2\text{,}\) and \(\sqrt{25}\) (which is really \(5\)) are integers.</p>
+<p id="zgY">Of these, only \(0\text{,}\) \(2\text{,}\) and \(\sqrt{25}\) are whole numbers, because whole numbers excludes the negative integers.</p>
+<p id="foh">Of these, only \(2\) and \(\sqrt{25}\) are natural numbers, because the natural numbers exclude \(0\text{.}\)</p>
+</div></div>
+</div></article></div>
+<article class="exercise exercise-like" id="mZK"><a data-knowl="" class="id-ref exercise-knowl original" data-refid="hk-mZK"><h6 class="heading">
+<span class="type">Checkpoint</span><span class="space"> </span><span class="codenumber">1.1.7</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-mZK"><article class="exercise exercise-like"><p id="p-37">The WeBWorK problem with ID “webwork-2” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article></div>
+<article class="exercise exercise-like" id="TgT"><a data-knowl="" class="id-ref exercise-knowl original" data-refid="hk-TgT"><h6 class="heading">
+<span class="type">Checkpoint</span><span class="space"> </span><span class="codenumber">1.1.8</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-TgT"><article class="exercise exercise-like"><p id="p-39">The WeBWorK problem with ID “webwork-3” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article></div></section><section class="subsection" id="yWl"><h3 class="heading hide-type">
+<span class="type">Subsection</span> <span class="codenumber">1.1.3</span> <span class="title">Calculating Square Roots with a Calculator</span>
+</h3>
+<p id="kqd">Most square roots are actually numbers with decimal places that go on forever. Take \(\sqrt{5}\) as an example:</p>
+<div class="displaymath">
+\begin{align*}
+\sqrt{4}\amp=2\amp\sqrt{5}\amp=\mathord{?}\amp\sqrt{9}\amp=3
+\end{align*}
+</div>
+<p id="Qxm">Since \(5\) is between \(4\) and \(9\text{,}\) then \(\sqrt{5}\) must be somewhere between \(2\) and \(3\text{.}\) There are no whole numbers between \(2\) and \(3\text{,}\) so \(\sqrt{5}\) must be some number with decimal places. If the decimal places eventually stopped, then squaring it would give you another number with decimal places that stop further out. But squaring it gives you \(5\) with no decimal places. So the only possibility is that \(\sqrt{5}\) is a decimal between \(2\) and \(3\) that goes on forever. With a calculator, we can see:</p>
+<div class="displaymath">
+\begin{equation*}
+\sqrt{5}\approx2.236
+\end{equation*}
+</div>
+<p class="continuation">Actually the decimal will not terminate, and that is why we used the \(\approx\) symbol instead of an equals sign. To get \(2.236\) we rounded down slightly from the true value of \(\sqrt{5}\text{.}\) With a calculator, we can check that \(2.236^2=4.999696\text{,}\) a little shy of \(5\text{.}\)</p></section><section class="subsection" id="fdu"><h3 class="heading hide-type">
+<span class="type">Subsection</span> <span class="codenumber">1.1.4</span> <span class="title">Square Roots of Fractions</span>
+</h3>
+<p id="wEv">We can calculate the square root of some fractions by hand, such as \(\sqrt{\frac{1}{4}}\text{.}\) The idea is the same: can you think of a number that you would square to get \(\frac{1}{4}\text{?}\) Being familiar with fraction multiplication, we know that \(\frac{1}{2}\cdot\frac{1}{2}=\frac{1}{4}\) and so \(\sqrt{\frac{1}{4}}=\frac{1}{2}\text{.}\)</p>
+<article class="exercise exercise-like" id="ALy"><a data-knowl="" class="id-ref exercise-knowl original" data-refid="hk-ALy"><h6 class="heading">
+<span class="type">Checkpoint</span><span class="space"> </span><span class="codenumber">1.1.9</span><span class="period">.</span><span class="space"> </span><span class="title">Square Roots of Fractions.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-ALy"><article class="exercise exercise-like"><p id="p-44">The WeBWorK problem with ID “webwork-4” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article></div></section><section class="subsection" id="RrG"><h3 class="heading hide-type">
+<span class="type">Subsection</span> <span class="codenumber">1.1.5</span> <span class="title">Different Number Sets</span>
+</h3>
+<p id="JkE">In the introduction, we mentioned how different sets of numbers are appropriate for different situations. Here are the basic sets of numbers that are used in basic algebra.</p>
+<dl id="prN" class="description-list">
+<dt id="qiL">Natural Numbers</dt>
+<dd>
+<p id="LQP">When we count, we begin: \(1, 2, 3, \dots\) and continue on in that pattern. These numbers are known as <dfn class="terminology">natural numbers</dfn>.</p>
+<p id="rXY">\(\mathbb{N}=\{1,2,3,\dots \}\)</p>
+</dd>
+<dt id="WpU">Whole Numbers</dt>
+<dd>
+<p id="Yfh">If we include zero, then we have the set of <dfn class="terminology">whole numbers</dfn>.</p>
+<p id="Emq">\(\{0,1,2,3,\dots \}\) has no standard symbol, but some options are \(\mathbb{N}_0\text{,}\) \(\mathbb{N}\cup\{0\}\text{,}\) and \(\mathbb{Z}_{\geq0}\text{.}\)</p>
+</dd>
+<dt id="Cxd">Integers</dt>
+<dd>
+<p id="ktz">If we include the negatives of whole numbers, then we have the set of <dfn class="terminology">integers</dfn>.</p>
+<p id="QAI">\(\mathbb{Z}=\{\dots,-3,-2,-1,0,1,2,3,\dots \}\text{.}\)</p>
+<p id="wHR">A \(\mathbb{Z}\) is used because one word in German for “numbers” is “Zahlen.”</p>
+</dd>
+<dt id="iEm">Rational Numbers</dt>
+<dd>
+<p id="cPa">A <dfn class="terminology">rational number</dfn> is any number that <em class="emphasis">can</em> be written as a fraction of integers, where the denominator is nonzero. Alternatively, a <dfn class="terminology">rational number</dfn> is any number that <em class="emphasis">can</em> be written with a decimal that terminates or that repeats.</p>
+<p id="IWj">\(\mathbb{Q}=\left\{0,1,-1,2,\frac{1}{2},-\frac{1}{2},-2,3,\frac{1}{3},-\frac{1}{3},-3,\frac{3}{2},\frac{2}{3}\ldots\right\}\)</p>
+<p id="pds">\(\mathbb{Q}=\left\{0,1,-1,2,0.5,-0.5,-2,3,0.\overline{3},-0.\overline{3},-3,1.5,0.\overline{6}\ldots\right\}\)</p>
+<p id="VkB">A \(\mathbb{Q}\) is used because fractions are <em class="emphasis">q</em>uotients of integers.</p>
+</dd>
+<dt id="OLv">Irrational Numbers</dt>
+<dd>
+<p id="BrK">Any number that <em class="emphasis">cannot</em> be written as a fraction of integers belongs to the set of <dfn class="terminology">irrational numbers</dfn>. Another way to say this is that any number whose decimal places goes on forever without repeating is an <dfn class="terminology">irrational number</dfn>. Some examples include \(\pi\approx3.1415926\ldots\text{,}\) \(\sqrt{15}\approx3.87298\ldots\text{,}\) \(e\approx2.71828\ldots\)</p>
+<p id="hyT">There is no standard symbol for the set of irrational numbers.</p>
+</dd>
+<dt id="uSE">Real Numbers</dt>
+<dd>
+<p id="NGc">Any number that can be marked somewhere on a number line is a <dfn class="terminology">real number</dfn>. Real numbers might be the only numbers you are familiar with. For a number to <em class="emphasis">not</em> be real, you have to start considering things called <em class="emphasis">complex numbers</em>, which are not our concern right now.</p>
+<p id="tNl">The set of real numbers can be denoted with \(\mathbb{R}\) for short.</p>
+</dd>
+</dl>
+<figure class="figure figure-like" id="VyW"><div class="image-box" style="width: 62%; margin-left: 19%; margin-right: 19%;">
+<img src="images/types-of-numbers.svg" role="img" class="contained" alt="a disc represents all real numbers; the disc is separated into two areas: one for irrational numbers with examples like pi, e, sqrt(15), and 1.010010001..., and the other for rational numbers with examples like 3/17, 1.25, and 4.3 repeating; within the rational area, there is a disc representing integers, with -42 as an example; within the integer area there is a region representing whole numbers with 0 as an example; within the whole numbers area there is a region representing natural numbers, with 23 as an example"><div class="image-archive">
+<a href="images/types-of-numbers.pdf">pdf</a><a href="images/types-of-numbers.png">png</a><a href="images/types-of-numbers.svg">svg</a><a href="images/types-of-numbers.tex">tex</a>
+</div>
+</div>
+<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">1.1.10<span class="period">.</span></span><span class="space"> </span>Types of Numbers</figcaption></figure><article class="warning remark-like" id="JrI"><h6 class="heading">
+<span class="type">Warning</span><span class="space"> </span><span class="codenumber">1.1.11</span><span class="period">.</span><span class="space"> </span><span class="title">Rational Numbers in Other Forms.</span>
+</h6>
+<p id="DQR">Any number that <em class="emphasis">can</em> be written as a ratio of integers is rational, even if it's not written that way at first. For example, these numbers might not look rational to you at first glance: \(-4\text{,}\) \(\sqrt{9}\text{,}\) \(0\pi\text{,}\) and \(\sqrt[3]{\sqrt{5}+2}-\sqrt[3]{\sqrt{5}-2}\text{.}\) But they are all rational, because they can respectively be written as \(\frac{-4}{1}\text{,}\) \(\frac{3}{1}\text{,}\) \(\frac{0}{1}\text{,}\) and \(\frac{1}{1}\text{.}\)</p></article><article class="example example-like" id="aLs"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-aLs"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">1.1.12</span><span class="period">.</span><span class="space"> </span><span class="title">Determine If Numbers Are This Type or That Type.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-aLs"><article class="example example-like"><p id="jYa">Determine which numbers from the set \(\left\{-102, -7.25, 0, \frac{\pi}{4}, 2, \frac{10}{3}, \sqrt{19}, \sqrt{25}, 10.\overline{7} \right\}\) are natural numbers, whole numbers, integers, rational numbers, irrational numbers, and real numbers.</p>
+<div class="solutions">
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-EHP" id="EHP"><span class="type">Explanation</span></a><div class="hidden-content tex2jax_ignore" id="hk-EHP"><div class="solution solution-like">
+<p id="aEo">All of these numbers are real numbers, because all of these numbers can be positioned on the real number line.</p>
+<p id="GLx">Each real number is either rational or irrational, and not both. \(-102\text{,}\) \(-7.25\text{,}\) \(0\text{,}\) and \(2\) are rational because we can see directly that their decimal expressions terminate. \(10.\overline{7}\) is also rational, because its decimal expression repeats. \(\frac{10}{3}\) is rational because it is a ratio of integers. And last but not least, \(\sqrt{25}\) is rational, because that's the same thing as \(5\text{.}\)</p>
+<p id="mSG">This leaves only \(\frac{\pi}{4}\) and \(\sqrt{19}\) as irrational numbers. Their decimal expressions go on forever without entering a repetitive cycle.</p>
+<p id="SZP">Only \(-102\text{,}\) \(0\text{,}\) \(2\text{,}\) and \(\sqrt{25}\) (which is really \(5\)) are integers.</p>
+<p id="zgY">Of these, only \(0\text{,}\) \(2\text{,}\) and \(\sqrt{25}\) are whole numbers, because whole numbers excludes the negative integers.</p>
+<p id="foh">Of these, only \(2\) and \(\sqrt{25}\) are natural numbers, because the natural numbers exclude \(0\text{.}\)</p>
+</div></div>
+</div></article></div>
+<article class="exercise exercise-like" id="mZK"><a data-knowl="" class="id-ref exercise-knowl original" data-refid="hk-mZK"><h6 class="heading">
+<span class="type">Checkpoint</span><span class="space"> </span><span class="codenumber">1.1.13</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-mZK"><article class="exercise exercise-like"><p id="p-70">The WeBWorK problem with ID “webwork-5” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article></div>
+<article class="exercise exercise-like" id="TgT"><a data-knowl="" class="id-ref exercise-knowl original" data-refid="hk-TgT"><h6 class="heading">
+<span class="type">Checkpoint</span><span class="space"> </span><span class="codenumber">1.1.14</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-TgT"><article class="exercise exercise-like"><p id="p-72">The WeBWorK problem with ID “webwork-6” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article></div></section><section class="subsection" id="pSu"><h3 class="heading hide-type">
+<span class="type">Subsection</span> <span class="codenumber">1.1.6</span> <span class="title">Comparison Symbols</span>
+</h3>
+<p id="jfg">In everyday language you can say something like “\(8\) is larger than \(3\text{.}\)” In mathematical writing, it's not convenient to write that out in English. Instead the symbol “\(\gt\)” has been adopted, and it's used like this:</p>
+<div class="displaymath">
+\begin{equation*}
+8\gt3
+\end{equation*}
+</div>
+<p class="continuation">and read out loud as “\(8\) is greater than \(3\text{.}\)” The symbol “\(\gt\)” is called the <dfn class="terminology">greater-than symbol.</dfn> </p>
+<article class="exercise exercise-like" id="DVZ"><a data-knowl="" class="id-ref exercise-knowl original" data-refid="hk-DVZ"><h6 class="heading">
+<span class="type">Checkpoint</span><span class="space"> </span><span class="codenumber">1.1.15</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-DVZ"><article class="exercise exercise-like"><p id="p-74">The WeBWorK problem with ID “webwork-7” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article></div></section></section></div></main>
+</div>
+</body>
+</html>

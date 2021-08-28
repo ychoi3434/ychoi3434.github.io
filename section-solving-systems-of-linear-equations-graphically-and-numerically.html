@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*       on 2021-08-28T19:50:34Z       *-->
+<!--*   A recent stable commit (2020-08-09):   *-->
+<!--* 98f21740783f166a773df4dc83cab5293ab63a4a *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<html lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>ORCCA Solving Systems of Linear Equations Graphically and Numerically</title>
+<meta name="Keywords" content="Authored in PreTeXt">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+<script>window.MathJax = {
+  tex: {
+    inlineMath: [['\\(','\\)']],
+    tags: "none",
+    useLabelIds: true,
+    tagSide: "right",
+    tagIndent: ".8em",
+    packages: {'[+]': ['base', 'extpfeil', 'ams', 'amscd', 'newcommand', 'knowl', 'sfrac']}
+  },
+  options: {
+    ignoreHtmlClass: "tex2jax_ignore",
+    processHtmlClass: "has_am",
+  },
+  chtml: {
+    scale: 0.88,
+    mtextInheritFont: true
+  },
+  loader: {
+    load: ['input/asciimath', '[tex]/extpfeil', '[tex]/amscd', '[tex]/newcommand', '[pretext]/mathjaxknowl3.js'],
+    paths: {pretext: "https://pretextbook.org/js/lib"},
+  },
+/* support for the sfrac command in MathJax (Beveled fraction) */
+  startup: {
+    ready() {
+      //
+      // Creating a simple "sfrac" package on-the-fly
+      //
+      const Configuration = MathJax._.input.tex.Configuration.Configuration;
+      const CommandMap = MathJax._.input.tex.SymbolMap.CommandMap;
+      
+      new CommandMap('sfrac', {
+        sfrac: 'SFrac'
+        }, {
+        SFrac(parser, name) {
+        const num = parser.ParseArg(name);
+        const den = parser.ParseArg(name);
+        const frac = parser.create('node', 'mfrac', [num, den], {bevelled: true});
+        parser.Push(frac);
+        }
+      });
+      //
+      // Create the package for the overridden macros
+      //
+      Configuration.create('sfrac', {
+        handler: {macro: ['sfrac']}
+      });
+      
+    MathJax.startup.defaultReady();
+    }
+  },
+};
+</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext_add_on.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script xmlns:svg="http://www.w3.org/2000/svg">sagecellEvalName='Evaluate (Sage)';
+</script><link xmlns:svg="http://www.w3.org/2000/svg" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://fonts.googleapis.com/css?family=Inconsolata:400,700&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/pretext.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/pretext_add_on.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/banner_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/toc_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/knowls_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/style_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/colors_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/setcolors.css" rel="stylesheet" type="text/css">
+<!-- 2019-10-12: Temporary - CSS file for experiments with styling --><link xmlns:svg="http://www.w3.org/2000/svg" href="developer.css" rel="stylesheet" type="text/css">
+</head>
+<body id="PCC-ORCCA" class="mathbook-book has-toc has-sidebar-left">
+<a class="assistive" href="#content">Skip to main content</a><div xmlns:svg="http://www.w3.org/2000/svg" id="latex-macros" class="hidden-content" style="display:none">\(\require{cancel}\newcommand{\abs}[1]{\left\lvert#1\right\rvert}
+\newcommand{\point}[2]{\left(#1,#2\right)}
+\newcommand{\highlight}[1]{\definecolor{sapphire}{RGB}{59,90,125} {\color{sapphire}{{#1}}}}
+\newcommand{\firsthighlight}[1]{\definecolor{sapphire}{RGB}{59,90,125} {\color{sapphire}{{#1}}}}
+\newcommand{\secondhighlight}[1]{\definecolor{emerald}{RGB}{20,97,75} {\color{emerald}{{#1}}}}
+\newcommand{\unhighlight}[1]{{\color{black}{{#1}}}}
+\newcommand{\lowlight}[1]{{\color{lightgray}{#1}}}
+\newcommand{\attention}[1]{\mathord{\overset{\downarrow}{#1}}}
+\newcommand{\nextoperation}[1]{\mathord{\boxed{#1}}}
+\newcommand{\substitute}[1]{{\color{blue}{{#1}}}}
+\newcommand{\pinover}[2]{\overset{\overset{\mathrm{\ #2\ }}{|}}{\strut #1 \strut}}
+\newcommand{\addright}[1]{{\color{blue}{{{}+#1}}}}
+\newcommand{\addleft}[1]{{\color{blue}{{#1+{}}}}}
+\newcommand{\subtractright}[1]{{\color{blue}{{{}-#1}}}}
+\newcommand{\multiplyright}[2][\cdot]{{\color{blue}{{{}#1#2}}}}
+\newcommand{\multiplyleft}[2][\cdot]{{\color{blue}{{#2#1{}}}}}
+\newcommand{\divideunder}[2]{\frac{#1}{{\color{blue}{{#2}}}}}
+\newcommand{\divideright}[1]{{\color{blue}{{{}\div#1}}}}
+\newcommand{\negate}[1]{{\color{blue}{{-}}}\left(#1\right)}
+\newcommand{\cancelhighlight}[1]{\definecolor{sapphire}{RGB}{59,90,125}{\color{sapphire}{{\cancel{#1}}}}}
+\newcommand{\secondcancelhighlight}[1]{\definecolor{emerald}{RGB}{20,97,75}{\color{emerald}{{\bcancel{#1}}}}}
+\newcommand{\thirdcancelhighlight}[1]{\definecolor{amethyst}{RGB}{112,72,91}{\color{amethyst}{{\xcancel{#1}}}}}
+\newcommand{\confirm}[1]{\stackrel{\checkmark}{#1}}
+\newcommand{\reject}[1]{\stackrel{\text{no}}{#1}}
+\newcommand{\wonder}[1]{\stackrel{\text{?}}{#1}}
+\newcommand{\apple}{\text{🍎}}
+\newcommand{\banana}{\text{🍌}}
+\newcommand{\pear}{\text{🍐}}
+\newcommand{\cat}{\text{🐱}}
+\newcommand{\dog}{\text{🐶}}
+\newcommand{\lt}{&lt;}
+\newcommand{\gt}{&gt;}
+\newcommand{\amp}{&amp;}
+\)</div>
+<header id="masthead" class="smallbuttons"><div class="banner"><div class="container">
+<a id="logo-link" href="http://www.pcc.edu/ORCCA" target="_blank"><img src="images/ORCCAbrandlogo.png" alt="Logo image"></a><div class="title-container">
+<h1 class="heading"><a href="orcca.html"><span class="title">RVCC Elementary Algebra</span></a></h1>
+<p class="byline">Department of Mathematics and Computer Science</p>
+</div>
+</div></div>
+<nav xmlns:svg="http://www.w3.org/2000/svg" id="primary-navbar" class="navbar"><div class="container">
+<div class="navbar-top-buttons">
+<button class="sidebar-left-toggle-button button active" aria-label="Show or hide table of contents sidebar">Contents</button><div class="tree-nav toolbar toolbar-divisor-3">
+<a class="index-button toolbar-item button" href="index-1.html" title="Index">Index</a><span class="threebuttons"><a id="previousbutton" class="previous-button toolbar-item button" href="chapter-systems-of-linear-equations-in-two-variables.html" title="Previous">Prev</a><a id="upbutton" class="up-button button toolbar-item" href="chapter-systems-of-linear-equations-in-two-variables.html" title="Up">Up</a><a id="nextbutton" class="next-button button toolbar-item" href="section-solving-systems-of-linear-equations-by-substitution.html" title="Next">Next</a></span>
+</div>
+</div>
+<div class="navbar-bottom-buttons toolbar toolbar-divisor-4">
+<button class="sidebar-left-toggle-button button toolbar-item active">Contents</button><a class="previous-button toolbar-item button" href="chapter-systems-of-linear-equations-in-two-variables.html" title="Previous">Prev</a><a class="up-button button toolbar-item" href="chapter-systems-of-linear-equations-in-two-variables.html" title="Up">Up</a><a class="next-button button toolbar-item" href="section-solving-systems-of-linear-equations-by-substitution.html" title="Next">Next</a>
+</div>
+</div></nav></header><div class="page">
+<div xmlns:svg="http://www.w3.org/2000/svg" id="sidebar-left" class="sidebar" role="navigation"><div class="sidebar-content">
+<nav id="toc"><ul>
+<li class="link frontmatter">
+<a href="frontmatter.html" data-scroll="JVg"><span class="title">Front Matter</span></a><ul><li><a href="colophon-1.html" data-scroll="colophon-1">Colophon</a></li></ul>
+</li>
+<li class="link part"><a href="part-all-of-the-chapters.html" data-scroll="part-all-of-the-chapters"><span class="codenumber">I</span> <span class="title"></span></a></li>
+<li class="link">
+<a href="chapter-introduction-to-algebra.html" data-scroll="dNX"><span class="codenumber">1</span> <span class="title">Introduction to Algebra</span></a><ul>
+<li><a href="section-real-numbers-and-the-number-line.html" data-scroll="ipv">Real Numbers and the Number Line</a></li>
+<li><a href="section-properties-of-real-numbers.html" data-scroll="tNy">Properties of Real Numbers</a></li>
+<li><a href="section-simplifying-and-writing-algebraic-expressions.html" data-scroll="xRO">Simplifying and Writing Algebraic Expressions</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="chapter-linear-equations-and-inequalities-modified.html" data-scroll="sWV"><span class="codenumber">2</span> <span class="title">Linear Equations and Inequalities</span></a><ul>
+<li><a href="section-introduction-to-equations.html" data-scroll="fwy">Introduction to Equations</a></li>
+<li><a href="section-linear-equations.html" data-scroll="xVO">Linear Equations</a></li>
+<li><a href="section-introduction-to-problem-solving.html" data-scroll="Wul">Introduction to Problem Solving</a></li>
+<li><a href="section-formulas.html" data-scroll="Nnq">Formulas</a></li>
+<li><a href="section-linear-inequalities.html" data-scroll="Nuc">Linear Inequalities</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="chapter-graphing-equations.html" data-scroll="gID"><span class="codenumber">3</span> <span class="title">Graphing Lines</span></a><ul>
+<li><a href="section-introduction-to-graphing.html" data-scroll="YTJ">Introduction to Graphing</a></li>
+<li><a href="section-equations-in-two-variables.html" data-scroll="QXY">Equations in Two Variables</a></li>
+<li><a href="section-intercepts-horizontal-and-vertical-lines.html" data-scroll="ByF">Intercepts: Horizontal and Vertical Lines</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="chapter-systems-of-linear-equations-in-two-variables.html" data-scroll="xGO"><span class="codenumber">4</span> <span class="title">Systems of Linear Equations</span></a><ul>
+<li><a href="section-solving-systems-of-linear-equations-graphically-and-numerically.html" data-scroll="njo" class="active">Solving Systems of Linear Equations Graphically and Numerically</a></li>
+<li><a href="section-solving-systems-of-linear-equations-by-substitution.html" data-scroll="zdh">Solving Systems of Linear Equations by Substitution</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="chapter-polynomials-and-exponents-modified.html" data-scroll="onc"><span class="codenumber">5</span> <span class="title">Exponents and Polynomials</span></a><ul>
+<li><a href="section-rules-for-exponents.html" data-scroll="KHJ">Rules for Exponents</a></li>
+<li><a href="section-adding-and-subtracting-polynomials.html" data-scroll="VvN">Addition and Subtraction of Polynomials</a></li>
+<li><a href="section-multiplication-of-polynomials.html" data-scroll="IcY">Multiplication of Polynomials</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="chapter-radical-expressions-and-equations.html" data-scroll="chapter-radical-expressions-and-equations"><span class="codenumber">6</span> <span class="title">Radical Expressions and Equations</span></a><ul>
+<li><a href="section-introduction-to-factoring.html" data-scroll="duD">Introduction to Factoring</a></li>
+<li><a href="section-factoring-trinomials.html" data-scroll="Mrf">Factoring Trinomials</a></li>
+<li><a href="section-solving-equations-by-factoring.html" data-scroll="DXi">Solving Equations by Factoring 1 (Quadratics)</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="chapter-rational-expressions.html" data-scroll="RzF"><span class="codenumber">7</span> <span class="title">Rational Expressions</span></a><ul>
+<li><a href="section-introduction-to-rational-expressions.html" data-scroll="Moo">Introduction to Rational Expressions</a></li>
+<li><a href="section-multiplication-and-division-of-rational-expressions.html" data-scroll="Vps">Multiplication and Division of Rational Expressions</a></li>
+<li><a href="section-addition-and-subtraction-with-like-denominators.html" data-scroll="KBw">Addition and Subtraction of Rational Expressions with Like Denominators</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="chapter-radical-expressions-and-functions.html" data-scroll="chapter-radical-expressions-and-functions"><span class="codenumber">8</span> <span class="title">Quantities in the Physical World</span></a><ul><li><a href="section-radical-expressions-and-functions.html" data-scroll="GAK">Radical Expressions and Functions</a></li></ul>
+</li>
+<li class="link backmatter"><a href="backmatter.html" data-scroll="jDj"><span class="title">Appendices</span></a></li>
+<li class="link">
+<a href="appendix-basic-math-review.html" data-scroll="appendix-basic-math-review"><span class="codenumber">A</span> <span class="title">Basic Math Review</span></a><ul>
+<li><a href="section-arithmetic-with-negative-numbers.html" data-scroll="qBB">Arithmetic with Negative Numbers</a></li>
+<li><a href="section-fractions-and-fraction-arithmetic.html" data-scroll="VAa">Fractions and Fraction Arithmetic</a></li>
+<li><a href="section-absolute-value-and-square-root.html" data-scroll="GAK">Absolute Value and Square Root</a></li>
+<li><a href="section-percentages.html" data-scroll="Chi">Percentages</a></li>
+<li><a href="section-order-of-operations.html" data-scroll="aog">Order of Operations</a></li>
+<li><a href="section-set-notation-and-types-of-numbers.html" data-scroll="Fdo">Set Notation and Types of Numbers</a></li>
+</ul>
+</li>
+<li class="link"><a href="appendix-unit-conversions.html" data-scroll="appendix-unit-conversions"><span class="codenumber">B</span> <span class="title">Unit Conversions</span></a></li>
+<li class="link"><a href="index-1.html" data-scroll="index-1"><span class="title">Index</span></a></li>
+</ul></nav><div class="extras"><nav><a class="mathbook-link" href="https://pretextbook.org">Authored in PreTeXt</a><a href="https://www.mathjax.org"><img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" alt="Powered by MathJax"></a></nav></div>
+</div></div>
+<main class="main"><div id="content" class="pretext-content"><section xmlns:svg="http://www.w3.org/2000/svg" class="section" id="njo"><h2 class="heading hide-type">
+<span class="type">Section</span> <span class="codenumber">4.1</span> <span class="title">Solving Systems of Linear Equations Graphically and Numerically</span>
+</h2>
+<section class="introduction" id="NPG"><p id="jqG">We have learned how to graph a line given its equation. In this section, we will learn what a <em class="emphasis">system</em> of <em class="emphasis">two</em> linear equations is, and how to use graphing to solve such a system.</p></section><section class="subsection" id="Tqx"><h3 class="heading hide-type">
+<span class="type">Subsection</span> <span class="codenumber">4.1.1</span> <span class="title">Solving Systems of Equations by Graphing</span>
+</h3>
+<article class="example example-like" id="wDa"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-wDa"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">4.1.1</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-wDa"><article class="example example-like"><div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;">
+<div class="sbspanel top" style="width:47%;">
+<p id="say">Fabiana and David are running at constant speeds in parallel lanes on a track. David starts out ahead of Fabiana, but Fabiana is running faster. We want to determine when Fabiana will catch up with David. Let's start by looking at the graph of each runner's distance over time, in <a class="xref" data-knowl="./knowl/figure-solving-systems-by-graphing-intro.html" title="Figure 4.1.2">Figure 4.1.2</a>.</p>
+<p id="YhH">Each of the two lines has an equation, as discussed in <code class="code-inline tex2jax_ignore">[cross-reference to target(s) "chapter-graphing-lines" missing or not unique]</code>. The line representing David appears to have \(y\)-intercept \((0,4)\) and slope \(\frac{4}{3}\text{,}\) so its equation is \(y=\frac{4}{3}t+4\text{.}\) The line representing Fabiana appears to have \(y\)-intercept \((0,0)\) and slope \(2\text{,}\) so its equation is \(y=2t\text{.}\)</p>
+</div>
+<div class="sbspanel top" style="width:47%;"><figure class="figure figure-like" id="QDi"><img src="images/image-81.svg" role="img" class="contained" alt="a coordinate plane with a line for David and a line for Fabiana; the horizontal scale is 1 second and the vertical scale is 2 meters; David's line has a y-intercept of (0,4) and Fabiana's line has a y-intercept of (0,0); the lines cross at the point (6,12)"><div class="image-archive">
+<a href="images/image-81.eps">eps</a><a href="images/image-81.pdf">pdf</a><a href="images/image-81.png">png</a><a href="images/image-81.svg">svg</a><a href="images/image-81.tex">tex</a>
+</div>
+<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">4.1.2<span class="period">.</span></span><span class="space"> </span>David and Fabiana's distances.</figcaption></figure></div>
+</div></div>
+<p id="EoQ">When these two equations are together as a package, we have what is called a “system of linear equations”:</p>
+<div class="displaymath">
+\begin{equation*}
+\left\{
+\begin{alignedat}{4}
+y \amp {}={} \tfrac{4}{3}t \amp {}+{} \amp 4 \\
+y \amp {}={} 2t
+\end{alignedat}
+\right.
+\end{equation*}
+</div>
+<p class="continuation">The large left brace indicates that this is a collection of two distinct equations, not one equation that was somehow algebraically manipulated into an equivalent equation.</p>
+<p id="kvZ">As we can see in <a class="xref" data-knowl="./knowl/figure-solving-systems-by-graphing-intro.html" title="Figure 4.1.2">Figure 4.1.2</a>, the graphs of the two equations cross at the point \((6,12)\text{.}\) We refer to the point \((6,12)\) as the solution to this system of linear equations. To denote the solution set, we write \(\{(6,12)\}\text{.}\) It's more valuable to interpret these numbers in context whenever possible: it took \(6\) seconds for the two runners to meet up, and when they met they were \(12\) meters up the track.</p></article></div>
+<article class="definition definition-like" id="definition-system-of-linear-equations"><h6 class="heading">
+<span class="type">Definition</span><span class="space"> </span><span class="codenumber">4.1.3</span><span class="period">.</span><span class="space"> </span><span class="title">System of Linear Equations.</span>
+</h6>
+<p id="p-691">A <dfn class="terminology">system of linear equations</dfn> is any pairing of two (or more) linear equations. A <dfn class="terminology">solution to a system of linear equations</dfn> is any point that is a solution for all of the equations in the system. The <dfn class="terminology">solution set to a system of linear equations</dfn> is the collection of all solutions to the system.</p></article><article class="remark remark-like" id="huc"><h6 class="heading">
+<span class="type">Remark</span><span class="space"> </span><span class="codenumber">4.1.4</span><span class="period">.</span>
+</h6>
+<p id="Xco">In <a class="xref" data-knowl="./knowl/example-solving-systems-by-graphing-intro.html" title="Example 4.1.1">Example 4.1.1</a>, we stated that the solution was the point \((6,12)\text{.}\) It makes sense to write this as an ordered pair when we're given a graph. In some cases when we have no graph, particularly when our variables are not \(x\) and \(y\text{,}\) it might not be clear which variable “comes first” and we won't be able to write an ordered pair. Nevertheless, given the context we can write meaningful summary statements.</p></article><article class="example example-like" id="cKj"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-cKj"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">4.1.5</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-cKj"><article class="example example-like"><p id="wKr">Determine the solution to the system of equations graphed in <a class="xref" data-knowl="./knowl/figure-solve-using-graph.html" title="Figure 4.1.6">Figure 4.1.6</a>.</p>
+<figure class="figure figure-like" id="cRA"><div class="image-box" style="width: 47%; margin-left: 26.5%; margin-right: 26.5%;">
+<img src="images/image-82.svg" role="img" class="contained" alt="A Cartesian plot with two intersecting lines; One line has a y-intercept of -2 and a slope of -1/4; the other line has a y-intercept of 5 and a slope of 2"><div class="image-archive">
+<a href="images/image-82.eps">eps</a><a href="images/image-82.pdf">pdf</a><a href="images/image-82.png">png</a><a href="images/image-82.svg">svg</a><a href="images/image-82.tex">tex</a>
+</div>
+</div>
+<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">4.1.6<span class="period">.</span></span><span class="space"> </span>Graph of a System of Equations</figcaption></figure><div class="solutions">
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-tWP" id="tWP"><span class="type">Explanation</span></a><div class="hidden-content tex2jax_ignore" id="hk-tWP"><div class="solution solution-like"><p id="WNT">The two lines intersect where \(x=-3\) and \(y=-1\text{,}\) so the solution is the point \((-3,-1)\text{.}\) We write the solution set as \(\{(-3,-1)\}\text{.}\)</p></div></div>
+</div></article></div>
+<article class="exercise exercise-like" id="ysn"><a data-knowl="" class="id-ref exercise-knowl original" data-refid="hk-ysn"><h6 class="heading">
+<span class="type">Checkpoint</span><span class="space"> </span><span class="codenumber">4.1.7</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-ysn"><article class="exercise exercise-like"><p id="p-695">The WeBWorK problem with ID “webwork-45” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article></div>
+<p id="cwb">Now let's look at an example where <em class="emphasis">we</em> need to make a graph to find the solution.</p>
+<article class="example example-like" id="IRs"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-IRs"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">4.1.8</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-IRs"><article class="example example-like"><p id="IYJ">Solve the following system of equations by graphing:</p>
+<div class="displaymath">
+\begin{equation*}
+\left\{
+\begin{alignedat}{4}
+y \amp {}={} \amp \tfrac{1}{2}x \amp {}+{} \amp 4 \\
+y \amp {}={} \amp {-x} \amp {}-{} \amp 5
+\end{alignedat}
+\right.
+\end{equation*}
+</div>
+<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;">
+<div class="sbspanel top" style="width:47%;">
+<p id="pfS">Notice that each of these equations is written in slope-intercept form. The first equation, \(y=\frac{1}{2}x+4\text{,}\) is a linear equation with a slope of \(\frac{1}{2}\) and a \(y\)-intercept of \((0,4)\text{.}\) The second equation, \(y=-x-5\text{,}\) is a linear equation with a slope of \(-1\) and a \(y\)-intercept of \((0,-5)\text{.}\) We'll use this information to graph both lines.</p>
+<p id="p-699">It appears that the two lines intersect where \(x=-6\) and \(y=1\text{,}\) so the solution of the system of equations would be the point \((-6,1)\text{.}\) We should check this with the two original equations.</p>
+<div class="displaymath">
+\begin{align*}
+y\amp=\frac{1}{2}x+4\amp y\amp=-x-5\\
+\substitute{1}\amp\wonder{=}\frac{1}{2}(\substitute{-6})+4\amp \substitute{1}\amp\wonder{=}-(\substitute{-6})-5\\
+1\amp\confirm{=}-3+4\amp 1\amp\confirm{=}6-5
+\end{align*}
+</div>
+<p class="continuation">This verifies that \((-6,1)\) is the solution, and we write the solution set as \(\{(-6,1)\}\text{.}\)</p>
+</div>
+<div class="sbspanel top" style="width:47%;"><figure class="figure figure-like" id="Buk"><img src="images/image-83.svg" role="img" class="contained" alt="A Cartesian grid with two intersecting lines; one line has a y-intercept of 4 and a slope of 1/2; the other line has a y-intercept of -5 and a slope of -1"><div class="image-archive">
+<a href="images/image-83.eps">eps</a><a href="images/image-83.pdf">pdf</a><a href="images/image-83.png">png</a><a href="images/image-83.svg">svg</a><a href="images/image-83.tex">tex</a>
+</div>
+<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">4.1.9<span class="period">.</span></span><span class="space"> </span>\(y=\frac{1}{2}x+4\) and \(y=-x-5\text{.}\)</figcaption></figure></div>
+</div></div></article></div>
+<article class="example example-like" id="oYB"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-oYB"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">4.1.10</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-oYB"><article class="example example-like"><p id="hBt">Solve the following system of equations by graphing:</p>
+<div class="displaymath">
+\begin{equation*}
+\left\{
+\begin{alignedat}{3}
+x \amp {}-{} \amp 3y \amp {}={} \amp {-12} \\
+2x \amp {}+{} \amp 3y \amp {}={} \amp 3
+\end{alignedat}
+\right.
+\end{equation*}
+</div>
+<div class="solutions">
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-adY" id="adY"><span class="type">Explanation</span></a><div class="hidden-content tex2jax_ignore" id="hk-adY"><div class="solution solution-like">
+<p id="jcl">Since both line equations are given in standard form, we'll graph each one by finding the intercepts. Recall that to find the \(x\)-intercept of each equation, replace \(y\) with \(0\) and solve for \(x\text{.}\) Similarly, to find the \(y\)-intercept of each equation, replace \(x\) with \(0\) and solve for \(y\text{.}\)</p>
+<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;">
+<div class="sbspanel top" style="width:47%;">
+<p id="Pju">For our first linear equation, we have:</p>
+<div class="displaymath">
+\begin{align*}
+x-3(\substitute{0}) \amp= -12 \amp \substitute{0}-3y \amp=-12\\
+x \amp= -12 \amp -3y \amp= -12\\
+\amp\amp y\amp= 4\text{.}
+\end{align*}
+</div>
+<p class="continuation">So the intercepts are \((-12,0)\) and \((0,4)\text{.}\)</p>
+</div>
+<div class="sbspanel top" style="width:47%;">
+<p id="vqD">For our second linear equation, we have:</p>
+<div class="displaymath">
+\begin{align*}
+2x+3(\substitute{0}) \amp= 3\amp 2(\substitute{0})+3y \amp= 3\\
+2x \amp= 3\amp 3y \amp= 3\\
+x \amp= \frac{3}{2}\amp y\amp= 1\text{.}
+\end{align*}
+</div>
+<p class="continuation">So the intercepts are \(\left(\frac{3}{2},0\right)\) and \((0,1)\text{.}\)</p>
+</div>
+</div></div>
+<p id="bxM">Now we can graph each line by plotting the intercepts and connecting these points:</p>
+<figure class="figure figure-like" id="nMe"><div class="image-box" style="width: 47%; margin-left: 26.5%; margin-right: 26.5%;">
+<img src="images/image-84.svg" role="img" class="contained" alt="a Cartesian plot with two intersecting lines; one line has a y-intercept of 4 and an x-intercept of -12; the other line has a y-intercept of 1 and an x-intercept of 3/2"><div class="image-archive">
+<a href="images/image-84.eps">eps</a><a href="images/image-84.pdf">pdf</a><a href="images/image-84.png">png</a><a href="images/image-84.svg">svg</a><a href="images/image-84.tex">tex</a>
+</div>
+</div>
+<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">4.1.11<span class="period">.</span></span><span class="space"> </span>Graphs of \(x-3y=-12\) and \(2x+3y=3\)</figcaption></figure><p id="HEV">It appears that the solution of the system of equations is the point of intersection of those two lines, which is \((-3,3)\text{.}\) It's important to check this is correct, because when making a hand-drawn graph, it would be easy to be off by a little bit. To check, we can substitute the values of \(x\) and \(y\) from the point \((-3,3)\) into each equation:</p>
+<div class="displaymath">
+\begin{align*}
+x-3y \amp=-12\amp 2x+3y \amp= 3\\
+\substitute{-3}-3(\substitute{3}) \amp\wonder{=}-12 \amp 2(\substitute{-3})+3(\substitute{3}) \amp\wonder{=} 3\\
+-3-9 \amp\confirm{=}-12 \amp -6+9 \amp\confirm{=} 3
+\end{align*}
+</div>
+<p class="continuation">So we have checked that \((-3,3)\) is indeed the solution for the system. We write the solution set as \(\{(-3,3)\}\text{.}\)</p>
+</div></div>
+</div></article></div>
+<article class="example example-like" id="VfK"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-VfK"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">4.1.12</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-VfK"><article class="example example-like"><p id="NIC">A college has a north campus and a south campus. The north campus has \(18{,}000\) students, and the south campus has \(4{,}000\) students. In the past five years, the north campus lost \(4{,}000\) students, and the south campus gained \(3{,}000\) students. If these trends continue, in how many years would the two campuses have the same number of students? Write and solve a system of equations modeling this problem.</p>
+<div class="solutions">
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-Glh" id="Glh"><span class="type">Explanation</span></a><div class="hidden-content tex2jax_ignore" id="hk-Glh"><div class="solution solution-like">
+<p id="TTn">Since all the given student counts are in the thousands, we make the decision to measure student population in thousands. So for instance, the north campus starts with a student population of \(18\) (thousand students).</p>
+<p id="Aaw">The north campus lost \(4\) thousand students in \(5\) years. So it is losing students at a rate of \(\frac{4\text{ thousand}}{5\text{ year}}\text{,}\) or \(\frac{4}{5}\,\frac{\text{thousand}}{\text{year}}\text{.}\) This rate of change should be interpreted as a negative number, because the north campus is losing students over time. So we have a linear model with starting value \(18\) thousand students, and a slope of \(-\frac{4}{5}\) thousand students per year. In other words,</p>
+<div class="displaymath">
+\begin{equation*}
+y=-\frac{4}{5}t+18\text{,}
+\end{equation*}
+</div>
+<p class="continuation">where \(y\) stands for the number of students in thousands, and \(t\) stands for the number of years into the future.</p>
+<p id="ghF">Similarly, the number of students at the south campus can be modeled by \(y=\frac{3}{5}t+4\text{.}\) Now we have a system of equations:</p>
+<div class="displaymath">
+\begin{align*}
+\left\{
+\begin{alignedat}{4}
+y \amp {}={} \amp {-\frac{4}{5}}t \amp {}+{} \amp 18 \\
+y \amp {}={} \amp \frac{3}{5}t \amp {}+{} \amp 4
+\end{alignedat}
+\right.
+\end{align*}
+</div>
+<p class="continuation">We will graph both lines using their slopes and \(y\)-intercepts.</p>
+<figure class="figure figure-like" id="svX"><div class="image-box" style="width: 50%; margin-left: 25%; margin-right: 25%;">
+<img src="images/image-85.svg" role="img" class="contained" alt="a coordinate plot with two intersecting lines; the North campus line has a y-intercept of 18 and a slope of -4/5; the South campus line has a y-intercept of 4 and a slope of 3/5"><div class="image-archive">
+<a href="images/image-85.eps">eps</a><a href="images/image-85.pdf">pdf</a><a href="images/image-85.png">png</a><a href="images/image-85.svg">svg</a><a href="images/image-85.tex">tex</a>
+</div>
+</div>
+<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">4.1.13<span class="period">.</span></span><span class="space"> </span>Number of Students at the South Campus and North Campus</figcaption></figure><p id="MoO">According to the graph, the lines intersect at \((10,10)\text{.}\) So if the trends continue, both campuses will have \(10{,}000\) students \(10\) years from now.</p>
+</div></div>
+</div></article></div>
+<article class="example example-like" id="BmT"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-BmT"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">4.1.14</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-BmT"><article class="example example-like"><p id="tPL">Solve the following system of equations by graphing:</p>
+<div class="displaymath">
+\begin{equation*}
+\left\{
+\begin{alignedat}{3}
+y \amp {}={} \amp 3(x-2) \amp {}+{} \amp 1 \\
+y \amp {}={} \amp -\tfrac{1}{2}(x+1) \amp {}-{} \amp 1
+\end{alignedat}
+\right.
+\end{equation*}
+</div>
+<div class="solutions">
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-msq" id="msq"><span class="type">Explanation</span></a><div class="hidden-content tex2jax_ignore" id="hk-msq"><div class="solution solution-like">
+<p id="YDg">Since both line equations are given in <code class="code-inline tex2jax_ignore">[cross-reference to target(s) "definition-point-slope-form" missing or not unique]</code>, we can start by graphing the point indicated in each equation and use the slope to determine the rest of the line.</p>
+<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;">
+<div class="sbspanel top" style="width:47%;"><p id="EKp">For our first equation, \(y=3(x-2)+1\text{,}\) the point indicated in the equation is \((2,1)\) and the slope is \(3\text{.}\)</p></div>
+<div class="sbspanel top" style="width:47%;"><p id="kRy">For our second equation, \(y=-\frac{1}{2}(x+1)-1\text{,}\) the point indicated in the equation is \((-1,-1)\) and the slope is \(-\frac{1}{2}\text{.}\)</p></div>
+</div></div>
+<p id="QYH">Now we can graph each line by plotting the points and using their slopes.</p>
+<figure class="figure figure-like" id="VIA"><div class="image-box" style="width: 47%; margin-left: 26.5%; margin-right: 26.5%;">
+<img src="images/image-86.svg" role="img" class="contained" alt="a Cartesian plot with two intersecting lines; one line passes through the point (2,1) with a slope of 3; the other line passes through the point (-1,-1) with a slope of -1/2."><div class="image-archive">
+<a href="images/image-86.eps">eps</a><a href="images/image-86.pdf">pdf</a><a href="images/image-86.png">png</a><a href="images/image-86.svg">svg</a><a href="images/image-86.tex">tex</a>
+</div>
+</div>
+<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">4.1.15<span class="period">.</span></span><span class="space"> </span>Graphs of \(y=3(x-2)+1\) and \(y=-\frac{1}{2}(x+1)-1\)</figcaption></figure><p id="xfQ">It appears that the solution of the system of equations is the point of intersection of those two lines, which is \((1,-2)\text{.}\) It's important to check this is correct, because when making a hand-drawn graph, it would be easy to be off by a little bit. To check, we can substitute the values of \(x\) and \(y\) from the point \((1,-2)\) into each equation:</p>
+<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;">
+<div class="sbspanel top" style="width:47%;"><div class="displaymath" id="dmZ">
+\begin{align*}
+y\amp=3(x-2)+1\\
+\substitute{-2}\amp\wonder{=}3(\substitute{1}-2)+1\\
+-2\amp\wonder{=}3(-1)+1\\
+-2\amp\confirm{=}-3+1
+\end{align*}
+</div></div>
+<div class="sbspanel top" style="width:47%;"><div class="displaymath" id="Jui">
+\begin{align*}
+y\amp=-\frac{1}{2}(x+1)-1\\
+\substitute{-2}\amp\wonder{=}-\frac{1}{2}(\substitute{1}+1)-1\\
+-2\amp\wonder{=}-\frac{1}{2}(2)-1\\
+-2\amp\confirm{=}-1-1
+\end{align*}
+</div></div>
+</div></div>
+<p id="pBr">So we have checked that \((2,-1)\) is indeed the solution for the system. We write the solution set as \(\{(2,-1)\}\text{.}\)</p>
+</div></div>
+</div></article></div></section><section class="subsection" id="zxG"><h3 class="heading hide-type">
+<span class="type">Subsection</span> <span class="codenumber">4.1.2</span> <span class="title">Special Systems of Equations</span>
+</h3>
+<p id="IDk">Recall that when we solved linear equations in one variable, there were two special cases discussed in detail in <code class="code-inline tex2jax_ignore">[cross-reference to target(s) "section-special-solution-sets" missing or not unique]</code>. In one special case, like with the equation \(x=x+1\text{,}\) there is no solution. And in the another case, like with the equation \(x=x\text{,}\) there are infinitely many solutions. When solving systems of equations in two variables, we have similar special cases to consider.</p>
+<article class="example example-like" id="ezw"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-ezw"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">4.1.16</span><span class="period">.</span><span class="space"> </span><span class="title">Parallel Lines.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-ezw"><article class="example example-like"><p id="ZWU">Let's look at the graphs of two lines with the same slope, \(y=2x-4\) and \(y=2x+1\text{:}\)</p>
+<figure class="figure figure-like" id="mlm"><div class="image-box" style="width: 50%; margin-left: 25%; margin-right: 25%;">
+<img src="images/image-87.svg" role="img" class="contained" alt="a coordinate grid with two parallel lines; one line has a y-intercept of -4 and the other has a y-intercept of 1; they both have a slope of 2"><div class="image-archive">
+<a href="images/image-87.eps">eps</a><a href="images/image-87.pdf">pdf</a><a href="images/image-87.png">png</a><a href="images/image-87.svg">svg</a><a href="images/image-87.tex">tex</a>
+</div>
+</div>
+<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">4.1.17<span class="period">.</span></span><span class="space"> </span>Graphs of \(y=2x-4\) and \(y=2x+1\)</figcaption></figure><p id="Ged">For this system of equations, what is the solution? Since the two lines have the same slope they are <dfn class="terminology">parallel lines</dfn> and will never intersect. This means that there is <em class="emphasis">no solution</em> to this system of equations. We write the solution set as \(\emptyset\text{.}\)</p></article></div>
+<p id="oKt">The symbol \(\emptyset\) is a special symbol that represents the <dfn class="terminology">empty set</dfn>, a <em class="emphasis">set</em> that has no numbers in it which can also be written simply as \(\{\text{ }\}\text{.}\)  This symbol is <em class="emphasis">not</em> the same thing as the number zero. The <em class="emphasis">number</em> of eggs in an empty egg carton is zero whereas the empty carton itself could represent the empty set. The symbols for the empty set and the number zero may look similar depending on how you write the number zero, so try to keep the concepts separate.</p>
+<article class="example example-like" id="KGF"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-KGF"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">4.1.18</span><span class="period">.</span><span class="space"> </span><span class="title">Coinciding Lines.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-KGF"><article class="example example-like"><p id="Ssv">Next we'll look at the other special case. Let's start with this system of equations:</p>
+<div class="displaymath">
+\begin{equation*}
+\left\{
+\begin{alignedat}{4}
+y \amp {}={} \amp 2x-4 \\
+6x-3y \amp {}={} \amp 12
+\end{alignedat}
+\right.
+\end{equation*}
+</div>
+<p id="yzE">To solve this system of equations, we want to graph each line. The first equation is in slope-intercept form and can be graphed easily using its slope of \(2\) and its \(y\)-intercept of \((0,-4)\text{.}\)</p>
+<p id="eGN">The second equation, \(6x-3y=12\text{,}\) can either be graphed by solving for \(y\) and using the slope-intercept form or by finding the intercepts. If we use the intercept method, we'll find that this line has an \(x\)-intercept of \((2,0)\) and a \(y\)-intercept of \((0,-4)\text{.}\) When we graph both lines we get <a class="xref" data-knowl="./knowl/figure-coinciding-lines.html" title="Figure 4.1.19">Figure 4.1.19</a>.</p>
+<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;">
+<div class="sbspanel top" style="width:47%;"><p id="KNW">Now we can see these are actually the <em class="emphasis">same</em> line, or <dfn class="terminology">coinciding lines</dfn>. To determine the solution to this system, we'll note that they overlap everywhere. This means that we have an infinite number of solutions: <em class="emphasis">all</em> points that fall on the line. It may be enough to report that there are infinitely many solutions. In order to be more specific, all we can do is say that any ordered pair \((x,y)\) satisfying the line equation is a solution. In set-builder notation, we would write \(\{(x,y)\mid y=2x-4\}\text{.}\)</p></div>
+<div class="sbspanel top" style="width:47%;"><figure class="figure figure-like" id="qVf"><img src="images/image-88.svg" role="img" class="contained" alt="a coordinate plot of two lines that are coinciding; they both have a y-intercept of (0,-4) and a slope of 2"><div class="image-archive">
+<a href="images/image-88.eps">eps</a><a href="images/image-88.pdf">pdf</a><a href="images/image-88.png">png</a><a href="images/image-88.svg">svg</a><a href="images/image-88.tex">tex</a>
+</div>
+<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">4.1.19<span class="period">.</span></span><span class="space"> </span>Graphs of \(y=2x-4\) and \(6x-3y=12\)</figcaption></figure></div>
+</div></div></article></div>
+<article class="remark remark-like" id="qNO"><h6 class="heading">
+<span class="type">Remark</span><span class="space"> </span><span class="codenumber">4.1.20</span><span class="period">.</span>
+</h6>
+<p id="Djx">In <a class="xref" data-knowl="./knowl/example-solving-systems-by-graphing-equivalent-equations.html" title="Example 4.1.18: Coinciding Lines">Example 4.1.18</a>, what would have happened if we had decided to convert the second line equation into slope-intercept form?</p>
+<div class="displaymath">
+\begin{align*}
+6x-3y\amp=12\\
+6x-3y\subtractright{6x}\amp=12\subtractright{6x}\\
+-3y\amp=-6x+12\\
+\multiplyleft{-\frac{1}{3}}(-3y)\amp=\multiplyleft{-\frac{1}{3}}(-6x+12)\\
+y\amp=2x-4
+\end{align*}
+</div>
+<p class="continuation">This is the literally the same as the first equation in our system. This is a different way to show that these two equations are equivalent and represent the same line. Any time we try to solve a system where the equations are equivalent, we'll have an infinite number of solutions.</p></article><article class="warning remark-like" id="hmY"><h6 class="heading">
+<span class="type">Warning</span><span class="space"> </span><span class="codenumber">4.1.21</span><span class="period">.</span>
+</h6>
+<p id="LTp">Notice that for a system of equations with infinite solutions like <a class="xref" data-knowl="./knowl/example-solving-systems-by-graphing-equivalent-equations.html" title="Example 4.1.18: Coinciding Lines">Example 4.1.18</a>, we didn't say that <em class="emphasis">every</em> point was a solution. Rather, <em class="emphasis">every point that falls on that line</em> is a solution. It would be incorrect to state this solution set as “all real numbers” or as “all ordered pairs.”</p></article><figure class="list table-like" id="WUX"><figcaption><span class="type">List</span><span class="space"> </span><span class="codenumber">4.1.22<span class="period">.</span></span><span class="space"> </span>A summary of the three types of systems of equations and their solution sets.</figcaption><div class="named-list-content"><dl class="description-list">
+<dt id="lWR">Intersecting Lines:</dt>
+<dd><p id="ess">If two linear equations make lines with different slopes, the system has one solution.</p></dd>
+<dt id="Sea">Parallel Lines:</dt>
+<dd><p id="KzB">If two linear equations make lines with the same slope but different \(y\)-intercepts, the system has no solution.</p></dd>
+<dt id="ylj">Coinciding Lines:</dt>
+<dd><p id="qGK">If two linear equations make lines with the same slope and the same \(y\)-intercept (in other words, they make the same line), the system has infinitely many solutions. This solution set consists of all ordered pairs on that line.</p></dd>
+</dl></div></figure></section><section class="reading-questions" id="reading-questions-13"><h3 class="heading hide-type">
+<span class="type">Reading Questions</span> <span class="codenumber">4.1.3</span> <span class="title">Reading Questions</span>
+</h3>
+<article class="exercise exercise-like" id="exercise-82"><h6 class="heading"><span class="codenumber">1<span class="period">.</span></span></h6>
+<p id="p-733">What is the purpose of the one big left brace in a system of two equations?</p></article><article class="exercise exercise-like" id="exercise-83"><h6 class="heading"><span class="codenumber">2<span class="period">.</span></span></h6>
+<p id="p-734">When you find a solution to a system of two linear equations in two variables, why should you check the solution? Would it be good enough to only substitute the numbers into <em class="emphasis">one</em> of the original two equations?</p></article><article class="exercise exercise-like" id="exercise-84"><h6 class="heading"><span class="codenumber">3<span class="period">.</span></span></h6>
+<p id="p-735">Suppose you have a system of two linear equations, and you know the system has exactly one solution. What can you say about the slopes of the two lines that the two equations define?</p></article></section></section></div></main>
+</div>
+</body>
+</html>

@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*       on 2021-08-28T19:50:38Z       *-->
+<!--*   A recent stable commit (2020-08-09):   *-->
+<!--* 98f21740783f166a773df4dc83cab5293ab63a4a *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<html lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>ORCCA Factoring Trinomials</title>
+<meta name="Keywords" content="Authored in PreTeXt">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+<script>window.MathJax = {
+  tex: {
+    inlineMath: [['\\(','\\)']],
+    tags: "none",
+    useLabelIds: true,
+    tagSide: "right",
+    tagIndent: ".8em",
+    packages: {'[+]': ['base', 'extpfeil', 'ams', 'amscd', 'newcommand', 'knowl', 'sfrac']}
+  },
+  options: {
+    ignoreHtmlClass: "tex2jax_ignore",
+    processHtmlClass: "has_am",
+  },
+  chtml: {
+    scale: 0.88,
+    mtextInheritFont: true
+  },
+  loader: {
+    load: ['input/asciimath', '[tex]/extpfeil', '[tex]/amscd', '[tex]/newcommand', '[pretext]/mathjaxknowl3.js'],
+    paths: {pretext: "https://pretextbook.org/js/lib"},
+  },
+/* support for the sfrac command in MathJax (Beveled fraction) */
+  startup: {
+    ready() {
+      //
+      // Creating a simple "sfrac" package on-the-fly
+      //
+      const Configuration = MathJax._.input.tex.Configuration.Configuration;
+      const CommandMap = MathJax._.input.tex.SymbolMap.CommandMap;
+      
+      new CommandMap('sfrac', {
+        sfrac: 'SFrac'
+        }, {
+        SFrac(parser, name) {
+        const num = parser.ParseArg(name);
+        const den = parser.ParseArg(name);
+        const frac = parser.create('node', 'mfrac', [num, den], {bevelled: true});
+        parser.Push(frac);
+        }
+      });
+      //
+      // Create the package for the overridden macros
+      //
+      Configuration.create('sfrac', {
+        handler: {macro: ['sfrac']}
+      });
+      
+    MathJax.startup.defaultReady();
+    }
+  },
+};
+</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext_add_on.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script xmlns:svg="http://www.w3.org/2000/svg">sagecellEvalName='Evaluate (Sage)';
+</script><link xmlns:svg="http://www.w3.org/2000/svg" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://fonts.googleapis.com/css?family=Inconsolata:400,700&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/pretext.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/pretext_add_on.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/banner_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/toc_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/knowls_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/style_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/colors_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/setcolors.css" rel="stylesheet" type="text/css">
+<!-- 2019-10-12: Temporary - CSS file for experiments with styling --><link xmlns:svg="http://www.w3.org/2000/svg" href="developer.css" rel="stylesheet" type="text/css">
+</head>
+<body id="PCC-ORCCA" class="mathbook-book has-toc has-sidebar-left">
+<a class="assistive" href="#content">Skip to main content</a><div xmlns:svg="http://www.w3.org/2000/svg" id="latex-macros" class="hidden-content" style="display:none">\(\require{cancel}\newcommand{\abs}[1]{\left\lvert#1\right\rvert}
+\newcommand{\point}[2]{\left(#1,#2\right)}
+\newcommand{\highlight}[1]{\definecolor{sapphire}{RGB}{59,90,125} {\color{sapphire}{{#1}}}}
+\newcommand{\firsthighlight}[1]{\definecolor{sapphire}{RGB}{59,90,125} {\color{sapphire}{{#1}}}}
+\newcommand{\secondhighlight}[1]{\definecolor{emerald}{RGB}{20,97,75} {\color{emerald}{{#1}}}}
+\newcommand{\unhighlight}[1]{{\color{black}{{#1}}}}
+\newcommand{\lowlight}[1]{{\color{lightgray}{#1}}}
+\newcommand{\attention}[1]{\mathord{\overset{\downarrow}{#1}}}
+\newcommand{\nextoperation}[1]{\mathord{\boxed{#1}}}
+\newcommand{\substitute}[1]{{\color{blue}{{#1}}}}
+\newcommand{\pinover}[2]{\overset{\overset{\mathrm{\ #2\ }}{|}}{\strut #1 \strut}}
+\newcommand{\addright}[1]{{\color{blue}{{{}+#1}}}}
+\newcommand{\addleft}[1]{{\color{blue}{{#1+{}}}}}
+\newcommand{\subtractright}[1]{{\color{blue}{{{}-#1}}}}
+\newcommand{\multiplyright}[2][\cdot]{{\color{blue}{{{}#1#2}}}}
+\newcommand{\multiplyleft}[2][\cdot]{{\color{blue}{{#2#1{}}}}}
+\newcommand{\divideunder}[2]{\frac{#1}{{\color{blue}{{#2}}}}}
+\newcommand{\divideright}[1]{{\color{blue}{{{}\div#1}}}}
+\newcommand{\negate}[1]{{\color{blue}{{-}}}\left(#1\right)}
+\newcommand{\cancelhighlight}[1]{\definecolor{sapphire}{RGB}{59,90,125}{\color{sapphire}{{\cancel{#1}}}}}
+\newcommand{\secondcancelhighlight}[1]{\definecolor{emerald}{RGB}{20,97,75}{\color{emerald}{{\bcancel{#1}}}}}
+\newcommand{\thirdcancelhighlight}[1]{\definecolor{amethyst}{RGB}{112,72,91}{\color{amethyst}{{\xcancel{#1}}}}}
+\newcommand{\confirm}[1]{\stackrel{\checkmark}{#1}}
+\newcommand{\reject}[1]{\stackrel{\text{no}}{#1}}
+\newcommand{\wonder}[1]{\stackrel{\text{?}}{#1}}
+\newcommand{\apple}{\text{🍎}}
+\newcommand{\banana}{\text{🍌}}
+\newcommand{\pear}{\text{🍐}}
+\newcommand{\cat}{\text{🐱}}
+\newcommand{\dog}{\text{🐶}}
+\newcommand{\lt}{&lt;}
+\newcommand{\gt}{&gt;}
+\newcommand{\amp}{&amp;}
+\)</div>
+<header id="masthead" class="smallbuttons"><div class="banner"><div class="container">
+<a id="logo-link" href="http://www.pcc.edu/ORCCA" target="_blank"><img src="images/ORCCAbrandlogo.png" alt="Logo image"></a><div class="title-container">
+<h1 class="heading"><a href="orcca.html"><span class="title">RVCC Elementary Algebra</span></a></h1>
+<p class="byline">Department of Mathematics and Computer Science</p>
+</div>
+</div></div>
+<nav xmlns:svg="http://www.w3.org/2000/svg" id="primary-navbar" class="navbar"><div class="container">
+<div class="navbar-top-buttons">
+<button class="sidebar-left-toggle-button button active" aria-label="Show or hide table of contents sidebar">Contents</button><div class="tree-nav toolbar toolbar-divisor-3">
+<a class="index-button toolbar-item button" href="index-1.html" title="Index">Index</a><span class="threebuttons"><a id="previousbutton" class="previous-button toolbar-item button" href="section-introduction-to-factoring.html" title="Previous">Prev</a><a id="upbutton" class="up-button button toolbar-item" href="chapter-radical-expressions-and-equations.html" title="Up">Up</a><a id="nextbutton" class="next-button button toolbar-item" href="section-solving-equations-by-factoring.html" title="Next">Next</a></span>
+</div>
+</div>
+<div class="navbar-bottom-buttons toolbar toolbar-divisor-4">
+<button class="sidebar-left-toggle-button button toolbar-item active">Contents</button><a class="previous-button toolbar-item button" href="section-introduction-to-factoring.html" title="Previous">Prev</a><a class="up-button button toolbar-item" href="chapter-radical-expressions-and-equations.html" title="Up">Up</a><a class="next-button button toolbar-item" href="section-solving-equations-by-factoring.html" title="Next">Next</a>
+</div>
+</div></nav></header><div class="page">
+<div xmlns:svg="http://www.w3.org/2000/svg" id="sidebar-left" class="sidebar" role="navigation"><div class="sidebar-content">
+<nav id="toc"><ul>
+<li class="link frontmatter">
+<a href="frontmatter.html" data-scroll="JVg"><span class="title">Front Matter</span></a><ul><li><a href="colophon-1.html" data-scroll="colophon-1">Colophon</a></li></ul>
+</li>
+<li class="link part"><a href="part-all-of-the-chapters.html" data-scroll="part-all-of-the-chapters"><span class="codenumber">I</span> <span class="title"></span></a></li>
+<li class="link">
+<a href="chapter-introduction-to-algebra.html" data-scroll="dNX"><span class="codenumber">1</span> <span class="title">Introduction to Algebra</span></a><ul>
+<li><a href="section-real-numbers-and-the-number-line.html" data-scroll="ipv">Real Numbers and the Number Line</a></li>
+<li><a href="section-properties-of-real-numbers.html" data-scroll="tNy">Properties of Real Numbers</a></li>
+<li><a href="section-simplifying-and-writing-algebraic-expressions.html" data-scroll="xRO">Simplifying and Writing Algebraic Expressions</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="chapter-linear-equations-and-inequalities-modified.html" data-scroll="sWV"><span class="codenumber">2</span> <span class="title">Linear Equations and Inequalities</span></a><ul>
+<li><a href="section-introduction-to-equations.html" data-scroll="fwy">Introduction to Equations</a></li>
+<li><a href="section-linear-equations.html" data-scroll="xVO">Linear Equations</a></li>
+<li><a href="section-introduction-to-problem-solving.html" data-scroll="Wul">Introduction to Problem Solving</a></li>
+<li><a href="section-formulas.html" data-scroll="Nnq">Formulas</a></li>
+<li><a href="section-linear-inequalities.html" data-scroll="Nuc">Linear Inequalities</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="chapter-graphing-equations.html" data-scroll="gID"><span class="codenumber">3</span> <span class="title">Graphing Lines</span></a><ul>
+<li><a href="section-introduction-to-graphing.html" data-scroll="YTJ">Introduction to Graphing</a></li>
+<li><a href="section-equations-in-two-variables.html" data-scroll="QXY">Equations in Two Variables</a></li>
+<li><a href="section-intercepts-horizontal-and-vertical-lines.html" data-scroll="ByF">Intercepts: Horizontal and Vertical Lines</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="chapter-systems-of-linear-equations-in-two-variables.html" data-scroll="xGO"><span class="codenumber">4</span> <span class="title">Systems of Linear Equations</span></a><ul>
+<li><a href="section-solving-systems-of-linear-equations-graphically-and-numerically.html" data-scroll="njo">Solving Systems of Linear Equations Graphically and Numerically</a></li>
+<li><a href="section-solving-systems-of-linear-equations-by-substitution.html" data-scroll="zdh">Solving Systems of Linear Equations by Substitution</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="chapter-polynomials-and-exponents-modified.html" data-scroll="onc"><span class="codenumber">5</span> <span class="title">Exponents and Polynomials</span></a><ul>
+<li><a href="section-rules-for-exponents.html" data-scroll="KHJ">Rules for Exponents</a></li>
+<li><a href="section-adding-and-subtracting-polynomials.html" data-scroll="VvN">Addition and Subtraction of Polynomials</a></li>
+<li><a href="section-multiplication-of-polynomials.html" data-scroll="IcY">Multiplication of Polynomials</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="chapter-radical-expressions-and-equations.html" data-scroll="chapter-radical-expressions-and-equations"><span class="codenumber">6</span> <span class="title">Radical Expressions and Equations</span></a><ul>
+<li><a href="section-introduction-to-factoring.html" data-scroll="duD">Introduction to Factoring</a></li>
+<li><a href="section-factoring-trinomials.html" data-scroll="Mrf" class="active">Factoring Trinomials</a></li>
+<li><a href="section-solving-equations-by-factoring.html" data-scroll="DXi">Solving Equations by Factoring 1 (Quadratics)</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="chapter-rational-expressions.html" data-scroll="RzF"><span class="codenumber">7</span> <span class="title">Rational Expressions</span></a><ul>
+<li><a href="section-introduction-to-rational-expressions.html" data-scroll="Moo">Introduction to Rational Expressions</a></li>
+<li><a href="section-multiplication-and-division-of-rational-expressions.html" data-scroll="Vps">Multiplication and Division of Rational Expressions</a></li>
+<li><a href="section-addition-and-subtraction-with-like-denominators.html" data-scroll="KBw">Addition and Subtraction of Rational Expressions with Like Denominators</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="chapter-radical-expressions-and-functions.html" data-scroll="chapter-radical-expressions-and-functions"><span class="codenumber">8</span> <span class="title">Quantities in the Physical World</span></a><ul><li><a href="section-radical-expressions-and-functions.html" data-scroll="GAK">Radical Expressions and Functions</a></li></ul>
+</li>
+<li class="link backmatter"><a href="backmatter.html" data-scroll="jDj"><span class="title">Appendices</span></a></li>
+<li class="link">
+<a href="appendix-basic-math-review.html" data-scroll="appendix-basic-math-review"><span class="codenumber">A</span> <span class="title">Basic Math Review</span></a><ul>
+<li><a href="section-arithmetic-with-negative-numbers.html" data-scroll="qBB">Arithmetic with Negative Numbers</a></li>
+<li><a href="section-fractions-and-fraction-arithmetic.html" data-scroll="VAa">Fractions and Fraction Arithmetic</a></li>
+<li><a href="section-absolute-value-and-square-root.html" data-scroll="GAK">Absolute Value and Square Root</a></li>
+<li><a href="section-percentages.html" data-scroll="Chi">Percentages</a></li>
+<li><a href="section-order-of-operations.html" data-scroll="aog">Order of Operations</a></li>
+<li><a href="section-set-notation-and-types-of-numbers.html" data-scroll="Fdo">Set Notation and Types of Numbers</a></li>
+</ul>
+</li>
+<li class="link"><a href="appendix-unit-conversions.html" data-scroll="appendix-unit-conversions"><span class="codenumber">B</span> <span class="title">Unit Conversions</span></a></li>
+<li class="link"><a href="index-1.html" data-scroll="index-1"><span class="title">Index</span></a></li>
+</ul></nav><div class="extras"><nav><a class="mathbook-link" href="https://pretextbook.org">Authored in PreTeXt</a><a href="https://www.mathjax.org"><img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" alt="Powered by MathJax"></a></nav></div>
+</div></div>
+<main class="main"><div id="content" class="pretext-content"><section xmlns:svg="http://www.w3.org/2000/svg" class="section" id="Mrf"><h2 class="heading hide-type">
+<span class="type">Section</span> <span class="codenumber">6.2</span> <span class="title">Factoring Trinomials</span>
+</h2>
+<section class="introduction" id="AMH"><p id="p-1037">A radical expression typically has several equivalent forms. For example, \(\frac{\sqrt{2}}{3}\) and \(\frac{2}{\sqrt{6}}\) are the same number. Mathematics has a preference for one of these forms over the other, and this section is about how to convert a given radical expression to that form.</p></section><section class="subsection" id="OlF"><h3 class="heading hide-type">
+<span class="type">Subsection</span> <span class="codenumber">6.2.1</span> <span class="title">Rationalizing the Denominator</span>
+</h3>
+<p id="FJe">To simplify radical expressions, we have seen that it helps to make the radicand as small as possible. Another helpful principle is to not leave any irrational numbers, such as \(\sqrt{3}\) or \(2\sqrt{5}\text{,}\) in the denominator of a fraction. In other words, we want the denominator to be rational. The process of dealing with such numbers in the denominator is called <dfn class="terminology">rationalizing the denominator</dfn>.</p>
+<p id="lQn">Let's see how we can replace \(\frac{1}{\sqrt{5}}\) with an equivalent expression that has no radical expressions in its denominator. If we multiply a radical by itself, the result is the radicand, by <a class="xref" data-knowl="./knowl/definition-square-root.html" title="Definition 8.1.1: Square Root">Definition 8.1.1</a>. As an example:</p>
+<div class="displaymath">
+\begin{equation*}
+\sqrt{5}\cdot\sqrt{5}=5
+\end{equation*}
+</div>
+<p class="continuation">With \(\frac{1}{\sqrt{5}}\text{,}\) we may multiply both the numerator and denominator by the same non-zero number and have an equivalent expression. If we multiply the numerator and denominator by \(\sqrt{5}\text{,}\) we have:</p>
+<div class="displaymath">
+\begin{align*}
+\frac{1}{\sqrt{5}}\amp=\frac{1}{\sqrt{5}} \multiplyright{\frac{\sqrt{5}}{\sqrt{5}}}\\
+\amp=\frac{1\cdot\sqrt{5}}{\sqrt{5}\cdot\sqrt{5}}\\
+\amp=\frac{\sqrt{5}}{5}
+\end{align*}
+</div>
+<p class="continuation">And voilà, we have an expression with no radical in its denominator. We can use a calculator to verify that \(\frac{1}{\sqrt{5}}\approx0.4472\text{,}\) and also \(\frac{\sqrt{5}}{5}\approx0.4472\text{.}\) They are equal.</p>
+<article class="example example-like" id="dpq"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-dpq"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">6.2.1</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-dpq"><article class="example example-like"><p id="beE">Rationalize the denominator of the expressions.</p>
+<ol class="lower-alpha cols2">
+<li id="lDJ"><p id="Kgt">\(\displaystyle \frac{3}{\sqrt{6}}\)</p></li>
+<li id="RKS"><p id="qnC">\(\displaystyle \frac{\sqrt{5}}{\sqrt{72}}\)</p></li>
+</ol>
+<div class="solutions">
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-gTQ" id="gTQ"><span class="type">Explanation</span></a><div class="hidden-content tex2jax_ignore" id="hk-gTQ"><div class="solution solution-like"><ol id="iJd" class="lower-alpha">
+<li id="xSb">
+<p id="WuL">To rationalize the denominator of \(\frac{3}{\sqrt{6}}\text{,}\) we multiply both the numerator and denominator by \(\frac{\sqrt{6}}{\sqrt{6}}\text{.}\)</p>
+<div class="displaymath">
+\begin{align*}
+\frac{3}{\sqrt{6}}\amp=\frac{3}{\sqrt{6}}\multiplyright{\frac{\sqrt{6}}{\sqrt{6}}}\\
+\amp=\frac{3\sqrt{6}}{6}\\
+\amp=\frac{\sqrt{6}}{2}
+\end{align*}
+</div>
+<p class="continuation">Note that we reduced a fraction \(\frac{3}{6}\) whose numerator and denominator were no longer inside the radical.</p>
+</li>
+<li id="dZk">
+<p id="CBU">To rationalize the denominator of \(\frac{\sqrt{5}}{\sqrt{72}}\text{,}\) we <em class="emphasis">could</em> multiply both the numerator and denominator by \(\sqrt{72}\text{,}\) and it would be effective; however, we should note that the \(\sqrt{72}\) in the denominator can be <em class="emphasis">reduced</em> first. Doing this will simplify the arithmetic because there will be smaller numbers to work with.</p>
+<div class="displaymath">
+\begin{align*}
+\frac{\sqrt{5}}{\sqrt{72}}\amp=\frac{\sqrt{5}}{\sqrt{36\cdot 2}}\\
+\amp=\frac{\sqrt{5}}{\sqrt{36}\cdot\sqrt{2}}\\
+\amp=\frac{\sqrt{5}}{6\cdot\sqrt{2}}\\
+\end{align*}
+<p class="intertext">Now all that remains is to multiply the numerator and denominator by \(\sqrt{2}\text{.}\)</p>
+\begin{align*}
+\amp=\frac{\sqrt{5}}{6\cdot\sqrt{2}}\multiplyright{\frac{\sqrt{2}}{\sqrt{2}}}\\
+\amp=\frac{\sqrt{10}}{6\cdot 2}\\
+\amp=\frac{\sqrt{10}}{12}
+\end{align*}
+</div>
+</li>
+</ol></div></div>
+</div></article></div>
+<article class="exercise exercise-like" id="WzY"><a data-knowl="" class="id-ref exercise-knowl original" data-refid="hk-WzY"><h6 class="heading">
+<span class="type">Checkpoint</span><span class="space"> </span><span class="codenumber">6.2.2</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-WzY"><article class="exercise exercise-like"><p id="p-1046">The WeBWorK problem with ID “webwork-62” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article></div>
+<article class="example example-like" id="qsP"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-qsP"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">6.2.3</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-qsP"><article class="example example-like"><p id="sKS">Rationalize the denominator in \(\sqrt{\frac{2}{7}}\text{.}\)</p>
+<div class="solutions">
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-Xyn" id="Xyn"><span class="type">Explanation</span></a><div class="hidden-content tex2jax_ignore" id="hk-Xyn"><div class="solution solution-like">
+<p id="p-1048">This example is slightly different. The entire fraction, including its denominator, is within a radical. Having a denominator within a radical is just as undesirable as having a radical in a denominator. So we want to do something to change the expression.</p>
+<div class="displaymath" id="yAe">
+\begin{align*}
+\sqrt{\frac{2}{7}}\amp=\frac{\sqrt{2}}{\sqrt{7}}\\
+\amp=\frac{\sqrt{2}}{\sqrt{7}}\multiplyright{\frac{\sqrt{7}}{\sqrt{7}}}\\
+\amp=\frac{\sqrt{2}\cdot\sqrt{7}}{\sqrt{7}\cdot\sqrt{7}}\\
+\amp=\frac{\sqrt{14}}{7}
+\end{align*}
+</div>
+</div></div>
+</div></article></div></section><section class="subsection" id="YFx"><h3 class="heading hide-type">
+<span class="type">Subsection</span> <span class="codenumber">6.2.2</span> <span class="title">Rationalize the Denominator Using the Difference of Squares Formula</span>
+</h3>
+<p id="p-1050">Conside the number \(\frac{1}{\sqrt{2}+1}\text{.}\) Its denominator is irrational, approximately \(2.414\ldots\text{.}\) Can we rewrite this as an equivalent expression where the denominator is rational? Let's try multiplying the numerator and denominator by \(\sqrt{2}\text{:}\)</p>
+<div class="displaymath">
+\begin{align*}
+\frac{1}{\sqrt{2}+1}\amp=\frac{1}{\left(\sqrt{2}+1\right)}\multiplyright{\frac{\sqrt{2}}{\sqrt{2}}}\\
+\amp=\frac{\sqrt{2}}{\sqrt{2}\cdot\highlight{\sqrt{2}}+1\cdot\highlight{\sqrt{2}}}\\
+\amp=\frac{\sqrt{2}}{2+\sqrt{2}}
+\end{align*}
+</div>
+<p class="continuation">We removed one radical from the denominator, but created another. We need to find another method. The difference of squares formula will help:</p>
+<div class="displaymath">
+\begin{equation*}
+(a+b)(a-b)=a^2-b^2
+\end{equation*}
+</div>
+<p class="continuation">Those two squares in \(a^2-b^2\) can be used as a tool to annihilate radicals. Take \(\frac{1}{\sqrt{2}+1}\text{,}\) and multiply both the numerator and denominator by \(\sqrt{2}-1\text{:}\)</p>
+<div class="displaymath">
+\begin{align*}
+\frac{1}{\sqrt{2}+1}\amp=\frac{1}{\left(\sqrt{2}+1\right)}\multiplyright{\frac{\left(\sqrt{2}-1\right)}{\left(\sqrt{2}-1\right)}}\\
+\amp=\frac{\sqrt{2}-1}{\left(\sqrt{2}\right)^2-(1)^2}\\
+\amp=\frac{\sqrt{2}-1}{2-1}\\
+\amp=\frac{\sqrt{2}-1}{1}\\
+\amp=\sqrt{2}-1
+\end{align*}
+</div>
+<article class="example example-like" id="Jwz"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-Jwz"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">6.2.4</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-Jwz"><article class="example example-like"><p id="HlN">Rationalize the denominator in \(\frac{\sqrt{7}-\sqrt{2}}{\sqrt{5}+\sqrt{3}}\text{.}\)</p>
+<div class="solutions">
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-NaZ" id="NaZ"><span class="type">Explanation</span></a><div class="hidden-content tex2jax_ignore" id="hk-NaZ"><div class="solution solution-like">
+<p id="OQm">To address the radicals in the denominator, we multiply both numerator and denominator by \(\sqrt{5}-\sqrt{3}\text{.}\)</p>
+<div class="displaymath">
+\begin{align*}
+\frac{\sqrt{7}-\sqrt{2}}{\sqrt{5}+\sqrt{3}}\amp=\frac{\sqrt{7}-\sqrt{2}}{\sqrt{5}+\sqrt{3}}\multiplyright{\frac{\left(\sqrt{5}-\sqrt{3}\right)}{\left(\sqrt{5}-\sqrt{3}\right)}}\\
+\amp=\frac{\sqrt{7}\multiplyright{\sqrt{5}}-\sqrt{7}\multiplyright{\sqrt{3}}-\sqrt{2}\multiplyright{\sqrt{5}}-\sqrt{2}\multiplyright{-\sqrt{3}}}{\left(\sqrt{5}\right)^2-\left(\sqrt{3}\right)^2}\\
+\amp=\frac{\sqrt{35}-\sqrt{21}-\sqrt{10}+\sqrt{6}}{5-3}\\
+\amp=\frac{\sqrt{35}-\sqrt{21}-\sqrt{10}+\sqrt{6}}{2}
+\end{align*}
+</div>
+</div></div>
+</div></article></div>
+<article class="exercise exercise-like" id="exercise-115"><a data-knowl="" class="id-ref exercise-knowl original" data-refid="hk-exercise-115"><h6 class="heading">
+<span class="type">Checkpoint</span><span class="space"> </span><span class="codenumber">6.2.5</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-exercise-115"><article class="exercise exercise-like"><p id="p-1053">The WeBWorK problem with ID “webwork-63” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article></div></section><section class="reading-questions" id="reading-questions-20"><h3 class="heading hide-type">
+<span class="type">Reading Questions</span> <span class="codenumber">6.2.3</span> <span class="title">Reading Questions</span>
+</h3>
+<article class="exercise exercise-like" id="exercise-116"><h6 class="heading"><span class="codenumber">1<span class="period">.</span></span></h6>
+<p id="p-1054">To rationalize a denominator in an expression like \(\frac{3}{\sqrt{5}}\text{,}\) explain the first step you will take.</p></article><article class="exercise exercise-like" id="exercise-117"><h6 class="heading"><span class="codenumber">2<span class="period">.</span></span></h6>
+<p id="p-1055">What is the special pattern from <code class="code-inline tex2jax_ignore">[cross-reference to target(s) "section-special-cases-of-multiplying-polynomials" missing or not unique]</code> that helps to rationalize the denominator in an expression like \(\frac{3}{2+\sqrt{5}}\text{?}\)</p></article></section></section></div></main>
+</div>
+</body>
+</html>

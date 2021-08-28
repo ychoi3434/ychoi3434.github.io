@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*       on 2021-08-28T19:50:49Z       *-->
+<!--*   A recent stable commit (2020-08-09):   *-->
+<!--* 98f21740783f166a773df4dc83cab5293ab63a4a *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<html lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>ORCCA Percentages</title>
+<meta name="Keywords" content="Authored in PreTeXt">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+<script>window.MathJax = {
+  tex: {
+    inlineMath: [['\\(','\\)']],
+    tags: "none",
+    useLabelIds: true,
+    tagSide: "right",
+    tagIndent: ".8em",
+    packages: {'[+]': ['base', 'extpfeil', 'ams', 'amscd', 'newcommand', 'knowl', 'sfrac']}
+  },
+  options: {
+    ignoreHtmlClass: "tex2jax_ignore",
+    processHtmlClass: "has_am",
+  },
+  chtml: {
+    scale: 0.88,
+    mtextInheritFont: true
+  },
+  loader: {
+    load: ['input/asciimath', '[tex]/extpfeil', '[tex]/amscd', '[tex]/newcommand', '[pretext]/mathjaxknowl3.js'],
+    paths: {pretext: "https://pretextbook.org/js/lib"},
+  },
+/* support for the sfrac command in MathJax (Beveled fraction) */
+  startup: {
+    ready() {
+      //
+      // Creating a simple "sfrac" package on-the-fly
+      //
+      const Configuration = MathJax._.input.tex.Configuration.Configuration;
+      const CommandMap = MathJax._.input.tex.SymbolMap.CommandMap;
+      
+      new CommandMap('sfrac', {
+        sfrac: 'SFrac'
+        }, {
+        SFrac(parser, name) {
+        const num = parser.ParseArg(name);
+        const den = parser.ParseArg(name);
+        const frac = parser.create('node', 'mfrac', [num, den], {bevelled: true});
+        parser.Push(frac);
+        }
+      });
+      //
+      // Create the package for the overridden macros
+      //
+      Configuration.create('sfrac', {
+        handler: {macro: ['sfrac']}
+      });
+      
+    MathJax.startup.defaultReady();
+    }
+  },
+};
+</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext_add_on.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script xmlns:svg="http://www.w3.org/2000/svg">sagecellEvalName='Evaluate (Sage)';
+</script><link xmlns:svg="http://www.w3.org/2000/svg" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://fonts.googleapis.com/css?family=Inconsolata:400,700&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/pretext.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/pretext_add_on.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/banner_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/toc_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/knowls_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/style_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/colors_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/setcolors.css" rel="stylesheet" type="text/css">
+<!-- 2019-10-12: Temporary - CSS file for experiments with styling --><link xmlns:svg="http://www.w3.org/2000/svg" href="developer.css" rel="stylesheet" type="text/css">
+</head>
+<body id="PCC-ORCCA" class="mathbook-book has-toc has-sidebar-left">
+<a class="assistive" href="#content">Skip to main content</a><div xmlns:svg="http://www.w3.org/2000/svg" id="latex-macros" class="hidden-content" style="display:none">\(\require{cancel}\newcommand{\abs}[1]{\left\lvert#1\right\rvert}
+\newcommand{\point}[2]{\left(#1,#2\right)}
+\newcommand{\highlight}[1]{\definecolor{sapphire}{RGB}{59,90,125} {\color{sapphire}{{#1}}}}
+\newcommand{\firsthighlight}[1]{\definecolor{sapphire}{RGB}{59,90,125} {\color{sapphire}{{#1}}}}
+\newcommand{\secondhighlight}[1]{\definecolor{emerald}{RGB}{20,97,75} {\color{emerald}{{#1}}}}
+\newcommand{\unhighlight}[1]{{\color{black}{{#1}}}}
+\newcommand{\lowlight}[1]{{\color{lightgray}{#1}}}
+\newcommand{\attention}[1]{\mathord{\overset{\downarrow}{#1}}}
+\newcommand{\nextoperation}[1]{\mathord{\boxed{#1}}}
+\newcommand{\substitute}[1]{{\color{blue}{{#1}}}}
+\newcommand{\pinover}[2]{\overset{\overset{\mathrm{\ #2\ }}{|}}{\strut #1 \strut}}
+\newcommand{\addright}[1]{{\color{blue}{{{}+#1}}}}
+\newcommand{\addleft}[1]{{\color{blue}{{#1+{}}}}}
+\newcommand{\subtractright}[1]{{\color{blue}{{{}-#1}}}}
+\newcommand{\multiplyright}[2][\cdot]{{\color{blue}{{{}#1#2}}}}
+\newcommand{\multiplyleft}[2][\cdot]{{\color{blue}{{#2#1{}}}}}
+\newcommand{\divideunder}[2]{\frac{#1}{{\color{blue}{{#2}}}}}
+\newcommand{\divideright}[1]{{\color{blue}{{{}\div#1}}}}
+\newcommand{\negate}[1]{{\color{blue}{{-}}}\left(#1\right)}
+\newcommand{\cancelhighlight}[1]{\definecolor{sapphire}{RGB}{59,90,125}{\color{sapphire}{{\cancel{#1}}}}}
+\newcommand{\secondcancelhighlight}[1]{\definecolor{emerald}{RGB}{20,97,75}{\color{emerald}{{\bcancel{#1}}}}}
+\newcommand{\thirdcancelhighlight}[1]{\definecolor{amethyst}{RGB}{112,72,91}{\color{amethyst}{{\xcancel{#1}}}}}
+\newcommand{\confirm}[1]{\stackrel{\checkmark}{#1}}
+\newcommand{\reject}[1]{\stackrel{\text{no}}{#1}}
+\newcommand{\wonder}[1]{\stackrel{\text{?}}{#1}}
+\newcommand{\apple}{\text{🍎}}
+\newcommand{\banana}{\text{🍌}}
+\newcommand{\pear}{\text{🍐}}
+\newcommand{\cat}{\text{🐱}}
+\newcommand{\dog}{\text{🐶}}
+\newcommand{\lt}{&lt;}
+\newcommand{\gt}{&gt;}
+\newcommand{\amp}{&amp;}
+\)</div>
+<header id="masthead" class="smallbuttons"><div class="banner"><div class="container">
+<a id="logo-link" href="http://www.pcc.edu/ORCCA" target="_blank"><img src="images/ORCCAbrandlogo.png" alt="Logo image"></a><div class="title-container">
+<h1 class="heading"><a href="orcca.html"><span class="title">RVCC Elementary Algebra</span></a></h1>
+<p class="byline">Department of Mathematics and Computer Science</p>
+</div>
+</div></div>
+<nav xmlns:svg="http://www.w3.org/2000/svg" id="primary-navbar" class="navbar"><div class="container">
+<div class="navbar-top-buttons">
+<button class="sidebar-left-toggle-button button active" aria-label="Show or hide table of contents sidebar">Contents</button><div class="tree-nav toolbar toolbar-divisor-3">
+<a class="index-button toolbar-item button" href="index-1.html" title="Index">Index</a><span class="threebuttons"><a id="previousbutton" class="previous-button toolbar-item button" href="section-absolute-value-and-square-root.html" title="Previous">Prev</a><a id="upbutton" class="up-button button toolbar-item" href="appendix-basic-math-review.html" title="Up">Up</a><a id="nextbutton" class="next-button button toolbar-item" href="section-order-of-operations.html" title="Next">Next</a></span>
+</div>
+</div>
+<div class="navbar-bottom-buttons toolbar toolbar-divisor-4">
+<button class="sidebar-left-toggle-button button toolbar-item active">Contents</button><a class="previous-button toolbar-item button" href="section-absolute-value-and-square-root.html" title="Previous">Prev</a><a class="up-button button toolbar-item" href="appendix-basic-math-review.html" title="Up">Up</a><a class="next-button button toolbar-item" href="section-order-of-operations.html" title="Next">Next</a>
+</div>
+</div></nav></header><div class="page">
+<div xmlns:svg="http://www.w3.org/2000/svg" id="sidebar-left" class="sidebar" role="navigation"><div class="sidebar-content">
+<nav id="toc"><ul>
+<li class="link frontmatter">
+<a href="frontmatter.html" data-scroll="JVg"><span class="title">Front Matter</span></a><ul><li><a href="colophon-1.html" data-scroll="colophon-1">Colophon</a></li></ul>
+</li>
+<li class="link part"><a href="part-all-of-the-chapters.html" data-scroll="part-all-of-the-chapters"><span class="codenumber">I</span> <span class="title"></span></a></li>
+<li class="link">
+<a href="chapter-introduction-to-algebra.html" data-scroll="dNX"><span class="codenumber">1</span> <span class="title">Introduction to Algebra</span></a><ul>
+<li><a href="section-real-numbers-and-the-number-line.html" data-scroll="ipv">Real Numbers and the Number Line</a></li>
+<li><a href="section-properties-of-real-numbers.html" data-scroll="tNy">Properties of Real Numbers</a></li>
+<li><a href="section-simplifying-and-writing-algebraic-expressions.html" data-scroll="xRO">Simplifying and Writing Algebraic Expressions</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="chapter-linear-equations-and-inequalities-modified.html" data-scroll="sWV"><span class="codenumber">2</span> <span class="title">Linear Equations and Inequalities</span></a><ul>
+<li><a href="section-introduction-to-equations.html" data-scroll="fwy">Introduction to Equations</a></li>
+<li><a href="section-linear-equations.html" data-scroll="xVO">Linear Equations</a></li>
+<li><a href="section-introduction-to-problem-solving.html" data-scroll="Wul">Introduction to Problem Solving</a></li>
+<li><a href="section-formulas.html" data-scroll="Nnq">Formulas</a></li>
+<li><a href="section-linear-inequalities.html" data-scroll="Nuc">Linear Inequalities</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="chapter-graphing-equations.html" data-scroll="gID"><span class="codenumber">3</span> <span class="title">Graphing Lines</span></a><ul>
+<li><a href="section-introduction-to-graphing.html" data-scroll="YTJ">Introduction to Graphing</a></li>
+<li><a href="section-equations-in-two-variables.html" data-scroll="QXY">Equations in Two Variables</a></li>
+<li><a href="section-intercepts-horizontal-and-vertical-lines.html" data-scroll="ByF">Intercepts: Horizontal and Vertical Lines</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="chapter-systems-of-linear-equations-in-two-variables.html" data-scroll="xGO"><span class="codenumber">4</span> <span class="title">Systems of Linear Equations</span></a><ul>
+<li><a href="section-solving-systems-of-linear-equations-graphically-and-numerically.html" data-scroll="njo">Solving Systems of Linear Equations Graphically and Numerically</a></li>
+<li><a href="section-solving-systems-of-linear-equations-by-substitution.html" data-scroll="zdh">Solving Systems of Linear Equations by Substitution</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="chapter-polynomials-and-exponents-modified.html" data-scroll="onc"><span class="codenumber">5</span> <span class="title">Exponents and Polynomials</span></a><ul>
+<li><a href="section-rules-for-exponents.html" data-scroll="KHJ">Rules for Exponents</a></li>
+<li><a href="section-adding-and-subtracting-polynomials.html" data-scroll="VvN">Addition and Subtraction of Polynomials</a></li>
+<li><a href="section-multiplication-of-polynomials.html" data-scroll="IcY">Multiplication of Polynomials</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="chapter-radical-expressions-and-equations.html" data-scroll="chapter-radical-expressions-and-equations"><span class="codenumber">6</span> <span class="title">Radical Expressions and Equations</span></a><ul>
+<li><a href="section-introduction-to-factoring.html" data-scroll="duD">Introduction to Factoring</a></li>
+<li><a href="section-factoring-trinomials.html" data-scroll="Mrf">Factoring Trinomials</a></li>
+<li><a href="section-solving-equations-by-factoring.html" data-scroll="DXi">Solving Equations by Factoring 1 (Quadratics)</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="chapter-rational-expressions.html" data-scroll="RzF"><span class="codenumber">7</span> <span class="title">Rational Expressions</span></a><ul>
+<li><a href="section-introduction-to-rational-expressions.html" data-scroll="Moo">Introduction to Rational Expressions</a></li>
+<li><a href="section-multiplication-and-division-of-rational-expressions.html" data-scroll="Vps">Multiplication and Division of Rational Expressions</a></li>
+<li><a href="section-addition-and-subtraction-with-like-denominators.html" data-scroll="KBw">Addition and Subtraction of Rational Expressions with Like Denominators</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="chapter-radical-expressions-and-functions.html" data-scroll="chapter-radical-expressions-and-functions"><span class="codenumber">8</span> <span class="title">Quantities in the Physical World</span></a><ul><li><a href="section-radical-expressions-and-functions.html" data-scroll="GAK">Radical Expressions and Functions</a></li></ul>
+</li>
+<li class="link backmatter"><a href="backmatter.html" data-scroll="jDj"><span class="title">Appendices</span></a></li>
+<li class="link">
+<a href="appendix-basic-math-review.html" data-scroll="appendix-basic-math-review"><span class="codenumber">A</span> <span class="title">Basic Math Review</span></a><ul>
+<li><a href="section-arithmetic-with-negative-numbers.html" data-scroll="qBB">Arithmetic with Negative Numbers</a></li>
+<li><a href="section-fractions-and-fraction-arithmetic.html" data-scroll="VAa">Fractions and Fraction Arithmetic</a></li>
+<li><a href="section-absolute-value-and-square-root.html" data-scroll="GAK">Absolute Value and Square Root</a></li>
+<li><a href="section-percentages.html" data-scroll="Chi" class="active">Percentages</a></li>
+<li><a href="section-order-of-operations.html" data-scroll="aog">Order of Operations</a></li>
+<li><a href="section-set-notation-and-types-of-numbers.html" data-scroll="Fdo">Set Notation and Types of Numbers</a></li>
+</ul>
+</li>
+<li class="link"><a href="appendix-unit-conversions.html" data-scroll="appendix-unit-conversions"><span class="codenumber">B</span> <span class="title">Unit Conversions</span></a></li>
+<li class="link"><a href="index-1.html" data-scroll="index-1"><span class="title">Index</span></a></li>
+</ul></nav><div class="extras"><nav><a class="mathbook-link" href="https://pretextbook.org">Authored in PreTeXt</a><a href="https://www.mathjax.org"><img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" alt="Powered by MathJax"></a></nav></div>
+</div></div>
+<main class="main"><div id="content" class="pretext-content"><section xmlns:svg="http://www.w3.org/2000/svg" class="section" id="Chi"><h2 class="heading hide-type">
+<span class="type">Section</span> <span class="codenumber">A.4</span> <span class="title">Percentages</span>
+</h2>
+<section class="introduction" id="uRe"><p id="HtR">Percent-related problems arise in everyday life. This section reviews some basic calculations that can be made with percentages.</p>
+<figure class="figure figure-like" id="fWB"><div class="video-box" style="width: 100%;padding-top: 56.25%; margin-left: 0%; margin-right: 0%;"><iframe id="video-3" class="video" allowfullscreen="" src="https://www.youtube-nocookie.com/embed?listType=playlist&amp;list=PLmuZCPhWPt-dRNkG2RKS6L6k1OdHZ_x16&amp;modestbranding=1&amp;rel=0"></iframe></div>
+<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">A.4.1<span class="period">.</span></span><span class="space"> </span>Alternative Video Lesson</figcaption></figure></section><section class="subsection" id="subsection-93"><h3 class="heading hide-type">
+<span class="type">Subsection</span> <span class="codenumber">A.4.1</span> <span class="title">Converting Percents, Decimals, and English</span>
+</h3>
+<p id="nBa">In many situations when translating from English to math, the word “of” translates as multiplication. Also the word “is” (and many similar words related to “to be”) translates to an equals sign. For example:</p>
+<div class="displaymath">
+\begin{align*}
+\text{One third }\amp\text{of thirty is ten.}\\
+\frac{1}{3}\amp\cdot30=10
+\end{align*}
+</div>
+<p id="TIj">Here is another example, this time involving a percentage. We know that “\(2\) is \(50\%\) of \(4\text{,}\)” so we can say:</p>
+<div class="displaymath">
+\begin{align*}
+2\amp\text{ is } 50\% \text{ of } 4\\
+2\amp= 0.5\cdot4
+\end{align*}
+</div>
+<article class="example example-like" id="OJV"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-OJV"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">A.4.2</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-OJV"><article class="example example-like"><p id="yaf">Translate each statement involving percents below into an equation. Define any variables used. (Solving these equations is an exercise).</p>
+<ol class="lower-alpha">
+<li id="mhm"><p id="HPq">How much is \(30\%\) of \(\$24.00\text{?}\)</p></li>
+<li id="Sov"><p id="nWz">\(\$7.20\) is what percent of \(\$24.00\text{?}\)</p></li>
+<li id="yvE"><p id="UdI">\(\$7.20\) is \(30\%\) of how much money?</p></li>
+</ol>
+<div class="solutions">
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-Hfw" id="Hfw"><span class="type">Explanation</span></a><div class="hidden-content tex2jax_ignore" id="hk-Hfw"><div class="solution solution-like">
+<p id="Oow">Each question can be translated from English into a math equation by reading it slowly and looking for the right signals.</p>
+<ol class="lower-alpha">
+<li id="eCN">
+<p id="AkR">The word “is” means about the same thing as the equals sign. “How much” is a question phrase, and we can let \(x\) be the unknown amount (in dollars). The word “of” translates to multiplication, as discussed earlier. So we have:</p>
+<div class="displaymath">
+\begin{equation*}
+\pinover{x}{how\ much}\pinover{=}{is}\pinover{0.30}{30\%}\pinover{\cdot}{of}\pinover{24}{\$24}
+\end{equation*}
+</div>
+</li>
+<li id="KJW">
+<p id="gsa">Let \(P\) be the unknown value. We have:</p>
+<div class="displaymath">
+\begin{equation*}
+\pinover{7.2}{\$7.20}\pinover{=}{is}\pinover{P}{what\ percent}\pinover{\cdot}{of}\pinover{24}{\$24}
+\end{equation*}
+</div>
+<p class="continuation">With this setup, \(P\) is going to be a decimal value (\(0.30\)) that you would translate into a percentage (\(30\%\)).</p>
+</li>
+<li id="qRf">
+<p id="Mzj">Let \(x\) be the unknown amount (in dollars). We have:</p>
+<div class="displaymath">
+\begin{equation*}
+\pinover{7.2}{\$7.20}\pinover{=}{is}\pinover{0.30}{30\%}\pinover{\cdot}{of}\pinover{x}{how\ much}
+\end{equation*}
+</div>
+</li>
+</ol>
+</div></div>
+</div></article></div>
+<article class="exercise exercise-like" id="aYn"><a data-knowl="" class="id-ref exercise-knowl original" data-refid="hk-aYn"><h6 class="heading">
+<span class="type">Checkpoint</span><span class="space"> </span><span class="codenumber">A.4.3</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-aYn"><article class="exercise exercise-like"><p id="p-1764">The WeBWorK problem with ID “webwork-291” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article></div></section><section class="subsection" id="ior"><h3 class="heading hide-type">
+<span class="type">Subsection</span> <span class="codenumber">A.4.2</span> <span class="title">Setting up and Solving Percent Equations</span>
+</h3>
+<p id="QND">An important skill for solving percent-related problems is to boil down a complicated word problem into a simple form like “\(2\) is \(50\%\) of \(4\text{.}\)” Let's look at some further examples.</p>
+<article class="example example-like" id="Tft"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-Tft"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">A.4.4</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-Tft"><article class="example example-like"><div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;">
+<div class="sbspanel top" style="width:50%;"><p id="eho">In Fall 2016, Portland Community College had \(89{,}900\) enrolled students. According to <a class="xref" data-knowl="./knowl/figure-pcc-race-demographics.html" title="Figure A.4.5">Figure A.4.5</a>, how many Black students were enrolled at PCC in Fall 2016?</p></div>
+<div class="sbspanel top" style="width:44%;"><figure class="figure figure-like" id="Kox"><img src="images/image-128.svg" role="img" class="contained" alt="a pie chart that indicates white students are 68%; Hispanic students are 11%; Asian students are 8%; Black students are 6%; and students of other ethnicities make up 7%"><div class="image-archive">
+<a href="images/image-128.eps">eps</a><a href="images/image-128.pdf">pdf</a><a href="images/image-128.png">png</a><a href="images/image-128.svg">svg</a><a href="images/image-128.tex">tex</a>
+</div>
+<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">A.4.5<span class="period">.</span></span><span class="space"> </span>Racial breakdown of PCC students in Fall 2016</figcaption></figure></div>
+</div></div>
+<div class="solutions">
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-nmF" id="nmF"><span class="type">Explanation</span></a><div class="hidden-content tex2jax_ignore" id="hk-nmF"><div class="solution solution-like">
+<p id="aCO">After reading this word problem and the chart, we can translate the problem into “what is \(6\%\) of \(89{,}900\text{?}\)” Let \(x\) be the number of Black students enrolled at PCC in Fall 2016. We can set up and solve the equation:</p>
+<div class="displaymath">
+\begin{align*}
+\pinover{x}{what}\amp\pinover{=}{is}\pinover{0.06}{6\%}\pinover{\cdot}{of}\pinover{89900}{89,900}\\
+x\amp=5394
+\end{align*}
+</div>
+<p class="continuation">There was not much “solving” to do, since the variable we wanted to isolate was already isolated.</p>
+<p id="GJX">As of Fall 2016, Portland Community College had \(5394\) Black students. Note: this is not likely to be perfectly accurate, because the numbers we started with (\(89{,}900\) enrolled students and \(6\%\)) appear to be rounded.</p>
+</div></div>
+</div></article></div>
+<article class="example example-like" id="zmC"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-zmC"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">A.4.6</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-zmC"><article class="example example-like"><div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;">
+<div class="sbspanel top" style="width:50%;"><p id="qvG">The bar graph in <a class="xref" data-knowl="./knowl/figure-school-class-sizes.html" title="Figure A.4.7">Figure A.4.7</a> displays how many students are in each class at a local high school. According to the bar graph, what percentage of the school's student population is freshman?</p></div>
+<div class="sbspanel top" style="width:44%;"><figure class="figure figure-like" id="WCP"><img src="images/image-129.svg" role="img" class="contained" alt="a bar graph indicating there are 134 freshmen, 103 sophomores, 96 juniors, and 86 seniors"><div class="image-archive">
+<a href="images/image-129.eps">eps</a><a href="images/image-129.pdf">pdf</a><a href="images/image-129.png">png</a><a href="images/image-129.svg">svg</a><a href="images/image-129.tex">tex</a>
+</div>
+<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">A.4.7<span class="period">.</span></span><span class="space"> </span>Number of students at a high school by class</figcaption></figure></div>
+</div></div>
+<div class="solutions">
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-TtO" id="TtO"><span class="type">Explanation</span></a><div class="hidden-content tex2jax_ignore" id="hk-TtO"><div class="solution solution-like">
+<p id="mRg">The school's total number of students is:</p>
+<div class="displaymath">
+\begin{equation*}
+134+103+96+86=419
+\end{equation*}
+</div>
+<p class="continuation">With that calculated, we can translate the main question:</p>
+<blockquote class="blockquote" id="zAX"><p id="SYp">“What percentage of the school's student population is freshman?”</p></blockquote>
+<p id="zfy">into:</p>
+<blockquote class="blockquote" id="fIg"><p id="fmH">“What percent of \(419\) is \(134\text{?}\)”</p></blockquote>
+<p id="LtQ">Using \(P\) to represent the unknown quantity, we write and solve the equation:</p>
+<div class="displaymath">
+\begin{align*}
+\pinover{P}{what\ percent}\pinover{\cdot}{of}\pinover{419}{419}\amp\pinover{=}{is}\pinover{134}{134}\\
+\divideunder{P\cdot 419}{419}\amp=\divideunder{134}{419}\\
+P\amp\approx0.3198\\
+P\amp\approx31.98\%
+\end{align*}
+</div>
+<p id="rAZ">Approximately \(31.98\%\) of the school's student population is freshman.</p>
+</div></div>
+</div></article></div>
+<article class="remark remark-like" id="XPm"><h6 class="heading">
+<span class="type">Remark</span><span class="space"> </span><span class="codenumber">A.4.8</span><span class="period">.</span>
+</h6>
+<p id="bmI">When solving equations that do <em class="emphasis">not</em> have context we state the solution set. However, when solving an equation or inequality that arises in an application problem (such as the context of the high school in <a class="xref" data-knowl="./knowl/example-high-school-classes.html" title="Example A.4.6">Example A.4.6</a>), it makes more sense to summarize our result with a sentence, using the context of the application. This allows us to communicate the full result, including appropriate units.</p></article><article class="example example-like" id="ftL"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-ftL"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">A.4.9</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-ftL"><article class="example example-like"><p id="CJY">Carlos just received his monthly paycheck. His gross pay (the amount before taxes and related things are deducted) was \(\$2{,}346.19\text{,}\) and his total tax and other deductions was \(\$350.21\text{.}\) The rest was deposited directly into his checking account. What percent of his gross pay went into his checking account?</p>
+<div class="solutions">
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-LPp" id="LPp"><span class="type">Explanation</span></a><div class="hidden-content tex2jax_ignore" id="hk-LPp"><div class="solution solution-like">
+<p id="XIi">Train yourself to read the word problem and not try to pick out numbers to substitute into formulas. You may find it helps to read the problem over to yourself three or more times before you attempt to solve it. There are <em class="emphasis">three</em> dollar amounts to discuss in this problem, and many students fall into a trap of using the wrong values in the wrong places. There is the gross pay, the amount that was deducted, and the amount that was deposited. Only two of these have been explicitly written down. We need to use subtraction to find the dollar amount that was deposited:</p>
+<div class="displaymath">
+\begin{equation*}
+2346.19-350.21=1995.98
+\end{equation*}
+</div>
+<p id="DPr">Now, we can translate the main question:</p>
+<blockquote class="blockquote" id="rWy"><p id="jWA">“What percent of his gross pay went into his checking account?”</p></blockquote>
+<p id="QdJ">into:</p>
+<blockquote class="blockquote" id="YdH"><p id="wkS">“What percent of \(\$2346.19\) is \(\$1995.98\text{?}\)”</p></blockquote>
+<p id="csb">Using \(P\) to represent the unknown quantity, we write and solve the equation:</p>
+<div class="displaymath">
+\begin{align*}
+\pinover{P}{what\ percent}\pinover{\cdot}{of}\pinover{2346.19}{\$2346.19}\amp\pinover{=}{is}\pinover{1995.98}{\$1995.98}\\
+\divideunder{P\cdot 2346.19}{2346.19}\amp=\divideunder{1995.98}{2346.19}\\
+P\amp\approx0.8507\\
+P\amp\approx85.07\%
+\end{align*}
+</div>
+<p id="Izk">Approximately \(85.07\%\) of his gross pay went into his checking account.</p>
+</div></div>
+</div></article></div>
+<article class="exercise exercise-like" id="wrW"><a data-knowl="" class="id-ref exercise-knowl original" data-refid="hk-wrW"><h6 class="heading">
+<span class="type">Checkpoint</span><span class="space"> </span><span class="codenumber">A.4.10</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-wrW"><article class="exercise exercise-like"><p id="p-1785">The WeBWorK problem with ID “webwork-292” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article></div>
+<article class="example example-like" id="LAU"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-LAU"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">A.4.11</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-LAU"><article class="example example-like"><div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;">
+<div class="sbspanel top" style="width:47%;"><p id="iRh">According to <a class="external" href="http://mfeldstein.com/how-much-do-college-students-actually-pay-for-textbooks/" target="_blank">e-Literate</a>, the average cost of a new college textbook has been increasing. Find the percentage of increase from 2009 to 2013.</p></div>
+<div class="sbspanel top" style="width:47%;"><figure class="figure figure-like" id="OYq"><img src="images/image-130.svg" role="img" class="contained" alt="a plot over time indicating average textbook price was $62.00 in 2009; $65.11 in 2010; $68.87 in 2011; $72.11 in 2012; and $79.00 in 2013"><div class="image-archive">
+<a href="images/image-130.eps">eps</a><a href="images/image-130.pdf">pdf</a><a href="images/image-130.png">png</a><a href="images/image-130.svg">svg</a><a href="images/image-130.tex">tex</a>
+</div>
+<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">A.4.12<span class="period">.</span></span><span class="space"> </span>Average New Textbook Price from 2009 to 2013</figcaption></figure></div>
+</div></div>
+<div class="solutions">
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-EkQ" id="EkQ"><span class="type">Explanation</span></a><div class="hidden-content tex2jax_ignore" id="hk-EkQ"><div class="solution solution-like">
+<p id="hbU">The actual amount of increase from 2009 to 2013 was \(79-62=17\text{,}\) dollars. We need to answer the question “\(\$17\) is what percent of \(\$62\text{?}\)” Note that we are comparing the \(17\) to \(62\text{,}\) not to \(79\text{.}\) In these situations where one amount is the earlier amount, the earlier original amount is the one that represents \(100\%\text{.}\) Let \(P\) represent the percent of increase. We can set up and solve the equation:</p>
+<div class="displaymath">
+\begin{align*}
+\pinover{17}{\$17}\amp\pinover{=}{is}\pinover{P}{what\ percent}\pinover{\cdot}{of}\pinover{62}{\$62}\\
+17\amp=62P\\
+\divideunder{17}{62}\amp=\divideunder{62P}{62}\\
+0.2742\amp\approx P
+\end{align*}
+</div>
+<p id="Njd">From 2009 to 2013, the average cost of a new textbook increased by approximately \(27.42\%\text{.}\)</p>
+</div></div>
+</div></article></div>
+<article class="exercise exercise-like" id="czf"><a data-knowl="" class="id-ref exercise-knowl original" data-refid="hk-czf"><h6 class="heading">
+<span class="type">Checkpoint</span><span class="space"> </span><span class="codenumber">A.4.13</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-czf"><article class="exercise exercise-like"><p id="p-1789">The WeBWorK problem with ID “webwork-293” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article></div>
+<article class="example example-like" id="rId"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-rId"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">A.4.14</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-rId"><article class="example example-like"><p id="vfz">Enrollment at your neighborhood's elementary school two years ago was \(417\) children. After a \(15\%\) increase last year and a \(15\%\) decrease this year, what's the new enrollment?</p>
+<div class="solutions">
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-krZ" id="krZ"><span class="type">Explanation</span></a><div class="hidden-content tex2jax_ignore" id="hk-krZ"><div class="solution solution-like">
+<p id="FEE">It is tempting to think that increasing by \(15\%\) and then decreasing by \(15\%\) would bring the enrollment right back to where it started. But the \(15\%\) decrease applies to the enrollment <em class="emphasis">after</em> it had already increased. So that \(15\%\) decrease is going to translate to <em class="emphasis">more</em> students lost than were gained.</p>
+<p id="lLN">Using \(100\%\) as corresponding to the enrollment from two years ago, the enrollment last year was \(100\%+15\%=115\%\) of that. But then using \(100\%\) as corresponding to the enrollment from last year, the enrollment this year was \(100\%-15\%=85\%\) of that. So we can set up and solve the equation</p>
+<div class="displaymath">
+\begin{align*}
+\pinover{x}{this\ \text{year's}\ enrollment}\amp\pinover{=}{is}\pinover{0.85}{85\%}\pinover{\cdot}{of}\pinover{1.15}{115\%}\pinover{\cdot}{of}\pinover{417}{enrollment\ two\ years\ ago}\\
+x\amp=0.85\cdot1.15\cdot417\\
+x\amp=407.6175
+\end{align*}
+</div>
+<p id="RSW">We would round and report that enrollment is now \(408\) students. (The percentage rise and fall of \(15\%\) were probably rounded in the first place, which is why we did not end up with a whole number.)</p>
+</div></div>
+</div></article></div></section><section class="exercises" id="OvA"><h3 class="heading hide-type">
+<span class="type">Exercises</span> <span class="codenumber">A.4.3</span> <span class="title">Exercises</span>
+</h3>
+<div class="exercisegroup" id="uCJ">
+<h6 class="heading"><span class="title">Review and Warmup</span></h6>
+<div class="exercisegroup-exercises cols3">
+<article class="exercise exercise-like" id="IGo"><h6 class="heading"><span class="codenumber">1<span class="period">.</span></span></h6>
+<p id="p-1794">The WeBWorK problem with ID “webwork-294” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="oNx"><h6 class="heading"><span class="codenumber">2<span class="period">.</span></span></h6>
+<p id="p-1795">The WeBWorK problem with ID “webwork-295” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="UUG"><h6 class="heading"><span class="codenumber">3<span class="period">.</span></span></h6>
+<p id="p-1796">The WeBWorK problem with ID “webwork-296” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="BbP"><h6 class="heading"><span class="codenumber">4<span class="period">.</span></span></h6>
+<p id="p-1797">The WeBWorK problem with ID “webwork-297” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="hiY"><h6 class="heading"><span class="codenumber">5<span class="period">.</span></span></h6>
+<p id="p-1798">The WeBWorK problem with ID “webwork-298” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="Nqh"><h6 class="heading"><span class="codenumber">6<span class="period">.</span></span></h6>
+<p id="p-1799">The WeBWorK problem with ID “webwork-299” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article>
+</div>
+</div>
+<div class="exercisegroup" id="exercisegroup-25"><div class="exercisegroup-exercises cols3">
+<article class="exercise exercise-like" id="txq"><h6 class="heading"><span class="codenumber">7<span class="period">.</span></span></h6>
+<p id="p-1800">The WeBWorK problem with ID “webwork-300” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="ZEz"><h6 class="heading"><span class="codenumber">8<span class="period">.</span></span></h6>
+<p id="p-1801">The WeBWorK problem with ID “webwork-301” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="FLI"><h6 class="heading"><span class="codenumber">9<span class="period">.</span></span></h6>
+<p id="p-1802">The WeBWorK problem with ID “webwork-302” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="lSR"><h6 class="heading"><span class="codenumber">10<span class="period">.</span></span></h6>
+<p id="p-1803">The WeBWorK problem with ID “webwork-303” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="Saa"><h6 class="heading"><span class="codenumber">11<span class="period">.</span></span></h6>
+<p id="p-1804">The WeBWorK problem with ID “webwork-304” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="yhj"><h6 class="heading"><span class="codenumber">12<span class="period">.</span></span></h6>
+<p id="p-1805">The WeBWorK problem with ID “webwork-305” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article>
+</div></div>
+<div class="exercisegroup" id="aJS">
+<h6 class="heading"><span class="title">Basic Percentage Calculation</span></h6>
+<div class="exercisegroup-exercises cols3">
+<article class="exercise exercise-like" id="eos"><h6 class="heading"><span class="codenumber">13<span class="period">.</span></span></h6>
+<p id="p-1806">The WeBWorK problem with ID “webwork-306” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="KvB"><h6 class="heading"><span class="codenumber">14<span class="period">.</span></span></h6>
+<p id="p-1807">The WeBWorK problem with ID “webwork-307” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="qCK"><h6 class="heading"><span class="codenumber">15<span class="period">.</span></span></h6>
+<p id="p-1808">The WeBWorK problem with ID “webwork-308” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="WJT"><h6 class="heading"><span class="codenumber">16<span class="period">.</span></span></h6>
+<p id="p-1809">The WeBWorK problem with ID “webwork-309” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="CRc"><h6 class="heading"><span class="codenumber">17<span class="period">.</span></span></h6>
+<p id="p-1810">The WeBWorK problem with ID “webwork-310” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="iYl"><h6 class="heading"><span class="codenumber">18<span class="period">.</span></span></h6>
+<p id="p-1811">The WeBWorK problem with ID “webwork-311” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="zWw"><h6 class="heading"><span class="codenumber">19<span class="period">.</span></span></h6>
+<p id="p-1812">The WeBWorK problem with ID “webwork-312” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="gdF"><h6 class="heading"><span class="codenumber">20<span class="period">.</span></span></h6>
+<p id="p-1813">The WeBWorK problem with ID “webwork-313” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="MkO"><h6 class="heading"><span class="codenumber">21<span class="period">.</span></span></h6>
+<p id="p-1814">The WeBWorK problem with ID “webwork-314” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="srX"><h6 class="heading"><span class="codenumber">22<span class="period">.</span></span></h6>
+<p id="p-1815">The WeBWorK problem with ID “webwork-315” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="Yzg"><h6 class="heading"><span class="codenumber">23<span class="period">.</span></span></h6>
+<p id="p-1816">The WeBWorK problem with ID “webwork-316” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="EGp"><h6 class="heading"><span class="codenumber">24<span class="period">.</span></span></h6>
+<p id="p-1817">The WeBWorK problem with ID “webwork-317” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article>
+</div>
+</div>
+<div class="exercisegroup" id="exercisegroup-27"><div class="exercisegroup-exercises cols2">
+<article class="exercise exercise-like" id="Pfu"><h6 class="heading"><span class="codenumber">25<span class="period">.</span></span></h6>
+<p id="p-1818">The WeBWorK problem with ID “webwork-318” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="vmD"><h6 class="heading"><span class="codenumber">26<span class="period">.</span></span></h6>
+<p id="p-1819">The WeBWorK problem with ID “webwork-319” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="btM"><h6 class="heading"><span class="codenumber">27<span class="period">.</span></span></h6>
+<p id="p-1820">The WeBWorK problem with ID “webwork-320” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="HAV"><h6 class="heading"><span class="codenumber">28<span class="period">.</span></span></h6>
+<p id="p-1821">The WeBWorK problem with ID “webwork-321” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="nIe"><h6 class="heading"><span class="codenumber">29<span class="period">.</span></span></h6>
+<p id="p-1822">The WeBWorK problem with ID “webwork-322” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="TPn"><h6 class="heading"><span class="codenumber">30<span class="period">.</span></span></h6>
+<p id="p-1823">The WeBWorK problem with ID “webwork-323” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article>
+</div></div>
+<div class="exercisegroup" id="GRb">
+<h6 class="heading"><span class="title">Applications</span></h6>
+<div class="exercisegroup-exercises cols2">
+<article class="exercise exercise-like" id="kNy"><h6 class="heading"><span class="codenumber">31<span class="period">.</span></span></h6>
+<p id="p-1824">The WeBWorK problem with ID “webwork-324” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="QUH"><h6 class="heading"><span class="codenumber">32<span class="period">.</span></span></h6>
+<p id="p-1825">The WeBWorK problem with ID “webwork-325” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="xbQ"><h6 class="heading"><span class="codenumber">33<span class="period">.</span></span></h6>
+<p id="p-1826">The WeBWorK problem with ID “webwork-326” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="diZ"><h6 class="heading"><span class="codenumber">34<span class="period">.</span></span></h6>
+<p id="p-1827">The WeBWorK problem with ID “webwork-327” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="Jqi"><h6 class="heading"><span class="codenumber">35<span class="period">.</span></span></h6>
+<p id="p-1828">The WeBWorK problem with ID “webwork-328” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="pxr"><h6 class="heading"><span class="codenumber">36<span class="period">.</span></span></h6>
+<p id="p-1829">The WeBWorK problem with ID “webwork-329” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="VEA"><h6 class="heading"><span class="codenumber">37<span class="period">.</span></span></h6>
+<p id="p-1830">The WeBWorK problem with ID “webwork-330” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="BLJ"><h6 class="heading"><span class="codenumber">38<span class="period">.</span></span></h6>
+<p id="p-1831">The WeBWorK problem with ID “webwork-331” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="hSS"><h6 class="heading"><span class="codenumber">39<span class="period">.</span></span></h6>
+<p id="p-1832">The WeBWorK problem with ID “webwork-332” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="Oab"><h6 class="heading"><span class="codenumber">40<span class="period">.</span></span></h6>
+<p id="p-1833">The WeBWorK problem with ID “webwork-333” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="uhk"><h6 class="heading"><span class="codenumber">41<span class="period">.</span></span></h6>
+<p id="p-1834">The WeBWorK problem with ID “webwork-334” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="aot"><h6 class="heading"><span class="codenumber">42<span class="period">.</span></span></h6>
+<p id="p-1835">The WeBWorK problem with ID “webwork-335” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="GvC"><h6 class="heading"><span class="codenumber">43<span class="period">.</span></span></h6>
+<p id="p-1836">The WeBWorK problem with ID “webwork-336” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="mCL"><h6 class="heading"><span class="codenumber">44<span class="period">.</span></span></h6>
+<p id="p-1837">The WeBWorK problem with ID “webwork-337” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="SJU"><h6 class="heading"><span class="codenumber">45<span class="period">.</span></span></h6>
+<p id="p-1838">The WeBWorK problem with ID “webwork-338” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="yRd"><h6 class="heading"><span class="codenumber">46<span class="period">.</span></span></h6>
+<p id="p-1839">The WeBWorK problem with ID “webwork-339” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="eYm"><h6 class="heading"><span class="codenumber">47<span class="period">.</span></span></h6>
+<p id="p-1840">The WeBWorK problem with ID “webwork-340” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="Lfv"><h6 class="heading"><span class="codenumber">48<span class="period">.</span></span></h6>
+<p id="p-1841">The WeBWorK problem with ID “webwork-341” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="rmE"><h6 class="heading"><span class="codenumber">49<span class="period">.</span></span></h6>
+<p id="p-1842">The WeBWorK problem with ID “webwork-342” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="XtN"><h6 class="heading"><span class="codenumber">50<span class="period">.</span></span></h6>
+<p id="p-1843">The WeBWorK problem with ID “webwork-343” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="DAW"><h6 class="heading"><span class="codenumber">51<span class="period">.</span></span></h6>
+<p id="p-1844">The WeBWorK problem with ID “webwork-344” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="jIf"><h6 class="heading"><span class="codenumber">52<span class="period">.</span></span></h6>
+<p id="p-1845">The WeBWorK problem with ID “webwork-345” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="PPo"><h6 class="heading"><span class="codenumber">53<span class="period">.</span></span></h6>
+<p id="p-1846">The WeBWorK problem with ID “webwork-346” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="vWx"><h6 class="heading"><span class="codenumber">54<span class="period">.</span></span></h6>
+<p id="p-1847">The WeBWorK problem with ID “webwork-347” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="AGq"><h6 class="heading"><span class="codenumber">55<span class="period">.</span></span></h6>
+<p id="p-1848">The WeBWorK problem with ID “webwork-348” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="gNz"><h6 class="heading"><span class="codenumber">56<span class="period">.</span></span></h6>
+<p id="p-1849">The WeBWorK problem with ID “webwork-349” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="cdG"><h6 class="heading"><span class="codenumber">57<span class="period">.</span></span></h6>
+<p id="p-1850">The WeBWorK problem with ID “webwork-350” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="IkP"><h6 class="heading"><span class="codenumber">58<span class="period">.</span></span></h6>
+<p id="p-1851">The WeBWorK problem with ID “webwork-351” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="orY"><h6 class="heading"><span class="codenumber">59<span class="period">.</span></span></h6>
+<p id="p-1852">The WeBWorK problem with ID “webwork-352” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="Uzh"><h6 class="heading"><span class="codenumber">60<span class="period">.</span></span></h6>
+<p id="p-1853">The WeBWorK problem with ID “webwork-353” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article>
+</div>
+</div>
+<div class="exercisegroup" id="mYk">
+<h6 class="heading"><span class="title">Percent Increase/Decrease</span></h6>
+<div class="exercisegroup-exercises cols2">
+<article class="exercise exercise-like" id="MUI"><h6 class="heading"><span class="codenumber">61<span class="period">.</span></span></h6>
+<p id="p-1854">The WeBWorK problem with ID “webwork-354” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="tbR"><h6 class="heading"><span class="codenumber">62<span class="period">.</span></span></h6>
+<p id="p-1855">The WeBWorK problem with ID “webwork-355” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="Zja"><h6 class="heading"><span class="codenumber">63<span class="period">.</span></span></h6>
+<p id="p-1856">The WeBWorK problem with ID “webwork-356” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="Fqj"><h6 class="heading"><span class="codenumber">64<span class="period">.</span></span></h6>
+<p id="p-1857">The WeBWorK problem with ID “webwork-357” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="lxs"><h6 class="heading"><span class="codenumber">65<span class="period">.</span></span></h6>
+<p id="p-1858">The WeBWorK problem with ID “webwork-358” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="REB"><h6 class="heading"><span class="codenumber">66<span class="period">.</span></span></h6>
+<p id="p-1859">The WeBWorK problem with ID “webwork-359” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="xLK"><h6 class="heading"><span class="codenumber">67<span class="period">.</span></span></h6>
+<p id="p-1860">The WeBWorK problem with ID “webwork-360” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="dST"><h6 class="heading"><span class="codenumber">68<span class="period">.</span></span></h6>
+<p id="p-1861">The WeBWorK problem with ID “webwork-361” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="Wou"><h6 class="heading"><span class="codenumber">69<span class="period">.</span></span></h6>
+<p id="p-1862">The WeBWorK problem with ID “webwork-362” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="CvD"><h6 class="heading"><span class="codenumber">70<span class="period">.</span></span></h6>
+<p id="p-1863">The WeBWorK problem with ID “webwork-363” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="Kac"><h6 class="heading"><span class="codenumber">71<span class="period">.</span></span></h6>
+<p id="p-1864">The WeBWorK problem with ID “webwork-364” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article><article class="exercise exercise-like" id="qhl"><h6 class="heading"><span class="codenumber">72<span class="period">.</span></span></h6>
+<p id="p-1865">The WeBWorK problem with ID “webwork-365” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article>
+</div>
+</div></section></section></div></main>
+</div>
+</body>
+</html>

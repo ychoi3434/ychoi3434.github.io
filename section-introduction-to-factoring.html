@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*       on 2021-08-28T19:50:38Z       *-->
+<!--*   A recent stable commit (2020-08-09):   *-->
+<!--* 98f21740783f166a773df4dc83cab5293ab63a4a *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<html lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>ORCCA Introduction to Factoring</title>
+<meta name="Keywords" content="Authored in PreTeXt">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+<script>window.MathJax = {
+  tex: {
+    inlineMath: [['\\(','\\)']],
+    tags: "none",
+    useLabelIds: true,
+    tagSide: "right",
+    tagIndent: ".8em",
+    packages: {'[+]': ['base', 'extpfeil', 'ams', 'amscd', 'newcommand', 'knowl', 'sfrac']}
+  },
+  options: {
+    ignoreHtmlClass: "tex2jax_ignore",
+    processHtmlClass: "has_am",
+  },
+  chtml: {
+    scale: 0.88,
+    mtextInheritFont: true
+  },
+  loader: {
+    load: ['input/asciimath', '[tex]/extpfeil', '[tex]/amscd', '[tex]/newcommand', '[pretext]/mathjaxknowl3.js'],
+    paths: {pretext: "https://pretextbook.org/js/lib"},
+  },
+/* support for the sfrac command in MathJax (Beveled fraction) */
+  startup: {
+    ready() {
+      //
+      // Creating a simple "sfrac" package on-the-fly
+      //
+      const Configuration = MathJax._.input.tex.Configuration.Configuration;
+      const CommandMap = MathJax._.input.tex.SymbolMap.CommandMap;
+      
+      new CommandMap('sfrac', {
+        sfrac: 'SFrac'
+        }, {
+        SFrac(parser, name) {
+        const num = parser.ParseArg(name);
+        const den = parser.ParseArg(name);
+        const frac = parser.create('node', 'mfrac', [num, den], {bevelled: true});
+        parser.Push(frac);
+        }
+      });
+      //
+      // Create the package for the overridden macros
+      //
+      Configuration.create('sfrac', {
+        handler: {macro: ['sfrac']}
+      });
+      
+    MathJax.startup.defaultReady();
+    }
+  },
+};
+</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext_add_on.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script xmlns:svg="http://www.w3.org/2000/svg">sagecellEvalName='Evaluate (Sage)';
+</script><link xmlns:svg="http://www.w3.org/2000/svg" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://fonts.googleapis.com/css?family=Inconsolata:400,700&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/pretext.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/pretext_add_on.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/banner_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/toc_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/knowls_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/style_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/colors_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/setcolors.css" rel="stylesheet" type="text/css">
+<!-- 2019-10-12: Temporary - CSS file for experiments with styling --><link xmlns:svg="http://www.w3.org/2000/svg" href="developer.css" rel="stylesheet" type="text/css">
+</head>
+<body id="PCC-ORCCA" class="mathbook-book has-toc has-sidebar-left">
+<a class="assistive" href="#content">Skip to main content</a><div xmlns:svg="http://www.w3.org/2000/svg" id="latex-macros" class="hidden-content" style="display:none">\(\require{cancel}\newcommand{\abs}[1]{\left\lvert#1\right\rvert}
+\newcommand{\point}[2]{\left(#1,#2\right)}
+\newcommand{\highlight}[1]{\definecolor{sapphire}{RGB}{59,90,125} {\color{sapphire}{{#1}}}}
+\newcommand{\firsthighlight}[1]{\definecolor{sapphire}{RGB}{59,90,125} {\color{sapphire}{{#1}}}}
+\newcommand{\secondhighlight}[1]{\definecolor{emerald}{RGB}{20,97,75} {\color{emerald}{{#1}}}}
+\newcommand{\unhighlight}[1]{{\color{black}{{#1}}}}
+\newcommand{\lowlight}[1]{{\color{lightgray}{#1}}}
+\newcommand{\attention}[1]{\mathord{\overset{\downarrow}{#1}}}
+\newcommand{\nextoperation}[1]{\mathord{\boxed{#1}}}
+\newcommand{\substitute}[1]{{\color{blue}{{#1}}}}
+\newcommand{\pinover}[2]{\overset{\overset{\mathrm{\ #2\ }}{|}}{\strut #1 \strut}}
+\newcommand{\addright}[1]{{\color{blue}{{{}+#1}}}}
+\newcommand{\addleft}[1]{{\color{blue}{{#1+{}}}}}
+\newcommand{\subtractright}[1]{{\color{blue}{{{}-#1}}}}
+\newcommand{\multiplyright}[2][\cdot]{{\color{blue}{{{}#1#2}}}}
+\newcommand{\multiplyleft}[2][\cdot]{{\color{blue}{{#2#1{}}}}}
+\newcommand{\divideunder}[2]{\frac{#1}{{\color{blue}{{#2}}}}}
+\newcommand{\divideright}[1]{{\color{blue}{{{}\div#1}}}}
+\newcommand{\negate}[1]{{\color{blue}{{-}}}\left(#1\right)}
+\newcommand{\cancelhighlight}[1]{\definecolor{sapphire}{RGB}{59,90,125}{\color{sapphire}{{\cancel{#1}}}}}
+\newcommand{\secondcancelhighlight}[1]{\definecolor{emerald}{RGB}{20,97,75}{\color{emerald}{{\bcancel{#1}}}}}
+\newcommand{\thirdcancelhighlight}[1]{\definecolor{amethyst}{RGB}{112,72,91}{\color{amethyst}{{\xcancel{#1}}}}}
+\newcommand{\confirm}[1]{\stackrel{\checkmark}{#1}}
+\newcommand{\reject}[1]{\stackrel{\text{no}}{#1}}
+\newcommand{\wonder}[1]{\stackrel{\text{?}}{#1}}
+\newcommand{\apple}{\text{🍎}}
+\newcommand{\banana}{\text{🍌}}
+\newcommand{\pear}{\text{🍐}}
+\newcommand{\cat}{\text{🐱}}
+\newcommand{\dog}{\text{🐶}}
+\newcommand{\lt}{&lt;}
+\newcommand{\gt}{&gt;}
+\newcommand{\amp}{&amp;}
+\)</div>
+<header id="masthead" class="smallbuttons"><div class="banner"><div class="container">
+<a id="logo-link" href="http://www.pcc.edu/ORCCA" target="_blank"><img src="images/ORCCAbrandlogo.png" alt="Logo image"></a><div class="title-container">
+<h1 class="heading"><a href="orcca.html"><span class="title">RVCC Elementary Algebra</span></a></h1>
+<p class="byline">Department of Mathematics and Computer Science</p>
+</div>
+</div></div>
+<nav xmlns:svg="http://www.w3.org/2000/svg" id="primary-navbar" class="navbar"><div class="container">
+<div class="navbar-top-buttons">
+<button class="sidebar-left-toggle-button button active" aria-label="Show or hide table of contents sidebar">Contents</button><div class="tree-nav toolbar toolbar-divisor-3">
+<a class="index-button toolbar-item button" href="index-1.html" title="Index">Index</a><span class="threebuttons"><a id="previousbutton" class="previous-button toolbar-item button" href="chapter-radical-expressions-and-equations.html" title="Previous">Prev</a><a id="upbutton" class="up-button button toolbar-item" href="chapter-radical-expressions-and-equations.html" title="Up">Up</a><a id="nextbutton" class="next-button button toolbar-item" href="section-factoring-trinomials.html" title="Next">Next</a></span>
+</div>
+</div>
+<div class="navbar-bottom-buttons toolbar toolbar-divisor-4">
+<button class="sidebar-left-toggle-button button toolbar-item active">Contents</button><a class="previous-button toolbar-item button" href="chapter-radical-expressions-and-equations.html" title="Previous">Prev</a><a class="up-button button toolbar-item" href="chapter-radical-expressions-and-equations.html" title="Up">Up</a><a class="next-button button toolbar-item" href="section-factoring-trinomials.html" title="Next">Next</a>
+</div>
+</div></nav></header><div class="page">
+<div xmlns:svg="http://www.w3.org/2000/svg" id="sidebar-left" class="sidebar" role="navigation"><div class="sidebar-content">
+<nav id="toc"><ul>
+<li class="link frontmatter">
+<a href="frontmatter.html" data-scroll="JVg"><span class="title">Front Matter</span></a><ul><li><a href="colophon-1.html" data-scroll="colophon-1">Colophon</a></li></ul>
+</li>
+<li class="link part"><a href="part-all-of-the-chapters.html" data-scroll="part-all-of-the-chapters"><span class="codenumber">I</span> <span class="title"></span></a></li>
+<li class="link">
+<a href="chapter-introduction-to-algebra.html" data-scroll="dNX"><span class="codenumber">1</span> <span class="title">Introduction to Algebra</span></a><ul>
+<li><a href="section-real-numbers-and-the-number-line.html" data-scroll="ipv">Real Numbers and the Number Line</a></li>
+<li><a href="section-properties-of-real-numbers.html" data-scroll="tNy">Properties of Real Numbers</a></li>
+<li><a href="section-simplifying-and-writing-algebraic-expressions.html" data-scroll="xRO">Simplifying and Writing Algebraic Expressions</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="chapter-linear-equations-and-inequalities-modified.html" data-scroll="sWV"><span class="codenumber">2</span> <span class="title">Linear Equations and Inequalities</span></a><ul>
+<li><a href="section-introduction-to-equations.html" data-scroll="fwy">Introduction to Equations</a></li>
+<li><a href="section-linear-equations.html" data-scroll="xVO">Linear Equations</a></li>
+<li><a href="section-introduction-to-problem-solving.html" data-scroll="Wul">Introduction to Problem Solving</a></li>
+<li><a href="section-formulas.html" data-scroll="Nnq">Formulas</a></li>
+<li><a href="section-linear-inequalities.html" data-scroll="Nuc">Linear Inequalities</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="chapter-graphing-equations.html" data-scroll="gID"><span class="codenumber">3</span> <span class="title">Graphing Lines</span></a><ul>
+<li><a href="section-introduction-to-graphing.html" data-scroll="YTJ">Introduction to Graphing</a></li>
+<li><a href="section-equations-in-two-variables.html" data-scroll="QXY">Equations in Two Variables</a></li>
+<li><a href="section-intercepts-horizontal-and-vertical-lines.html" data-scroll="ByF">Intercepts: Horizontal and Vertical Lines</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="chapter-systems-of-linear-equations-in-two-variables.html" data-scroll="xGO"><span class="codenumber">4</span> <span class="title">Systems of Linear Equations</span></a><ul>
+<li><a href="section-solving-systems-of-linear-equations-graphically-and-numerically.html" data-scroll="njo">Solving Systems of Linear Equations Graphically and Numerically</a></li>
+<li><a href="section-solving-systems-of-linear-equations-by-substitution.html" data-scroll="zdh">Solving Systems of Linear Equations by Substitution</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="chapter-polynomials-and-exponents-modified.html" data-scroll="onc"><span class="codenumber">5</span> <span class="title">Exponents and Polynomials</span></a><ul>
+<li><a href="section-rules-for-exponents.html" data-scroll="KHJ">Rules for Exponents</a></li>
+<li><a href="section-adding-and-subtracting-polynomials.html" data-scroll="VvN">Addition and Subtraction of Polynomials</a></li>
+<li><a href="section-multiplication-of-polynomials.html" data-scroll="IcY">Multiplication of Polynomials</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="chapter-radical-expressions-and-equations.html" data-scroll="chapter-radical-expressions-and-equations"><span class="codenumber">6</span> <span class="title">Radical Expressions and Equations</span></a><ul>
+<li><a href="section-introduction-to-factoring.html" data-scroll="duD" class="active">Introduction to Factoring</a></li>
+<li><a href="section-factoring-trinomials.html" data-scroll="Mrf">Factoring Trinomials</a></li>
+<li><a href="section-solving-equations-by-factoring.html" data-scroll="DXi">Solving Equations by Factoring 1 (Quadratics)</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="chapter-rational-expressions.html" data-scroll="RzF"><span class="codenumber">7</span> <span class="title">Rational Expressions</span></a><ul>
+<li><a href="section-introduction-to-rational-expressions.html" data-scroll="Moo">Introduction to Rational Expressions</a></li>
+<li><a href="section-multiplication-and-division-of-rational-expressions.html" data-scroll="Vps">Multiplication and Division of Rational Expressions</a></li>
+<li><a href="section-addition-and-subtraction-with-like-denominators.html" data-scroll="KBw">Addition and Subtraction of Rational Expressions with Like Denominators</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="chapter-radical-expressions-and-functions.html" data-scroll="chapter-radical-expressions-and-functions"><span class="codenumber">8</span> <span class="title">Quantities in the Physical World</span></a><ul><li><a href="section-radical-expressions-and-functions.html" data-scroll="GAK">Radical Expressions and Functions</a></li></ul>
+</li>
+<li class="link backmatter"><a href="backmatter.html" data-scroll="jDj"><span class="title">Appendices</span></a></li>
+<li class="link">
+<a href="appendix-basic-math-review.html" data-scroll="appendix-basic-math-review"><span class="codenumber">A</span> <span class="title">Basic Math Review</span></a><ul>
+<li><a href="section-arithmetic-with-negative-numbers.html" data-scroll="qBB">Arithmetic with Negative Numbers</a></li>
+<li><a href="section-fractions-and-fraction-arithmetic.html" data-scroll="VAa">Fractions and Fraction Arithmetic</a></li>
+<li><a href="section-absolute-value-and-square-root.html" data-scroll="GAK">Absolute Value and Square Root</a></li>
+<li><a href="section-percentages.html" data-scroll="Chi">Percentages</a></li>
+<li><a href="section-order-of-operations.html" data-scroll="aog">Order of Operations</a></li>
+<li><a href="section-set-notation-and-types-of-numbers.html" data-scroll="Fdo">Set Notation and Types of Numbers</a></li>
+</ul>
+</li>
+<li class="link"><a href="appendix-unit-conversions.html" data-scroll="appendix-unit-conversions"><span class="codenumber">B</span> <span class="title">Unit Conversions</span></a></li>
+<li class="link"><a href="index-1.html" data-scroll="index-1"><span class="title">Index</span></a></li>
+</ul></nav><div class="extras"><nav><a class="mathbook-link" href="https://pretextbook.org">Authored in PreTeXt</a><a href="https://www.mathjax.org"><img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" alt="Powered by MathJax"></a></nav></div>
+</div></div>
+<main class="main"><div id="content" class="pretext-content"><section xmlns:svg="http://www.w3.org/2000/svg" class="section" id="duD"><h2 class="heading hide-type">
+<span class="type">Section</span> <span class="codenumber">6.1</span> <span class="title">Introduction to Factoring</span>
+</h2>
+<section class="introduction" id="Rzo"><p id="WxC">In <a href="chapter-polynomials-and-exponents-modified.html" class="internal" title="Chapter 5: Exponents and Polynomials">Chapter 5</a>, we learned how to multiply polynomials, such as when you start with \((x+2)(x+3)\) and obtain \(x^2+5x+6\text{.}\) This chapter, starting with this section, is about the <em class="emphasis">opposite</em> process—factoring. For example, starting with \(x^2+5x+6\) and obtaining \((x+2)(x+3)\text{.}\) We will start with the simplest kind of factoring: for example starting with \(x^2+2x\) and obtaining \(x(x+2)\text{.}\)</p></section><section class="subsection" id="foy"><h3 class="heading hide-type">
+<span class="type">Subsection</span> <span class="codenumber">6.1.1</span> <span class="title">Motivation for Factoring</span>
+</h3>
+<p id="bhv">When you write \(x^2+2x\text{,}\) you have an algebraic expression built with two terms—two parts that are <em class="emphasis">added</em> together. When you write \(x(x+2)\text{,}\) you have an algebraic expression built with two factors—two parts that are <em class="emphasis">multiplied</em> together. Factoring is useful, because sometimes (but not always) having your expression written as parts that are <em class="emphasis">multiplied</em> together makes it easy to simplify the expression.</p>
+<p id="HoE">You've seen this with fractions. To simplify \(\frac{15}{35}\text{,}\) breaking down the numerator and denominator into factors is useful: \(\frac{3\cdot5}{7\cdot5}\text{.}\) Now you can see that the factors of \(5\) cancel. </p>
+<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;">
+<div class="sbspanel top" style="width:47%;"><p id="p-975">There are other reasons to appreciate the value in factoring. One reason is that there is a relationship between a factored polynomial and the horizontal intercepts of its graph. For example in the graph of \(y=(x+2)(x-3)\text{,}\) the horizontal intercepts are \((-2,0)\) and \((3,0)\text{.}\) Note the \(x\)-values are \(-2\) and \(3\text{,}\) and think about what happens when you subsitutue those numbers in for \(x\) in \(y=(x+2)(x-3)\text{.}\) We will explore this more fully in <code class="code-inline tex2jax_ignore">[cross-reference to target(s) "section-quadratic-graphs-and-vertex-form" missing or not unique]</code>.</p></div>
+<div class="sbspanel top" style="width:47%;"><figure class="figure figure-like" id="figure-108"><img src="images/image-97.svg" role="img" class="contained" alt=""><div class="image-archive">
+<a href="images/image-97.eps">eps</a><a href="images/image-97.pdf">pdf</a><a href="images/image-97.png">png</a><a href="images/image-97.svg">svg</a><a href="images/image-97.tex">tex</a>
+</div>
+<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">6.1.1<span class="period">.</span></span><span class="space"> </span>A graph of \(y=(x+2)(x-3)\)</figcaption></figure></div>
+</div></div></section><section class="subsection" id="LvH"><h3 class="heading hide-type">
+<span class="type">Subsection</span> <span class="codenumber">6.1.2</span> <span class="title">Identifying the Greatest Common Factor</span>
+</h3>
+<p id="TCW">The most basic technique for factoring involves recognizing the <dfn class="terminology">greatest common factor</dfn>  between two expressions, which is the largest factor that goes in evenly to both expressions. For example, the greatest common factor between \(6\) and \(8\) is \(2\text{,}\) since \(2\) divides nicely into both \(6\) and \(8\) and no larger number would divide nicely into both \(6\) and \(8\text{.}\)</p>
+<p id="zKf">Similarly, the greatest common factor between \(4x\) and \(3x^2\) is \(x\text{.}\) If you write \(4x\) as a product of its factors, you have \(2\cdot 2 \cdot x\text{.}\) And if you fully factor \(3x^2\text{,}\) you have \(3\cdot x\cdot x\text{.}\) The only factor they have in common is \(x\text{,}\) so that is the greatest common factor. No larger expression goes in nicely to both expressions.</p>
+<article class="example example-like" id="UPt"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-UPt"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">6.1.2</span><span class="period">.</span><span class="space"> </span><span class="title">Finding the Greatest Common Factor.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-UPt"><article class="example example-like"><p id="jRn">What is the common factor between \(6x^2\) and \(70x\text{?}\) Break down each of these into its factors:</p>
+<div class="displaymath">
+\begin{align*}
+6x^2 \amp =2\cdot3\cdot x\cdot x \amp 70x \amp =2\cdot5\cdot7\cdot x\\
+\end{align*}
+<p class="intertext">And identify the common factors:</p>
+\begin{align*}
+6x^2 \amp =\attention{2}\cdot3\cdot \attention{x}\cdot x \amp 70x \amp =\attention{2}\cdot5\cdot7\cdot \attention{x}
+\end{align*}
+</div>
+<p class="continuation">With \(2\) and \(x\) in common, the greatest common factor is \(2x\text{.}\)</p></article></div>
+<article class="exercise exercise-like" id="AWC"><a data-knowl="" class="id-ref exercise-knowl original" data-refid="hk-AWC"><h6 class="heading">
+<span class="type">Checkpoint</span><span class="space"> </span><span class="codenumber">6.1.3</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-AWC"><article class="exercise exercise-like"><p id="p-979">The WeBWorK problem with ID “webwork-57” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article></div></section><section class="subsection" id="rCQ"><h3 class="heading hide-type">
+<span class="type">Subsection</span> <span class="codenumber">6.1.3</span> <span class="title">Factoring Out the Greatest Common Factor</span>
+</h3>
+<p id="LYx">We have learned the distributive property: \(a(b+c)=ab+ac\text{.}\) Perhaps you have thought of this as a way to “distribute” the number \(a\) to each of \(b\) and \(c\text{.}\) In this section, we will use the distributive property in the opposite way. If you have an expression \(ab+ac\text{,}\) it is equal to \(a(b+c)\text{.}\) In that example, we factored out \(a\text{,}\) which is the common factor between \(ab\) and \(ac\text{.}\)</p>
+<p id="sfG">The following steps use the distributive property to factor out the greatest common factor between two or more terms.</p>
+<article class="algorithm theorem-like" id="hdL"><h6 class="heading">
+<span class="type">Process</span><span class="space"> </span><span class="codenumber">6.1.4</span><span class="period">.</span><span class="space"> </span><span class="title">Factoring Out the Greatest Common Factor.</span>
+</h6>
+<ol id="XCV" class="decimal">
+<li id="QtV"><p id="RdP">Identify the greatest common factor in all terms.</p></li>
+<li id="wBe"><p id="xkY">Write the greatest common factor outside a pair of parentheses with the appropriate addition or subtraction signs inside.</p></li>
+<li id="cIn"><p id="dsh">For each term from the original expression, what would you multiply the greatest common factor by to result in that term? Write your answer in the parentheses.</p></li>
+</ol></article><article class="example example-like" id="NkU"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-NkU"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">6.1.5</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-NkU"><article class="example example-like"><p id="PYw">To factor \(12x^2+15x\text{:}\)</p>
+<ol class="decimal">
+<li id="IPw"><p id="Jzq">The greatest common factor between \(12x^2\) and \(15x\) is \(3x\text{.}\)</p></li>
+<li id="oWF"><p id="pGz">\(\displaystyle 3x(\phantom{4x}+\phantom{5})\)</p></li>
+<li id="VdO"><p id="VNI">\(\displaystyle 3x(4x+5)\)</p></li>
+</ol></article></div>
+<article class="example example-like" id="tsd"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-tsd"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">6.1.6</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-tsd"><article class="example example-like"><p id="wfF">Factor the polynomial \(3x^3+3x^2-9\text{.}\)</p>
+<ol id="cmO" class="decimal">
+<li id="BkX"><p id="BUR">We identify the greatest common factor as \(3\text{,}\) because \(3\) is the only common factor between \(3x^3\text{,}\) \(3x^2\) and \(9\text{.}\)</p></li>
+<li id="hsg">
+<p id="ica">We write:</p>
+<div class="displaymath">
+\begin{equation*}
+3x^3+3x^2-9=3(\phantom{x^2}+\phantom{x^2}-\phantom{3})\text{.}
+\end{equation*}
+</div>
+</li>
+<li id="Nzp">
+<p id="Ojj">We ask the question “\(3\) times what gives \(3x^3\text{?}\)” The answer is \(x^3\text{.}\) Now we have:</p>
+<div class="displaymath">
+\begin{equation*}
+3x^3+3x^2-9=3(x^3+\phantom{x^2}-\phantom{3})\text{.}
+\end{equation*}
+</div>
+<p id="uqs">We ask the question “\(3\) times what gives \(3x^2\text{?}\)” The answer is \(x^2\text{.}\) Now we have:</p>
+<div class="displaymath">
+\begin{equation*}
+3x^3+3x^2-9=3(x^3+x^2-\phantom{3})\text{.}
+\end{equation*}
+</div>
+<p id="axB">We ask the question “\(3\) times what gives \(9\text{?}\)” The answer is \(3\text{.}\) Now we have:</p>
+<div class="displaymath">
+\begin{equation*}
+3x^3+3x^2-9=3(x^3+x^2-3)\text{.}
+\end{equation*}
+</div>
+</li>
+</ol>
+<p id="ItX">To check that this is correct, multiplying through \(3(x^3+x^2-3)\) should give the original expression \(3x^3+3x^2-9\text{.}\) We check this, and it does.</p></article></div>
+<article class="exercise exercise-like" id="Zzm"><a data-knowl="" class="id-ref exercise-knowl original" data-refid="hk-Zzm"><h6 class="heading">
+<span class="type">Checkpoint</span><span class="space"> </span><span class="codenumber">6.1.7</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-Zzm"><article class="exercise exercise-like"><p id="p-998">The WeBWorK problem with ID “webwork-58” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article></div></section><section class="subsection" id="XJZ"><h3 class="heading hide-type">
+<span class="type">Subsection</span> <span class="codenumber">6.1.4</span> <span class="title">Visualizing With Rectangles</span>
+</h3>
+<p id="EtY">In <code class="code-inline tex2jax_ignore">[cross-reference to target(s) "section-multiplying-polynomials" missing or not unique]</code>, we learned one way to multiply polynomials using rectangle diagrams. Similarly, we can factor a polynomial with a rectangle diagram.</p>
+<article class="algorithm theorem-like" id="FGv"><h6 class="heading">
+<span class="type">Process</span><span class="space"> </span><span class="codenumber">6.1.8</span><span class="period">.</span><span class="space"> </span><span class="title">Factoring Out the Greatest Common Factor Using Rectangles.</span>
+</h6>
+<ol id="DKe" class="decimal">
+<li id="tGy"><p id="GEK">Put the terms into adjacent rectangles. Think of these as labeling the areas of each rectangle.</p></li>
+<li id="ZNH"><p id="mLT">Identify the greatest common factor, and mark the height of the overall rectangle with it.</p></li>
+<li id="FUQ"><p id="STc">Mark the width of each rectangle based on each rectangle's area and height.</p></li>
+<li id="mbZ"><p id="zal">Since the overall rectangle's area equals its width times its height, the height is one factor, and the sum of the widths is another factor.</p></li>
+</ol></article><article class="example example-like" id="lNE"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-lNE"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">6.1.9</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-lNE"><article class="example example-like"><p id="oBg">We will factor \(12x^2+15x\text{,}\) the same polynomial from the example in <a class="xref" data-knowl="./knowl/algorithm-factor-gcf.html" title="Process 6.1.4: Factoring Out the Greatest Common Factor">Algorithm 6.1.4</a>, so that you may compare the two styles.</p>
+<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;">
+<div class="sbspanel fixed-width bottom" style="width:32%;"><table class="tabular" id="Gjl">
+<tr>
+<td class="r m b0 r0 l0 t0 lines"></td>
+<td class="r m b1 r0 l0 t0 lines"></td>
+<td class="r m b1 r0 l0 t0 lines"></td>
+</tr>
+<tr>
+<td class="r m b0 r1 l0 t0 lines"></td>
+<td class="r m b1 r1 l0 t0 lines">\(12x^2\)</td>
+<td class="r m b1 r1 l0 t0 lines">\(15x\)</td>
+</tr>
+</table></div>
+<div class="sbspanel fixed-width bottom" style="width:32%;"><table class="tabular" id="mqu">
+<tr>
+<td class="r m b0 r0 l0 t0 lines"></td>
+<td class="r m b1 r0 l0 t0 lines"></td>
+<td class="r m b1 r0 l0 t0 lines"></td>
+</tr>
+<tr>
+<td class="r m b0 r1 l0 t0 lines">\(3x\)</td>
+<td class="r m b1 r1 l0 t0 lines">\(12x^2\)</td>
+<td class="r m b1 r1 l0 t0 lines">\(15x\)</td>
+</tr>
+</table></div>
+<div class="sbspanel fixed-width bottom" style="width:32%;"><table class="tabular" id="SxD">
+<tr>
+<td class="r m b0 r0 l0 t0 lines"></td>
+<td class="r m b1 r0 l0 t0 lines">\(4x\)</td>
+<td class="r m b1 r0 l0 t0 lines">\(5\)</td>
+</tr>
+<tr>
+<td class="r m b0 r1 l0 t0 lines">\(3x\)</td>
+<td class="r m b1 r1 l0 t0 lines">\(12x^2\)</td>
+<td class="r m b1 r1 l0 t0 lines">\(15x\)</td>
+</tr>
+</table></div>
+</div></div>
+<p id="UIp">So \(12x^2+15x\) factors as \(3x(4x+5)\text{.}\)</p></article></div></section><section class="subsection" id="DRi"><h3 class="heading hide-type">
+<span class="type">Subsection</span> <span class="codenumber">6.1.5</span> <span class="title">More Examples of Factoring out the Common Factor</span>
+</h3>
+<p id="kBh">Previous examples did not cover every nuance with factoring out the greatest common factor. Here are a few more factoring examples that attempt to do so.</p>
+<article class="example example-like" id="ybW"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-ybW"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">6.1.10</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-ybW"><article class="example example-like"><p id="APy">Factor \(-35m^5+5m^4-10m^3\text{.}\)</p>
+<p id="gWH">First, we identify the common factor. The number \(5\) is the greatest common factor of the three coefficients (which were \(-35\text{,}\) \(5\text{,}\) and \(-10\)) and also \(m^3\) is the largest expression that divides \(m^5\text{,}\) \(m^4\text{,}\) and \(m^3\text{.}\) Therefore the greatest common factor is \(5m^3\text{.}\)</p>
+<p id="NdQ">In this example, the leading term is a negative number. When this happens, we will make it common practice to take that negative as part of the greatest common factor. So we will proceed by factoring out \(-5m^3\text{.}\) Note the signs change inside the parentheses.</p>
+<div class="displaymath">
+\begin{align*}
+-35m^5\highlight{{}+{}}5m^4\highlight{{}-{}}10m^3\amp=-5m^3(\phantom{7m^2}\highlight{{}-{}}\phantom{m}\highlight{{}+{}}\phantom{2})\\
+\amp=-5m^3(7m^2-\phantom{m}+\phantom{2})\\
+\amp=-5m^3(7m^2-m+\phantom{2})\\
+\amp=-5m^3(7m^2-m+2)
+\end{align*}
+</div></article></div>
+<article class="example example-like" id="ejf"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-ejf"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">6.1.11</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-ejf"><article class="example example-like"><p id="tkZ">Factor \(14-7n^2+28n^4-21n\text{.}\)</p>
+<p id="Zsi">Notice that the terms are not in a standard order, with powers of \(n\) decreasing as you read left to right. It is usually a best practice to rearrange the terms into the standard order first.</p>
+<div class="displaymath">
+\begin{equation*}
+14-7n^2+28n^4-21n=28n^4-7n^2-21n+14\text{.}
+\end{equation*}
+</div>
+<p id="Fzr">The number \(7\) divides all of the numerical coefficients. Separately, no power of \(n\) is part of the greatest common factor because the \(14\) term has no \(n\) factors. So the greatest common factor is just \(7\text{.}\) We proceed by factoring that out:</p>
+<div class="displaymath">
+\begin{align*}
+14-7n^2+28n^4-21n\amp=28n^4-7n^2-21n+14\\
+\amp=7\mathopen{}\left(4n^4-n^2-3n+2\right)\mathclose{}
+\end{align*}
+</div></article></div>
+<article class="example example-like" id="Kqo"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-Kqo"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">6.1.12</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-Kqo"><article class="example example-like"><p id="lGA">Factor \(24ab^2+16a^2b^3-12a^3b^2\text{.}\)</p>
+<p id="RNJ">There are two variables in this polynomial, but that does not change the factoring strategy. The greatest numerical factor between the three terms is \(4\text{.}\) The variable \(a\) divides all three terms, and \(b^2\) divides all three terms. So we have:</p>
+<div class="displaymath">
+\begin{align*}
+24ab^2+16a^2b^3-12a^3b^2
+\amp=4ab^2\mathopen{}\left(6+4ab-3a^2\right)\mathclose{}
+\end{align*}
+</div></article></div>
+<article class="example example-like" id="qxx"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-qxx"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">6.1.13</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-qxx"><article class="example example-like"><p id="xUS">Factor \(4m^2n-3xy\text{.}\)</p>
+<p id="ecb">There are no common factors in those two terms (unless you want to count \(1\) or \(-1\text{,}\) but we do not count these for the purposes of identifying a greatest common factor). In this situation we can say the polynomial is <dfn class="terminology">prime</dfn>  or <dfn class="terminology">irreducible</dfn>, and leave it as it is.</p></article></div>
+<article class="example example-like" id="WEG"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-WEG"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">6.1.14</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-WEG"><article class="example example-like"><p id="Kjk">Factor \(-x^3+2x+18\text{.}\)</p>
+<p id="qqt">There are no common factors in those three terms, and it would be correct to state that this polynomial is prime or irreducible. However, since its leading coefficient is negative, it may be wise to factor out a negative sign. So, it could be factored as \(-\mathopen{}\left(x^3-2x-18\right)\mathclose{}\text{.}\) Note that <em class="emphasis">every</em> term is negated as the leading negative sign is extracted.</p></article></div></section><section class="reading-questions" id="reading-questions-18"><h3 class="heading hide-type">
+<span class="type">Reading Questions</span> <span class="codenumber">6.1.6</span> <span class="title">Reading Questions</span>
+</h3>
+<article class="exercise exercise-like" id="exercise-108"><h6 class="heading"><span class="codenumber">1<span class="period">.</span></span></h6>
+<p id="p-1020">Given two terms, how would you describe their “greatest common factor?”</p></article><article class="exercise exercise-like" id="exercise-109"><h6 class="heading"><span class="codenumber">2<span class="period">.</span></span></h6>
+<p id="p-1021">If a simplified polynomial has four terms, and you factor out its greatest common factor, how many terms will remain inside a set of parentheses?</p></article></section><section class="introduction" id="hzk"><p id="PvG">This section covers a technique for factoring polynomials like \(x^3+3x^2+2x+6\text{,}\) which factors as \(\left(x^2+2\right)(x+3)\text{.}\) If there are <em class="emphasis">four</em> terms, the technique in this section <em class="emphasis">might</em> help you to factor the polynomial. Additionally, this technique is a stepping stone to a factoring technique in <code class="code-inline tex2jax_ignore">[cross-reference to target(s) "section-factoring-trinomials-with-leading-coefficient-one" missing or not unique]</code> and <code class="code-inline tex2jax_ignore">[cross-reference to target(s) "section-factoring-trinomials-with-a-nontrivial-leading-coefficient" missing or not unique]</code>.</p></section><section class="subsection" id="aqk"><h3 class="heading hide-type">
+<span class="type">Subsection</span> <span class="codenumber">6.1.7</span> <span class="title">Factoring out Common Polynomials</span>
+</h3>
+<p id="MBa">Recall that to factor \(3x+6\text{,}\) we factor out the common factor \(3\text{:}\)</p>
+<div class="displaymath">
+\begin{align*}
+3x+6\amp=\attention{3}x+\attention{3}\cdot2\\
+\amp=3(x+2)
+\end{align*}
+</div>
+<p class="continuation">The “\(3\)” here could have been something more abstract, and it still would be valid to factor it out:</p>
+<div class="displaymath">
+\begin{align*}
+xA+2A\amp=x\attention{A}+2\attention{A}\amp x\apple+2\apple\amp=x\attention{\apple}+2\attention{\apple}\\
+\amp=A(x+2)\amp\amp=\apple(x+2)
+\end{align*}
+</div>
+<p class="continuation">In fact, even “larger” things can be factored out, as in this example:</p>
+<div class="displaymath">
+\begin{align*}
+x(a+b)+2(a+b)\amp=x\attention{\overbrace{(a+b)}}+2\attention{\overbrace{(a+b)}}\\
+\amp=(a+b)(x+2)
+\end{align*}
+</div>
+<p id="sIj">In this last example, we factored out the binomial factor \((a+b)\text{.}\) Factoring out binomials is the essence of this section, so let's see that a few more times:</p>
+<div class="displaymath">
+\begin{align*}
+x(x+2)+3(x+2)\amp=x\attention{\overbrace{(x+2)}}+3\attention{\overbrace{(x+2)}}\\
+\amp=(x+2)(x+3)
+\end{align*}
+</div>
+<div class="displaymath">
+\begin{align*}
+z^2(2y+5)+3(2y+5)\amp=z^2\attention{\overbrace{(2y+5)}}+3\attention{\overbrace{(2y+5)}}\\
+\amp=(2y+5)(z^2+3)
+\end{align*}
+</div>
+<p class="continuation">And even with an expression like \(Q^2(Q-3)+Q-3\text{,}\) if we re-write it in the right way using a \(1\) and some parentheses, then it too can be factored:</p>
+<div class="displaymath">
+\begin{align*}
+Q^2(Q-3)+Q-3\amp=Q^2(Q-3)+1(Q-3)\\
+\amp=Q^2\attention{\overbrace{(Q-3)}}+1\attention{\overbrace{(Q-3)}}\\
+\amp=(Q-3)(Q^2+1)
+\end{align*}
+</div>
+<p id="YPs">The truth is you are unlikely to come upon an expression like \(x(x+2)+3(x+2)\text{,}\) as in these examples. Why wouldn't someone have multiplied that out already? Or factored it all the way? So far in this section, we have only been looking at a stepping stone to a real factoring technique called <dfn class="terminology">factoring by grouping</dfn>.</p></section><section class="subsection" id="Gxt"><h3 class="heading hide-type">
+<span class="type">Subsection</span> <span class="codenumber">6.1.8</span> <span class="title">Factoring by Grouping</span>
+</h3>
+<p id="EWB">Factoring by grouping is a factoring technique that <em class="emphasis">sometimes</em> works on polynomials with four terms. Here is an example.</p>
+<article class="example example-like" id="Lhm"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-Lhm"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">6.1.15</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-Lhm"><article class="example example-like"><p id="KLN">Suppose we must factor \(x^3-3x^2+5x-15\text{.}\) Note that there are four terms, and they are written in descending order of the powers of \(x\text{.}\) “Grouping” means to group the first two terms and the last two terms together:</p>
+<div class="displaymath">
+\begin{align*}
+x^3-3x^2+5x-15\amp=\left(x^3-3x^2\right)+(5x-15)\\
+\end{align*}
+<p class="intertext">Now, each of these two groups has its own greatest common factor we can factor out:</p>
+\begin{align*}
+\amp=\highlight{x^2}(x-3)\highlight{{}+5}(x-3)\\
+\end{align*}
+<p class="intertext">In a sense, we are “lucky” because we now see matching binomials that can themselves be factored out:</p>
+\begin{align*}
+\amp=\highlight{x^2}\attention{\overbrace{(x-3)}}\highlight{{}+5}\attention{\overbrace{(x-3)}}\\
+\amp=(x-3)\highlight{\left(x^2+5\right)}
+\end{align*}
+</div>
+<p class="continuation">And so we have factored \(x^3-3x^2+5x-15\) as \((x-3)\left(x^2+5\right)\text{.}\) But to be sure, if we multiply this back out, it should recover the original \(x^3-3x^2+5x-15\text{.}\) To confirm your factoring is correct, you should always multiply out your factored result to check that it matches the original polynomial.</p></article></div>
+<article class="exercise exercise-like" id="jJW"><a data-knowl="" class="id-ref exercise-knowl original" data-refid="hk-jJW"><h6 class="heading">
+<span class="type">Checkpoint</span><span class="space"> </span><span class="codenumber">6.1.16</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-jJW"><article class="exercise exercise-like"><p id="p-1028">The WeBWorK problem with ID “webwork-59” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article></div>
+<article class="example example-like" id="rov"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-rov"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">6.1.17</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-rov"><article class="example example-like"><p id="qSW">Factor \(t^3-5t^2-3t+15\text{.}\) This example has a complication with negative signs. If we try to break up this polynomial into two groups as \(\left(t^3-5t^2\right)-(3t+15)\text{,}\) then we've made an error! In that last expression, we are <em class="emphasis">subtracting</em> a group with the term \(15\text{,}\) so overall it subtracts \(15\text{.}\) The original polynomial <em class="emphasis">added</em> \(15\text{,}\) so we are off course.</p>
+<p id="Xaf">One way to handle this is to treat subtraction as addition of a negative:</p>
+<div class="displaymath">
+\begin{align*}
+t^3-5t^2-3t+15\amp=t^3-5t^2+(-3t)+15\\
+\amp=\left(t^3-5t^2\right)+\left(-3t+15\right)\\
+\end{align*}
+<p class="intertext">Now we can proceed to factor out common factors from each group. Since the second group leads with a negative coefficient, we'll factor out \(-3\text{.}\) This will result in the “\({}+15\)” becoming “\({}-5\text{.}\)”</p>
+\begin{align*}
+\amp=\highlight{t^2}(t-5)+\highlight{(-3)}(t-5)\\
+\amp=\highlight{t^2}\attention{\overbrace{(t-5)}}\highlight{{}-3}\attention{\overbrace{(t-5)}}\\
+\amp=(t-5)\highlight{\left(t^2-3\right)}
+\end{align*}
+</div>
+<p class="continuation">And remember that we can confirm this is correct by multiplying it out. If we made no mistakes, it should result in the original  \(t^3-5t^2-3t+15\text{.}\)</p></article></div>
+<article class="exercise exercise-like" id="PRf"><a data-knowl="" class="id-ref exercise-knowl original" data-refid="hk-PRf"><h6 class="heading">
+<span class="type">Checkpoint</span><span class="space"> </span><span class="codenumber">6.1.18</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-PRf"><article class="exercise exercise-like"><p id="p-1031">The WeBWorK problem with ID “webwork-60” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article></div>
+<article class="example example-like" id="XvE"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-XvE"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">6.1.19</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-XvE"><article class="example example-like"><p id="Dho">Factor \(x^3-3x^2+x-3\text{.}\) To succeed with this example, we will need to “factor out” a trivial number \(1\) that isn't apparent until we make it so.</p>
+<div class="displaymath">
+\begin{align*}
+x^3-3x^2+x-3\amp=\left(x^3-3x^2\right)+(x-3)\\
+\amp=\highlight{x^2}(x-3)\highlight{{}+1}(x-3)\\
+\amp=\highlight{x^2}\attention{\overbrace{(x-3)}}\highlight{{}+1}\attention{\overbrace{(x-3)}}\\
+\amp=(x-3)\highlight{\left(x^2+1\right)}
+\end{align*}
+</div>
+<p class="continuation">Notice how we changed \(x-3\) to \(+1(x-3)\text{,}\) so we wouldn't forget the \(+1\) in the final factored form. As always, we should check this is correct by multiplying it out.</p></article></div>
+<article class="exercise exercise-like" id="vYo"><a data-knowl="" class="id-ref exercise-knowl original" data-refid="hk-vYo"><h6 class="heading">
+<span class="type">Checkpoint</span><span class="space"> </span><span class="codenumber">6.1.20</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-vYo"><article class="exercise exercise-like"><p id="p-1033">The WeBWorK problem with ID “webwork-61” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article></div>
+<article class="example example-like" id="DCN"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-DCN"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">6.1.21</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-DCN"><article class="example example-like"><p id="jox">Factor \(xy^2-10y^2-2x+20\text{.}\) The technique can work when there are multiple variables too.</p>
+<div class="displaymath">
+\begin{align*}
+xy^2-10y^2-2x+20\amp=\left(xy^2-10y^2\right)+(-2x+20)\\
+\amp=\highlight{y^2}(x-10)+\highlight{(-2)}(x-10)\\
+\amp=\highlight{y^2}\attention{\overbrace{(x-10)}}\highlight{-2}\attention{\overbrace{(x-10)}}\\
+\amp=(x-10)\highlight{\left(y^2-2\right)}\text{.}
+\end{align*}
+</div></article></div>
+<p id="ldK">Unfortunately, this technique is not guaranteed to work on every polynomial with four terms. In fact, <em class="emphasis">most</em> randomly selected four-term polynomials will not factor using this method and those selected here should be considered “nice.” Here is an example that will not factor with grouping:</p>
+<div class="displaymath">
+\begin{align*}
+x^3+6x^2+11x+6\amp= \left(x^3+6x^2\right)+(11x+6)\\
+\amp= x^2\underbrace{\left(x+6\right)}_{\mathord{?}}+1\underbrace{(11x+6)}_{\mathord{?}}
+\end{align*}
+</div>
+<p class="continuation">In this example, at the step where we hope to see the same binomial appearing twice, we see two different binomials. It doesn't mean that this kind of polynomial can't be factored, but it does mean that “factoring by grouping” is not going to help. This polynomial actually factors as \((x+1)(x+2)(x+3)\text{.}\) So the fact that grouping fails to factor the polynomial doesn't tell us whether or not it is prime.</p></section><section class="reading-questions" id="reading-questions-19"><h3 class="heading hide-type">
+<span class="type">Reading Questions</span> <span class="codenumber">6.1.9</span> <span class="title">Reading Questions</span>
+</h3>
+<article class="exercise exercise-like" id="exercise-113"><h6 class="heading"><span class="codenumber">1<span class="period">.</span></span></h6>
+<p id="p-1036">Factoring by grouping is a factoring technique for when a polynomial has <span class="fillin" role="img" aria-label="6-character blank" style="width: 2.727272727272727em;"></span> terms.</p></article></section></section></div></main>
+</div>
+</body>
+</html>

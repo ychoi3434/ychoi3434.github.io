@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*       on 2021-08-28T19:50:41Z       *-->
+<!--*   A recent stable commit (2020-08-09):   *-->
+<!--* 98f21740783f166a773df4dc83cab5293ab63a4a *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<html lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>ORCCA Introduction to Rational Expressions</title>
+<meta name="Keywords" content="Authored in PreTeXt">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+<script>window.MathJax = {
+  tex: {
+    inlineMath: [['\\(','\\)']],
+    tags: "none",
+    useLabelIds: true,
+    tagSide: "right",
+    tagIndent: ".8em",
+    packages: {'[+]': ['base', 'extpfeil', 'ams', 'amscd', 'newcommand', 'knowl', 'sfrac']}
+  },
+  options: {
+    ignoreHtmlClass: "tex2jax_ignore",
+    processHtmlClass: "has_am",
+  },
+  chtml: {
+    scale: 0.88,
+    mtextInheritFont: true
+  },
+  loader: {
+    load: ['input/asciimath', '[tex]/extpfeil', '[tex]/amscd', '[tex]/newcommand', '[pretext]/mathjaxknowl3.js'],
+    paths: {pretext: "https://pretextbook.org/js/lib"},
+  },
+/* support for the sfrac command in MathJax (Beveled fraction) */
+  startup: {
+    ready() {
+      //
+      // Creating a simple "sfrac" package on-the-fly
+      //
+      const Configuration = MathJax._.input.tex.Configuration.Configuration;
+      const CommandMap = MathJax._.input.tex.SymbolMap.CommandMap;
+      
+      new CommandMap('sfrac', {
+        sfrac: 'SFrac'
+        }, {
+        SFrac(parser, name) {
+        const num = parser.ParseArg(name);
+        const den = parser.ParseArg(name);
+        const frac = parser.create('node', 'mfrac', [num, den], {bevelled: true});
+        parser.Push(frac);
+        }
+      });
+      //
+      // Create the package for the overridden macros
+      //
+      Configuration.create('sfrac', {
+        handler: {macro: ['sfrac']}
+      });
+      
+    MathJax.startup.defaultReady();
+    }
+  },
+};
+</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext_add_on.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script xmlns:svg="http://www.w3.org/2000/svg">sagecellEvalName='Evaluate (Sage)';
+</script><link xmlns:svg="http://www.w3.org/2000/svg" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://fonts.googleapis.com/css?family=Inconsolata:400,700&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/pretext.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/pretext_add_on.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/banner_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/toc_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/knowls_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/style_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/colors_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/setcolors.css" rel="stylesheet" type="text/css">
+<!-- 2019-10-12: Temporary - CSS file for experiments with styling --><link xmlns:svg="http://www.w3.org/2000/svg" href="developer.css" rel="stylesheet" type="text/css">
+</head>
+<body id="PCC-ORCCA" class="mathbook-book has-toc has-sidebar-left">
+<a class="assistive" href="#content">Skip to main content</a><div xmlns:svg="http://www.w3.org/2000/svg" id="latex-macros" class="hidden-content" style="display:none">\(\require{cancel}\newcommand{\abs}[1]{\left\lvert#1\right\rvert}
+\newcommand{\point}[2]{\left(#1,#2\right)}
+\newcommand{\highlight}[1]{\definecolor{sapphire}{RGB}{59,90,125} {\color{sapphire}{{#1}}}}
+\newcommand{\firsthighlight}[1]{\definecolor{sapphire}{RGB}{59,90,125} {\color{sapphire}{{#1}}}}
+\newcommand{\secondhighlight}[1]{\definecolor{emerald}{RGB}{20,97,75} {\color{emerald}{{#1}}}}
+\newcommand{\unhighlight}[1]{{\color{black}{{#1}}}}
+\newcommand{\lowlight}[1]{{\color{lightgray}{#1}}}
+\newcommand{\attention}[1]{\mathord{\overset{\downarrow}{#1}}}
+\newcommand{\nextoperation}[1]{\mathord{\boxed{#1}}}
+\newcommand{\substitute}[1]{{\color{blue}{{#1}}}}
+\newcommand{\pinover}[2]{\overset{\overset{\mathrm{\ #2\ }}{|}}{\strut #1 \strut}}
+\newcommand{\addright}[1]{{\color{blue}{{{}+#1}}}}
+\newcommand{\addleft}[1]{{\color{blue}{{#1+{}}}}}
+\newcommand{\subtractright}[1]{{\color{blue}{{{}-#1}}}}
+\newcommand{\multiplyright}[2][\cdot]{{\color{blue}{{{}#1#2}}}}
+\newcommand{\multiplyleft}[2][\cdot]{{\color{blue}{{#2#1{}}}}}
+\newcommand{\divideunder}[2]{\frac{#1}{{\color{blue}{{#2}}}}}
+\newcommand{\divideright}[1]{{\color{blue}{{{}\div#1}}}}
+\newcommand{\negate}[1]{{\color{blue}{{-}}}\left(#1\right)}
+\newcommand{\cancelhighlight}[1]{\definecolor{sapphire}{RGB}{59,90,125}{\color{sapphire}{{\cancel{#1}}}}}
+\newcommand{\secondcancelhighlight}[1]{\definecolor{emerald}{RGB}{20,97,75}{\color{emerald}{{\bcancel{#1}}}}}
+\newcommand{\thirdcancelhighlight}[1]{\definecolor{amethyst}{RGB}{112,72,91}{\color{amethyst}{{\xcancel{#1}}}}}
+\newcommand{\confirm}[1]{\stackrel{\checkmark}{#1}}
+\newcommand{\reject}[1]{\stackrel{\text{no}}{#1}}
+\newcommand{\wonder}[1]{\stackrel{\text{?}}{#1}}
+\newcommand{\apple}{\text{🍎}}
+\newcommand{\banana}{\text{🍌}}
+\newcommand{\pear}{\text{🍐}}
+\newcommand{\cat}{\text{🐱}}
+\newcommand{\dog}{\text{🐶}}
+\newcommand{\lt}{&lt;}
+\newcommand{\gt}{&gt;}
+\newcommand{\amp}{&amp;}
+\)</div>
+<header id="masthead" class="smallbuttons"><div class="banner"><div class="container">
+<a id="logo-link" href="http://www.pcc.edu/ORCCA" target="_blank"><img src="images/ORCCAbrandlogo.png" alt="Logo image"></a><div class="title-container">
+<h1 class="heading"><a href="orcca.html"><span class="title">RVCC Elementary Algebra</span></a></h1>
+<p class="byline">Department of Mathematics and Computer Science</p>
+</div>
+</div></div>
+<nav xmlns:svg="http://www.w3.org/2000/svg" id="primary-navbar" class="navbar"><div class="container">
+<div class="navbar-top-buttons">
+<button class="sidebar-left-toggle-button button active" aria-label="Show or hide table of contents sidebar">Contents</button><div class="tree-nav toolbar toolbar-divisor-3">
+<a class="index-button toolbar-item button" href="index-1.html" title="Index">Index</a><span class="threebuttons"><a id="previousbutton" class="previous-button toolbar-item button" href="chapter-rational-expressions.html" title="Previous">Prev</a><a id="upbutton" class="up-button button toolbar-item" href="chapter-rational-expressions.html" title="Up">Up</a><a id="nextbutton" class="next-button button toolbar-item" href="section-multiplication-and-division-of-rational-expressions.html" title="Next">Next</a></span>
+</div>
+</div>
+<div class="navbar-bottom-buttons toolbar toolbar-divisor-4">
+<button class="sidebar-left-toggle-button button toolbar-item active">Contents</button><a class="previous-button toolbar-item button" href="chapter-rational-expressions.html" title="Previous">Prev</a><a class="up-button button toolbar-item" href="chapter-rational-expressions.html" title="Up">Up</a><a class="next-button button toolbar-item" href="section-multiplication-and-division-of-rational-expressions.html" title="Next">Next</a>
+</div>
+</div></nav></header><div class="page">
+<div xmlns:svg="http://www.w3.org/2000/svg" id="sidebar-left" class="sidebar" role="navigation"><div class="sidebar-content">
+<nav id="toc"><ul>
+<li class="link frontmatter">
+<a href="frontmatter.html" data-scroll="JVg"><span class="title">Front Matter</span></a><ul><li><a href="colophon-1.html" data-scroll="colophon-1">Colophon</a></li></ul>
+</li>
+<li class="link part"><a href="part-all-of-the-chapters.html" data-scroll="part-all-of-the-chapters"><span class="codenumber">I</span> <span class="title"></span></a></li>
+<li class="link">
+<a href="chapter-introduction-to-algebra.html" data-scroll="dNX"><span class="codenumber">1</span> <span class="title">Introduction to Algebra</span></a><ul>
+<li><a href="section-real-numbers-and-the-number-line.html" data-scroll="ipv">Real Numbers and the Number Line</a></li>
+<li><a href="section-properties-of-real-numbers.html" data-scroll="tNy">Properties of Real Numbers</a></li>
+<li><a href="section-simplifying-and-writing-algebraic-expressions.html" data-scroll="xRO">Simplifying and Writing Algebraic Expressions</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="chapter-linear-equations-and-inequalities-modified.html" data-scroll="sWV"><span class="codenumber">2</span> <span class="title">Linear Equations and Inequalities</span></a><ul>
+<li><a href="section-introduction-to-equations.html" data-scroll="fwy">Introduction to Equations</a></li>
+<li><a href="section-linear-equations.html" data-scroll="xVO">Linear Equations</a></li>
+<li><a href="section-introduction-to-problem-solving.html" data-scroll="Wul">Introduction to Problem Solving</a></li>
+<li><a href="section-formulas.html" data-scroll="Nnq">Formulas</a></li>
+<li><a href="section-linear-inequalities.html" data-scroll="Nuc">Linear Inequalities</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="chapter-graphing-equations.html" data-scroll="gID"><span class="codenumber">3</span> <span class="title">Graphing Lines</span></a><ul>
+<li><a href="section-introduction-to-graphing.html" data-scroll="YTJ">Introduction to Graphing</a></li>
+<li><a href="section-equations-in-two-variables.html" data-scroll="QXY">Equations in Two Variables</a></li>
+<li><a href="section-intercepts-horizontal-and-vertical-lines.html" data-scroll="ByF">Intercepts: Horizontal and Vertical Lines</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="chapter-systems-of-linear-equations-in-two-variables.html" data-scroll="xGO"><span class="codenumber">4</span> <span class="title">Systems of Linear Equations</span></a><ul>
+<li><a href="section-solving-systems-of-linear-equations-graphically-and-numerically.html" data-scroll="njo">Solving Systems of Linear Equations Graphically and Numerically</a></li>
+<li><a href="section-solving-systems-of-linear-equations-by-substitution.html" data-scroll="zdh">Solving Systems of Linear Equations by Substitution</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="chapter-polynomials-and-exponents-modified.html" data-scroll="onc"><span class="codenumber">5</span> <span class="title">Exponents and Polynomials</span></a><ul>
+<li><a href="section-rules-for-exponents.html" data-scroll="KHJ">Rules for Exponents</a></li>
+<li><a href="section-adding-and-subtracting-polynomials.html" data-scroll="VvN">Addition and Subtraction of Polynomials</a></li>
+<li><a href="section-multiplication-of-polynomials.html" data-scroll="IcY">Multiplication of Polynomials</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="chapter-radical-expressions-and-equations.html" data-scroll="chapter-radical-expressions-and-equations"><span class="codenumber">6</span> <span class="title">Radical Expressions and Equations</span></a><ul>
+<li><a href="section-introduction-to-factoring.html" data-scroll="duD">Introduction to Factoring</a></li>
+<li><a href="section-factoring-trinomials.html" data-scroll="Mrf">Factoring Trinomials</a></li>
+<li><a href="section-solving-equations-by-factoring.html" data-scroll="DXi">Solving Equations by Factoring 1 (Quadratics)</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="chapter-rational-expressions.html" data-scroll="RzF"><span class="codenumber">7</span> <span class="title">Rational Expressions</span></a><ul>
+<li><a href="section-introduction-to-rational-expressions.html" data-scroll="Moo" class="active">Introduction to Rational Expressions</a></li>
+<li><a href="section-multiplication-and-division-of-rational-expressions.html" data-scroll="Vps">Multiplication and Division of Rational Expressions</a></li>
+<li><a href="section-addition-and-subtraction-with-like-denominators.html" data-scroll="KBw">Addition and Subtraction of Rational Expressions with Like Denominators</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="chapter-radical-expressions-and-functions.html" data-scroll="chapter-radical-expressions-and-functions"><span class="codenumber">8</span> <span class="title">Quantities in the Physical World</span></a><ul><li><a href="section-radical-expressions-and-functions.html" data-scroll="GAK">Radical Expressions and Functions</a></li></ul>
+</li>
+<li class="link backmatter"><a href="backmatter.html" data-scroll="jDj"><span class="title">Appendices</span></a></li>
+<li class="link">
+<a href="appendix-basic-math-review.html" data-scroll="appendix-basic-math-review"><span class="codenumber">A</span> <span class="title">Basic Math Review</span></a><ul>
+<li><a href="section-arithmetic-with-negative-numbers.html" data-scroll="qBB">Arithmetic with Negative Numbers</a></li>
+<li><a href="section-fractions-and-fraction-arithmetic.html" data-scroll="VAa">Fractions and Fraction Arithmetic</a></li>
+<li><a href="section-absolute-value-and-square-root.html" data-scroll="GAK">Absolute Value and Square Root</a></li>
+<li><a href="section-percentages.html" data-scroll="Chi">Percentages</a></li>
+<li><a href="section-order-of-operations.html" data-scroll="aog">Order of Operations</a></li>
+<li><a href="section-set-notation-and-types-of-numbers.html" data-scroll="Fdo">Set Notation and Types of Numbers</a></li>
+</ul>
+</li>
+<li class="link"><a href="appendix-unit-conversions.html" data-scroll="appendix-unit-conversions"><span class="codenumber">B</span> <span class="title">Unit Conversions</span></a></li>
+<li class="link"><a href="index-1.html" data-scroll="index-1"><span class="title">Index</span></a></li>
+</ul></nav><div class="extras"><nav><a class="mathbook-link" href="https://pretextbook.org">Authored in PreTeXt</a><a href="https://www.mathjax.org"><img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" alt="Powered by MathJax"></a></nav></div>
+</div></div>
+<main class="main"><div id="content" class="pretext-content"><section xmlns:svg="http://www.w3.org/2000/svg" class="section" id="Moo"><h2 class="heading hide-type">
+<span class="type">Section</span> <span class="codenumber">7.1</span> <span class="title">Introduction to Rational Expressions</span>
+</h2>
+<section class="introduction" id="uWI"><p id="tar">In this chapter we will learn about rational functions, which are ratios of two polynomial functions. Creating this ratio inherently requires division, and we'll explore the effect this has on the graphs of rational functions and their domain and range.</p></section><section class="subsection" id="KBf"><h3 class="heading hide-type">
+<span class="type">Subsection</span> <span class="codenumber">7.1.1</span> <span class="title">Graphs of Rational Functions</span>
+</h3>
+<article class="example example-like" id="example-154"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-example-154"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">7.1.1</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-example-154"><article class="example example-like"><div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;">
+<div class="sbspanel top" style="width:47%;">
+<p id="Tso">When a drug is injected into a patient, the drug's concentration in the patient's bloodstream can be modeled by the function \(C\text{,}\) with formula</p>
+<div class="displaymath">
+\begin{equation*}
+C(t)=\frac{3t}{t^2+8}
+\end{equation*}
+</div>
+<p class="continuation">where \(C(t)\) gives the drug's concentration, in milligrams per liter, \(t\) hours since the injection. A new injection is needed when the concentration falls to \(0.35\) milligrams per liter. Using graphing technology, we will graph \(y=\frac{3t}{t^2+8}\) and \(y=0.35\) to examine the situation and answer some important questions.</p>
+</div>
+<div class="sbspanel top" style="width:47%;"><figure class="figure figure-like" id="UxH"><img src="images/image-98.svg" role="img" class="contained" alt=""><div class="image-archive">
+<a href="images/image-98.eps">eps</a><a href="images/image-98.pdf">pdf</a><a href="images/image-98.png">png</a><a href="images/image-98.svg">svg</a><a href="images/image-98.tex">tex</a>
+</div>
+<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">7.1.2<span class="period">.</span></span><span class="space"> </span>Graph of \(C(t)=\frac{3t}{t^2+8}\)</figcaption></figure></div>
+</div></div>
+<ol id="p-1175" class="lower-alpha">
+<li id="qWJ"><p id="JKh">What is the concentration after 10 hours?</p></li>
+<li id="XdS"><p id="pRq">After how many hours since the first injection is the drug concentration greatest?</p></li>
+<li id="Dlb"><p id="VYz">After how many hours since the first injection should the next injection be given?</p></li>
+<li id="jsk"><p id="CfI">What happens to the drug concentration if no further injections are given?</p></li>
+</ol>
+<div class="solutions">
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-104" id="solution-104"><span class="type">Explanation</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-104"><div class="solution solution-like"><ol id="p-1180" class="lower-alpha">
+<li id="li-243">
+<p id="AEQ">To determine the concentration after 10 hours, we will evaluate \(C\) at \(t=10\text{.}\) After \(10\) hours, the concentration will be about <span class="quantity">0.2777 <sup>mg</sup>⁄<sub>L</sub></span>.</p>
+<div class="displaymath">
+\begin{align*}
+C(10)\amp=\frac{3(10)}{10^2+8}\\
+\amp=\frac{30}{108}\\
+\amp=\frac{5}{18}\\
+\amp\approx 0.2777
+\end{align*}
+</div>
+</li>
+<li id="li-244"><p id="zzx">Using the graph, we can see that the maximum concentration of the drug will be <span class="quantity">0.53 <sup>mg</sup>⁄<sub>L</sub></span> and will occur after about \(2.828\) hours.</p></li>
+<li id="li-245"><p id="fGG">The approximate points of intersection \((1.066,0.35)\) and \((7.506,0.35)\) tell us that the concentration of the drug will reach <span class="quantity">0.35 <sup>mg</sup>⁄<sub>L</sub></span> after about \(1.066\) hours and again after about \(7.506\) hours. Given the rising, then falling shape of the graph, this means that another dose will need to be administered after about \(7.506\) hours.</p></li>
+<li id="li-246">
+<p id="LNP">From the initial graph, it appears that the concentration of the drug will diminish to zero with enough time passing. Exploring further, we can see both numerically and graphically that for larger and larger values of \(t\text{,}\) the function values get closer and closer to zero. This is shown in <a class="xref" data-knowl="./knowl/figure-rational-function-intro-injection-large-t-table.html" title="Figure 7.1.3">Figure 7.1.3</a> and <a class="xref" data-knowl="./knowl/figure-rational-function-intro-injection-large-t.html" title="Figure 7.1.4">Figure 7.1.4</a>.</p>
+<div class="sidebyside"><div class="sbsrow" style="margin-left:1.5%;margin-right:1.5%;">
+<div class="sbspanel top" style="width:48.4536082474227%;"><figure class="figure figure-like" id="ETk"><table class="tabular" id="lat">
+<tr>
+<td class="c m b2 r0 l0 t0 lines">\(t\)</td>
+<td class="l m b2 r0 l0 t0 lines">\(C(t)\)</td>
+</tr>
+<tr>
+<td class="c m b0 r0 l0 t0 lines">\(24\)</td>
+<td class="l m b0 r0 l0 t0 lines">\(0.123\ldots\)</td>
+</tr>
+<tr>
+<td class="c m b0 r0 l0 t0 lines">\(48\)</td>
+<td class="l m b0 r0 l0 t0 lines">\(0.062\ldots\)</td>
+</tr>
+<tr>
+<td class="c m b0 r0 l0 t0 lines">\(72\)</td>
+<td class="l m b0 r0 l0 t0 lines">\(0.041\ldots\)</td>
+</tr>
+<tr>
+<td class="c m b0 r0 l0 t0 lines">\(96\)</td>
+<td class="l m b0 r0 l0 t0 lines">\(0.031\ldots\)</td>
+</tr>
+<tr>
+<td class="c m b0 r0 l0 t0 lines">\(120\)</td>
+<td class="l m b0 r0 l0 t0 lines">\(0.020\ldots\)</td>
+</tr>
+</table>
+<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">7.1.3<span class="period">.</span></span><span class="space"> </span>Numerical Values for \(C(t)=\frac{3t}{t^2+8}\)</figcaption></figure></div>
+<div class="sbspanel top" style="width:48.4536082474227%;"><figure class="figure figure-like" id="MTi"><img src="images/image-99.svg" role="img" class="contained" alt=""><div class="image-archive">
+<a href="images/image-99.eps">eps</a><a href="images/image-99.pdf">pdf</a><a href="images/image-99.png">png</a><a href="images/image-99.svg">svg</a><a href="images/image-99.tex">tex</a>
+</div>
+<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">7.1.4<span class="period">.</span></span><span class="space"> </span>Graph of \(C(t)=\frac{3t}{t^2+8}\)</figcaption></figure></div>
+</div></div>
+</li>
+</ol></div></div>
+</div></article></div>
+<p id="rUY">In <code class="code-inline tex2jax_ignore">[cross-reference to target(s) "section-solving-rational-equations" missing or not unique]</code>, we'll explore how to algebraically solve \(C(t)=0.35\text{.}\) For now, we will rely on technology to make the graph and determine intersection points.</p>
+<p id="Ych">The function \(C\text{,}\) where \(C(t)=\frac{3t}{t^2+8}\text{,}\) is a <em class="emphasis">rational function</em>, which is a type of function defined as follows.</p>
+<article class="definition definition-like" id="bzq"><h6 class="heading">
+<span class="type">Definition</span><span class="space"> </span><span class="codenumber">7.1.5</span><span class="period">.</span><span class="space"> </span><span class="title">Rational Function.</span>
+</h6>
+<p id="amT">A <dfn class="terminology">rational function</dfn> \(f\) is a function in the form</p>
+<div class="displaymath">
+\begin{equation*}
+f(x)=\frac{P(x)}{Q(x)}
+\end{equation*}
+</div>
+<p class="continuation">where \(P\) and \(Q\) are polynomial functions, but \(Q\) is not the constant zero function. </p></article><article class="exercise exercise-like" id="doD"><a data-knowl="" class="id-ref exercise-knowl original" data-refid="hk-doD"><h6 class="heading">
+<span class="type">Checkpoint</span><span class="space"> </span><span class="codenumber">7.1.6</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-doD"><article class="exercise exercise-like"><p id="p-1188">The WeBWorK problem with ID “webwork-64” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article></div>
+<p id="Ejq">A rational function's graph is not always smooth like the one shown in <a class="xref" data-knowl="./knowl/figure-rational-function-intro-drug-concentration.html" title="Figure 7.1.2">Example 7.1.2</a>. It could have breaks, as we'll see now.</p>
+<article class="example example-like" id="HGz"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-HGz"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">7.1.7</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-HGz"><article class="example example-like"><p id="Guc">Build a table and sketch the graph of the function \(f\) where \(f(x)=\frac{1}{x-2}\text{.}\) Find the function's domain and range.</p>
+<p id="mBl">Since \(x=2\) makes the denominator \(0\text{,}\) the function will be undefined for \(x=2\text{.}\) We'll start by choosing various \(x\)-values and plotting the associated points.</p>
+<div class="sidebyside"><div class="sbsrow" style="margin-left:1.5%;margin-right:1.5%;">
+<div class="sbspanel top" style="width:48.4536082474227%;"><figure class="figure figure-like" id="gqA"><table class="tabular" id="sES">
+<tr>
+<td class="c m b2 r0 l0 t0 lines">\(x\)</td>
+<td class="c m b2 r0 l0 t0 lines" colspan="2">\(f(x)\)</td>
+<td class="l m b2 r0 l0 t0 lines">Point</td>
+</tr>
+<tr>
+<td class="c m b0 r0 l0 t0 lines">\(-6\)</td>
+<td class="l m b0 r0 l0 t0 lines">\(\frac{1}{-6-2}\)</td>
+<td class="l m b0 r0 l0 t0 lines">\(-0.125\)</td>
+<td class="l m b0 r0 l0 t0 lines">\((-6,-0.125)\)</td>
+</tr>
+<tr>
+<td class="c m b0 r0 l0 t0 lines">\(-4\)</td>
+<td class="l m b0 r0 l0 t0 lines">\(\frac{1}{-4-2}\)</td>
+<td class="l m b0 r0 l0 t0 lines">\(\approx -0.167\)</td>
+<td class="l m b0 r0 l0 t0 lines">\(\left(-4,-\frac{1}{6}\right)\)</td>
+</tr>
+<tr>
+<td class="c m b0 r0 l0 t0 lines">\(-2\)</td>
+<td class="l m b0 r0 l0 t0 lines">\(\frac{1}{-2-2}\)</td>
+<td class="l m b0 r0 l0 t0 lines">\(-0.25\)</td>
+<td class="l m b0 r0 l0 t0 lines">\((-2,-0.25)\)</td>
+</tr>
+<tr>
+<td class="c m b0 r0 l0 t0 lines">\(0\)</td>
+<td class="l m b0 r0 l0 t0 lines">\(\frac{1}{0-2}\)</td>
+<td class="l m b0 r0 l0 t0 lines">\(-0.5\)</td>
+<td class="l m b0 r0 l0 t0 lines">\((0,-0.5)\)</td>
+</tr>
+<tr>
+<td class="c m b0 r0 l0 t0 lines">\(1\)</td>
+<td class="l m b0 r0 l0 t0 lines">\(\frac{1}{1-2}\)</td>
+<td class="l m b0 r0 l0 t0 lines">\(-1\)</td>
+<td class="l m b0 r0 l0 t0 lines">\((1,-1)\)</td>
+</tr>
+<tr>
+<td class="c m b0 r0 l0 t0 lines">\(2\)</td>
+<td class="l m b0 r0 l0 t0 lines">\(\frac{1}{2-2}\)</td>
+<td class="l m b0 r0 l0 t0 lines">undefined</td>
+<td class="l m b0 r0 l0 t0 lines"></td>
+</tr>
+<tr>
+<td class="c m b0 r0 l0 t0 lines">\(3\)</td>
+<td class="l m b0 r0 l0 t0 lines">\(\frac{1}{3-2}\)</td>
+<td class="l m b0 r0 l0 t0 lines">\(1\)</td>
+<td class="l m b0 r0 l0 t0 lines">\((3,1)\)</td>
+</tr>
+<tr>
+<td class="c m b0 r0 l0 t0 lines">\(4\)</td>
+<td class="l m b0 r0 l0 t0 lines">\(\frac{1}{4-2}\)</td>
+<td class="l m b0 r0 l0 t0 lines">\(0.5\)</td>
+<td class="l m b0 r0 l0 t0 lines">\((4,0.5)\)</td>
+</tr>
+</table>
+<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">7.1.8<span class="period">.</span></span><span class="space"> </span>Initial Values of \(f(x)=\frac{1}{x-2}\)</figcaption></figure></div>
+<div class="sbspanel top" style="width:48.4536082474227%;"><figure class="figure figure-like" id="Dzw"><img src="images/image-100.svg" role="img" class="contained" alt=""><div class="image-archive">
+<a href="images/image-100.eps">eps</a><a href="images/image-100.pdf">pdf</a><a href="images/image-100.png">png</a><a href="images/image-100.svg">svg</a><a href="images/image-100.tex">tex</a>
+</div>
+<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">7.1.9<span class="period">.</span></span><span class="space"> </span>Initial Points for \(f(x)=\frac{1}{x-2}\)</figcaption></figure></div>
+</div></div>
+<p id="SIu">Note that extra points were chosen near \(x=2\) in the <a class="xref" data-knowl="./knowl/figure-rational-function-intro-initial-table.html" title="Figure 7.1.8">Figure 7.1.8</a>, but it's still not clear on the graph what happens really close to \(x=2\text{.}\) It will be essential that we include at least one \(x\)-value between \(1\) and \(2\) and also between \(2\) and \(3\text{.}\)</p>
+<p id="yPD">Further, we'll note that dividing one number by a number that is close to \(0\) yields a large number. For example, \(\frac{1}{0.0005}=2000\text{.}\) In fact, the smaller the number is that we divide by, the larger our result becomes. So when \(x\) gets closer and closer to \(2\text{,}\) then \(x-2\) gets closer and closer to \(0\text{.}\) And then \(\frac{1}{x-2}\) takes very large values.</p>
+<p id="eWM">When we plot additional points closer and closer to \(2\text{,}\) we get larger and larger results. To the left of \(2\text{,}\) the results are negative, so the connected curve has an arrow pointing downward there. The opposite happens to the right of \(x=2\text{,}\) and an arrow points upward. We'll also draw the vertical line \(x=2\) as a dashed line to indicate that the graph never actually touches it.</p>
+<div class="sidebyside"><div class="sbsrow" style="margin-left:1.5%;margin-right:1.5%;">
+<div class="sbspanel middle" style="width:48.4536082474227%;"><figure class="figure figure-like" id="MxJ"><table class="tabular" id="YMb">
+<tr>
+<td class="c m b2 r0 l0 t0 lines">\(x\)</td>
+<td class="c m b2 r0 l0 t0 lines" colspan="2">\(f(x)\)</td>
+<td class="l m b2 r0 l0 t0 lines">Point</td>
+</tr>
+<tr>
+<td class="c m b0 r0 l0 t0 lines">\(-6\)</td>
+<td class="l m b0 r0 l0 t0 lines">\(\frac{1}{-6-2}\)</td>
+<td class="l m b0 r0 l0 t0 lines">\(-0.125\)</td>
+<td class="l m b0 r0 l0 t0 lines">\((-6,-0.125)\)</td>
+</tr>
+<tr>
+<td class="c m b0 r0 l0 t0 lines">\(-4\)</td>
+<td class="l m b0 r0 l0 t0 lines">\(\frac{1}{-4-2}\)</td>
+<td class="l m b0 r0 l0 t0 lines">\(\approx -0.167\)</td>
+<td class="l m b0 r0 l0 t0 lines">\(\left(-4,-\frac{1}{6}\right)\)</td>
+</tr>
+<tr>
+<td class="c m b0 r0 l0 t0 lines">\(-2\)</td>
+<td class="l m b0 r0 l0 t0 lines">\(\frac{1}{-2-2}\)</td>
+<td class="l m b0 r0 l0 t0 lines">\(-0.25\)</td>
+<td class="l m b0 r0 l0 t0 lines">\((-2,-0.25)\)</td>
+</tr>
+<tr>
+<td class="c m b0 r0 l0 t0 lines">\(0\)</td>
+<td class="l m b0 r0 l0 t0 lines">\(\frac{1}{0-2}\)</td>
+<td class="l m b0 r0 l0 t0 lines">\(-0.5\)</td>
+<td class="l m b0 r0 l0 t0 lines">\((0,-0.5)\)</td>
+</tr>
+<tr>
+<td class="c m b0 r0 l0 t0 lines">\(1\)</td>
+<td class="l m b0 r0 l0 t0 lines">\(\frac{1}{1-2}\)</td>
+<td class="l m b0 r0 l0 t0 lines">\(-1\)</td>
+<td class="l m b0 r0 l0 t0 lines">\((1,-1)\)</td>
+</tr>
+<tr>
+<td class="c m b0 r0 l0 t0 lines">\(1.5\)</td>
+<td class="l m b0 r0 l0 t0 lines">\(\frac{1}{1.5-2}\)</td>
+<td class="l m b0 r0 l0 t0 lines">\(-2\)</td>
+<td class="l m b0 r0 l0 t0 lines">\((1.5,-2)\)</td>
+</tr>
+<tr>
+<td class="c m b0 r0 l0 t0 lines">\(1.8\)</td>
+<td class="l m b0 r0 l0 t0 lines">\(\frac{1}{1.8-2}\)</td>
+<td class="l m b0 r0 l0 t0 lines">\(-5\)</td>
+<td class="l m b0 r0 l0 t0 lines">\((1.8,-5)\)</td>
+</tr>
+<tr>
+<td class="c m b0 r0 l0 t0 lines">\(2\)</td>
+<td class="l m b0 r0 l0 t0 lines">\(\frac{1}{2-2}\)</td>
+<td class="l m b0 r0 l0 t0 lines">undefined</td>
+<td class="l m b0 r0 l0 t0 lines"></td>
+</tr>
+<tr>
+<td class="c m b0 r0 l0 t0 lines">\(2.1\)</td>
+<td class="l m b0 r0 l0 t0 lines">\(\frac{1}{2.2-2}\)</td>
+<td class="l m b0 r0 l0 t0 lines">\(5\)</td>
+<td class="l m b0 r0 l0 t0 lines">\((2.2,5)\)</td>
+</tr>
+<tr>
+<td class="c m b0 r0 l0 t0 lines">\(2.5\)</td>
+<td class="l m b0 r0 l0 t0 lines">\(\frac{1}{2.5-2}\)</td>
+<td class="l m b0 r0 l0 t0 lines">\(2\)</td>
+<td class="l m b0 r0 l0 t0 lines">\((2.5,2)\)</td>
+</tr>
+<tr>
+<td class="c m b0 r0 l0 t0 lines">\(3\)</td>
+<td class="l m b0 r0 l0 t0 lines">\(\frac{1}{3-2}\)</td>
+<td class="l m b0 r0 l0 t0 lines">\(1\)</td>
+<td class="l m b0 r0 l0 t0 lines">\((3,1)\)</td>
+</tr>
+<tr>
+<td class="c m b0 r0 l0 t0 lines">\(4\)</td>
+<td class="l m b0 r0 l0 t0 lines">\(\frac{1}{4-2}\)</td>
+<td class="l m b0 r0 l0 t0 lines">\(0.5\)</td>
+<td class="l m b0 r0 l0 t0 lines">\((4,0.5)\)</td>
+</tr>
+</table>
+<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">7.1.10<span class="period">.</span></span><span class="space"> </span>Values of \(f(x)=\frac{1}{x-2}\)</figcaption></figure></div>
+<div class="sbspanel middle" style="width:48.4536082474227%;"><figure class="figure figure-like" id="jGF"><img src="images/image-101.svg" role="img" class="contained" alt=""><div class="image-archive">
+<a href="images/image-101.eps">eps</a><a href="images/image-101.pdf">pdf</a><a href="images/image-101.png">png</a><a href="images/image-101.svg">svg</a><a href="images/image-101.tex">tex</a>
+</div>
+<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">7.1.11<span class="period">.</span></span><span class="space"> </span>Full Graph of \(f(x)=\frac{1}{x-2}\)</figcaption></figure></div>
+</div></div>
+<p id="LdV">Note that in <a class="xref" data-knowl="./knowl/figure-rational-function-intro-full-graph.html" title="Figure 7.1.11">Figure 7.1.11</a>, the line \(y=0\) was also drawn as a dashed line. This is because the values of \(y=f(x)\) will get closer and closer to zero as the inputs become more and more positive (or negative).</p>
+<p id="rle">We know that the domain of this function is \((-\infty,2)\cup(2,\infty)\) as the function is undefined at \(2\text{.}\) We can determine this algebraically, and it is also evident in the graph.</p>
+<p id="Xsn">We can see from the graph that the range of the function is \((-\infty,0)\cup(0,\infty)\text{.}\) See <code class="code-inline tex2jax_ignore">[cross-reference to target(s) "exercise-rational-function-domain" missing or not unique]</code> for a discussion of how to see the range using a graph like this one.</p></article></div>
+<article class="remark remark-like" id="Aca"><h6 class="heading">
+<span class="type">Remark</span><span class="space"> </span><span class="codenumber">7.1.12</span><span class="period">.</span>
+</h6>
+<p id="Ijp">The line \(x=2\) in <a class="xref" data-knowl="./knowl/example-introduction-to-rational-functions.html" title="Example 7.1.7">Example 7.1.7</a> is referred to as a <dfn class="terminology">vertical asymptote</dfn>.  The line \(y=0\) is referred to as a <dfn class="terminology">horizontal asymptote</dfn>.  We'll use this vocabulary when referencing such lines, but the classification of vertical asymptotes and horizontal asymptotes is beyond the scope of this book.</p></article><article class="example example-like" id="nNI"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-nNI"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">7.1.13</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-nNI"><article class="example example-like"><p id="PNO">Algebraically find the domain of \(g(x)=\frac{3x^2}{x^2-2x-24}\text{.}\) Use technology to sketch a graph of this function.</p>
+<div class="solutions">
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-bdR" id="bdR"><span class="type">Explanation</span></a><div class="hidden-content tex2jax_ignore" id="hk-bdR"><div class="solution solution-like">
+<p id="iWL">To find a rational function's domain, we set the denominator equal to \(0\) and solve:</p>
+<div class="displaymath">
+\begin{align*}
+x^2-2x-24\amp=0\\
+(x-6)(x+4)\amp=0
+\end{align*}
+</div>
+<div class="displaymath">
+\begin{align*}
+x-6\amp=0\amp\text{or}\amp\amp x+4\amp=0\\
+x\amp=6\amp\text{or}\amp\amp x\amp=-4
+\end{align*}
+</div>
+<p class="continuation">Since \(x=6\) and \(x=-4\) will cause the denominator to be \(0\text{,}\) they are excluded from the domain. The function's domain is \(\left\{x \mid x\ne6, x\ne-4\right\}\text{.}\) In interval notation, the domain is \((-\infty,-4)\cup(-4,6)\cup(6,\infty)\text{.}\)</p>
+<p id="PdU">To begin creating this graph, we'll use technology to create a table of function values, making sure to include values near both \(-4\) and \(6\text{.}\) We'll sketch an initial plot of these.</p>
+<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;">
+<div class="sbspanel bottom" style="width:47%;"><figure class="figure figure-like" id="qPF"><table class="tabular" id="jlg">
+<tr>
+<td class="r m b2 r0 l0 t0 lines">\(x\)</td>
+<td class="l m b2 r2 l0 t0 lines">\(\frac{3x^2}{x^2-2x-24}\)</td>
+<td class="r m b2 r0 l0 t0 lines">\(x\)</td>
+<td class="l m b2 r0 l0 t0 lines">\(\frac{3x^2}{x^2-2x-24}\)</td>
+</tr>
+<tr>
+<td class="r m b0 r0 l0 t0 lines">\(-10\)</td>
+<td class="l m b0 r2 l0 t0 lines">\(3.125\)</td>
+<td class="r m b0 r0 l0 t0 lines">\(1\)</td>
+<td class="l m b0 r0 l0 t0 lines">\(-0.12\)</td>
+</tr>
+<tr>
+<td class="r m b0 r0 l0 t0 lines">\(-9\)</td>
+<td class="l m b0 r2 l0 t0 lines">\(3.24\)</td>
+<td class="r m b0 r0 l0 t0 lines">\(2\)</td>
+<td class="l m b0 r0 l0 t0 lines">\(-0.5\)</td>
+</tr>
+<tr>
+<td class="r m b0 r0 l0 t0 lines">\(-8\)</td>
+<td class="l m b0 r2 l0 t0 lines">\(3.428\ldots\)</td>
+<td class="r m b0 r0 l0 t0 lines">\(3\)</td>
+<td class="l m b0 r0 l0 t0 lines">\(-1.285\)</td>
+</tr>
+<tr>
+<td class="r m b0 r0 l0 t0 lines">\(-7\)</td>
+<td class="l m b0 r2 l0 t0 lines">\(3.769\ldots\)</td>
+<td class="r m b0 r0 l0 t0 lines">\(4\)</td>
+<td class="l m b0 r0 l0 t0 lines">\(-3\)</td>
+</tr>
+<tr>
+<td class="r m b0 r0 l0 t0 lines">\(-6\)</td>
+<td class="l m b0 r2 l0 t0 lines">\(4.5\)</td>
+<td class="r m b0 r0 l0 t0 lines">\(5\)</td>
+<td class="l m b0 r0 l0 t0 lines">\(-8.333\ldots\)</td>
+</tr>
+<tr>
+<td class="r m b0 r0 l0 t0 lines">\(-5\)</td>
+<td class="l m b0 r2 l0 t0 lines">\(6.818\ldots\)</td>
+<td class="r m b0 r0 l0 t0 lines">\(6\)</td>
+<td class="l m b0 r0 l0 t0 lines">undefined</td>
+</tr>
+<tr>
+<td class="r m b0 r0 l0 t0 lines">\(-4\)</td>
+<td class="l m b0 r2 l0 t0 lines">undefined</td>
+<td class="r m b0 r0 l0 t0 lines">\(7\)</td>
+<td class="l m b0 r0 l0 t0 lines">\(13.363\ldots\)</td>
+</tr>
+<tr>
+<td class="r m b0 r0 l0 t0 lines">\(-3\)</td>
+<td class="l m b0 r2 l0 t0 lines">\(-3\)</td>
+<td class="r m b0 r0 l0 t0 lines">\(8\)</td>
+<td class="l m b0 r0 l0 t0 lines">\(8\)</td>
+</tr>
+<tr>
+<td class="r m b0 r0 l0 t0 lines">\(-2\)</td>
+<td class="l m b0 r2 l0 t0 lines">\(-0.75\)</td>
+<td class="r m b0 r0 l0 t0 lines">\(9\)</td>
+<td class="l m b0 r0 l0 t0 lines">\(6.230\ldots\)</td>
+</tr>
+<tr>
+<td class="r m b0 r0 l0 t0 lines">\(-1\)</td>
+<td class="l m b0 r2 l0 t0 lines">\(-0.142\ldots\)</td>
+<td class="r m b0 r0 l0 t0 lines">\(10\)</td>
+<td class="l m b0 r0 l0 t0 lines">\(5.357\ldots\)</td>
+</tr>
+<tr>
+<td class="r m b0 r0 l0 t0 lines">\(0\)</td>
+<td class="l m b0 r2 l0 t0 lines">\(0\ldots\)</td>
+<td class="r m b0 r0 l0 t0 lines"></td>
+<td class="l m b0 r0 l0 t0 lines"></td>
+</tr>
+</table>
+<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">7.1.14<span class="period">.</span></span><span class="space"> </span>Numerical Values for \(g\)</figcaption></figure></div>
+<div class="sbspanel bottom" style="width:47%;"><figure class="figure figure-like" id="TNN"><img src="images/image-102.svg" role="img" class="contained" alt=""><div class="image-archive">
+<a href="images/image-102.eps">eps</a><a href="images/image-102.pdf">pdf</a><a href="images/image-102.png">png</a><a href="images/image-102.svg">svg</a><a href="images/image-102.tex">tex</a>
+</div>
+<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">7.1.15<span class="period">.</span></span><span class="space"> </span>Initial Set-Up to Graph \(g\)</figcaption></figure></div>
+</div></div>
+<p id="vld">We can now begin to see what happens near \(x=-4\) and \(x=6\text{.}\) These are referred to as vertical asymptotes and will be graphed as dashed vertical lines as they are features of the graph but do not include function values.</p>
+<p id="bsm">The last thing we need to consider is what happens for large positive values of \(x\) and large negative values of \(x\text{.}\) Choosing a few values, we find:</p>
+<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;">
+<div class="sbspanel top" style="width:47%;"><figure class="figure figure-like" id="WWO"><table class="tabular" id="Psp">
+<tr>
+<td class="c m b2 r0 l0 t0 lines">\(x\)</td>
+<td class="l m b2 r0 l0 t0 lines">\(g(x)\)</td>
+</tr>
+<tr>
+<td class="c m b0 r0 l0 t0 lines">\(1000\)</td>
+<td class="l m b0 r0 l0 t0 lines">\(3.0060\ldots\)</td>
+</tr>
+<tr>
+<td class="c m b0 r0 l0 t0 lines">\(2000\)</td>
+<td class="l m b0 r0 l0 t0 lines">\(3.0030\ldots\)</td>
+</tr>
+<tr>
+<td class="c m b0 r0 l0 t0 lines">\(3000\)</td>
+<td class="l m b0 r0 l0 t0 lines">\(3.0020\ldots\)</td>
+</tr>
+<tr>
+<td class="c m b0 r0 l0 t0 lines">\(4000\)</td>
+<td class="l m b0 r0 l0 t0 lines">\(3.0015\ldots\)</td>
+</tr>
+</table>
+<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">7.1.16<span class="period">.</span></span><span class="space"> </span>Values for Large Positive \(x\)</figcaption></figure></div>
+<div class="sbspanel top" style="width:47%;"><figure class="figure figure-like" id="DdX"><table class="tabular" id="vzy">
+<tr>
+<td class="c m b2 r0 l0 t0 lines">\(x\)</td>
+<td class="l m b2 r0 l0 t0 lines">\(g(x)\)</td>
+</tr>
+<tr>
+<td class="c m b0 r0 l0 t0 lines">\(-1000\)</td>
+<td class="l m b0 r0 l0 t0 lines">\(2.9940\ldots\)</td>
+</tr>
+<tr>
+<td class="c m b0 r0 l0 t0 lines">\(-2000\)</td>
+<td class="l m b0 r0 l0 t0 lines">\(2.9970\ldots\)</td>
+</tr>
+<tr>
+<td class="c m b0 r0 l0 t0 lines">\(-3000\)</td>
+<td class="l m b0 r0 l0 t0 lines">\(2.9980\ldots\)</td>
+</tr>
+<tr>
+<td class="c m b0 r0 l0 t0 lines">\(-4000\)</td>
+<td class="l m b0 r0 l0 t0 lines">\(2.9985\ldots\)</td>
+</tr>
+</table>
+<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">7.1.17<span class="period">.</span></span><span class="space"> </span>Values for Large Negative \(x\)</figcaption></figure></div>
+</div></div>
+<p id="Hzv">Thus for really large positive \(x\) and for really large negative \(x\text{,}\) we see that the function values get closer and closer to \(y=3\text{.}\) This is referred to as the horizontal asymptote, and will be graphed as a dashed horizontal line on the graph.</p>
+<p id="nGE">Putting all of this together, we can sketch a graph of this function.</p>
+<div class="sidebyside"><div class="sbsrow" style="margin-left:1.5%;margin-right:1.5%;">
+<div class="sbspanel top" style="width:48.4536082474227%;"><figure class="figure figure-like" id="zUW"><img src="images/image-103.svg" role="img" class="contained" alt=""><div class="image-archive">
+<a href="images/image-103.eps">eps</a><a href="images/image-103.pdf">pdf</a><a href="images/image-103.png">png</a><a href="images/image-103.svg">svg</a><a href="images/image-103.tex">tex</a>
+</div>
+<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">7.1.18<span class="period">.</span></span><span class="space"> </span>Asymptotes Added for Graphing \(g(x)=\frac{3x^2}{x^2-2x-24}\)</figcaption></figure></div>
+<div class="sbspanel top" style="width:48.4536082474227%;"><figure class="figure figure-like" id="gcf"><img src="images/image-104.svg" role="img" class="contained" alt=""><div class="image-archive">
+<a href="images/image-104.eps">eps</a><a href="images/image-104.pdf">pdf</a><a href="images/image-104.png">png</a><a href="images/image-104.svg">svg</a><a href="images/image-104.tex">tex</a>
+</div>
+<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">7.1.19<span class="period">.</span></span><span class="space"> </span>Full Graph of \(g(x)=\frac{3x^2}{x^2-2x-24}\)</figcaption></figure></div>
+</div></div>
+</div></div>
+</div></article></div>
+<p id="kqz">Let's look at another example where a rational function is used to model real life data.</p>
+<article class="example example-like" id="TUR"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-TUR"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">7.1.20</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-TUR"><article class="example example-like"><p id="vUX">The monthly operation cost of Saqui's shoe company is approximately \(\$300{,}000.00\text{.}\) The cost of producing each pair of shoes is \(\$30.00\text{.}\) As a result, the cost of producing \(x\) pairs of shoes is \(30x+300000\) dollars, and the average cost of producing each pair of shoes can be modeled by</p>
+<div class="displaymath">
+\begin{equation*}
+\bar{C}(x)=\frac{30x+300000}{x}\text{.}
+\end{equation*}
+</div>
+<p id="ccg">Answer the following questions with technology.</p>
+<ol class="lower-alpha">
+<li id="YTf"><p id="rGD">What's the average cost of producing \(100\) pairs of shoes? Of producing \(1000\) pairs? Of producing \(10{,}000\) pairs? What's the pattern?</p></li>
+<li id="Fao"><p id="XNM">To make the average cost of producing each pair of shoes cheaper than \(\$50.00\text{,}\) at least how many pairs of shoes must Saqui's company produce?</p></li>
+<li id="lhx"><p id="DUV">Assume that her company's shoes are very popular. What happens to the average cost of producing shoes if more and more people keep buying them?</p></li>
+</ol>
+<div class="solutions">
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-Hla" id="Hla"><span class="type">Explanation</span></a><div class="hidden-content tex2jax_ignore" id="hk-Hla"><div class="solution solution-like">
+<p id="Mjo">We will graph the function with technology. After adjusting window settings, we have:</p>
+<figure class="figure figure-like" id="YxG"><div class="image-box" style="width: 47%; margin-left: 26.5%; margin-right: 26.5%;">
+<img src="images/image-105.svg" role="img" class="contained" alt=""><div class="image-archive">
+<a href="images/image-105.eps">eps</a><a href="images/image-105.pdf">pdf</a><a href="images/image-105.png">png</a><a href="images/image-105.svg">svg</a><a href="images/image-105.tex">tex</a>
+</div>
+</div>
+<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">7.1.21<span class="period">.</span></span><span class="space"> </span>Graph of \(\bar{C}(x)=\frac{30x+300000}{x}\)</figcaption></figure><ol id="sqx" class="lower-alpha">
+<li id="RoG">
+<p id="Qjn">To answer this question, we locate the points where \(x\) values are \(100\text{,}\) \(1000\) and \(10{,}000\text{.}\) They are \((100,3030), (1000,330)\) and \((10000,60)\text{.}\) They imply:</p>
+<ul class="disc">
+<li id="hCX"><p id="WIt">If the company produces \(100\) pairs of shoes, the average cost of producing one pair is \(\$3030.00\text{.}\)</p></li>
+<li id="NKg"><p id="wqw">If the company produces \(1{,}000\) pairs of shoes, the average cost of producing one pair is \(\$330.00\text{.}\)</p></li>
+<li id="tRp"><p id="cxF">If the company produces \(10{,}000\) pairs of shoes, the average cost of producing one pair is \(\$60.00\text{.}\)</p></li>
+</ul>
+<p class="continuation">We can see the more shoes her company produces, the lower the average cost.</p>
+</li>
+<li id="xvP">
+<p id="oLX">To answer this question, we locate the point where its \(y\)-value is \(50\text{.}\) With technology, we graph both \(y=\bar{C}(x)\) and \(y=50\text{,}\) and locate their intersection.</p>
+<figure class="figure figure-like" id="Bap"><div class="image-box" style="width: 47%; margin-left: 26.5%; margin-right: 26.5%;">
+<img src="images/image-106.svg" role="img" class="contained" alt=""><div class="image-archive">
+<a href="images/image-106.eps">eps</a><a href="images/image-106.pdf">pdf</a><a href="images/image-106.png">png</a><a href="images/image-106.svg">svg</a><a href="images/image-106.tex">tex</a>
+</div>
+</div>
+<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">7.1.22<span class="period">.</span></span><span class="space"> </span>Intersection of \(\bar{C}(x)=\frac{30x+300000}{x}\) and \(y=50\)</figcaption></figure><p id="UTg">The intersection \((15000,50)\) implies the average cost of producing one pair is \(\$50.00\) if her company produces \(15{,}000\) pairs of shoes.</p>
+</li>
+<li id="dCY">
+<p id="NoH">To answer this question, we substitute \(x\) with some large numbers, and use technology to create a table of values:</p>
+<figure class="figure figure-like" id="eBn"><div class="tabular-box natural-width"><table class="tabular" id="KIw">
+<tr>
+<td class="l m b2 r0 l0 t0 lines">\(x\)</td>
+<td class="l m b2 r0 l0 t0 lines">\(g(x)\)</td>
+</tr>
+<tr>
+<td class="l m b0 r0 l0 t0 lines">\(100000\)</td>
+<td class="l m b0 r0 l0 t0 lines">\(33\)</td>
+</tr>
+<tr>
+<td class="l m b0 r0 l0 t0 lines">\(1000000\)</td>
+<td class="l m b0 r0 l0 t0 lines">\(31\)</td>
+</tr>
+<tr>
+<td class="l m b0 r0 l0 t0 lines">\(10000000\)</td>
+<td class="l m b0 r0 l0 t0 lines">\(30.03\)</td>
+</tr>
+<tr>
+<td class="l m b0 r0 l0 t0 lines">\(100000000\)</td>
+<td class="l m b0 r0 l0 t0 lines">\(30.003\)</td>
+</tr>
+</table></div>
+<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">7.1.23<span class="period">.</span></span><span class="space"> </span>Values for Large Positive \(x\)</figcaption></figure><p id="tvQ">We can estimate that the average cost of producing one pair is getting closer and closer to \(\$30.00\) as her company produces more and more pairs of shoes.</p>
+<p id="ZCZ">Note that the cost of producing each pair is \(\$30.00\text{.}\) This implies, for big companies whose products are very popular, the cost of operations can be ignored when calculating the average cost of producing each unit of product.</p>
+</li>
+</ol>
+</div></div>
+</div></article></div></section><section class="reading-questions" id="reading-questions-22"><h3 class="heading hide-type">
+<span class="type">Reading Questions</span> <span class="codenumber">7.1.2</span> <span class="title">Reading Questions</span>
+</h3>
+<article class="exercise exercise-like" id="exercise-121"><h6 class="heading"><span class="codenumber">1<span class="period">.</span></span></h6>
+<p id="p-1223">What makes a function be a “rational” function?</p></article><article class="exercise exercise-like" id="exercise-122"><h6 class="heading"><span class="codenumber">2<span class="period">.</span></span></h6>
+<p id="p-1224">Describe what an asymptote is.</p></article><article class="exercise exercise-like" id="exercise-123"><h6 class="heading"><span class="codenumber">3<span class="period">.</span></span></h6>
+<p id="p-1225">If there is a rational function with a vertical asymptote at \(x=7\text{,}\) what does that mean about the denominator of the rational function?</p></article></section></section></div></main>
+</div>
+</body>
+</html>

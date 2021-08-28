@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*       on 2021-08-28T19:50:32Z       *-->
+<!--*   A recent stable commit (2020-08-09):   *-->
+<!--* 98f21740783f166a773df4dc83cab5293ab63a4a *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<html lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>ORCCA Linear Inequalities</title>
+<meta name="Keywords" content="Authored in PreTeXt">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+<script>window.MathJax = {
+  tex: {
+    inlineMath: [['\\(','\\)']],
+    tags: "none",
+    useLabelIds: true,
+    tagSide: "right",
+    tagIndent: ".8em",
+    packages: {'[+]': ['base', 'extpfeil', 'ams', 'amscd', 'newcommand', 'knowl', 'sfrac']}
+  },
+  options: {
+    ignoreHtmlClass: "tex2jax_ignore",
+    processHtmlClass: "has_am",
+  },
+  chtml: {
+    scale: 0.88,
+    mtextInheritFont: true
+  },
+  loader: {
+    load: ['input/asciimath', '[tex]/extpfeil', '[tex]/amscd', '[tex]/newcommand', '[pretext]/mathjaxknowl3.js'],
+    paths: {pretext: "https://pretextbook.org/js/lib"},
+  },
+/* support for the sfrac command in MathJax (Beveled fraction) */
+  startup: {
+    ready() {
+      //
+      // Creating a simple "sfrac" package on-the-fly
+      //
+      const Configuration = MathJax._.input.tex.Configuration.Configuration;
+      const CommandMap = MathJax._.input.tex.SymbolMap.CommandMap;
+      
+      new CommandMap('sfrac', {
+        sfrac: 'SFrac'
+        }, {
+        SFrac(parser, name) {
+        const num = parser.ParseArg(name);
+        const den = parser.ParseArg(name);
+        const frac = parser.create('node', 'mfrac', [num, den], {bevelled: true});
+        parser.Push(frac);
+        }
+      });
+      //
+      // Create the package for the overridden macros
+      //
+      Configuration.create('sfrac', {
+        handler: {macro: ['sfrac']}
+      });
+      
+    MathJax.startup.defaultReady();
+    }
+  },
+};
+</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/0.13/pretext_add_on.js"></script><script xmlns:svg="http://www.w3.org/2000/svg" src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script xmlns:svg="http://www.w3.org/2000/svg">sagecellEvalName='Evaluate (Sage)';
+</script><link xmlns:svg="http://www.w3.org/2000/svg" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://fonts.googleapis.com/css?family=Inconsolata:400,700&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/pretext.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/pretext_add_on.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/banner_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/toc_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/knowls_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/style_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/colors_default.css" rel="stylesheet" type="text/css">
+<link xmlns:svg="http://www.w3.org/2000/svg" href="https://pretextbook.org/css/0.31/setcolors.css" rel="stylesheet" type="text/css">
+<!-- 2019-10-12: Temporary - CSS file for experiments with styling --><link xmlns:svg="http://www.w3.org/2000/svg" href="developer.css" rel="stylesheet" type="text/css">
+</head>
+<body id="PCC-ORCCA" class="mathbook-book has-toc has-sidebar-left">
+<a class="assistive" href="#content">Skip to main content</a><div xmlns:svg="http://www.w3.org/2000/svg" id="latex-macros" class="hidden-content" style="display:none">\(\require{cancel}\newcommand{\abs}[1]{\left\lvert#1\right\rvert}
+\newcommand{\point}[2]{\left(#1,#2\right)}
+\newcommand{\highlight}[1]{\definecolor{sapphire}{RGB}{59,90,125} {\color{sapphire}{{#1}}}}
+\newcommand{\firsthighlight}[1]{\definecolor{sapphire}{RGB}{59,90,125} {\color{sapphire}{{#1}}}}
+\newcommand{\secondhighlight}[1]{\definecolor{emerald}{RGB}{20,97,75} {\color{emerald}{{#1}}}}
+\newcommand{\unhighlight}[1]{{\color{black}{{#1}}}}
+\newcommand{\lowlight}[1]{{\color{lightgray}{#1}}}
+\newcommand{\attention}[1]{\mathord{\overset{\downarrow}{#1}}}
+\newcommand{\nextoperation}[1]{\mathord{\boxed{#1}}}
+\newcommand{\substitute}[1]{{\color{blue}{{#1}}}}
+\newcommand{\pinover}[2]{\overset{\overset{\mathrm{\ #2\ }}{|}}{\strut #1 \strut}}
+\newcommand{\addright}[1]{{\color{blue}{{{}+#1}}}}
+\newcommand{\addleft}[1]{{\color{blue}{{#1+{}}}}}
+\newcommand{\subtractright}[1]{{\color{blue}{{{}-#1}}}}
+\newcommand{\multiplyright}[2][\cdot]{{\color{blue}{{{}#1#2}}}}
+\newcommand{\multiplyleft}[2][\cdot]{{\color{blue}{{#2#1{}}}}}
+\newcommand{\divideunder}[2]{\frac{#1}{{\color{blue}{{#2}}}}}
+\newcommand{\divideright}[1]{{\color{blue}{{{}\div#1}}}}
+\newcommand{\negate}[1]{{\color{blue}{{-}}}\left(#1\right)}
+\newcommand{\cancelhighlight}[1]{\definecolor{sapphire}{RGB}{59,90,125}{\color{sapphire}{{\cancel{#1}}}}}
+\newcommand{\secondcancelhighlight}[1]{\definecolor{emerald}{RGB}{20,97,75}{\color{emerald}{{\bcancel{#1}}}}}
+\newcommand{\thirdcancelhighlight}[1]{\definecolor{amethyst}{RGB}{112,72,91}{\color{amethyst}{{\xcancel{#1}}}}}
+\newcommand{\confirm}[1]{\stackrel{\checkmark}{#1}}
+\newcommand{\reject}[1]{\stackrel{\text{no}}{#1}}
+\newcommand{\wonder}[1]{\stackrel{\text{?}}{#1}}
+\newcommand{\apple}{\text{🍎}}
+\newcommand{\banana}{\text{🍌}}
+\newcommand{\pear}{\text{🍐}}
+\newcommand{\cat}{\text{🐱}}
+\newcommand{\dog}{\text{🐶}}
+\newcommand{\lt}{&lt;}
+\newcommand{\gt}{&gt;}
+\newcommand{\amp}{&amp;}
+\)</div>
+<header id="masthead" class="smallbuttons"><div class="banner"><div class="container">
+<a id="logo-link" href="http://www.pcc.edu/ORCCA" target="_blank"><img src="images/ORCCAbrandlogo.png" alt="Logo image"></a><div class="title-container">
+<h1 class="heading"><a href="orcca.html"><span class="title">RVCC Elementary Algebra</span></a></h1>
+<p class="byline">Department of Mathematics and Computer Science</p>
+</div>
+</div></div>
+<nav xmlns:svg="http://www.w3.org/2000/svg" id="primary-navbar" class="navbar"><div class="container">
+<div class="navbar-top-buttons">
+<button class="sidebar-left-toggle-button button active" aria-label="Show or hide table of contents sidebar">Contents</button><div class="tree-nav toolbar toolbar-divisor-3">
+<a class="index-button toolbar-item button" href="index-1.html" title="Index">Index</a><span class="threebuttons"><a id="previousbutton" class="previous-button toolbar-item button" href="section-formulas.html" title="Previous">Prev</a><a id="upbutton" class="up-button button toolbar-item" href="chapter-linear-equations-and-inequalities-modified.html" title="Up">Up</a><a id="nextbutton" class="next-button button toolbar-item" href="chapter-graphing-equations.html" title="Next">Next</a></span>
+</div>
+</div>
+<div class="navbar-bottom-buttons toolbar toolbar-divisor-4">
+<button class="sidebar-left-toggle-button button toolbar-item active">Contents</button><a class="previous-button toolbar-item button" href="section-formulas.html" title="Previous">Prev</a><a class="up-button button toolbar-item" href="chapter-linear-equations-and-inequalities-modified.html" title="Up">Up</a><a class="next-button button toolbar-item" href="chapter-graphing-equations.html" title="Next">Next</a>
+</div>
+</div></nav></header><div class="page">
+<div xmlns:svg="http://www.w3.org/2000/svg" id="sidebar-left" class="sidebar" role="navigation"><div class="sidebar-content">
+<nav id="toc"><ul>
+<li class="link frontmatter">
+<a href="frontmatter.html" data-scroll="JVg"><span class="title">Front Matter</span></a><ul><li><a href="colophon-1.html" data-scroll="colophon-1">Colophon</a></li></ul>
+</li>
+<li class="link part"><a href="part-all-of-the-chapters.html" data-scroll="part-all-of-the-chapters"><span class="codenumber">I</span> <span class="title"></span></a></li>
+<li class="link">
+<a href="chapter-introduction-to-algebra.html" data-scroll="dNX"><span class="codenumber">1</span> <span class="title">Introduction to Algebra</span></a><ul>
+<li><a href="section-real-numbers-and-the-number-line.html" data-scroll="ipv">Real Numbers and the Number Line</a></li>
+<li><a href="section-properties-of-real-numbers.html" data-scroll="tNy">Properties of Real Numbers</a></li>
+<li><a href="section-simplifying-and-writing-algebraic-expressions.html" data-scroll="xRO">Simplifying and Writing Algebraic Expressions</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="chapter-linear-equations-and-inequalities-modified.html" data-scroll="sWV"><span class="codenumber">2</span> <span class="title">Linear Equations and Inequalities</span></a><ul>
+<li><a href="section-introduction-to-equations.html" data-scroll="fwy">Introduction to Equations</a></li>
+<li><a href="section-linear-equations.html" data-scroll="xVO">Linear Equations</a></li>
+<li><a href="section-introduction-to-problem-solving.html" data-scroll="Wul">Introduction to Problem Solving</a></li>
+<li><a href="section-formulas.html" data-scroll="Nnq">Formulas</a></li>
+<li><a href="section-linear-inequalities.html" data-scroll="Nuc" class="active">Linear Inequalities</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="chapter-graphing-equations.html" data-scroll="gID"><span class="codenumber">3</span> <span class="title">Graphing Lines</span></a><ul>
+<li><a href="section-introduction-to-graphing.html" data-scroll="YTJ">Introduction to Graphing</a></li>
+<li><a href="section-equations-in-two-variables.html" data-scroll="QXY">Equations in Two Variables</a></li>
+<li><a href="section-intercepts-horizontal-and-vertical-lines.html" data-scroll="ByF">Intercepts: Horizontal and Vertical Lines</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="chapter-systems-of-linear-equations-in-two-variables.html" data-scroll="xGO"><span class="codenumber">4</span> <span class="title">Systems of Linear Equations</span></a><ul>
+<li><a href="section-solving-systems-of-linear-equations-graphically-and-numerically.html" data-scroll="njo">Solving Systems of Linear Equations Graphically and Numerically</a></li>
+<li><a href="section-solving-systems-of-linear-equations-by-substitution.html" data-scroll="zdh">Solving Systems of Linear Equations by Substitution</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="chapter-polynomials-and-exponents-modified.html" data-scroll="onc"><span class="codenumber">5</span> <span class="title">Exponents and Polynomials</span></a><ul>
+<li><a href="section-rules-for-exponents.html" data-scroll="KHJ">Rules for Exponents</a></li>
+<li><a href="section-adding-and-subtracting-polynomials.html" data-scroll="VvN">Addition and Subtraction of Polynomials</a></li>
+<li><a href="section-multiplication-of-polynomials.html" data-scroll="IcY">Multiplication of Polynomials</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="chapter-radical-expressions-and-equations.html" data-scroll="chapter-radical-expressions-and-equations"><span class="codenumber">6</span> <span class="title">Radical Expressions and Equations</span></a><ul>
+<li><a href="section-introduction-to-factoring.html" data-scroll="duD">Introduction to Factoring</a></li>
+<li><a href="section-factoring-trinomials.html" data-scroll="Mrf">Factoring Trinomials</a></li>
+<li><a href="section-solving-equations-by-factoring.html" data-scroll="DXi">Solving Equations by Factoring 1 (Quadratics)</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="chapter-rational-expressions.html" data-scroll="RzF"><span class="codenumber">7</span> <span class="title">Rational Expressions</span></a><ul>
+<li><a href="section-introduction-to-rational-expressions.html" data-scroll="Moo">Introduction to Rational Expressions</a></li>
+<li><a href="section-multiplication-and-division-of-rational-expressions.html" data-scroll="Vps">Multiplication and Division of Rational Expressions</a></li>
+<li><a href="section-addition-and-subtraction-with-like-denominators.html" data-scroll="KBw">Addition and Subtraction of Rational Expressions with Like Denominators</a></li>
+</ul>
+</li>
+<li class="link">
+<a href="chapter-radical-expressions-and-functions.html" data-scroll="chapter-radical-expressions-and-functions"><span class="codenumber">8</span> <span class="title">Quantities in the Physical World</span></a><ul><li><a href="section-radical-expressions-and-functions.html" data-scroll="GAK">Radical Expressions and Functions</a></li></ul>
+</li>
+<li class="link backmatter"><a href="backmatter.html" data-scroll="jDj"><span class="title">Appendices</span></a></li>
+<li class="link">
+<a href="appendix-basic-math-review.html" data-scroll="appendix-basic-math-review"><span class="codenumber">A</span> <span class="title">Basic Math Review</span></a><ul>
+<li><a href="section-arithmetic-with-negative-numbers.html" data-scroll="qBB">Arithmetic with Negative Numbers</a></li>
+<li><a href="section-fractions-and-fraction-arithmetic.html" data-scroll="VAa">Fractions and Fraction Arithmetic</a></li>
+<li><a href="section-absolute-value-and-square-root.html" data-scroll="GAK">Absolute Value and Square Root</a></li>
+<li><a href="section-percentages.html" data-scroll="Chi">Percentages</a></li>
+<li><a href="section-order-of-operations.html" data-scroll="aog">Order of Operations</a></li>
+<li><a href="section-set-notation-and-types-of-numbers.html" data-scroll="Fdo">Set Notation and Types of Numbers</a></li>
+</ul>
+</li>
+<li class="link"><a href="appendix-unit-conversions.html" data-scroll="appendix-unit-conversions"><span class="codenumber">B</span> <span class="title">Unit Conversions</span></a></li>
+<li class="link"><a href="index-1.html" data-scroll="index-1"><span class="title">Index</span></a></li>
+</ul></nav><div class="extras"><nav><a class="mathbook-link" href="https://pretextbook.org">Authored in PreTeXt</a><a href="https://www.mathjax.org"><img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" alt="Powered by MathJax"></a></nav></div>
+</div></div>
+<main class="main"><div id="content" class="pretext-content"><section xmlns:svg="http://www.w3.org/2000/svg" class="section" id="Nuc"><h2 class="heading hide-type">
+<span class="type">Section</span> <span class="codenumber">2.5</span> <span class="title">Linear Inequalities</span>
+</h2>
+<p id="Rmp">In this section, we learn that solving basic inequalities is not that different from solving basic equations.</p>
+<p id="xty">With one small complication, we can use very similar properties to <a class="xref" data-knowl="./knowl/fact-properties-of-equivalent-equations.html" title="Fact 2.1.12: Properties of Equivalent Equations">Fact 2.1.12</a> when we solve inequalities (as opposed to equations). Here are some numerical examples.</p>
+<div class="tabular-box natural-width"><table class="tabular">
+<tr>
+<td class="l m b0 r0 l0 t0 lines">Add to both sides</td>
+<td class="l m b0 r0 l0 t0 lines">If \(2\lt4\text{,}\) then \(2\addright{1}\confirm{\lt}4\addright{1}\text{.}\)</td>
+</tr>
+<tr>
+<td class="l m b0 r0 l0 t0 lines">Subtract from both sides</td>
+<td class="l m b0 r0 l0 t0 lines">If \(2\lt4\text{,}\) then \(2\subtractright{1}\confirm{\lt}4\subtractright{1}\text{.}\)</td>
+</tr>
+<tr>
+<td class="l m b0 r0 l0 t0 lines">Multiply on both sides by a <em class="emphasis">positive</em> number</td>
+<td class="l m b0 r0 l0 t0 lines">If \(2\lt4\text{,}\) then \(\multiplyleft{3}2\confirm{\lt}\multiplyleft{3}4\text{.}\)</td>
+</tr>
+<tr>
+<td class="l m b0 r0 l0 t0 lines">Divide on both sides by a <em class="emphasis">positive</em> number</td>
+<td class="l m b0 r0 l0 t0 lines">If \(2\lt4\text{,}\) then \(\divideunder{2}{2}\confirm{\lt}\divideunder{4}{2}\text{.}\)</td>
+</tr>
+</table></div>
+<p id="JHQ">However, something interesting happens when we multiply or divide by the same <em class="emphasis">negative</em> number on both sides of an inequality: the direction reverses! To understand why, consider <a class="xref" data-knowl="./knowl/figure-multiply-by-negative.html" title="Figure 2.5.1">Figure 2.5.1</a>, where the numbers \(2\) and \(4\) are multiplied by the negative number \(-1\text{.}\)</p>
+<figure class="figure figure-like" id="ikA"><div class="image-box" style="width: 65%; margin-left: 17.5%; margin-right: 17.5%;">
+<img src="images/image-28.svg" role="img" class="contained" alt="a number line with -4, -2, 2, and 4 marked; text indicated that 2 &lt; 4; arrows swing from 2 to -2 and 4 to -4, indicating multiplication by -1; text indicates that -2 &gt; -4"><div class="image-archive">
+<a href="images/image-28.eps">eps</a><a href="images/image-28.pdf">pdf</a><a href="images/image-28.png">png</a><a href="images/image-28.svg">svg</a><a href="images/image-28.tex">tex</a>
+</div>
+</div>
+<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">2.5.1<span class="period">.</span></span><span class="space"> </span>When two numbers are multiplied by a negative number, their relationship changes.</figcaption></figure><p id="pOZ">So even though \(2\lt4\text{,}\) if we multiply both sides by \(-1\text{,}\) we have the false inequality \(-2\reject{\lt}-4\text{.}\) The <em class="emphasis">true</em> inequality is \(-2\gt-4\text{.}\)</p>
+<article class="fact theorem-like" id="hWf"><h6 class="heading">
+<span class="type">Fact</span><span class="space"> </span><span class="codenumber">2.5.2</span><span class="period">.</span><span class="space"> </span><span class="title">Changing the Direction of the Inequality Sign.</span>
+</h6>
+<p id="nZM">When we multiply or divide each side of an inequality by the same <em class="emphasis">negative</em> number, the inequality sign must change direction. Do <em class="emphasis">not</em> change the inequality sign when multiplying/dividing by a positive number, or when adding/subtracting by any number.</p></article><article class="example example-like" id="VHN"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-VHN"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">2.5.3</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-VHN"><article class="example example-like"><p id="bLu">Solve the inequality \(-2x\geq12\text{.}\) State the solution set graphically, using interval notation, and using set-builder notation. (Interval notation and set-builder notation are discussed in <code class="code-inline tex2jax_ignore">[cross-reference to target(s) "section-comparison-symbols-and-notation-for-intervals" missing or not unique]</code>.)</p>
+<div class="solutions">
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-yUq" id="yUq"><span class="type">Explanation</span></a><div class="hidden-content tex2jax_ignore" id="hk-yUq"><div class="solution solution-like">
+<p id="Eod">To solve this inequality, we will divide each side by \(-2\text{:}\)</p>
+<div class="displaymath">
+\begin{align*}
+-2x\amp\geq12\\
+\divideunder{-2x}{-2}\amp\highlight{{}\leq{}}\divideunder{12}{-2}\amp\amp\text{Note the change in direction.}\\
+x\amp\leq-6
+\end{align*}
+</div>
+<p id="kvm">Note that the inequality sign changed direction at the step where we divided each side of the inequality by a <em class="emphasis">negative</em> number.</p>
+<p id="QCv">When we solve a linear <em class="emphasis">inequality</em>, there are usually infinitely many solutions. (Unlike when we solve a linear equation and only have one solution.) For this example, any number less than or equal to \(-6\) is a solution.</p>
+<p id="wJE">There are at least three ways to represent the solution set for the solution to an inequality: graphically, with set-builder notation, and with interval notation. Graphically, we represent the solution set as:</p>
+<div class="image-box" style="width: 47%; margin-left: 26.5%; margin-right: 26.5%;">
+<img src="images/image-29.svg" role="img" class="contained" alt="a number line with a mark at -6; a thick line overlays the number line to the left of -6 with an arrow pointing left; there is a right bracket at -6"><div class="image-archive">
+<a href="images/image-29.eps">eps</a><a href="images/image-29.pdf">pdf</a><a href="images/image-29.png">png</a><a href="images/image-29.svg">svg</a><a href="images/image-29.tex">tex</a>
+</div>
+</div>
+<p id="cQN">Using interval notation, we write the solution set as \((-\infty,-6]\text{.}\) Using set-builder notation, we write the solution set as \(\{x\mid x\leq-6\}\text{.}\)</p>
+<p id="IXW">As with equations, we should check solutions to catch both human mistakes as well as for possible extraneous solutions (numbers which were <em class="emphasis">possible</em> solutions according to algebra, but which actually do not solve the inequality).</p>
+<p id="pff">Since there are infinitely many solutions, it's impossible to literally check them all. We found that all values of \(x\) for which \(x\leq-6\) are solutions. One approach is to check that one number less than \(-6\) (any number, your choice) satisfies the inequality. <em class="emphasis">And</em> that \(-6\) satisfies the inequality. <em class="emphasis">And</em> that one number greater than \(-6\) (any number, your choice) does <em class="emphasis">not</em> satsify the inequality.</p>
+<div class="image-box" style="width: 47%; margin-left: 26.5%; margin-right: 26.5%;">
+<img src="images/image-30.svg" role="img" class="contained" alt="a number line with a mark at -6; a thick line overlays the number line to the left of -6 with an arrow pointing left; there is a right bracket at -6; three arrows point to -7, -6, and -5 on the number line, suggesting that these values will be checked as possible solutions"><div class="image-archive">
+<a href="images/image-30.eps">eps</a><a href="images/image-30.pdf">pdf</a><a href="images/image-30.png">png</a><a href="images/image-30.svg">svg</a><a href="images/image-30.tex">tex</a>
+</div>
+</div>
+<div class="displaymath" id="p-486">
+\begin{align*}
+-2x\amp\geq12\amp -2x\amp\ge12\amp -2x\amp\ge12\\
+-2(\substitute{-7})\amp\wonder{\geq}12\amp -2(\substitute{-6})\amp\wonder{\ge}12\amp -2(\substitute{-5})\amp\wonder{\ge}12\\
+14\amp\confirm{\geq}12\amp 12\amp\confirm{\ge}12\amp 12\amp\reject{\ge}12
+\end{align*}
+</div>
+<p id="Vmo">Thus both \(-7\) and \(-6\) are solutions, while \(-5\) is not. This is evidence that our solution set is correct, and it's valuable in that making these checks would likely help us catch an error if we had made one. While it certainly does take time and space to make three checks like this, it has its value.</p>
+</div></div>
+</div></article></div>
+<article class="example example-like" id="BOW"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-BOW"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">2.5.4</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-BOW"><article class="example example-like"><p id="HSD">Solve the inequality \(t+7\lt5\text{.}\) State the solution set graphically, using interval notation, and using set-builder notation.</p>
+<div class="solutions">
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-fbz" id="fbz"><span class="type">Explanation</span></a><div class="hidden-content tex2jax_ignore" id="hk-fbz"><div class="solution solution-like">
+<p id="Btx">To solve this inequality, we will subtract \(7\) from each side. There is not much difference between this process and solving the <em class="emphasis">equation</em> \(t+7=5\text{,}\) because we are not going to multiply or divide by negative numbers.</p>
+<div class="displaymath">
+\begin{align*}
+t+7\amp\lt5\\
+t+7\subtractright{7}\amp\lt5\subtractright{7}\\
+t\amp\lt-2
+\end{align*}
+</div>
+<p id="hAG">Note again that the direction of the inequality did not change, since we did not multiply or divide each side of the inequality by a negative number at any point.</p>
+<p id="NHP">Graphically, we represent this solution set as:</p>
+<div class="image-box" style="width: 47%; margin-left: 26.5%; margin-right: 26.5%;">
+<img src="images/image-31.svg" role="img" class="contained" alt="a number line with a mark at -2; a thick line overlays the number line to the left of -2 with an arrow pointing left; there is a right parenthesis at -2"><div class="image-archive">
+<a href="images/image-31.eps">eps</a><a href="images/image-31.pdf">pdf</a><a href="images/image-31.png">png</a><a href="images/image-31.svg">svg</a><a href="images/image-31.tex">tex</a>
+</div>
+</div>
+<p id="tOY">Using interval notation, we write the solution set as \((-\infty,-2)\text{.}\) Using set-builder notation, we write the solution set as \(\{t\mid t\lt-2\}\text{.}\)</p>
+<p id="ZWh">We should check that some number less than \(-2\) <em class="emphasis">is</em> a solution, but that \(-2\) and some number greater than \(-2\) are <em class="emphasis">not</em> solutions.</p>
+<div class="displaymath">
+\begin{align*}
+t+7\amp\lt5\amp t+7\amp\lt5\amp t+7\amp\lt5\\
+\substitute{-10}+7\amp\wonder{\lt}5\amp \substitute{-2}+7\amp\wonder{\lt}5\amp \substitute{0}+7\amp\wonder{\lt}5\\
+-3\amp\confirm{\lt}5\amp 5\amp\reject{\lt}5\amp 7\amp\reject{\lt}5
+\end{align*}
+</div>
+<p class="continuation">So our solution is reasonably checked.</p>
+</div></div>
+</div></article></div>
+<article class="exercise exercise-like" id="mFY"><a data-knowl="" class="id-ref exercise-knowl original" data-refid="hk-mFY"><h6 class="heading">
+<span class="type">Checkpoint</span><span class="space"> </span><span class="codenumber">2.5.5</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-mFY"><article class="exercise exercise-like"><p id="p-494">The WeBWorK problem with ID “webwork-30” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article></div>
+<article class="exercise exercise-like" id="SNh"><a data-knowl="" class="id-ref exercise-knowl original" data-refid="hk-SNh"><h6 class="heading">
+<span class="type">Checkpoint</span><span class="space"> </span><span class="codenumber">2.5.6</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-SNh"><article class="exercise exercise-like"><p id="p-495">The WeBWorK problem with ID “webwork-31” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article></div>
+<article class="example example-like" id="example-60"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-example-60"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">2.5.7</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-example-60"><article class="example example-like"><p id="p-496">Solve the inequality \(-1\lt x-5\text{.}\) State the solution set using interval notation and set-builder notation.</p>
+<div class="solutions">
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-50" id="solution-50"><span class="type">Explanation</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-50"><div class="solution solution-like">
+<p id="p-497">To solve this inequality, we will add \(5\) to each side.</p>
+<div class="displaymath">
+\begin{align*}
+-1\amp\lt x-5\\
+-1\addright{5}\amp\lt x-5\addright{5}\\
+4\amp\lt x
+\end{align*}
+</div>
+<p id="p-498">Observe that our result \(4\lt x\) means “\(4\) is <em class="emphasis">less</em> than \(x\)”, which is equivalent to the statement “\(x\) is <em class="emphasis">greater</em> than \(4\)”, or \(x\gt4\text{.}\) This means that we can rewrite an inequality into an equivalent inequality by writing it in the reverse order, including “flipping” the comparison symbol. Here are some other examples of “flipping” inequalities:</p>
+<ul class="disc">
+<li id="li-94">\(z\leq0\) is equivalent to \(0\geq z\)</li>
+<li id="li-95">\(-6\gt t\) is equivalent to \(t\lt-6\)</li>
+<li id="li-96">\(q\geq r\) is equivalent to \(r\leq q\)</li>
+</ul>
+<p class="continuation">Be careful not to confuse “flipping” inequalities this way with applying <a class="xref" data-knowl="./knowl/fact-changing-direction-of-inequality-sign.html" title="Fact 2.5.2: Changing the Direction of the Inequality Sign">Fact 2.5.2</a>, which only applies when multiplying or dividing each side of an inequality by a negative number. We did <em class="emphasis">not</em> do that in our work above.</p>
+<p id="p-499">Graphically, we represent this solution set as:</p>
+<div class="image-box" style="width: 47%; margin-left: 26.5%; margin-right: 26.5%;">
+<img src="images/image-32.svg" role="img" class="contained" alt="a number line with a mark at 4; a thick line overlays the number line to the right of 4 with an arrow pointing left; there is a left parenthesis at 4"><div class="image-archive">
+<a href="images/image-32.eps">eps</a><a href="images/image-32.pdf">pdf</a><a href="images/image-32.png">png</a><a href="images/image-32.svg">svg</a><a href="images/image-32.tex">tex</a>
+</div>
+</div>
+<p id="p-500">We write the solution set in interval notation as \((4,\infty)\text{.}\) Using set-builder notation, we write the solution set as \(\{x\mid 4\lt x\}\text{.}\)</p>
+<p id="p-501">To check our answer, we should pick some numbers greater than \(4\) to see if they are solutions. Also, we should pick some numbers less than or <em class="emphasis">equal</em> to \(4\) to see if they are <em class="emphasis">not</em> solutions.</p>
+<div class="displaymath">
+\begin{align*}
+-1\amp\lt x-5\amp -1\amp\lt x-5\amp -1\amp\lt x-5\amp -1\amp\lt x-5\\
+-1\amp\wonder{\lt}\substitute{-3}-5\amp -1\amp\wonder{\lt}\substitute{4}-5\amp -1\amp\wonder{\lt}\substitute{5}-5\amp -1\amp\wonder{\lt}\substitute{8}-5\\
+-1\amp\reject{\lt}-8\amp -1\amp\reject{\lt}-1\amp -1\amp\confirm{\lt}0\amp -1\amp\confirm{\lt}3
+\end{align*}
+</div>
+<p class="continuation">So our solution is reasonably checked.</p>
+</div></div>
+</div></article></div>
+<section class="reading-questions" id="reading-questions-6"><h3 class="heading hide-type">
+<span class="type">Reading Questions</span> <span class="codenumber">2.5.1</span> <span class="title">Reading Questions</span>
+</h3>
+<article class="exercise exercise-like" id="exercise-47"><h6 class="heading"><span class="codenumber">1<span class="period">.</span></span></h6>
+<p id="p-502">What are three ways to express the solution set to a linear inequality?</p></article><article class="exercise exercise-like" id="exercise-48"><h6 class="heading"><span class="codenumber">2<span class="period">.</span></span></h6>
+<p id="p-503">When you go through the motions of solving a simple linear inequality, what step(s) might you need to take where something special happens that you don't have to worry about when solving a simple linear equation?</p></article><article class="exercise exercise-like" id="exercise-49"><h6 class="heading"><span class="codenumber">3<span class="period">.</span></span></h6>
+<p id="p-504">Why does checking the solution set to an inequality take more effort than checking the solution set to an equation?</p></article></section><section class="introduction" id="nHe"><p id="Dex">One purpose of learning math is to be able to model real-life situations and then use the model to ask and answer questions about the situation. In this lesson, we will examine the basics of modeling to set up an equation (or inequality).</p></section><section class="subsection" id="dYX"><h3 class="heading hide-type">
+<span class="type">Subsection</span> <span class="codenumber">2.5.2</span> <span class="title">Setting Up Equations for Rate Models</span>
+</h3>
+<p id="YMB">To set up an equation modeling a real world scenario, the first thing we need to do is identify what variable we will use. The variable we use will be determined by whatever is unknown in our problem statement. Once we've identified and defined our variable, we'll use the numerical information provided to set up our equation.</p>
+<article class="example example-like" id="TzS"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-TzS"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">2.5.8</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-TzS"><article class="example example-like"><p id="tKL">A savings account starts with \(\$500\text{.}\) Each month, an automatic deposit of \(\$150\) is made. Write an equation that represents the number of months it will take for the balance to reach \(\$1{,}700\text{.}\)</p>
+<div class="solutions">
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-TOn" id="TOn"><span class="type">Explanation</span></a><div class="hidden-content tex2jax_ignore" id="hk-TOn"><div class="solution solution-like">
+<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;">
+<div class="sbspanel top" style="width:47%;">
+<p id="aXn">To set up an equation, we might start by making a table in order to identify a general pattern for the total amount in the account after \(m\) months. In <a class="xref" data-knowl="./knowl/figure-savings-pattern.html" title="Figure 2.5.9">Figure 2.5.9</a>, we find the pattern is that after \(m\) months, the total amount saved is \(500+150m\text{.}\)</p>
+<p id="Hew">Using this pattern, we determine that an equation representing when the total savings equals \(\$1700\) is:</p>
+<div class="displaymath">
+\begin{equation*}
+500+150m=1700 
+\end{equation*}
+</div>
+</div>
+<div class="sbspanel top" style="width:47%;"><figure class="figure figure-like" id="LsQ"><table class="tabular" id="rzZ">
+<tr>
+<td class="c m b2 r0 l0 t0 lines">Months Since<br>Saving Started</td>
+<td class="l m b2 r0 l0 t0 lines">Total Amount Saved<br>(in Dollars)</td>
+</tr>
+<tr>
+<td class="c m b0 r0 l0 t0 lines">\(0\)</td>
+<td class="l m b0 r0 l0 t0 lines">\(500\)</td>
+</tr>
+<tr>
+<td class="c m b0 r0 l0 t0 lines">\(1\)</td>
+<td class="l m b0 r0 l0 t0 lines">\(500+150=650\)</td>
+</tr>
+<tr>
+<td class="c m b0 r0 l0 t0 lines">\(2\)</td>
+<td class="l m b0 r0 l0 t0 lines">\(500+150(2)=800\)</td>
+</tr>
+<tr>
+<td class="c m b0 r0 l0 t0 lines">\(3\)</td>
+<td class="l m b0 r0 l0 t0 lines">\(500+150(3)=950\)</td>
+</tr>
+<tr>
+<td class="c m b0 r0 l0 t0 lines">\(4\)</td>
+<td class="l m b0 r0 l0 t0 lines">\(500+150(4)=1100\)</td>
+</tr>
+<tr>
+<td class="c m b0 r0 l0 t0 lines">\(\vdots\)</td>
+<td class="c m b0 r0 l0 t0 lines">\(\vdots\)</td>
+</tr>
+<tr>
+<td class="c m b0 r0 l0 t0 lines">\(m\)</td>
+<td class="l m b0 r0 l0 t0 lines">\(500+150m\)</td>
+</tr>
+</table>
+<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">2.5.9<span class="period">.</span></span><span class="space"> </span>Amount in Savings Account</figcaption></figure></div>
+</div></div>
+<p id="p-510">Right now we are not interested in actually solving this equation and finding the number of months \(m\) until the savings has reached \(\$1700\text{.}\) The skill of <em class="emphasis">setting up</em> that equation is challenging enough, and this section only focuses on that setup.</p>
+</div></div>
+</div></article></div>
+<article class="example example-like" id="zHb"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-zHb"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">2.5.10</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-zHb"><article class="example example-like"><p id="ZRU">A bathtub contains <span class="quantity">2.5 ft<sup>3</sup></span> of water. More water is being poured in at a rate of <span class="quantity">1.75 ft<sup>3</sup></span> per minute. Write an equation representing when the amount of water in the bathtub will reach <span class="quantity">6.25 ft<sup>3</sup></span>.</p>
+<div class="solutions">
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-zVw" id="zVw"><span class="type">Explanation</span></a><div class="hidden-content tex2jax_ignore" id="hk-zVw"><div class="solution solution-like">
+<div class="sidebyside"><div class="sbsrow" style="margin-left:0%;margin-right:0%;">
+<div class="sbspanel top" style="width:47%;"><p id="nlF">Since this problem refers to <em class="emphasis">when</em> the amount of water will reach a certain amount, we immediately know that the unknown quantity is time. As the volume of water in the tub is measured in <span class="quantity">ft<sup>3</sup></span> per minute, we know that time needs to be measured in minutes. We'll define \(t\) to be the number of minutes that water is poured into the tub. To determine this equation, we'll start by making a table of values:</p></div>
+<div class="sbspanel top" style="width:47%;"><figure class="figure figure-like" id="XHi"><table class="tabular" id="DOr">
+<tr>
+<td class="c m b2 r0 l0 t0 lines">Minutes Water<br>Has Been Poured</td>
+<td class="l m b2 r0 l0 t0 lines">Total Amount<br>of Water (in <span class="quantity">ft<sup>3</sup></span>)</td>
+</tr>
+<tr>
+<td class="c m b0 r0 l0 t0 lines">\(0\)</td>
+<td class="l m b0 r0 l0 t0 lines">\(2.5\)</td>
+</tr>
+<tr>
+<td class="c m b0 r0 l0 t0 lines">\(1\)</td>
+<td class="l m b0 r0 l0 t0 lines">\(2.5+1.75=4.25\)</td>
+</tr>
+<tr>
+<td class="c m b0 r0 l0 t0 lines">\(2\)</td>
+<td class="l m b0 r0 l0 t0 lines">\(2.5+1.75(2)=6\)</td>
+</tr>
+<tr>
+<td class="c m b0 r0 l0 t0 lines">\(3\)</td>
+<td class="l m b0 r0 l0 t0 lines">\(2.5+1.75(3)=7.75\)</td>
+</tr>
+<tr>
+<td class="c m b0 r0 l0 t0 lines">\(\vdots\)</td>
+<td class="c m b0 r0 l0 t0 lines">\(\vdots\)</td>
+</tr>
+<tr>
+<td class="c m b0 r0 l0 t0 lines">\(t\)</td>
+<td class="l m b0 r0 l0 t0 lines">\(2.5+1.75t\)</td>
+</tr>
+</table>
+<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">2.5.11<span class="period">.</span></span><span class="space"> </span>Amount of Water in the Bathtub</figcaption></figure></div>
+</div></div>
+<p id="TsO">Using this pattern, we determine that the equation representing when the amount will be <span class="quantity">6.25 ft<sup>3</sup></span> is:</p>
+<div class="displaymath">
+\begin{equation*}
+2.5+1.75t=6.25
+\end{equation*}
+</div>
+</div></div>
+</div></article></div></section><section class="subsection" id="Kgg"><h3 class="heading hide-type">
+<span class="type">Subsection</span> <span class="codenumber">2.5.3</span> <span class="title">Setting Up Equations for Percent Problems</span>
+</h3>
+<p id="ETK"><a href="section-percentages.html" class="internal" title="Section A.4: Percentages">Section A.4</a> reviews some basics of working with percentages, and even solves some one-step equations that are set up using percentages. Here we look at some scenarios where there is an equation to set up based on percentages, but it things are a little more complicated than with a one-step equation. One important fact is that when doing math with percentages, we always start by rewriting the percentage as a decimal. For example, \(18\%\) should be written as \(0.18\) if you are going to us it to do algebra or arithmetic.</p>
+<article class="example example-like" id="EqU"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-EqU"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">2.5.12</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-EqU"><article class="example example-like"><p id="FZd">Jakobi's annual salary as a nurse in Portland, Oregon, is \(\$73{,}290\text{.}\) His salary increased by \(4\%\) from last year. Write a linear equation modeling this scenario, where the unknown value is Jakobi's salary last year.</p>
+<div class="solutions">
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-gcF" id="gcF"><span class="type">Explanation</span></a><div class="hidden-content tex2jax_ignore" id="hk-gcF"><div class="solution solution-like">
+<p id="zzX">We want to work with Jakobi's salary last year. So we'll introduce \(s\text{,}\) defined to be Jakobi's salary last year (in dollars). To set up the equation, we need to think about how he arrived at this year's salary. To get to this year's salary, his employer took last year's salary and added \(4\%\) to it. Conceptually, this means we have:</p>
+<div class="displaymath">
+\begin{equation*}
+(\text{last year's salary})+(4\%\text{ of last year's salary}) = (\text{this year's salary}) 
+\end{equation*}
+</div>
+<p class="continuation">We'll represent \(4\%\) of last year's salary with \(0.04s\) since \(0.04\) is the decimal representation of \(4\%\text{.}\) This means that the equation we set up is:</p>
+<div class="displaymath">
+\begin{equation*}
+s+0.04s=73290 
+\end{equation*}
+</div>
+</div></div>
+</div></article></div>
+<article class="exercise exercise-like" id="QFm"><a data-knowl="" class="id-ref exercise-knowl original" data-refid="hk-QFm"><h6 class="heading">
+<span class="type">Checkpoint</span><span class="space"> </span><span class="codenumber">2.5.13</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-QFm"><article class="exercise exercise-like"><p id="p-517">The WeBWorK problem with ID “webwork-32” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article></div>
+<article class="example example-like" id="kyd"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-kyd"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">2.5.14</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-kyd"><article class="example example-like"><p id="mgm">The price of a refrigerator after a \(15\%\) discount is \(\$612\text{.}\) Write a linear equation modeling this scenario, where the original price of the refrigerator (before the discount was applied) is the unknown quantity.</p>
+<div class="solutions">
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-MjO" id="MjO"><span class="type">Explanation</span></a><div class="hidden-content tex2jax_ignore" id="hk-MjO"><div class="solution solution-like">
+<p id="LOp">We'll let \(c\) be the original price of the refrigerator. To obtain the discounted price, we take the original price and subtract \(15\%\) of that amount. Conceptually, this looks like:</p>
+<div class="displaymath">
+\begin{equation*}
+(\text{original price})-(15\%\text{ of the original price})= (\text{discounted price})
+\end{equation*}
+</div>
+<p class="continuation">Since the amount of the discount is \(15\%\) of the original price, we'll represent this with \(0.15c\text{.}\) The equation we set up is then:</p>
+<div class="displaymath">
+\begin{equation*}
+c-0.15c=612
+\end{equation*}
+</div>
+</div></div>
+</div></article></div>
+<article class="exercise exercise-like" id="wMv"><a data-knowl="" class="id-ref exercise-knowl original" data-refid="hk-wMv"><h6 class="heading">
+<span class="type">Checkpoint</span><span class="space"> </span><span class="codenumber">2.5.15</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-wMv"><article class="exercise exercise-like"><p id="p-520">The WeBWorK problem with ID “webwork-33” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article></div></section><section class="subsection" id="Wuy"><h3 class="heading hide-type">
+<span class="type">Subsection</span> <span class="codenumber">2.5.4</span> <span class="title">Setting Up Inequalities for Models</span>
+</h3>
+<p id="Ric">In general, we'll model using inequalities when we want to determine a maximum or minimum value. To identify that an inequality is needed instead of an equality, we'll look for phrases like <em class="emphasis">at least, at most, at a minimum</em> or <em class="emphasis">at a maximum</em>.</p>
+<article class="example example-like" id="Bwo"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-Bwo"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">2.5.16</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-Bwo"><article class="example example-like"><p id="yuE">The car share company car2go has a one-time registration fee of \(\$5\) and charges \(\$14.99\) per hour for use of their vehicles. Hana wants to use car2go and has a maximum budget of \(\$300\text{.}\) Write a linear inequality representing this scenario, where the unknown quantity is the number of hours she uses their vehicles.</p>
+<div class="solutions">
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-Yyg" id="Yyg"><span class="type">Explanation</span></a><div class="hidden-content tex2jax_ignore" id="hk-Yyg"><div class="solution solution-like">
+<p id="paS">We'll let \(h\) be the number of hours that Hana uses car2go. We need the initial cost and the cost from the hourly charge to be less than or equal to \(\$300\text{,}\) which we set up as:</p>
+<div class="displaymath">
+\begin{equation*}
+5+14.99h \le 300
+\end{equation*}
+</div>
+</div></div>
+</div></article></div>
+<article class="example example-like" id="hDx"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-hDx"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">2.5.17</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-hDx"><article class="example example-like"><p id="eBN">When an oil tank is decommissioned, it is drained of its remaining oil and then re-filled with an inert material, such as sand. A cylindrical oil tank has a volume of <span class="quantity">275 gal</span> and is being filled with sand at a rate of <span class="quantity">700 gal</span> per hour. Write a linear inequality representing this scenario, where the time it takes for the tank to overflow with sand is the unknown quantity.</p>
+<div class="solutions">
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-EFp" id="EFp"><span class="type">Explanation</span></a><div class="hidden-content tex2jax_ignore" id="hk-EFp"><div class="solution solution-like">
+<p id="Vib">The unknown in this scenario is time, so we'll define \(t\) to be the number of hours that sand is poured into the tank. (Note that we chose hours based on the rate at which the sand is being poured.) We'll represent the amount of sand poured in as \(700t\) as each hour an additional <span class="quantity">700 gal</span> are added. Given that we want to know when this amount exceeds <span class="quantity">275 gal</span>, we set this equation up as:</p>
+<div class="displaymath">
+\begin{equation*}
+700t &gt;275
+\end{equation*}
+</div>
+</div></div>
+</div></article></div></section><section class="subsection" id="CBH"><h3 class="heading hide-type">
+<span class="type">Subsection</span> <span class="codenumber">2.5.5</span> <span class="title">Translating Phrases into Algebraic Expressions and Equations/Inequalities</span>
+</h3>
+<p id="xpl">Void of context, there are certain short phrases and expressions in English that have mathematical meaning, and might show up in a modeling scenario. The following table shows how to translate some of these common phrases into algebraic expressions.</p>
+<figure class="table table-like" id="wjS"><figcaption><span class="type">Table</span><span class="space"> </span><span class="codenumber">2.5.18<span class="period">.</span></span><span class="space"> </span>Translating English Phrases into Math Expressions</figcaption><div class="tabular-box natural-width"><table class="tabular" id="Iyk">
+<tr>
+<td class="l t b2 r0 l0 t0 lines">English Phrases</td>
+<td class="c t b2 r0 l0 t0 lines">Math Expressions</td>
+</tr>
+<tr>
+<td class="l t b0 r0 l0 t0 lines">the sum of \(2\) and a number</td>
+<td class="c t b0 r0 l0 t0 lines">\(x+2\) or \(2+x\)</td>
+</tr>
+<tr>
+<td class="l t b0 r0 l0 t0 lines">\(2\) more than a number</td>
+<td class="c t b0 r0 l0 t0 lines">\(x+2\) or \(2+x\)</td>
+</tr>
+<tr>
+<td class="l t b0 r0 l0 t0 lines">a number increased by \(2\)</td>
+<td class="c t b0 r0 l0 t0 lines">\(x+2\) or \(2+x\)</td>
+</tr>
+<tr>
+<td class="l t b2 r0 l0 t0 lines">a number and \(2\) together</td>
+<td class="c t b2 r0 l0 t0 lines">\(x+2\) or \(2+x\)</td>
+</tr>
+<tr>
+<td class="l t b0 r0 l0 t0 lines">the difference between a number and \(2\)</td>
+<td class="c t b0 r0 l0 t0 lines">\(x-2\)</td>
+</tr>
+<tr>
+<td class="l t b0 r0 l0 t0 lines">the difference of \(2\) and a number</td>
+<td class="c t b0 r0 l0 t0 lines">\(2-x\)</td>
+</tr>
+<tr>
+<td class="l t b0 r0 l0 t0 lines">\(2\) less than a number</td>
+<td class="c t b0 r0 l0 t0 lines">\(x-2\) (<em class="emphasis">not</em> \(2-x\))</td>
+</tr>
+<tr>
+<td class="l t b0 r0 l0 t0 lines">a number decreased by \(2\)</td>
+<td class="c t b0 r0 l0 t0 lines">\(x-2\)</td>
+</tr>
+<tr>
+<td class="l t b0 r0 l0 t0 lines">\(2\) decreased by a number</td>
+<td class="c t b0 r0 l0 t0 lines">\(2-x\)</td>
+</tr>
+<tr>
+<td class="l t b0 r0 l0 t0 lines">\(2\) subtracted from a number</td>
+<td class="c t b0 r0 l0 t0 lines">\(x-2\)</td>
+</tr>
+<tr>
+<td class="l t b2 r0 l0 t0 lines">a number subtracted from \(2\)</td>
+<td class="c t b2 r0 l0 t0 lines">\(2-x\)</td>
+</tr>
+<tr>
+<td class="l t b0 r0 l0 t0 lines">the product of \(2\) and a number</td>
+<td class="c t b0 r0 l0 t0 lines">\(2x\)</td>
+</tr>
+<tr>
+<td class="l t b0 r0 l0 t0 lines">twice a number</td>
+<td class="c t b0 r0 l0 t0 lines">\(2x\)</td>
+</tr>
+<tr>
+<td class="l t b0 r0 l0 t0 lines">a number times 2</td>
+<td class="c t b0 r0 l0 t0 lines">\(x\cdot 2\) or \(2x\)</td>
+</tr>
+<tr>
+<td class="l t b0 r0 l0 t0 lines">two thirds of a number</td>
+<td class="c t b0 r0 l0 t0 lines">\(\frac{2}{3}x\)</td>
+</tr>
+<tr>
+<td class="l t b2 r0 l0 t0 lines">\(25\%\) of a number</td>
+<td class="c t b2 r0 l0 t0 lines">\(0.25x\)</td>
+</tr>
+<tr>
+<td class="l t b0 r0 l0 t0 lines">the quotient of a number and \(2\)</td>
+<td class="c t b0 r0 l0 t0 lines">\(\sfrac{x}{2}\)</td>
+</tr>
+<tr>
+<td class="l t b0 r0 l0 t0 lines">the quotient of \(2\) and a number</td>
+<td class="c t b0 r0 l0 t0 lines">\(\sfrac{2}{x}\)</td>
+</tr>
+<tr>
+<td class="l t b0 r0 l0 t0 lines">the ratio of a number and \(2\)</td>
+<td class="c t b0 r0 l0 t0 lines">\(\sfrac{x}{2}\)</td>
+</tr>
+<tr>
+<td class="l t b0 r0 l0 t0 lines">the ratio of \(2\) and a number</td>
+<td class="c t b0 r0 l0 t0 lines">\(\sfrac{2}{x}\)</td>
+</tr>
+</table></div></figure><p id="dwu">We can extend this to setting up equations and inequalities. Let's look at some examples. The key is to break a complicated phrase or sentence into smaller parts, identifying key vocabulary such as “is,” “of,” “greater than,” “at most,” etc.</p>
+<figure class="table table-like" id="crb"><figcaption><span class="type">Table</span><span class="space"> </span><span class="codenumber">2.5.19<span class="period">.</span></span><span class="space"> </span>Translating English Sentences into Math Equations</figcaption><div class="tabular-box natural-width"><table class="tabular" id="oFt">
+<tr>
+<td class="l t b2 r0 l0 t0 lines">English Sentences</td>
+<td class="c t b2 r0 l0 t0 lines">Math Equations<br>and Inequalities</td>
+</tr>
+<tr>
+<td class="l t b0 r0 l0 t0 lines">The sum of \(2\) and a number is \(6\text{.}\)</td>
+<td class="c t b0 r0 l0 t0 lines">\(x+2=6\)</td>
+</tr>
+<tr>
+<td class="l t b0 r0 l0 t0 lines">\(2\) less than a number is at least \(6\text{.}\)</td>
+<td class="c t b0 r0 l0 t0 lines">\(x-2\ge6\)</td>
+</tr>
+<tr>
+<td class="l t b0 r0 l0 t0 lines">Twice a number is at most \(6\text{.}\)</td>
+<td class="c t b0 r0 l0 t0 lines">\(2x\le6\)</td>
+</tr>
+<tr>
+<td class="l t b0 r0 l0 t0 lines">\(6\) is the quotient of a number and \(2\text{.}\)</td>
+<td class="c t b0 r0 l0 t0 lines">\(6=\frac{x}{2}\)</td>
+</tr>
+<tr>
+<td class="l t b0 r0 l0 t0 lines">\(4\) less than twice a number is greater than \(10\text{.}\)</td>
+<td class="c t b0 r0 l0 t0 lines">\(2x-4\gt10\)</td>
+</tr>
+<tr>
+<td class="l t b0 r0 l0 t0 lines">Twice the difference between \(4\) and a number is \(10\text{.}\)</td>
+<td class="c t b0 r0 l0 t0 lines">\(2(4-x)=10\)</td>
+</tr>
+<tr>
+<td class="l t b0 r0 l0 t0 lines">The product of \(2\) and the sum of \(3\) and a number is less than \(10\text{.}\)</td>
+<td class="c t b0 r0 l0 t0 lines">\(2(x+3)\lt10\)</td>
+</tr>
+<tr>
+<td class="l t b0 r0 l0 t0 lines">The product of \(2\) and a number, subtracted from \(5\text{,}\) yields \(8\text{.}\)</td>
+<td class="c t b0 r0 l0 t0 lines">\(5-2x=8\)</td>
+</tr>
+<tr>
+<td class="l t b0 r0 l0 t0 lines">Two thirds of a number subtracted from \(10\) is \(2\text{.}\)</td>
+<td class="c t b0 r0 l0 t0 lines">\(10-\frac{2}{3}x=2\)</td>
+</tr>
+<tr>
+<td class="l t b0 r0 l0 t0 lines">\(25\%\) of the sum of 7 and a number is \(2\text{.}\)</td>
+<td class="c t b0 r0 l0 t0 lines">\(0.25(x+7)=2\)</td>
+</tr>
+</table></div></figure><p id="p-528">A certain amount of practice with translating these English phrases and sentences into math expressions, equations, and inequalities can be helpful for word problems that do have context. In the exercises for this section, you will find such practice exercises.</p></section><section class="reading-questions" id="reading-questions-7"><h3 class="heading hide-type">
+<span class="type">Reading Questions</span> <span class="codenumber">2.5.6</span> <span class="title">Reading Questions</span>
+</h3>
+<article class="exercise exercise-like" id="exercise-52"><h6 class="heading"><span class="codenumber">1<span class="period">.</span></span></h6>
+<p id="p-529">It is common to come across a word problem where there is some kind of rate. In a problem like that, it can help you to understand the pattern if you make a <span class="fillin" role="img" aria-label="10-character blank" style="width: 4.545454545454546em;"></span>.</p></article><article class="exercise exercise-like" id="exercise-53"><h6 class="heading"><span class="codenumber">2<span class="period">.</span></span></h6>
+<p id="p-530">It is common to come across a word problem where some percent is either added or subtracted from an unknown original value. With the approach described in theis section for setting up an equation, how many times will you use the variable in such an equation?</p></article><article class="exercise exercise-like" id="exercise-54"><h6 class="heading"><span class="codenumber">3<span class="period">.</span></span></h6>
+<p id="p-531">Is there any difference between these three phrases, or do they all mean the same thing?</p>
+<ul class="disc">
+<li id="li-97">ten subtracted from a number</li>
+<li id="li-98">ten less than a number</li>
+<li id="li-99">ten minus a number</li>
+</ul></article></section><section class="introduction" id="aMS"><p id="EJp">We learned how to solve one-step inequalities in <code class="code-inline tex2jax_ignore">[cross-reference to target(s) "section-solving-one-step-inequalities" missing or not unique]</code>. In this section, we will solve linear inequalities that need more than one step.</p></section><section class="subsection" id="ecX"><h3 class="heading hide-type">
+<span class="type">Subsection</span> <span class="codenumber">2.5.7</span> <span class="title">Solving Multistep Inequalities</span>
+</h3>
+<p id="QXH">When solving a linear inequality, we follow the same steps in <a class="xref" data-knowl="./knowl/algorithm-solve-multistep-linear-equation.html" title="Process 2.2.3: Steps to Solve Linear Equations">Process 2.2.3</a>. The only difference is that when we multiply or divide by a negative number on both sides of an inequality, the direction of the inequality symbol must switch.</p>
+<article class="algorithm theorem-like" id="nwJ"><h6 class="heading">
+<span class="type">Process</span><span class="space"> </span><span class="codenumber">2.5.20</span><span class="period">.</span><span class="space"> </span><span class="title">Steps to Solve Linear Inequalities.</span>
+</h6>
+<dl id="p-534" class="description-list">
+<dt id="kgE">Simplify</dt>
+<dd><p id="oQx">Simplify the expressions on each side of the inequality by distributing and combining like terms.</p></dd>
+<dt id="QnN">Separate</dt>
+<dd><p id="UXG">Use addition or subtraction to isolate the variable terms and constant terms (numbers) so that they are on different sides of the inequality symbol.</p></dd>
+<dt id="wuW">Clear Coefficient</dt>
+<dd><p id="BeP">Use multiplication or division to eliminate the variable term's coefficient. <em class="emphasis">If you multiply or divide each side by a negative number, switch the direction of the inequality symbol.</em></p></dd>
+<dt id="cCf">Check</dt>
+<dd><p id="hlY">A solution to a linear inequality has a “boundary number”. In the original inequality, check a number less than the boundary number, the boundary number itself, and a number greater than the boundary number to confirm what should be a solution is indeed a solution, and what should not is not. (This can be time-consuming, so use your judgment about when you might get away with skipping this.)</p></dd>
+<dt id="IJo">Summarize</dt>
+<dd><p id="Nth">State the solution set or (in the case of an application problem) summarize the result in a complete sentence using appropriate units.</p></dd>
+</dl></article><article class="example example-like" id="iMQ"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-iMQ"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">2.5.21</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-iMQ"><article class="example example-like"><p id="HDV">Solve for \(t\) in the inequality \(-3t+5\geq11\text{.}\) Write the solution set in both set-builder notation and interval notation.</p>
+<div class="solutions">
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-GUb" id="GUb"><span class="type">Explanation</span></a><div class="hidden-content tex2jax_ignore" id="hk-GUb"><div class="solution solution-like">
+<div class="displaymath" id="tAq">
+\begin{align*}
+-3t+5\amp\geq11\\
+-3t+5\subtractright{5}\amp\geq11\subtractright{5}\\
+-3t\amp\geq6\\
+\divideunder{-3t}{-3}\amp\mathbin{\highlight{\le}}\divideunder{6}{-3}\\
+t\amp\leq-2
+\end{align*}
+</div>
+<p id="p-542">Note that when we divided both sides of the inequality by \(-3\text{,}\) we had to switch the direction of the inequality symbol. At this point we think that the solution set in set-builder notation is \(\{t\mid t\leq-2\}\text{,}\) and the solution set in interval notation is \((-\infty,-2]\text{.}\)</p>
+<p id="p-543">Since there are infinitely many solutions, it's impossible to literally check them all. We believe that all values of \(t\) for which \(t\leq-2\) are solutions. We check that one number less than \(-2\) (any number, your choice) satisfies the inequality. <em class="emphasis">And</em> that \(-2\) satisfies the inequality. <em class="emphasis">And</em> that one number greater than \(-2\) (any number, your choice) does <em class="emphasis">not</em> satisfy the inequality. We choose to check the values \(-10\text{,}\) \(-2\text{,}\) and \(0\text{.}\)</p>
+<div class="sidebyside"><div class="sbsrow" style="margin-left:26.5%;margin-right:26.5%;"><div class="sbspanel top" style="width:100%;">
+<img src="images/image-33.svg" role="img" class="contained" alt="a number line with a mark at -2; a thick line overlays the number line to the left of -2 with an arrow pointing left; there is a right bracket at -2; three arrows point to -10, -2, and 0 on the number line, suggesting that these values will be checked as possible solutions"><div class="image-archive">
+<a href="images/image-33.eps">eps</a><a href="images/image-33.pdf">pdf</a><a href="images/image-33.png">png</a><a href="images/image-33.svg">svg</a><a href="images/image-33.tex">tex</a>
+</div>
+</div></div></div>
+<div class="displaymath" id="p-544">
+\begin{align*}
+-3t+5\amp\geq12\amp -3t+5\amp\ge12\amp -3t+5\amp\ge11\\
+-3(\substitute{-10})+5\amp\wonder{\geq}12\amp -3(\substitute{-2})+5\amp\wonder{\geq}12\amp -3(\substitute{0})+5\amp\wonder{\geq}11\\
+30+5\amp\wonder{\geq}11\amp 6+5\amp\wonder{\geq}11\amp 0+5\amp\wonder{\geq}11\\
+35\amp\confirm{\geq}11\amp 11\amp\confirm{\geq}11\amp 5\amp\reject{\geq}11
+\end{align*}
+</div>
+<p class="continuation">So both \(-10\) and \(-2\) are solutions as expected, while \(0\) is not. This is evidence that our solution set is correct, and it's valuable in that making these checks would likely help us catch an error if we had made one. While it certainly does take time and space to make three checks like this, it has its value.</p>
+</div></div>
+</div></article></div>
+<article class="example example-like" id="OTZ"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-OTZ"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">2.5.22</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-OTZ"><article class="example example-like"><p id="nLe">Solve for \(z\) in the inequality \((6z+5)-(2z-3)\gt-12\text{.}\) Write the solution set in both set-builder notation and interval notation.</p>
+<div class="solutions">
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-nbk" id="nbk"><span class="type">Explanation</span></a><div class="hidden-content tex2jax_ignore" id="hk-nbk"><div class="solution solution-like">
+<div class="displaymath" id="Sda">
+\begin{align*}
+(6z+5)-(2z-3)\amp\gt-12\\
+6z+5-2z+3\amp\gt-12\\
+4z+8\amp\gt-12\\
+4z+8\subtractright{8}\amp\gt-12\subtractright{8}\\
+4z\amp\gt-20\\
+\divideunder{4z}{4}\amp\gt\divideunder{-20}{4}\\
+z\amp\gt -5
+\end{align*}
+</div>
+<p id="p-547">Note that we divided both sides of the inequality by \(4\) and since this is a positive number we <em class="emphasis">did not</em> need to switch the direction of the inequality symbol. At this point we think that the solution set in set-builder notation is \(\{z\mid z\gt-5\}\text{,}\) and the solution set in interval notation is \((-5,\infty)\text{.}\)</p>
+<p id="p-548">Since there are infinitely many solutions, it's impossible to literally check them all. We believe that all values of \(z\) for which \(z\gt-5\) are solutions. We check that one number less than \(-5\) (any number, your choice) does <em class="emphasis">not</em> satisfy the inequality. <em class="emphasis">And</em> that \(-5\) does <em class="emphasis">not</em> satisfy the inequality. <em class="emphasis">And</em> that one number greater than \(-5\) (any number, your choice) <em class="emphasis">does</em> satisfy the inequality. We choose to check the values \(-10\text{,}\) \(-5\text{,}\) and \(0\text{.}\)</p>
+<div class="sidebyside"><div class="sbsrow" style="margin-left:26.5%;margin-right:26.5%;"><div class="sbspanel top" style="width:100%;">
+<img src="images/image-34.svg" role="img" class="contained" alt="a number line with a mark at -5; a thick line overlays the number line to the right of -5 with an arrow pointing right; there is a left parenthesis at -5; three arrows point to -10, -5, and 0 on the number line, suggesting that these values will be checked as possible solutions"><div class="image-archive">
+<a href="images/image-34.eps">eps</a><a href="images/image-34.pdf">pdf</a><a href="images/image-34.png">png</a><a href="images/image-34.svg">svg</a><a href="images/image-34.tex">tex</a>
+</div>
+</div></div></div>
+<div class="displaymath" id="p-549">
+\begin{align*}
+(6z+5)-(2z-3)\amp\gt-12\amp(6z+5)-(2z-3)\amp\gt-12\amp(6z+5)-(2z-3)\amp\gt-12\\
+(6(\substitute{-10})+5)-(2(\substitute{-10})-3)\amp\wonder{\gt}-12\amp(6(\substitute{-5})+5)-(2(\substitute{-5})-3)\amp\wonder{\gt}-12\amp(6(\substitute{0})+5)-(2(\substitute{0})-3)\amp\wonder{\gt}-12\\
+(-60+5)-(-20-3)\amp\wonder{\gt}-12\amp(-30+5)-(-10-3)\amp\wonder{\gt}-12\amp(0+5)-(0-3)\amp\wonder{\gt}-12\\
+-55-(-23)\amp\wonder{\gt}-12\amp-25-(-13)\amp\wonder{\gt}-12\amp5-(-3)\amp\wonder{\gt}-12\\
+-32\amp\reject{\gt}-12\amp-12\amp\reject{\gt}-12\amp8\amp\confirm{\gt}-12
+\end{align*}
+</div>
+<p class="continuation">So both \(-10\) and \(-5\) are not solutions as expected, while \(0\) is a solution. This is evidence that our solution set is correct. The solution set in set-builder notation is \(\{z\mid z\gt-5\}\text{.}\) The solution set in interval notation is \((-5,\infty)\text{.}\)</p>
+</div></div>
+</div></article></div>
+<article class="exercise exercise-like" id="exercise-55"><a data-knowl="" class="id-ref exercise-knowl original" data-refid="hk-exercise-55"><h6 class="heading">
+<span class="type">Checkpoint</span><span class="space"> </span><span class="codenumber">2.5.23</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-exercise-55"><article class="exercise exercise-like"><p id="p-550">The WeBWorK problem with ID “webwork-34” will appear here if you provide the file of problems that have been processed by a WeBWorK server (<code class="code-inline tex2jax_ignore">webwork-representations.ptx</code>).</p></article></div>
+<article class="example example-like" id="bir"><a data-knowl="" class="id-ref example-knowl original" data-refid="hk-bir"><h6 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">2.5.24</span><span class="period">.</span>
+</h6></a></article><div class="hidden-content tex2jax_ignore" id="hk-bir"><article class="example example-like"><p id="zZw">When a stopwatch started, the pressure inside a gas container was \(4.2\) atm (one atm is standard atmospheric pressure). As the container was heated, the pressure increased by \(0.7\) atm per minute. The maximum pressure the container can handle was \(21.7\) atm. Heating must be stopped once the pressure reaches \(21.7\) atm. Over what time interval was the container in a safe state?</p>
+<div class="solutions">
+<a data-knowl="" class="id-ref solution-knowl original" data-refid="hk-fwL" id="fwL"><span class="type">Explanation</span></a><div class="hidden-content tex2jax_ignore" id="hk-fwL"><div class="solution solution-like">
+<p id="Piu">The pressure increases by \(0.7\) atm per minute, so it increases by \(0.7m\) after \(m\) minutes. Counting in the original pressure of \(4.2\) atm, pressure in the container can be modeled by \(0.7m+4.2\text{,}\) where \(m\) is the number of minutes since the stop watch started.</p>
+<p id="vpD">The container is safe when the pressure is \(21.7\) atm or lower. We can write and solve this inequality:</p>
+<div class="displaymath">
+\begin{align*}
+0.7m+4.2\amp\leq21.7\\
+0.7m+4.2\subtractright{4.2}\amp\leq21.7\subtractright{4.2}\\
+0.7m\amp\leq17.5\\
+\divideunder{0.7m}{0.7}\amp\leq\divideunder{17.5}{0.7}\\
+m\amp\leq25
+\end{align*}
+</div>
+<p id="bwM">In summary, the container was safe as long as \(m\leq25\text{.}\) Assuming that \(m\) also must be greater than or equal to zero, this means \(0\leq m\leq 25\text{.}\) We can write this as the time interval as \([0,25]\text{.}\) Thus the container was safe between 0 minutes and 25 minutes.</p>
+</div></div>
+</div></article></div></section><section class="reading-questions" id="reading-questions-8"><h3 class="heading hide-type">
+<span class="type">Reading Questions</span> <span class="codenumber">2.5.8</span> <span class="title">Reading Questions</span>
+</h3>
+<article class="exercise exercise-like" id="exercise-56"><h6 class="heading"><span class="codenumber">1<span class="period">.</span></span></h6>
+<p id="p-555">When solving an inequality, what are the conditions when you have to reverse the direction of the inequality symbol?</p></article><article class="exercise exercise-like" id="exercise-57"><h6 class="heading"><span class="codenumber">2<span class="period">.</span></span></h6>
+<p id="p-556">How is the solution set to a linear inequality different from the solution set to a linear equation?</p></article></section></section></div></main>
+</div>
+</body>
+</html>
